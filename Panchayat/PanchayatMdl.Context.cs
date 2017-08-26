@@ -52,5 +52,6 @@ namespace Panchayat
         public virtual DbSet<Audit> Audits { get; set; }
         public virtual DbSet<RegisterType> RegisterTypes { get; set; }
         public virtual DbSet<Meeting> Meetings { get; set; }
+        public virtual DbSet<IllegalConstruction> IllegalConstructions { get; set; }
     }
 }

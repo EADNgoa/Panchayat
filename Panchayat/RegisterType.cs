@@ -18,6 +18,7 @@ namespace Panchayat
         public RegisterType()
         {
             this.Meetings = new HashSet<Meeting>();
+            this.IllegalConstructions = new HashSet<IllegalConstruction>();
         }
     
         public int RegisterTypeID { get; set; }
@@ -25,5 +26,7 @@ namespace Panchayat
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Meeting> Meetings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IllegalConstruction> IllegalConstructions { get; set; }
     }
 }

@@ -1,0 +1,82 @@
+﻿@model Panchayat.IllegalConstruction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IllegalConstruction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfComp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfComp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameOfPr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameOfPr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressOfPr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressOfPr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NatOfCon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NatOfCon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OccasOfCons)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OccasOfCons)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActionTaken)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActionTaken)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterType.RegisterType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterType.RegisterType1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IllegalConID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
