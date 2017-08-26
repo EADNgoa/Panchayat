@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Subject:</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProposerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Proposer Name:</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ProposerName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProposerName, "", new { @class = "text-danger" })
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PropOrAmend, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Is Proposal? :</label>
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.PropOrAmend)
@@ -58,9 +58,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MeetingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Meeting Date:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MeetingDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MeetingDate, new { htmlAttributes = new { @class = "form-control" ,type="date"} })
                 @Html.ValidationMessageFor(model => model.MeetingDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RegisterTypeID, "RegisterTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Register Type:</label>
             <div class="col-md-10">
                 @Html.DropDownList("RegisterTypeID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.RegisterTypeID, "", new { @class = "text-danger" })
