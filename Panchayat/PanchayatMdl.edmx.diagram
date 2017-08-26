@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f6045e67b3384e138fe1a60d2b0f7bb4" Name="Diagram1" ZoomLevel="71">
+      <Diagram DiagramId="f6045e67b3384e138fe1a60d2b0f7bb4" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="PanchayatModel.Citizen" Width="1.5" PointX="4.375" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Correction" Width="1.5" PointX="11.875" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Form1" Width="1.5" PointX="3.625" PointY="12.25" IsExpanded="true" />
@@ -63,6 +63,7 @@
         <AssociationConnector Association="PanchayatModel.FK_Demand_CitizenID" />
         <AssociationConnector Association="PanchayatModel.FK_DemandDetails_Demand" />
         <EntityTypeShape EntityType="PanchayatModel.CBRunning" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PanchayatModel.Audit" Width="1.5" PointX="11.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

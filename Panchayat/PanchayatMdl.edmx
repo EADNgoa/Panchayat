@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="PanchayatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Audit">
+          <Key>
+            <PropertyRef Name="AuditID" />
+          </Key>
+          <Property Name="AuditID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuditNo" Type="int" />
+          <Property Name="ListOfAuditObjection" Type="varchar(max)" />
+          <Property Name="ActionsTaken" Type="varchar(max)" />
+          <Property Name="Year" Type="int" />
+        </EntityType>
         <EntityType Name="CBRunning">
           <Key>
             <PropertyRef Name="EntryDate" />
@@ -666,6 +676,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PanchayatModelStoreContainer">
+          <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CBRunning" EntityType="Self.CBRunning" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Citizen" EntityType="Self.Citizen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
@@ -1380,6 +1391,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="DemandDetail" EntitySet="DemandDetails" />
           </AssociationSet>
           <EntitySet Name="CBRunnings" EntityType="PanchayatModel.CBRunning" />
+          <EntitySet Name="Audits" EntityType="PanchayatModel.Audit" />
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -1724,6 +1736,16 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="TotalOutflow" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CBTotal" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
+        <EntityType Name="Audit">
+          <Key>
+            <PropertyRef Name="AuditID" />
+          </Key>
+          <Property Name="AuditID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuditNo" Type="Int32" />
+          <Property Name="ListOfAuditObjection" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ActionsTaken" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1997,6 +2019,17 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="TotalOutflow" ColumnName="TotalOutflow" />
                 <ScalarProperty Name="TotalInflow" ColumnName="TotalInflow" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audits">
+            <EntityTypeMapping TypeName="PanchayatModel.Audit">
+              <MappingFragment StoreEntitySet="Audit">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ActionsTaken" ColumnName="ActionsTaken" />
+                <ScalarProperty Name="ListOfAuditObjection" ColumnName="ListOfAuditObjection" />
+                <ScalarProperty Name="AuditNo" ColumnName="AuditNo" />
+                <ScalarProperty Name="AuditID" ColumnName="AuditID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

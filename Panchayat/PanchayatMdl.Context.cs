@@ -49,5 +49,6 @@ namespace Panchayat
         public virtual DbSet<DemandLedgerDetail> DemandLedgerDetails { get; set; }
         public virtual DbSet<Demand> Demands { get; set; }
         public virtual DbSet<CBRunning> CBRunnings { get; set; }
+        public virtual DbSet<Audit> Audits { get; set; }
     }
 }
