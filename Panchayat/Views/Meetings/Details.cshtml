@@ -1,0 +1,90 @@
+﻿@model Panchayat.Meeting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Meeting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProposerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProposerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PropOrAmend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PropOrAmend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.For)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.For)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Against)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Against)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MeetingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeetingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resolution)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resolution)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterType.RegisterType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterType.RegisterType1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MeetingID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

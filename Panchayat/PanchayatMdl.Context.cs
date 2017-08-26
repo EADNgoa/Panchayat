@@ -50,5 +50,7 @@ namespace Panchayat
         public virtual DbSet<Demand> Demands { get; set; }
         public virtual DbSet<CBRunning> CBRunnings { get; set; }
         public virtual DbSet<Audit> Audits { get; set; }
+        public virtual DbSet<RegisterType> RegisterTypes { get; set; }
+        public virtual DbSet<Meeting> Meetings { get; set; }
     }
 }
