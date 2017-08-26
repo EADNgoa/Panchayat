@@ -64,6 +64,9 @@
         <AssociationConnector Association="PanchayatModel.FK_DemandDetails_Demand" />
         <EntityTypeShape EntityType="PanchayatModel.CBRunning" Width="1.5" PointX="9.375" PointY="3.75" />
         <EntityTypeShape EntityType="PanchayatModel.Audit" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PanchayatModel.RegisterType" Width="1.5" PointX="11.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PanchayatModel.Meeting" Width="1.5" PointX="13.625" PointY="3" />
+        <AssociationConnector Association="PanchayatModel.FK_Meeting_RegisterType" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

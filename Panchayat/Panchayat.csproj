@@ -214,6 +214,7 @@
     <Compile Include="Controllers\CorrectionsController.cs" />
     <Compile Include="Controllers\DemandsController.cs" />
     <Compile Include="Controllers\Form4Controller.cs" />
+    <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Controllers\PeriodsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\EAController.cs" />
@@ -269,6 +270,9 @@
     <Compile Include="LedgerDetail.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
+    <Compile Include="Meeting.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Extensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -297,6 +301,9 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterType.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="RVdetail.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -532,6 +539,11 @@
     <Content Include="Views\Audits\Details.cshtml" />
     <Content Include="Views\Audits\Edit.cshtml" />
     <Content Include="Views\Audits\Index.cshtml" />
+    <Content Include="Views\Meetings\Create.cshtml" />
+    <Content Include="Views\Meetings\Delete.cshtml" />
+    <Content Include="Views\Meetings\Details.cshtml" />
+    <Content Include="Views\Meetings\Edit.cshtml" />
+    <Content Include="Views\Meetings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

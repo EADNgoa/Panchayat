@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Panchayat.Meeting>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProposerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PropOrAmend)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.For)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Against)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resolution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegisterType.RegisterType1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProposerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PropOrAmend)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.For)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Against)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeetingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resolution)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisterType.RegisterType1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MeetingID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MeetingID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MeetingID })
+        </td>
+    </tr>
+}
+
+</table>

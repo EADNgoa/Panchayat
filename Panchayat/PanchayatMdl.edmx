@@ -195,6 +195,21 @@
           <Property Name="Ledger" Type="varchar" MaxLength="70" />
           <Property Name="IsIncome" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+          </Key>
+          <Property Name="MeetingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="350" />
+          <Property Name="ProposerName" Type="varchar" MaxLength="100" />
+          <Property Name="PropOrAmend" Type="bit" />
+          <Property Name="For" Type="int" />
+          <Property Name="Against" Type="int" />
+          <Property Name="MeetingDate" Type="date" />
+          <Property Name="Resolution" Type="varchar(max)" />
+          <Property Name="Remark" Type="varchar" MaxLength="350" />
+          <Property Name="RegisterTypeID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Period">
           <Key>
             <PropertyRef Name="PeriodID" />
@@ -202,6 +217,13 @@
           <Property Name="PeriodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FromYr" Type="int" Nullable="false" />
           <Property Name="ToYr" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegisterTypes">
+          <Key>
+            <PropertyRef Name="RegisterTypeID" />
+          </Key>
+          <Property Name="RegisterTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegisterType" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="RVdetails">
           <Key>
@@ -567,6 +589,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Meeting_RegisterType">
+          <End Role="RegisterTypes" Type="Self.RegisterTypes" Multiplicity="1" />
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterTypes">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="Meeting">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RVDetails_LederDetail">
           <End Role="LedgerDetails" Type="Self.LedgerDetails" Multiplicity="1" />
           <End Role="RVdetails" Type="Self.RVdetails" Multiplicity="*" />
@@ -694,7 +728,9 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <EntitySet Name="Form4" EntityType="Self.Form4" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LedgerDetails" EntityType="Self.LedgerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ledgers" EntityType="Self.Ledgers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meeting" EntityType="Self.Meeting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegisterTypes" EntityType="Self.RegisterTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RVdetails" EntityType="Self.RVdetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubLedgers" EntityType="Self.SubLedgers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubLedgerType" EntityType="Self.SubLedgerType" Schema="dbo" store:Type="Tables" />
@@ -805,6 +841,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_LedgerDetails_SubLedger" Association="Self.FK_LedgerDetails_SubLedger">
             <End Role="SubLedgers" EntitySet="SubLedgers" />
             <End Role="LedgerDetails" EntitySet="LedgerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meeting_RegisterType" Association="Self.FK_Meeting_RegisterType">
+            <End Role="RegisterTypes" EntitySet="RegisterTypes" />
+            <End Role="Meeting" EntitySet="Meeting" />
           </AssociationSet>
           <AssociationSet Name="FK_RVDetails_LederDetail" Association="Self.FK_RVDetails_LederDetail">
             <End Role="LedgerDetails" EntitySet="LedgerDetails" />
@@ -1392,6 +1432,12 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           </AssociationSet>
           <EntitySet Name="CBRunnings" EntityType="PanchayatModel.CBRunning" />
           <EntitySet Name="Audits" EntityType="PanchayatModel.Audit" />
+          <EntitySet Name="RegisterTypes" EntityType="PanchayatModel.RegisterType" />
+          <EntitySet Name="Meetings" EntityType="PanchayatModel.Meeting" />
+          <AssociationSet Name="FK_Meeting_RegisterType" Association="PanchayatModel.FK_Meeting_RegisterType">
+            <End Role="RegisterType" EntitySet="RegisterTypes" />
+            <End Role="Meeting" EntitySet="Meetings" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -1746,6 +1792,42 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="ActionsTaken" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Year" Type="Int32" />
         </EntityType>
+        <EntityType Name="RegisterType">
+          <Key>
+            <PropertyRef Name="RegisterTypeID" />
+          </Key>
+          <Property Name="RegisterTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegisterType1" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Meetings" Relationship="PanchayatModel.FK_Meeting_RegisterType" FromRole="RegisterType" ToRole="Meeting" />
+        </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+          </Key>
+          <Property Name="MeetingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="ProposerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PropOrAmend" Type="Boolean" />
+          <Property Name="For" Type="Int32" />
+          <Property Name="Against" Type="Int32" />
+          <Property Name="MeetingDate" Type="DateTime" Precision="0" />
+          <Property Name="Resolution" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="RegisterTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_Meeting_RegisterType" FromRole="Meeting" ToRole="RegisterType" />
+        </EntityType>
+        <Association Name="FK_Meeting_RegisterType">
+          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="1" />
+          <End Type="PanchayatModel.Meeting" Role="Meeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterType">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="Meeting">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2030,6 +2112,30 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="ListOfAuditObjection" ColumnName="ListOfAuditObjection" />
                 <ScalarProperty Name="AuditNo" ColumnName="AuditNo" />
                 <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegisterTypes">
+            <EntityTypeMapping TypeName="PanchayatModel.RegisterType">
+              <MappingFragment StoreEntitySet="RegisterTypes">
+                <ScalarProperty Name="RegisterType1" ColumnName="RegisterType" />
+                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meetings">
+            <EntityTypeMapping TypeName="PanchayatModel.Meeting">
+              <MappingFragment StoreEntitySet="Meeting">
+                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Resolution" ColumnName="Resolution" />
+                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+                <ScalarProperty Name="Against" ColumnName="Against" />
+                <ScalarProperty Name="For" ColumnName="For" />
+                <ScalarProperty Name="PropOrAmend" ColumnName="PropOrAmend" />
+                <ScalarProperty Name="ProposerName" ColumnName="ProposerName" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
