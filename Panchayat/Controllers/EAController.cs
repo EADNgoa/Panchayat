@@ -18,11 +18,11 @@ namespace Panchayat.Controllers
         // GET: EA
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (DateTime.Now.Date > DateTime.Parse("15 Aug 2017"))
-            {                
-                filterContext.Result = new RedirectResult("~/Home/pli");
-                return;
-            }
+            //if (DateTime.Now.Date > DateTime.Parse("15 Aug 2017"))
+            //{                
+            //    filterContext.Result = new RedirectResult("~/Home/pli");
+            //    return;
+            //}
             
         }
 
