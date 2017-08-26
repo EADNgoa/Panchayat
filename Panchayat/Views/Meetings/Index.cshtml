@@ -1,81 +1,108 @@
-﻿@model IEnumerable<Panchayat.Meeting>
+﻿@model PagedList.IPagedList<Panchayat.Meeting>
+  @using PagedList.Mvc;
 
-@{
-    ViewBag.Title = "Index";
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Meeting</h2>
+@using (Html.BeginForm("Index", "Meetings", FormMethod.Get))
+{
+    <div class="row">
+        <div>
+            <table>
+                <tr>
+                    <td></td>
+                    <td> Proposer Name:</td>
+                    <td> @Html.TextBox("pn", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
+
+
+                    <td> Meeting Date:</td>
+                    <td> @Html.TextBox("md", ViewBag.CurrentFilter as string, new { type = "date", @class="form-control"})</td>
+
+                    <td class="col-lg-1"></td>
+                    <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                </tr>
+            </table>
+
+
+
+
+        </div>
+    </div>
 }
+<br />
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Subject
+            </th>
+            <th>
+               Proposer Name
+            </th>
+            <th>
+              Proposal Or Amendment
+            </th>
+            <th>
+               For
+            </th>
+            <th>
+               Against
+            </th>
+            <th>
+               Meeting Date
+            </th>
+            <th>
+               Resolution
+            </th>
+            <th>
+               Remark
+            </th>
+           
+            <th></th>
+        </tr>
 
-<h2>Index</h2>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProposerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropOrAmend)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.For)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Against)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MeetingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resolution)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remark)
+                </td>
+          
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MeetingID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MeetingID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MeetingID })
+                </td>
+            </tr>
+        }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Subject)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProposerName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PropOrAmend)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.For)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Against)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MeetingDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Resolution)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Remark)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegisterType.RegisterType1)
-        </th>
-        <th></th>
-    </tr>
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Subject)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProposerName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PropOrAmend)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.For)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Against)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MeetingDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Resolution)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remark)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegisterType.RegisterType1)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MeetingID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MeetingID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MeetingID })
-        </td>
-    </tr>
-}
-
-</table>
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerID = ViewBag.LedgerID }))

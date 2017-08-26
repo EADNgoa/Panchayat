@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Panchayat;
+using PagedList;
 
 namespace Panchayat.Controllers
 {
@@ -15,10 +16,25 @@ namespace Panchayat.Controllers
         private PanchayatEntities db = new PanchayatEntities();
 
         // GET: Meetings
-        public ActionResult Index()
+        public ActionResult Index(bool? poa,string pn,DateTime? md,int? page)
         {
-            var meetings = db.Meetings.Include(m => m.RegisterType);
-            return View(meetings.ToList());
+            var meetings = db.Meetings.Where(x=>x.MeetingID>0);
+
+            if (!string.IsNullOrEmpty(pn))
+            {
+                meetings = meetings.Where(p => p.ProposerName.Contains(pn));
+
+                page = 1;
+            }
+            if(md !=null)
+            {
+                meetings = meetings.Where(p => p.MeetingDate ==md);
+                page = 1;
+            }
+         
+            int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
+            int pageNumber = (page ?? 1);
+            return View(meetings.ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Meetings/Details/5
@@ -52,6 +68,7 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 db.Meetings.Add(meeting);
                 db.SaveChanges();
                 return RedirectToAction("Index");
