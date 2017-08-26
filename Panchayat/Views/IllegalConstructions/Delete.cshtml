@@ -1,0 +1,88 @@
+﻿@model Panchayat.IllegalConstruction
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>IllegalConstruction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfComp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfComp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameOfPr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameOfPr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressOfPr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressOfPr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NatOfCon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NatOfCon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OccasOfCons)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OccasOfCons)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActionTaken)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActionTaken)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterType.RegisterType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterType.RegisterType1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

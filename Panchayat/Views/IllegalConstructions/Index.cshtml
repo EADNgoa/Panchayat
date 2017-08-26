@@ -1,0 +1,100 @@
+﻿@model PagedList.IPagedList<Panchayat.IllegalConstruction>
+@using PagedList.Mvc;
+
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Illegal Construction</h2>
+@using (Html.BeginForm("Index", "IllegalConstructions", FormMethod.Get))
+{
+    <div class="row">
+        <div>
+            <table>
+                <tr>
+                    <td></td>
+                    <td> Date Of Complain:</td>
+                    <td> @Html.TextBox("dc", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+
+                    <td class="col-lg-1"></td>
+                    <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                </tr>
+            </table>
+
+
+
+
+        </div>
+    </div>
+}
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Date Of Complain
+        </th>
+        <th>
+           Name And Address Of Complain
+        </th>
+        <th>
+           Name And Adress Of Person Doing Complain
+        </th>
+        <th>
+           Name Of Construction
+        </th>
+        <th>
+            Occasion Of Construction
+        </th>
+        <th>
+           Action Taken
+        </th>
+        <th>
+            Remark
+        </th>
+    
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfComp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfPr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressOfPr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NatOfCon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OccasOfCons)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActionTaken)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+     
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IllegalConID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IllegalConID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IllegalConID })
+        </td>
+    </tr>
+}
+
+</table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerID = ViewBag.LedgerID }))
