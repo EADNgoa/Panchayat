@@ -1,0 +1,45 @@
+﻿@model PagedList.IPagedList<Panchayat.LedgerDetail>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = MyExtensions.CamelToSentence(Panchayat.MyExtensions.GetTitle(GetType().Name));
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            SubLedger
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().LedgerDetail1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubLedger.Ledger)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LedgerDetail1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LedgerDetailID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LedgerDetailID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LedgerDetailID })
+        </td>
+    </tr>
+}
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerDetailsID = ViewBag.LedgerDetailsID }))

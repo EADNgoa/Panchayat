@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Form2>
+@{
+    ViewBag.Title = String.Format("Proforma for control ledger - Abstract Register");
+}
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+
+<header class="section-to-print">
+    <h1 class="text-center"><b>FORM NO. 2</b></h1>    
+    <h3 class="text-center"><B>@ViewBag.Title</B></h3>
+    <h4 class="text-center">@ViewBag.RptFor</h4>
+
+    @if (ViewBag.IsIncome == "Receipt")
+    {
+        <p>Reciept: YES</p>
+            <p>Expenditure:</p>
+    }
+    else
+    {
+        <p>Reciept: </p>
+            <p>Expenditure: YES</p>
+    }
+</header>
+
+
+
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th class="col-md-1">
+                Month
+            </th>
+            <th class="col-md-3">
+                Short Particulars
+            </th>
+            <th class="col-md-2">
+               Amount
+            </th>
+            <th class="3">
+               Progressive
+            </th>
+            <th class="col-md-2">
+                Total
+            </th>
+           
+
+        </tr>
+    </thead>
+    <tbody>
+            @{ decimal tot = 0; }
+            @foreach(Panchayat.Form2 item in Model)
+            {
+            <tr>
+                <td class="col-md-1">@MyExtensions.MonthFromInt((int)item.Month)</td>
+                <td class="col-md-3">@Html.DisplayFor(modelItem => item.ShortParticaulars)</td>
+                <td class="col-md-2">@Html.DisplayFor(modelItem => item.Amount)</td>
+                <td class="col-md-3">@tot</td>
+                <td class="col-md-2">@(tot = tot + (decimal)item.Amount)</td>
+            </tr>
+            }
+    </tbody>
+</table>
+

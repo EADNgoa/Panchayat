@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f6045e67b3384e138fe1a60d2b0f7bb4" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="PanchayatModel.Citizen" Width="1.5" PointX="4.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.Correction" Width="1.5" PointX="11.875" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.Form1" Width="1.5" PointX="3.625" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.Form10" Width="1.5" PointX="1.375" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.Form10Det" Width="1.5" PointX="3.625" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.Form2" Width="1.5" PointX="3.625" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.Form3" Width="1.5" PointX="6.625" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.Form4" Width="1.5" PointX="6.625" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.LedgerDetail" Width="1.5" PointX="8.875" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.Ledger" Width="1.5" PointX="1.375" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.SubLedger" Width="1.5" PointX="6.625" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.SubLedgerType" Width="1.5" PointX="4.375" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.VoucherLedgerDetail" Width="1.5" PointX="11.125" PointY="18.125" IsExpanded="true" />
+        <AssociationConnector Association="PanchayatModel.FK_Form4_Citizen" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Corrections_Reciept" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form1_Ledger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form1_SubLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form10Det_Form10" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form10Det_Ledger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form10Det_SubLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form2_Ledger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form2_SubLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form3_Ledger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form3_SubLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form4_Ledger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Form4_SubLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_LedgerDetails_SubLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_Voucher_LedgerDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_SubLedgers_Ledgers" ManuallyRouted="false" />
+        <AssociationConnector Association="PanchayatModel.FK_SubLedgers_SubLedgerType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PanchayatModel.RVdetail" Width="1.5" PointX="11.125" PointY="14.875" />
+        <AssociationConnector Association="PanchayatModel.FK_RVdetails_ToReceipt" />
+        <AssociationConnector Association="PanchayatModel.FK_RVDetails_LederDetail" />
+        <EntityTypeShape EntityType="PanchayatModel.Period" Width="1.5" PointX="6.625" PointY="1.125" />
+        <EntityTypeShape EntityType="PanchayatModel.Voucher" Width="1.5" PointX="8.875" PointY="12.25" />
+        <AssociationConnector Association="PanchayatModel.FK_Corrections_Voucher" />
+        <AssociationConnector Association="PanchayatModel.FK_Voucher_Ledger" />
+        <AssociationConnector Association="PanchayatModel.FK_RVdetails_ToVoucher" />
+        <AssociationConnector Association="PanchayatModel.FK_Voucher_SubLedger" />
+        <AssociationConnector Association="PanchayatModel.FK_Voucher_VouLedger" />
+        <EntityTypeShape EntityType="PanchayatModel.Config" Width="1.5" PointX="2.125" PointY="0.5" />
+        <EntityTypeShape EntityType="PanchayatModel.DemandDetail" Width="1.5" PointX="8.875" PointY="17.625" />
+        <EntityTypeShape EntityType="PanchayatModel.DemandPeriod" Width="1.5" PointX="14.125" PointY="17.75" />
+        <EntityTypeShape EntityType="PanchayatModel.DemandYear" Width="1.5" PointX="8.875" PointY="8.5" />
+        <AssociationConnector Association="PanchayatModel.FK_DemandDetails_SubLedgerID" />
+        <AssociationConnector Association="PanchayatModel.FK_DemandPeriod_ToDemandDetails" />
+        <AssociationConnector Association="PanchayatModel.FK_DemandYear_ToDemandDetails" />
+        <AssociationConnector Association="PanchayatModel.FK_DemandPeriod_ToPeriod" />
+        <AssociationConnector Association="PanchayatModel.FK_DemandYear_ToForm4" />
+        <AssociationConnector Association="PanchayatModel.FK_DemandYear_ToPeriod" />
+        <EntityTypeShape EntityType="PanchayatModel.PeriodSL" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PanchayatModel.DemandLedgerDetail" Width="1.5" PointX="11.125" PointY="21.875" />
+        <AssociationConnector Association="PanchayatModel.FK_DemandLedgerDetails_Demand" />
+        <AssociationConnector Association="PanchayatModel.FK_DemandLedgerDetails_LederDetail" />
+        <EntityTypeShape EntityType="PanchayatModel.Demand" Width="1.5" PointX="6.625" PointY="18.125" />
+        <AssociationConnector Association="PanchayatModel.FK_Demand_CitizenID" />
+        <AssociationConnector Association="PanchayatModel.FK_DemandDetails_Demand" />
+        <EntityTypeShape EntityType="PanchayatModel.CBRunning" Width="1.5" PointX="9.375" PointY="3.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

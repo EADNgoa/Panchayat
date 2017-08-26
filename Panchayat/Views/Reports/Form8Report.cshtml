@@ -1,0 +1,134 @@
+﻿@model List<Form7Rpt>
+@{
+    ViewBag.Title = String.Format("DEMAND AND COLLECTION REGISTER");
+}
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+
+
+@*<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>*@
+
+<h3 class="section-to-print">@ViewBag.Title</h3>
+
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th colspan="5">Yearwise demand and the amount collection</th>
+                       
+            @for(int i=ViewBag.SelPeriod.FromYr; i<= ViewBag.SelPeriod.ToYr;i++)
+            {
+                <th colspan="4">FY starting: @i </th>
+            }
+            <th></th>
+        </tr>
+        <tr>
+            <th>
+                Sr. No.
+            </th>
+            <th width="30%">
+                Name Of Tax Payer
+            </th>
+            <th>
+                House No.
+            </th>
+            <th>Details of Tax</th>
+            <th>
+                Ref. Sr. No
+            </th>
+            @for (int i = ViewBag.SelPeriod.FromYr; i <= ViewBag.SelPeriod.ToYr; i++)
+            {
+                <th>Arrears</th>            
+                <th>Years Demand</th>
+                <th>Total Payable</th>
+                <th>AmuontPaid</th>
+            }
+            <th>Remarks</th>
+        </tr>
+        <tr>
+            @for (int i = 1; i < 27; i++)
+            {
+                <th>@i</th>
+            }
+        </tr>
+    </thead>
+    <tbody>       
+                                                @*A new row for each Citizen's House*@
+        @foreach(Form7Rpt item in Model)
+        {
+            bool rowspanflag = false;
+            int TxDmdCnt = item.TaxDmd.Count;
+            @: <tr>
+                
+                <td rowspan="@TxDmdCnt">@Html.DisplayFor(model => item.form7ID)</td>
+                <td width="30%" rowspan="@TxDmdCnt">@Html.DisplayFor(model => item.CitName) 
+                id: 
+                    @Html.DisplayFor(model => item.CitID)                    
+                </td>
+                <td rowspan="@TxDmdCnt">@Html.DisplayFor(model => item.House)</td>
+                
+                                                                                @*A new row for each tax type*@
+                for(int k = 0; k < TxDmdCnt; k++)
+                {
+                    if(rowspanflag)
+                    {
+                        @:<tr>
+                    }
+
+                    <td>@Html.DisplayFor(model => item.TaxDmd[k].SLname)</td>
+                    <td>@Html.DisplayFor(model => item.TaxDmd[k].DDID)</td>
+                                                                                @*for each tax type and each year*@
+                    for(int y = ViewBag.SelPeriod.FromYr; y <= ViewBag.SelPeriod.ToYr; y++)
+                    {
+                            if (item.TaxDmd[k].TaxActuals.Keys.Any(ke => ke.Equals(y)))
+                            {
+                                <td>@Html.DisplayFor(model => item.TaxDmd[k].TaxActuals[y].Arrears)</td>
+                                <td>@Html.DisplayFor(model => item.TaxDmd[k].DmdAmt)</td>
+                                <td>
+                                    @(item.TaxDmd[k].TaxActuals[y].Arrears + item.TaxDmd[k].DmdAmt)
+                                </td>
+                                <td>@Html.DisplayFor(model => item.TaxDmd[k].TaxActuals[y].PaidAmt)</td>
+                            } else
+                            {
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            }
+                    }
+                    if(rowspanflag)
+                    {
+                        @:</tr>
+                    } else
+                    {
+                       @: <td rowspan="@TxDmdCnt">@Html.DisplayFor(model => item.Remarks)</td>
+                       @: </tr>
+                    }
+                    rowspanflag = true;
+                }
+          }
+    </tbody>
+</table>
+
+

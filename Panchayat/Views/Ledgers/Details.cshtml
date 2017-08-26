@@ -1,0 +1,34 @@
+﻿@model Panchayat.Ledger
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ledger</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ledger1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ledger1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsIncome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsIncome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LedgerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

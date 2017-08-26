@@ -1,0 +1,105 @@
+﻿@model Panchayat.Form4
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .dl-horizontal dt {
+        width: 240px;
+        padding-right: 15px;
+    }
+</style>
+
+
+
+<div>
+    <div class="section-to-print">
+        <h2 class="text-center"><b>FORM NO. 4</b></h2>
+        <h5 class="text-center">[See Rule 13 and Rule 20 (IV))]</h5>
+        <h1 class="text-center">RECEIPT</h1>        
+    </div>
+    <hr />
+    <dl class="dl-horizontal section-to-print">
+        <dt class="pull-right">
+            
+        </dt>
+        <dd class="pull-right">
+            Receipt No.
+            @Html.DisplayFor(model => model.RecieptNo)
+        </dd>
+        <dt>
+            <strong>The Village Panchayat</strong>
+        </dt>
+        <dd>
+            @ViewBag.vpname
+        </dd>
+        <dt>
+            <i>Received with thanks from</i>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Citizen.Name)
+            @Html.DisplayFor(model => model.RecvdFrom)
+        </dd>        
+        <dt>
+            <i>Rs.</i>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+            &nbsp; <i>Rupees</i>
+            @ViewBag.AmtInWds 
+        </dd>
+        <dt>
+            <i>on account of</i>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ledger.Ledger1)
+            >>
+            @Html.DisplayFor(model => model.SubLedger.Ledger)
+        </dd>        
+
+
+        <dt>
+            Date
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PayDate)
+        </dd>
+
+        <dt>
+            Reference to cash entry
+        </dt>
+        <dd>
+            
+        </dd>
+
+        <dt>
+            Book
+        </dt>
+        <dd>            
+        </dd>
+
+        <dt>
+            page No.
+        </dt>
+        <dd>            
+        </dd>
+        <dt class="pull-right">
+            <h4><strong>V. P. Secretary</strong></h4>
+            @ViewBag.vpname
+        </dt>
+        <dd>            
+        </dd>
+    </dl>
+
+    <div class="section-to-print">
+        <hr />
+        Instruction covering the use of form 4: <br />
+
+        a) Receipt valid subject to the realization of cheque
+    </div>
+<p>
+    <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RecieptNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<DemandLedgerDetail>
+
+<table width="80%">
+    <tr>
+        @foreach (var item in ViewBag.ld)
+        {
+            <td style="font-variant-caps:small-caps; font-weight:300">
+                <u>@item.LedgerDetail1</u>
+            </td>
+        }
+    </tr>
+    <tr>
+        @foreach (DemandLedgerDetail cld in Model)
+        {
+            <td>
+                @cld.DemandLedgerDetail1
+            </td>
+        }
+    </tr>
+
+</table>

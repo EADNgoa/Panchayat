@@ -1,0 +1,70 @@
+﻿@model IEnumerable<GenericReport>
+
+
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+
+<h3 class="section-to-print">@ViewBag.Title</h3>
+
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th>
+               Pay Date
+            </th>
+            <th>
+                @if(ViewBag.RVtype)
+                    { 
+                        @:Receipt No.
+                    } 
+                else
+                    { 
+                        @:Voucher No.
+                    }
+                @ViewBag.RV
+            </th>
+            <th>
+                Amount
+            </th>
+
+            @foreach (var hd in ViewBag.dyHeads)
+            {
+                <th>
+                    @hd
+                </th>
+            }
+
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (GenericReport item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.RVid)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+
+                    @Html.Action("GenericReportDetails", new { RVtype = ViewBag.RVtype, RVid = item.RVid })
+                </tr>
+
+            }
+    </tbody>
+</table>
+

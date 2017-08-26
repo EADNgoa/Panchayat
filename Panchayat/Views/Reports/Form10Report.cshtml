@@ -1,0 +1,171 @@
+﻿@model IEnumerable<Form10rpt>
+    @{      
+        ViewBag.Title = String.Format("General Ledger - Abstract Ledger ");
+    }
+    @*<style type="text/css">
+        table {
+            page-break-inside: auto
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
+
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-footer-group
+        }
+    </style>*@
+    <header class="section-to-print">
+        <h1 class="text-center"><b>FORM NO. 10</b></h1>
+        <h5 class="text-center">[See Rule 21(a)]</h5>
+        <h3 class="text-center">Monthly/ Annual/ Account of</h3>
+        <h4 class="text-center">ACCOUNT OF INCOME AND EXPENDITURE</h4>
+        <h3 class="text-center">of Village Panchayat @ViewBag.vpname</h3>
+        <h3 class="text-center">for the month of @ViewBag.MonYr</h3>
+       
+    </header>
+    <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+    <table class="table section-to-print">
+        <thead>
+
+            <tr>
+                <th class="col-md-2">
+                    Particulars of Income
+                </th>
+                <th class="col-md-3">
+                    Amount
+                </th>                
+            </tr>
+             
+              
+        </thead>
+        <tbody>            
+            @{ decimal tot = 0;
+                decimal sltot = 0;
+                string CurLedg = "";
+                var ExpRecs = Model.Where(m => m.isIncome = true);
+             }
+
+            @foreach (var item in ExpRecs)
+            {
+                if(CurLedg!=item.Ledger)
+                {
+                    if (sltot>0)
+                    {
+                        <tr>
+                            <td><h4><strong>Ledger Total</strong></h4></td>
+                            <td><h4><strong>@sltot</strong> </h4></td>
+                        </tr>
+                    }
+
+                    CurLedg = item.Ledger;
+                    sltot = 0;
+                    <tr>
+                        <td><h3>@CurLedg</h3></td>
+                        <td></td>
+                    </tr>
+                } else
+                {
+                    sltot += item.Amount;
+                    tot += item.Amount;
+                    <tr>
+                        <td>@item.SubLedger</td>
+                        <td>@item.Amount</td>
+                    </tr>
+                }            
+            }
+
+            <tr>
+                <td>TOTAL RECEIPT</td>
+                <td>@tot</td>
+            </tr>
+            <tr>
+                <td>OPENING BALANCE</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>GRAND TOTAL</td>
+                <td>@tot</td>
+            </tr>
+        </tbody>
+    </table>
+<hr />
+<hr />
+<hr />
+
+<table class="table section-to-print">
+    <thead>
+
+        <tr>
+            <th class="col-md-2">
+                Particulars of Expenditure
+            </th>
+            <th class="col-md-3">
+                Amount
+            </th>
+        </tr>
+
+
+    </thead>
+    <tbody>
+        @{  tot = 0;
+            sltot = 0;
+            CurLedg = "";
+            var RecpRecs = Model.Where(m => m.isIncome = false);
+        }
+
+        @foreach (var item in RecpRecs)
+        {
+            if (CurLedg != item.Ledger)
+            {
+                if (sltot > 0)
+                {
+                    <tr>
+                        <td><h4><strong>Ledger Total</strong></h4></td>
+                        <td><h4><strong>@sltot</strong> </h4></td>
+                    </tr>
+                }
+
+                CurLedg = item.Ledger;
+                sltot = 0;
+                <tr>
+                    <td><h3>@CurLedg</h3></td>
+                    <td></td>
+                </tr>
+            }
+            else
+            {
+                sltot += item.Amount;
+                tot += item.Amount;
+                <tr>
+                    <td>@item.SubLedger</td>
+                    <td>@item.Amount</td>
+                </tr>
+            }
+        }
+
+        <tr>
+            <td>TOTAL RECEIPT</td>
+            <td>@tot</td>
+        </tr>
+        <tr>
+            <td>OPENING BALANCE</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>GRAND TOTAL</td>
+            <td>@tot</td>
+        </tr>
+    </tbody>
+</table>
+
+<footer class="section-to-print">
+    <div class="center-block">
+    <p class="text-center">Certified that the closing balance as shown in the account has been compared with that shown in the Cash Book and found to be correct.</p>
+</footer>
+

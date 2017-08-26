@@ -1,0 +1,108 @@
+﻿@model List<Form7Rpt>
+@{
+    ViewBag.Title = String.Format("Assesment Register(Form 7)");
+}
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+
+<h3 class="section-to-print">@ViewBag.Title</h3>
+
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th>
+                Sr. No.
+            </th>
+            <th>
+                Name Of Tax Payer
+            </th>
+            <th>
+                House No.
+            </th>
+            <th>Name of Tax</th>
+            <th>
+                Amount Accessed
+            </th>
+            <th>Name of Tax</th>
+            <th>
+                Amount Accessed
+            </th>
+            <th>Additional Taxes</th>
+            <th>
+                Total
+            </th>
+            <th>
+                Remark
+            </th>
+        </tr>
+        <tr>
+            @for (int i = 1; i < 11; i++)
+            {
+                <th>@i</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            decimal tot = 0M;
+        }
+        @foreach (Form7Rpt item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => item.form7ID)</td>
+                <td>@Html.DisplayFor(model => item.CitName) 
+                id: 
+                    @Html.DisplayFor(model => item.CitID)                    
+                </td>
+                <td>@Html.DisplayFor(model => item.House)</td>
+                <td>@Html.DisplayFor(model => item.TaxDmd[0].SLname)</td>
+                <td>@Html.DisplayFor(model => item.TaxDmd[0].DmdAmt)</td>
+                
+                @if (item.TaxDmd.Count > 1)
+                {
+                    <td>@Html.DisplayFor(model => item.TaxDmd[1].SLname)</td>
+                    <td>@Html.DisplayFor(model => item.TaxDmd[1].DmdAmt)</td>
+                }else
+                {
+                    <td></td><td></td>
+                }
+
+                <td>
+                    @for (int j = 0; j < item.TaxDmd.Count; j++)
+                    {
+                        tot += item.TaxDmd[j].DmdAmt;
+                        if (j > 1)
+                        {
+                            @Html.DisplayFor(model => item.TaxDmd[j].SLname) @: :
+                            @Html.DisplayFor(model => item.TaxDmd[j].DmdAmt) <br />
+                        }
+                    }
+                </td>
+                <td>
+                    @String.Format("{0}{1}", tot, "")
+                    @{ tot = 0M; }
+                </td>
+                <td>@Html.DisplayFor(model => item.Remarks)</td>
+            </tr>
+
+                        }
+    </tbody>
+</table>

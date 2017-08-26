@@ -1,0 +1,58 @@
+﻿@model Panchayat.Correction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Correction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CorrectionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorrectionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Form4.RecieptNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Form4.RecieptNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Voucher.PassedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voucher.PassedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CorrectionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

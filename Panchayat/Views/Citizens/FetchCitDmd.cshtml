@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Panchayat.Demand>
+<style>
+    .THinverse {
+        background-color:wheat;
+        color:black;
+    }
+</style>
+
+@{ 
+    //Fetch current Period (based on financial year)
+    int y = (System.DateTime.Today.Month > 3) ? System.DateTime.Today.Year : System.DateTime.Today.Year - 1;
+}
+
+<table width="100%" class="table">
+    @foreach (var item in Model)
+    {
+        var dmds = item.DemandDetails;
+        <tr>
+            <th class="THinverse" >@item.HouseNo </th>
+            <th class="THinverse"> @item.Remarks</th>
+            <th class="THinverse" > @if (item.StopDate < DateTime.Today)
+            { 
+                @: <span style="color:orangered;">Stopped </span>
+            } 
+            </th>
+        </tr>
+        
+       
+        <tr>
+            <td>
+                <table width="80%">
+                    
+                    @foreach (DemandDetail dmd in dmds)
+                {
+                        <tr style="border-bottom: thin; border-bottom-color:antiquewhite; border-bottom-style: solid;">
+                            <td>@dmd.SubLedger.Ledger</td>
+                            <td>@{ 
+                                var dp = dmd.DemandPeriods.FirstOrDefault(p => p.Period.FromYr <= y && p.Period.ToYr >= y);
+                            }
+                                @if (dp.Amount != null)
+                                {
+                                    @dp.Amount
+                                }
+                                else
+                                {
+                                    @dp.SysAmt
+                                    @: (Sys)
+                                }
+                            </td>
+                            
+                        <td>
+                            @Html.Action("FetchCitLedDets", new { DDID = dmd.DDID, SLid = dmd.SubLedgerID })
+                        </td>
+                            <td style="text-align:right;">@Html.ActionLink("Edit", "Edit", "Demands", new { id = item.DemandID, SLid = dmd.SubLedgerID},null) </td>
+
+                    </tr>
+                    
+                    
+                                }
+                </table>
+            </td>
+        </tr>
+    }
+</table>
+
+      

@@ -1,0 +1,34 @@
+﻿@model Panchayat.Period
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Period</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FromYr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromYr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToYr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToYr)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PeriodID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

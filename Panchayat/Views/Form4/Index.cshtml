@@ -1,0 +1,93 @@
+﻿@model PagedList.IPagedList<Panchayat.Form4>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Receipts";
+}
+
+<h2>Receipts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "Form4", FormMethod.Get))
+{
+    <div class="row form-group-sm">
+        <div>
+            Find by Reciept No: @Html.TextBox("SearchRecieptNo", ViewBag.CurrentFilter as string)
+            &nbsp; Find by Citizen: 
+            @Html.TextBox("SearchCitizen", ViewBag.CurrentFilter as string)
+            &nbsp; From Date: @Html.TextBox("fdate", ViewBag.CurrentFilter as string, new { type = "date"})
+            &nbsp; To Date: @Html.TextBox("tdate", ViewBag.CurrentFilter as string, new { type = "date" })<br />
+            &nbsp; Price Range: @Html.TextBox("fAmount", ViewBag.CurrentFilter as string)
+            &nbsp; to: @Html.TextBox("tAmount", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+        </div>
+    </div>
+}
+  
+        
+        <table class="table section-to-print">
+            <tr>
+                <th>
+                    Receipt No.
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().PayDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Citizen.Name)                    
+                </th>
+                <th>
+                    Ledger
+                </th>
+                <th>
+                    SubLedger
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Amount)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RecieptNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PayDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Citizen.Name)
+                        @Html.DisplayFor(modelItem => item.RecvdFrom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ledger.Ledger1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubLedger.Ledger)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                        @if (item.Corrections.Count() > 0)
+                        {
+                            <a href="/corrections/Index?ReceiptID=@item.RecieptNo"><span class="badge">@item.Corrections.Count()</span></a>
+                        }
+                    </td>
+                    <td>
+                        @((item.PayDate==DateTime.Today)? Html.ActionLink("Edit", "Edit", new { id = item.RecieptNo }) : Html.Raw("&nbsp &nbsp &nbsp &nbsp &nbsp") )
+
+                        @Html.ActionLink("Print", "Details", new { id = item.RecieptNo }) |
+                        @Html.ActionLink("Correct", "Create","Corrections", new { ReceiptID = item.RecieptNo },null)
+                    </td>
+                </tr>
+            }
+
+        </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, SubLedgerID = ViewBag.SubLedgerID }))

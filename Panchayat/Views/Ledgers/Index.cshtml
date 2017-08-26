@@ -1,0 +1,44 @@
+﻿@model PagedList.IPagedList<Panchayat.Ledger>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = Panchayat.MyExtensions.GetTitle(GetType().Name);
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Ledger1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().IsIncome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ledger1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsIncome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LedgerID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LedgerID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LedgerID })
+        </td>
+    </tr>
+}
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerID = ViewBag.LedgerID }))

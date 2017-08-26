@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Form3>
+
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+
+<header class="section-to-print">
+    <h1 class="text-center"><b>FORM NO. 3</b></h1>
+    <h5 class="text-center">[See Rule 20(iii)]</h5>    
+    <h4 class="text-center">CASH BOOK FOR THE YEAR @ViewBag.fy to @((int)ViewBag.fy+1)</h4>
+    <hr />
+    <h3 class="text-center">@ViewBag.IsIncome </h3>
+    <hr />
+</header>
+
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th class="col-md-1">
+               Date
+            </th>
+            <th class="col-md-3">
+                Short Particulars
+            </th>
+            <th class="col-md-2">
+                Amount
+            </th>
+            <th>Total</th>
+            <th class="3">
+                Classification
+            </th>
+            <th class="col-md-2">
+                Ledger
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td>Brought Forward:</td>
+            <td></td>
+            @{ decimal ob = (decimal)ViewBag.OB;
+                decimal tot = 0; }
+            <td>@ob</td>
+            <td></td>
+            <td></td>
+        </tr>
+            @foreach (Panchayat.Form3 item in Model)
+            {
+                tot += (decimal)item.Amount;
+               @:<tr>
+                <td class="col-md-1">@Html.DisplayFor(modelItem => item.PayDate)</td>
+                <td class="col-md-3">@Html.DisplayFor(modelItem => item.TransNo) :
+                @Html.DisplayFor(modelItem => item.TransPerson)</td>
+                <td class="col-md-2">@Html.DisplayFor(modelItem => item.Amount)</td>
+                <td></td>
+                <td class="col-md-2">@Html.DisplayFor(modelItem => item.SubLedger.Ledger)</td>
+                <td class="col-md-2">@Html.DisplayFor(modelItem => item.Ledger.Ledger1)</td>
+               @:</tr>
+            }
+        <tr>
+            <td></td>
+            <td>Receipt Total and Closing Balance:</td>
+            <td>@tot</td>            
+            <td>@(tot+ob)</td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </tbody>
+</table>
+

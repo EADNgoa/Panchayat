@@ -1,0 +1,103 @@
+﻿@model PagedList.IPagedList<Panchayat.Voucher>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Vouchers";
+}
+
+<h2>Vouchers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Vouchers", FormMethod.Get))
+{
+    <div class="row form-group-sm">
+        <div>
+            Find by Voucher No: @Html.TextBox("SearchRecieptNo", ViewBag.CurrentFilter as string)
+            &nbsp; Find by Passed By:
+            @Html.TextBox("PassedBy",ViewBag.CurrentFilter as string)
+            &nbsp; From Date: @Html.TextBox("fdate", ViewBag.CurrentFilter as string, new { type = "date" })
+            &nbsp; To Date: @Html.TextBox("tdate", ViewBag.CurrentFilter as string, new { type = "date" })<br />
+            &nbsp; Price Range: @Html.TextBox("fAmount", ViewBag.CurrentFilter as string)
+            &nbsp; to: @Html.TextBox("tAmount", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+        </div>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PassedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().of)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().For)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PayDate)
+        </th>
+        <th>
+            Sub Ledger
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Amount)            
+        </th>
+        <th>
+            Actual Amt
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VoucherID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.of)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.For)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubLedger.Ledger)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActualAmount)
+            @if(item.Corrections.Count() > 0)
+            {
+                <a href="/corrections/Index?VoucherID=item.VoucherID"><span class="badge">@item.Corrections.Count()</span></a> 
+            }
+        </td>
+        <td>
+            @((item.PayDate == DateTime.Today) ? Html.ActionLink("Edit", "Edit", new { id = item.VoucherID }) : Html.Raw("&nbsp &nbsp &nbsp &nbsp &nbsp") )
+            
+            @Html.ActionLink("Print", "Details", new { id=item.VoucherID }) |
+            @Html.ActionLink("Correct", "Create", "Corrections", new { VoucherID = item.VoucherID}, null)
+        </td>
+    </tr>
+}
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, SubLedgerID = ViewBag.SubLedgerID }))

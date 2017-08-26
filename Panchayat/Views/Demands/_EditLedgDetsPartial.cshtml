@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Panchayat.DemandLedgerDetail>
+
+
+<style>
+    .form-contol {
+        color: black;
+    }
+</style>
+
+<h2>Details of this Ledger</h2>
+        
+            @foreach (var LedDet in Model)
+            {
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">@LedDet.LedgerDetail.LedgerDetail1 </label>
+                    <div class="col-md-10">
+                        <input type="text" id="data-@LedDet.DemandLedgerDetailsID" name="data-@LedDet.DemandLedgerDetailsID" value="@LedDet.DemandLedgerDetail1" class="form-contol" />
+                    </div>
+                </div>
+
+            }
+        

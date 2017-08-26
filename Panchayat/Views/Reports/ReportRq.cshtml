@@ -1,0 +1,86 @@
+﻿<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm((string)ViewBag.ReturnAction, "Reports", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Choose Filters for your report</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @if (ViewBag.PeriodID != null)
+        {
+            <div class="form-group">
+                @Html.Label("Period", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("PeriodID", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+        }
+
+        @if (ViewBag.IsIncome != null)
+        {
+            <div class="form-group">
+                @Html.Label("Receipts OR Expenditure?", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IsIncome", (IEnumerable<SelectListItem>)ViewBag.IsIncome, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+        }
+
+        @if (ViewBag.MonthBox != null)
+        {
+            <div class="form-group">
+                @Html.Label("Month", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("RptMonth", (IEnumerable<SelectListItem>)ViewBag.MonthBox, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+        }
+
+        @if (ViewBag.YearBox != null)
+        {
+            <div class="form-group">
+                @Html.Label("Year", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("RptYear", (IEnumerable<SelectListItem>)ViewBag.YearBox, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+        }
+
+        @if (ViewBag.ForDate != null)
+        {
+            <div class="form-group">
+                @Html.Label("For Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="date" id="ForDate" name="ForDate" class="form-control" />
+                </div>
+            </div>
+        }
+
+        @if (ViewBag.SubLedger != null)
+        {
+            @Html.Hidden("SubLedgerID")
+            <div class="form-group">
+                @Html.Label("SubLedger", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" id="SubLedgerID" name="SubLedger" style="color:black;" data-autocomplete-idholder="#SubLedgerID" data-autocombo-url="@Url.Action("AutoCompleteSubLedgs")" class="form-control" />  
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@ViewBag.Title" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

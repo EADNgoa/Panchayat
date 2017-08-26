@@ -1,0 +1,124 @@
+﻿@model Panchayat.Voucher
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    .dl-horizontal dt {
+        width: 240px;
+        padding-right: 15px;
+    }
+</style>
+
+<div class="section-to-print">
+<h2>Village Panchayat @ViewBag.vpname</h2>
+
+    <dl class="dl-horizontal">
+        <dt></dt>
+        <dd class="pull-right">
+           DATE:  @Html.DisplayFor(model => model.PayDate)
+        </dd>
+
+        <dt>           
+            VOUCHER NO:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VoucherID)
+        </dd>
+                
+        <dt>
+            Receipt Passed By Shri
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PassedBy)
+            &nbsp; of &nbsp;
+            @Html.DisplayFor(model => model.of)
+        </dd>
+
+
+        <dt>
+            for Rs.
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt></dt>
+        <dd class="pull-right">
+            (Rupees &nbsp; 
+            @ViewBag.AmtInWds )   from sarpanch/ Secretary of Village Panchayat @ViewBag.vpname
+        </dd>
+
+        <dt>
+            Recieved a sum of Rs.
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActualAmount)
+        </dd>
+        <dt>
+            on account of
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.For)
+        </dd>
+        </dl>
+        <hr />
+
+        <table width="100%">
+            <tr>
+                <td style="text-align:center">
+                    Authorised By
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="text-align:center"><br />-------------------------------</td>
+                <td style="text-align:center"><u>@String.Format("{0:dd-MMM-yyyy}", Model.PayDate)</u></td>
+            </tr>
+            <tr>
+                <td style="text-align:center">Sarpanch</td>
+                <td style="text-align:center">Paid on</td>
+            </tr>
+            <tr>
+                <td>Dated @String.Format("{0:dd-MMM-yyyy}", Model.PayDate)</td>
+                <td> @String.Format("{0:dd-MMM-yyyy}", Model.PayDate)</td>
+            </tr>
+            <tr>
+                <td>Approved and passed for the payment of Rs. @Model.Amount</td>
+                <td>Dated @String.Format("{0:dd-MMM-yyyy}", Model.PayDate)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>C.B. Folio</td>
+            </tr>
+            <tr>
+                <td>by res. No. @Model.ResNo</td>
+                <td>Paid by me</td>
+            </tr>
+            <tr>
+                <td>held on the meeting dated @String.Format("{0:dd-MMM-yyyy}", Model.HeldOn)</td>
+                <td><br />................................</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Sarpanch V.P @ViewBag.vpname</td>
+                <td>Secretary V.P @ViewBag.vpname</td>
+            </tr>
+            <tr>
+                <td>Date @DateTime.Today.ToString("dd-MMM-yyyy")</td>
+                <td>Date @DateTime.Today.ToString("dd-MMM-yyyy")</td>
+            </tr>
+        </table>    
+</div>
+
+<br />
+<p>
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VoucherID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

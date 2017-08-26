@@ -1,0 +1,58 @@
+﻿@model Panchayat.LedgerDetail
+
+<style>
+    li a {
+        float:right;
+    }
+</style>
+
+@{
+    ViewBag.Title = "Details";
+}
+    <h3>Ledger Detail Fields @ViewBag.ForSL</h3>
+
+<p>
+    @Html.ActionLink("Edit SubLedger", "Edit", new { id = Model.SubLedgerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+
+@using (Html.BeginForm("CreateLedDet","SubLedgers",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SubLedgerID)
+    <div class="form-horizontal">        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.LedgerDetail1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LedgerDetail1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LedgerDetail1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add Detail" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+    @{ 
+        var LedDets = ViewBag.LedDets;
+    }
+    
+    <ul class="list-group">
+        @foreach (LedgerDetail item in LedDets)
+        {
+            <li class="list-group-item" style="color:darkblue;">@item.LedgerDetail1
+        @Html.ActionLink("Edit", "EditLedDet", new { id = item.LedgerDetailID }) 
+        </li>
+        }
+    </ul>
+

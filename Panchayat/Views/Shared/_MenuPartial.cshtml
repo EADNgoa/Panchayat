@@ -1,0 +1,70 @@
+﻿<style>
+    #emblem {
+        position: fixed;
+        left: 0px;
+        top: 15px;
+        -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
+        filter: drop-shadow(5px 5px 5px #222);
+        -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+        filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    }
+</style>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Masters<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="~/Configs/Edit/1">Configuration</a></li>                        
+                        <li><a href="~/Periods">Periods</a></li>
+                        <li><a href="~/Citizens">Citizen</a></li>
+                        <li><a href="~/Ledgers">Ledgers</a></li>
+                        <li><a href="~/SubLedgers">Sub Ledgers</a></li>
+                        <li><a href="~/LedgerDetails">Ledger Details</a></li>
+                        <li><a href="~/SubLedgerTypes">SubLedger Types</a></li>                        
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Transactions<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="~/Form4">Reciept</a></li>
+                        <li><a href="~/Vouchers">Voucher</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Demands<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="~/Demands/Create">Add Demand</a></li>
+                        
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="~/Reports/Form1RptRq">Form1</a></li>
+                        <li><a href="~/Reports/Form2RptRq">Form2</a></li>
+                        <li><a href="~/Reports/Form3RptRq">Form3</a></li>
+                        <li><a href="~/Reports/Form7RptRq"> Form7</a></li>
+                        <li><a href="~/Reports/Form8RptRq"> Form8</a></li>
+                        <li><a href="~/Reports/Form10RptRq">Form10</a></li>                        
+                        <li><a href="~/Reports/GenericRptRq">Generic Register</a></li>
+                    </ul>
+                </li>
+
+                    </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>

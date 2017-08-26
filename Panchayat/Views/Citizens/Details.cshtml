@@ -1,0 +1,56 @@
+﻿@model Panchayat.Citizen
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Citizen</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResAddress)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CitizenID }) |
+    @Html.ActionLink("Back to List", "Index")  |
+    @Html.ActionLink("Add Demand", "Create", "Demands", new { id = Model.CitizenID }, null)
+</p>
+<hr />
+<h3>Demand Details</h3>
+
+    @Html.Action("FetchCitDmd", new { id = Model.CitizenID } )
+

@@ -1,0 +1,2026 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PanchayatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CBRunning">
+          <Key>
+            <PropertyRef Name="EntryDate" />
+          </Key>
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="TotalInflow" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalOutflow" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CBTotal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Citizen">
+          <Key>
+            <PropertyRef Name="CitizenID" />
+          </Key>
+          <Property Name="CitizenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" />
+          <Property Name="Mobile" Type="varchar" MaxLength="25" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="ResAddress" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="ConfigID" />
+          </Key>
+          <Property Name="ConfigID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VP" Type="varchar" MaxLength="50" />
+          <Property Name="DemandIncPerc" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ArrearsPerc" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="RowsPerPage" Type="int" />
+        </EntityType>
+        <EntityType Name="Corrections">
+          <Key>
+            <PropertyRef Name="CorrectionID" />
+          </Key>
+          <Property Name="CorrectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CorrectionDate" Type="date" />
+          <Property Name="RecieptID" Type="int" />
+          <Property Name="VoucherID" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remark" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Demand">
+          <Key>
+            <PropertyRef Name="DemandID" />
+          </Key>
+          <Property Name="DemandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CitizenID" Type="int" />
+          <Property Name="HouseNo" Type="varchar" MaxLength="10" />
+          <Property Name="CreatedOn" Type="date" Nullable="false" />
+          <Property Name="StopDate" Type="date" Nullable="false" />
+          <Property Name="Remarks" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="DemandDetails">
+          <Key>
+            <PropertyRef Name="DDID" />
+          </Key>
+          <Property Name="DDID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DemandID" Type="int" Nullable="false" />
+          <Property Name="SubLedgerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DemandLedgerDetails">
+          <Key>
+            <PropertyRef Name="DemandLedgerDetailsID" />
+          </Key>
+          <Property Name="DemandLedgerDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DDID" Type="int" />
+          <Property Name="LedgerDetailID" Type="int" />
+          <Property Name="DemandLedgerDetail" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DemandPeriod">
+          <Key>
+            <PropertyRef Name="DDID" />
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="DDID" Type="int" Nullable="false" />
+          <Property Name="PeriodID" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="SysAmt" Type="decimal" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="DemandYear">
+          <Key>
+            <PropertyRef Name="DemandYear" />
+            <PropertyRef Name="DDID" />
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="DemandYear" Type="int" Nullable="false" />
+          <Property Name="DDID" Type="int" Nullable="false" />
+          <Property Name="PeriodID" Type="int" Nullable="false" />
+          <Property Name="Arrears" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RecieptNo" Type="int" />
+          <Property Name="RecptAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RecptDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Form1">
+          <Key>
+            <PropertyRef Name="Form1ID" />
+          </Key>
+          <Property Name="Form1ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LedgerID" Type="int" />
+          <Property Name="SubLedgerID" Type="int" />
+          <Property Name="EntryDate" Type="date" />
+          <Property Name="Particulars" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Progressive" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Form10">
+          <Key>
+            <PropertyRef Name="Form10ID" />
+          </Key>
+          <Property Name="Form10ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="OB" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GrandTotal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Form10Det">
+          <Key>
+            <PropertyRef Name="Form10DetID" />
+          </Key>
+          <Property Name="Form10DetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Form10ID" Type="int" />
+          <Property Name="LedgerID" Type="int" />
+          <Property Name="SubLedgerID" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Form2">
+          <Key>
+            <PropertyRef Name="Form2ID" />
+          </Key>
+          <Property Name="Form2ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="LedgerID" Type="int" />
+          <Property Name="SubLedgerID" Type="int" />
+          <Property Name="ShortParticaulars" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Progressive" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Form3">
+          <Key>
+            <PropertyRef Name="CashBookID" />
+          </Key>
+          <Property Name="CashBookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayDate" Type="date" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="LedgerID" Type="int" />
+          <Property Name="SubLedgerID" Type="int" />
+          <Property Name="TransNo" Type="int" />
+          <Property Name="TransPerson" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Form4">
+          <Key>
+            <PropertyRef Name="RecieptNo" />
+          </Key>
+          <Property Name="RecieptNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CitizenID" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PayDate" Type="date" />
+          <Property Name="LedgerID" Type="int" />
+          <Property Name="SubLedgerID" Type="int" />
+          <Property Name="RecvdFrom" Type="varchar" MaxLength="150" />
+          <Property Name="HouseNo" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="LedgerDetails">
+          <Key>
+            <PropertyRef Name="LedgerDetailID" />
+          </Key>
+          <Property Name="LedgerDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubLedgerID" Type="int" />
+          <Property Name="LedgerDetail" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Ledgers">
+          <Key>
+            <PropertyRef Name="LedgerID" />
+          </Key>
+          <Property Name="LedgerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ledger" Type="varchar" MaxLength="70" />
+          <Property Name="IsIncome" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="PeriodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FromYr" Type="int" Nullable="false" />
+          <Property Name="ToYr" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RVdetails">
+          <Key>
+            <PropertyRef Name="RVdetailID" />
+          </Key>
+          <Property Name="RVdetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptNo" Type="int" />
+          <Property Name="VoucherID" Type="int" />
+          <Property Name="LedgerDetailID" Type="int" Nullable="false" />
+          <Property Name="RVDetail" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="SubLedgers">
+          <Key>
+            <PropertyRef Name="SubLedgerID" />
+          </Key>
+          <Property Name="SubLedgerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LedgerID" Type="int" />
+          <Property Name="SubLedgerTypeID" Type="int" />
+          <Property Name="Ledger" Type="varchar" MaxLength="70" />
+          <Property Name="HasDemand" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubLedgerType">
+          <Key>
+            <PropertyRef Name="SubLedgerTypeID" />
+          </Key>
+          <Property Name="SubLedgerTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubLedgerType" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Voucher">
+          <Key>
+            <PropertyRef Name="VoucherID" />
+          </Key>
+          <Property Name="VoucherID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PassedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="of" Type="varchar" MaxLength="100" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ActualAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="For" Type="varchar(max)" />
+          <Property Name="PayDate" Type="date" />
+          <Property Name="CBfolio" Type="int" />
+          <Property Name="ResNo" Type="varchar" MaxLength="50" />
+          <Property Name="HeldOn" Type="date" />
+          <Property Name="Meeting" Type="varchar" MaxLength="50" />
+          <Property Name="LedgerID" Type="int" />
+          <Property Name="SubLedgerID" Type="int" />
+        </EntityType>
+        <EntityType Name="VoucherLedgerDetails">
+          <Key>
+            <PropertyRef Name="VocherLedgerDetailID" />
+          </Key>
+          <Property Name="VocherLedgerDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoucherID" Type="int" />
+          <Property Name="LedgerDetailID" Type="int" />
+          <Property Name="VoucherLedgerDetail" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PeriodSLs">
+          <Key>
+            <PropertyRef Name="PeriodID" />
+            <PropertyRef Name="PeriodSL" />
+          </Key>
+          <Property Name="PeriodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PeriodSL" Type="varchar" MaxLength="28" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Corrections_Reciept">
+          <End Role="Form4" Type="Self.Form4" Multiplicity="0..1" />
+          <End Role="Corrections" Type="Self.Corrections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="Corrections">
+              <PropertyRef Name="RecieptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Corrections_Voucher">
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="0..1" />
+          <End Role="Corrections" Type="Self.Corrections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voucher">
+              <PropertyRef Name="VoucherID" />
+            </Principal>
+            <Dependent Role="Corrections">
+              <PropertyRef Name="VoucherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Demand_CitizenID">
+          <End Role="Citizen" Type="Self.Citizen" Multiplicity="0..1" />
+          <End Role="Demand" Type="Self.Demand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citizen">
+              <PropertyRef Name="CitizenID" />
+            </Principal>
+            <Dependent Role="Demand">
+              <PropertyRef Name="CitizenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandDetails_Demand">
+          <End Role="Demand" Type="Self.Demand" Multiplicity="1" />
+          <End Role="DemandDetails" Type="Self.DemandDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Demand">
+              <PropertyRef Name="DemandID" />
+            </Principal>
+            <Dependent Role="DemandDetails">
+              <PropertyRef Name="DemandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandDetails_SubLedgerID">
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="1" />
+          <End Role="DemandDetails" Type="Self.DemandDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="DemandDetails">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandLedgerDetails_Demand">
+          <End Role="DemandDetails" Type="Self.DemandDetails" Multiplicity="0..1" />
+          <End Role="DemandLedgerDetails" Type="Self.DemandLedgerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DemandDetails">
+              <PropertyRef Name="DDID" />
+            </Principal>
+            <Dependent Role="DemandLedgerDetails">
+              <PropertyRef Name="DDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandLedgerDetails_LederDetail">
+          <End Role="LedgerDetails" Type="Self.LedgerDetails" Multiplicity="0..1" />
+          <End Role="DemandLedgerDetails" Type="Self.DemandLedgerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LedgerDetails">
+              <PropertyRef Name="LedgerDetailID" />
+            </Principal>
+            <Dependent Role="DemandLedgerDetails">
+              <PropertyRef Name="LedgerDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandPeriod_ToDemandDetails">
+          <End Role="DemandDetails" Type="Self.DemandDetails" Multiplicity="1" />
+          <End Role="DemandPeriod" Type="Self.DemandPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DemandDetails">
+              <PropertyRef Name="DDID" />
+            </Principal>
+            <Dependent Role="DemandPeriod">
+              <PropertyRef Name="DDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandPeriod_ToPeriod">
+          <End Role="Period" Type="Self.Period" Multiplicity="1" />
+          <End Role="DemandPeriod" Type="Self.DemandPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="DemandPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandYear_ToDemandDetails">
+          <End Role="DemandDetails" Type="Self.DemandDetails" Multiplicity="1" />
+          <End Role="DemandYear" Type="Self.DemandYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DemandDetails">
+              <PropertyRef Name="DDID" />
+            </Principal>
+            <Dependent Role="DemandYear">
+              <PropertyRef Name="DDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandYear_ToForm4">
+          <End Role="Form4" Type="Self.Form4" Multiplicity="0..1" />
+          <End Role="DemandYear" Type="Self.DemandYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="DemandYear">
+              <PropertyRef Name="RecieptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandYear_ToPeriod">
+          <End Role="Period" Type="Self.Period" Multiplicity="1" />
+          <End Role="DemandYear" Type="Self.DemandYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="DemandYear">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form1_Ledger">
+          <End Role="Ledgers" Type="Self.Ledgers" Multiplicity="0..1" />
+          <End Role="Form1" Type="Self.Form1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Form1">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form1_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="0..1" />
+          <End Role="Form1" Type="Self.Form1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Form1">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form10Det_Form10">
+          <End Role="Form10" Type="Self.Form10" Multiplicity="0..1" />
+          <End Role="Form10Det" Type="Self.Form10Det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form10">
+              <PropertyRef Name="Form10ID" />
+            </Principal>
+            <Dependent Role="Form10Det">
+              <PropertyRef Name="Form10ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form10Det_Ledger">
+          <End Role="Ledgers" Type="Self.Ledgers" Multiplicity="0..1" />
+          <End Role="Form10Det" Type="Self.Form10Det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Form10Det">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form10Det_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="0..1" />
+          <End Role="Form10Det" Type="Self.Form10Det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Form10Det">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form2_Ledger">
+          <End Role="Ledgers" Type="Self.Ledgers" Multiplicity="0..1" />
+          <End Role="Form2" Type="Self.Form2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Form2">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form2_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="0..1" />
+          <End Role="Form2" Type="Self.Form2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Form2">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form3_Ledger">
+          <End Role="Ledgers" Type="Self.Ledgers" Multiplicity="0..1" />
+          <End Role="Form3" Type="Self.Form3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Form3">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form3_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="0..1" />
+          <End Role="Form3" Type="Self.Form3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Form3">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form4_Citizen">
+          <End Role="Citizen" Type="Self.Citizen" Multiplicity="0..1" />
+          <End Role="Form4" Type="Self.Form4" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citizen">
+              <PropertyRef Name="CitizenID" />
+            </Principal>
+            <Dependent Role="Form4">
+              <PropertyRef Name="CitizenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form4_Ledger">
+          <End Role="Ledgers" Type="Self.Ledgers" Multiplicity="0..1" />
+          <End Role="Form4" Type="Self.Form4" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Form4">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form4_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="0..1" />
+          <End Role="Form4" Type="Self.Form4" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Form4">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LedgerDetails_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="0..1" />
+          <End Role="LedgerDetails" Type="Self.LedgerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="LedgerDetails">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RVDetails_LederDetail">
+          <End Role="LedgerDetails" Type="Self.LedgerDetails" Multiplicity="1" />
+          <End Role="RVdetails" Type="Self.RVdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LedgerDetails">
+              <PropertyRef Name="LedgerDetailID" />
+            </Principal>
+            <Dependent Role="RVdetails">
+              <PropertyRef Name="LedgerDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RVdetails_ToReceipt">
+          <End Role="Form4" Type="Self.Form4" Multiplicity="0..1" />
+          <End Role="RVdetails" Type="Self.RVdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="RVdetails">
+              <PropertyRef Name="ReceiptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RVdetails_ToVoucher">
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="0..1" />
+          <End Role="RVdetails" Type="Self.RVdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voucher">
+              <PropertyRef Name="VoucherID" />
+            </Principal>
+            <Dependent Role="RVdetails">
+              <PropertyRef Name="VoucherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubLedgers_Ledgers">
+          <End Role="Ledgers" Type="Self.Ledgers" Multiplicity="0..1" />
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="SubLedgers">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubLedgers_SubLedgerType">
+          <End Role="SubLedgerType" Type="Self.SubLedgerType" Multiplicity="0..1" />
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgerType">
+              <PropertyRef Name="SubLedgerTypeID" />
+            </Principal>
+            <Dependent Role="SubLedgers">
+              <PropertyRef Name="SubLedgerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Ledger">
+          <End Role="Ledgers" Type="Self.Ledgers" Multiplicity="0..1" />
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_LedgerDetail">
+          <End Role="LedgerDetails" Type="Self.LedgerDetails" Multiplicity="0..1" />
+          <End Role="VoucherLedgerDetails" Type="Self.VoucherLedgerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LedgerDetails">
+              <PropertyRef Name="LedgerDetailID" />
+            </Principal>
+            <Dependent Role="VoucherLedgerDetails">
+              <PropertyRef Name="LedgerDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="0..1" />
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_VouLedger">
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="0..1" />
+          <End Role="VoucherLedgerDetails" Type="Self.VoucherLedgerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voucher">
+              <PropertyRef Name="VoucherID" />
+            </Principal>
+            <Dependent Role="VoucherLedgerDetails">
+              <PropertyRef Name="VoucherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PanchayatModelStoreContainer">
+          <EntitySet Name="CBRunning" EntityType="Self.CBRunning" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Citizen" EntityType="Self.Citizen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Corrections" EntityType="Self.Corrections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Demand" EntityType="Self.Demand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DemandDetails" EntityType="Self.DemandDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DemandLedgerDetails" EntityType="Self.DemandLedgerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DemandPeriod" EntityType="Self.DemandPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DemandYear" EntityType="Self.DemandYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form1" EntityType="Self.Form1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form10" EntityType="Self.Form10" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form10Det" EntityType="Self.Form10Det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form2" EntityType="Self.Form2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form3" EntityType="Self.Form3" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form4" EntityType="Self.Form4" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LedgerDetails" EntityType="Self.LedgerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ledgers" EntityType="Self.Ledgers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RVdetails" EntityType="Self.RVdetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubLedgers" EntityType="Self.SubLedgers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubLedgerType" EntityType="Self.SubLedgerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Voucher" EntityType="Self.Voucher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VoucherLedgerDetails" EntityType="Self.VoucherLedgerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PeriodSLs" EntityType="Self.PeriodSLs" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PeriodSLs].[PeriodID] AS [PeriodID], 
+    [PeriodSLs].[PeriodSL] AS [PeriodSL]
+    FROM [dbo].[PeriodSLs] AS [PeriodSLs]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Corrections_Reciept" Association="Self.FK_Corrections_Reciept">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="Corrections" EntitySet="Corrections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Corrections_Voucher" Association="Self.FK_Corrections_Voucher">
+            <End Role="Voucher" EntitySet="Voucher" />
+            <End Role="Corrections" EntitySet="Corrections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Demand_CitizenID" Association="Self.FK_Demand_CitizenID">
+            <End Role="Citizen" EntitySet="Citizen" />
+            <End Role="Demand" EntitySet="Demand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandDetails_Demand" Association="Self.FK_DemandDetails_Demand">
+            <End Role="Demand" EntitySet="Demand" />
+            <End Role="DemandDetails" EntitySet="DemandDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandDetails_SubLedgerID" Association="Self.FK_DemandDetails_SubLedgerID">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="DemandDetails" EntitySet="DemandDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandLedgerDetails_Demand" Association="Self.FK_DemandLedgerDetails_Demand">
+            <End Role="DemandDetails" EntitySet="DemandDetails" />
+            <End Role="DemandLedgerDetails" EntitySet="DemandLedgerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandLedgerDetails_LederDetail" Association="Self.FK_DemandLedgerDetails_LederDetail">
+            <End Role="LedgerDetails" EntitySet="LedgerDetails" />
+            <End Role="DemandLedgerDetails" EntitySet="DemandLedgerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandPeriod_ToDemandDetails" Association="Self.FK_DemandPeriod_ToDemandDetails">
+            <End Role="DemandDetails" EntitySet="DemandDetails" />
+            <End Role="DemandPeriod" EntitySet="DemandPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandPeriod_ToPeriod" Association="Self.FK_DemandPeriod_ToPeriod">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="DemandPeriod" EntitySet="DemandPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandYear_ToDemandDetails" Association="Self.FK_DemandYear_ToDemandDetails">
+            <End Role="DemandDetails" EntitySet="DemandDetails" />
+            <End Role="DemandYear" EntitySet="DemandYear" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandYear_ToForm4" Association="Self.FK_DemandYear_ToForm4">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="DemandYear" EntitySet="DemandYear" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandYear_ToPeriod" Association="Self.FK_DemandYear_ToPeriod">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="DemandYear" EntitySet="DemandYear" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form1_Ledger" Association="Self.FK_Form1_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Form1" EntitySet="Form1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form1_SubLedger" Association="Self.FK_Form1_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Form1" EntitySet="Form1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form10Det_Form10" Association="Self.FK_Form10Det_Form10">
+            <End Role="Form10" EntitySet="Form10" />
+            <End Role="Form10Det" EntitySet="Form10Det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form10Det_Ledger" Association="Self.FK_Form10Det_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Form10Det" EntitySet="Form10Det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form10Det_SubLedger" Association="Self.FK_Form10Det_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Form10Det" EntitySet="Form10Det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form2_Ledger" Association="Self.FK_Form2_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Form2" EntitySet="Form2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form2_SubLedger" Association="Self.FK_Form2_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Form2" EntitySet="Form2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form3_Ledger" Association="Self.FK_Form3_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Form3" EntitySet="Form3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form3_SubLedger" Association="Self.FK_Form3_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Form3" EntitySet="Form3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form4_Citizen" Association="Self.FK_Form4_Citizen">
+            <End Role="Citizen" EntitySet="Citizen" />
+            <End Role="Form4" EntitySet="Form4" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form4_Ledger" Association="Self.FK_Form4_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Form4" EntitySet="Form4" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form4_SubLedger" Association="Self.FK_Form4_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Form4" EntitySet="Form4" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LedgerDetails_SubLedger" Association="Self.FK_LedgerDetails_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="LedgerDetails" EntitySet="LedgerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RVDetails_LederDetail" Association="Self.FK_RVDetails_LederDetail">
+            <End Role="LedgerDetails" EntitySet="LedgerDetails" />
+            <End Role="RVdetails" EntitySet="RVdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RVdetails_ToReceipt" Association="Self.FK_RVdetails_ToReceipt">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="RVdetails" EntitySet="RVdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RVdetails_ToVoucher" Association="Self.FK_RVdetails_ToVoucher">
+            <End Role="Voucher" EntitySet="Voucher" />
+            <End Role="RVdetails" EntitySet="RVdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubLedgers_Ledgers" Association="Self.FK_SubLedgers_Ledgers">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubLedgers_SubLedgerType" Association="Self.FK_SubLedgers_SubLedgerType">
+            <End Role="SubLedgerType" EntitySet="SubLedgerType" />
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Ledger" Association="Self.FK_Voucher_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_LedgerDetail" Association="Self.FK_Voucher_LedgerDetail">
+            <End Role="LedgerDetails" EntitySet="LedgerDetails" />
+            <End Role="VoucherLedgerDetails" EntitySet="VoucherLedgerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_SubLedger" Association="Self.FK_Voucher_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_VouLedger" Association="Self.FK_Voucher_VouLedger">
+            <End Role="Voucher" EntitySet="Voucher" />
+            <End Role="VoucherLedgerDetails" EntitySet="VoucherLedgerDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PanchayatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Citizen">
+          <Key>
+            <PropertyRef Name="CitizenID" />
+          </Key>
+          <Property Name="CitizenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ResAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Form4" Relationship="Self.FK_Form4_Citizen" FromRole="Citizen" ToRole="Form4" />
+          <NavigationProperty Name="Demands" Relationship="PanchayatModel.FK_Demand_CitizenID" FromRole="Citizen" ToRole="Demand" />
+        </EntityType>
+        <EntityType Name="Correction">
+          <Key>
+            <PropertyRef Name="CorrectionID" />
+          </Key>
+          <Property Name="CorrectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CorrectionDate" Type="DateTime" Precision="0" />
+          <Property Name="RecieptID" Type="Int32" />
+          <Property Name="VoucherID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Form4" Relationship="Self.FK_Corrections_Reciept" FromRole="Corrections" ToRole="Form4" />
+          <NavigationProperty Name="Voucher" Relationship="PanchayatModel.FK_Corrections_Voucher" FromRole="Correction" ToRole="Voucher" />
+        </EntityType>
+        <EntityType Name="Form1">
+          <Key>
+            <PropertyRef Name="Form1ID" />
+          </Key>
+          <Property Name="Form1ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LedgerID" Type="Int32" />
+          <Property Name="SubLedgerID" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="0" />
+          <Property Name="Particulars" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Progressive" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Ledger" Relationship="Self.FK_Form1_Ledger" FromRole="Form1" ToRole="Ledgers" />
+          <NavigationProperty Name="SubLedger" Relationship="Self.FK_Form1_SubLedger" FromRole="Form1" ToRole="SubLedgers" />
+        </EntityType>
+        <EntityType Name="Form10">
+          <Key>
+            <PropertyRef Name="Form10ID" />
+          </Key>
+          <Property Name="Form10ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="OB" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GrandTotal" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Form10Det" Relationship="Self.FK_Form10Det_Form10" FromRole="Form10" ToRole="Form10Det" />
+        </EntityType>
+        <EntityType Name="Form10Det">
+          <Key>
+            <PropertyRef Name="Form10DetID" />
+          </Key>
+          <Property Name="Form10DetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Form10ID" Type="Int32" />
+          <Property Name="LedgerID" Type="Int32" />
+          <Property Name="SubLedgerID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Form10" Relationship="Self.FK_Form10Det_Form10" FromRole="Form10Det" ToRole="Form10" />
+          <NavigationProperty Name="Ledger" Relationship="Self.FK_Form10Det_Ledger" FromRole="Form10Det" ToRole="Ledgers" />
+          <NavigationProperty Name="SubLedger" Relationship="Self.FK_Form10Det_SubLedger" FromRole="Form10Det" ToRole="SubLedgers" />
+        </EntityType>
+        <EntityType Name="Form2">
+          <Key>
+            <PropertyRef Name="Form2ID" />
+          </Key>
+          <Property Name="Form2ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="LedgerID" Type="Int32" />
+          <Property Name="SubLedgerID" Type="Int32" />
+          <Property Name="ShortParticaulars" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Progressive" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Ledger" Relationship="Self.FK_Form2_Ledger" FromRole="Form2" ToRole="Ledgers" />
+          <NavigationProperty Name="SubLedger" Relationship="Self.FK_Form2_SubLedger" FromRole="Form2" ToRole="SubLedgers" />
+        </EntityType>
+        <EntityType Name="Form3">
+          <Key>
+            <PropertyRef Name="CashBookID" />
+          </Key>
+          <Property Name="CashBookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayDate" Type="DateTime" Precision="0" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LedgerID" Type="Int32" />
+          <Property Name="SubLedgerID" Type="Int32" />
+          <NavigationProperty Name="Ledger" Relationship="Self.FK_Form3_Ledger" FromRole="Form3" ToRole="Ledgers" />
+          <NavigationProperty Name="SubLedger" Relationship="Self.FK_Form3_SubLedger" FromRole="Form3" ToRole="SubLedgers" />
+          <Property Name="TransNo" Type="Int32" />
+          <Property Name="TransPerson" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Form4">
+          <Key>
+            <PropertyRef Name="RecieptNo" />
+          </Key>
+          <Property Name="RecieptNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CitizenID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PayDate" Type="DateTime" Precision="0" />
+          <Property Name="LedgerID" Type="Int32" />
+          <Property Name="SubLedgerID" Type="Int32" />
+          <NavigationProperty Name="Citizen" Relationship="Self.FK_Form4_Citizen" FromRole="Form4" ToRole="Citizen" />
+          <NavigationProperty Name="Corrections" Relationship="Self.FK_Corrections_Reciept" FromRole="Form4" ToRole="Corrections" />
+          <NavigationProperty Name="Ledger" Relationship="Self.FK_Form4_Ledger" FromRole="Form4" ToRole="Ledgers" />
+          <NavigationProperty Name="SubLedger" Relationship="Self.FK_Form4_SubLedger" FromRole="Form4" ToRole="SubLedgers" />
+          <NavigationProperty Name="RVdetails" Relationship="PanchayatModel.FK_RVdetails_ToReceipt" FromRole="Form4" ToRole="RVdetail" />
+          <Property Name="RecvdFrom" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DemandYears" Relationship="PanchayatModel.FK_DemandYear_ToForm4" FromRole="Form4" ToRole="DemandYear" />
+          <Property Name="HouseNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LedgerDetail">
+          <Key>
+            <PropertyRef Name="LedgerDetailID" />
+          </Key>
+          <Property Name="LedgerDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubLedgerID" Type="Int32" />
+          <Property Name="LedgerDetail1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SubLedger" Relationship="Self.FK_LedgerDetails_SubLedger" FromRole="LedgerDetails" ToRole="SubLedgers" />
+          <NavigationProperty Name="VoucherLedgerDetails" Relationship="Self.FK_Voucher_LedgerDetail" FromRole="LedgerDetails" ToRole="VoucherLedgerDetails" />
+          <NavigationProperty Name="RVdetails" Relationship="PanchayatModel.FK_RVDetails_LederDetail" FromRole="LedgerDetail" ToRole="RVdetail" />
+          <NavigationProperty Name="DemandLedgerDetails" Relationship="PanchayatModel.FK_DemandLedgerDetails_LederDetail" FromRole="LedgerDetail" ToRole="DemandLedgerDetail" />
+        </EntityType>
+        <EntityType Name="Ledger">
+          <Key>
+            <PropertyRef Name="LedgerID" />
+          </Key>
+          <Property Name="LedgerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ledger1" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="IsIncome" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Form1" Relationship="Self.FK_Form1_Ledger" FromRole="Ledgers" ToRole="Form1" />
+          <NavigationProperty Name="Form10Det" Relationship="Self.FK_Form10Det_Ledger" FromRole="Ledgers" ToRole="Form10Det" />
+          <NavigationProperty Name="Form2" Relationship="Self.FK_Form2_Ledger" FromRole="Ledgers" ToRole="Form2" />
+          <NavigationProperty Name="Form3" Relationship="Self.FK_Form3_Ledger" FromRole="Ledgers" ToRole="Form3" />
+          <NavigationProperty Name="Form4" Relationship="Self.FK_Form4_Ledger" FromRole="Ledgers" ToRole="Form4" />
+          <NavigationProperty Name="SubLedgers" Relationship="Self.FK_SubLedgers_Ledgers" FromRole="Ledgers" ToRole="SubLedgers" />
+          <NavigationProperty Name="Vouchers" Relationship="PanchayatModel.FK_Voucher_Ledger" FromRole="Ledger" ToRole="Voucher" />
+        </EntityType>
+        <EntityType Name="SubLedger">
+          <Key>
+            <PropertyRef Name="SubLedgerID" />
+          </Key>
+          <Property Name="SubLedgerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LedgerID" Type="Int32" />
+          <Property Name="SubLedgerTypeID" Type="Int32" />
+          <Property Name="Ledger" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Form1" Relationship="Self.FK_Form1_SubLedger" FromRole="SubLedgers" ToRole="Form1" />
+          <NavigationProperty Name="Form10Det" Relationship="Self.FK_Form10Det_SubLedger" FromRole="SubLedgers" ToRole="Form10Det" />
+          <NavigationProperty Name="Form2" Relationship="Self.FK_Form2_SubLedger" FromRole="SubLedgers" ToRole="Form2" />
+          <NavigationProperty Name="Form3" Relationship="Self.FK_Form3_SubLedger" FromRole="SubLedgers" ToRole="Form3" />
+          <NavigationProperty Name="Form4" Relationship="Self.FK_Form4_SubLedger" FromRole="SubLedgers" ToRole="Form4" />
+          <NavigationProperty Name="LedgerDetails" Relationship="Self.FK_LedgerDetails_SubLedger" FromRole="SubLedgers" ToRole="LedgerDetails" />
+          <NavigationProperty Name="Ledger1" Relationship="Self.FK_SubLedgers_Ledgers" FromRole="SubLedgers" ToRole="Ledgers" />
+          <NavigationProperty Name="SubLedgerType" Relationship="Self.FK_SubLedgers_SubLedgerType" FromRole="SubLedgers" ToRole="SubLedgerType" />
+          <Property Name="HasDemand" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Vouchers" Relationship="PanchayatModel.FK_Voucher_SubLedger" FromRole="SubLedger" ToRole="Voucher" />
+          <NavigationProperty Name="DemandDetails" Relationship="PanchayatModel.FK_DemandDetails_SubLedgerID" FromRole="SubLedger" ToRole="DemandDetail" />
+        </EntityType>
+        <EntityType Name="SubLedgerType">
+          <Key>
+            <PropertyRef Name="SubLedgerTypeID" />
+          </Key>
+          <Property Name="SubLedgerTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubLedgerType1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SubLedgers" Relationship="Self.FK_SubLedgers_SubLedgerType" FromRole="SubLedgerType" ToRole="SubLedgers" />
+        </EntityType>
+        <EntityType Name="VoucherLedgerDetail">
+          <Key>
+            <PropertyRef Name="VocherLedgerDetailID" />
+          </Key>
+          <Property Name="VocherLedgerDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoucherID" Type="Int32" />
+          <Property Name="LedgerDetailID" Type="Int32" />
+          <Property Name="VoucherLedgerDetail1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LedgerDetail" Relationship="Self.FK_Voucher_LedgerDetail" FromRole="VoucherLedgerDetails" ToRole="LedgerDetails" />
+          <NavigationProperty Name="Voucher" Relationship="PanchayatModel.FK_Voucher_VouLedger" FromRole="VoucherLedgerDetail" ToRole="Voucher" />
+        </EntityType>
+        <Association Name="FK_Form4_Citizen">
+          <End Role="Citizen" Type="Self.Citizen" Multiplicity="0..1" />
+          <End Role="Form4" Type="Self.Form4" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citizen">
+              <PropertyRef Name="CitizenID" />
+            </Principal>
+            <Dependent Role="Form4">
+              <PropertyRef Name="CitizenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Corrections_Reciept">
+          <End Role="Form4" Type="Self.Form4" Multiplicity="0..1" />
+          <End Role="Corrections" Type="Self.Correction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="Corrections">
+              <PropertyRef Name="RecieptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form1_Ledger">
+          <End Role="Ledgers" Type="Self.Ledger" Multiplicity="0..1" />
+          <End Role="Form1" Type="Self.Form1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Form1">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form1_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedger" Multiplicity="0..1" />
+          <End Role="Form1" Type="Self.Form1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Form1">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form10Det_Form10">
+          <End Role="Form10" Type="Self.Form10" Multiplicity="0..1" />
+          <End Role="Form10Det" Type="Self.Form10Det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form10">
+              <PropertyRef Name="Form10ID" />
+            </Principal>
+            <Dependent Role="Form10Det">
+              <PropertyRef Name="Form10ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form10Det_Ledger">
+          <End Role="Ledgers" Type="Self.Ledger" Multiplicity="0..1" />
+          <End Role="Form10Det" Type="Self.Form10Det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Form10Det">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form10Det_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedger" Multiplicity="0..1" />
+          <End Role="Form10Det" Type="Self.Form10Det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Form10Det">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form2_Ledger">
+          <End Role="Ledgers" Type="Self.Ledger" Multiplicity="0..1" />
+          <End Role="Form2" Type="Self.Form2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Form2">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form2_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedger" Multiplicity="0..1" />
+          <End Role="Form2" Type="Self.Form2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Form2">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form3_Ledger">
+          <End Role="Ledgers" Type="Self.Ledger" Multiplicity="0..1" />
+          <End Role="Form3" Type="Self.Form3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Form3">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form3_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedger" Multiplicity="0..1" />
+          <End Role="Form3" Type="Self.Form3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Form3">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form4_Ledger">
+          <End Role="Ledgers" Type="Self.Ledger" Multiplicity="0..1" />
+          <End Role="Form4" Type="Self.Form4" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Form4">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Form4_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedger" Multiplicity="0..1" />
+          <End Role="Form4" Type="Self.Form4" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Form4">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LedgerDetails_SubLedger">
+          <End Role="SubLedgers" Type="Self.SubLedger" Multiplicity="0..1" />
+          <End Role="LedgerDetails" Type="Self.LedgerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="LedgerDetails">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_LedgerDetail">
+          <End Role="LedgerDetails" Type="Self.LedgerDetail" Multiplicity="0..1" />
+          <End Role="VoucherLedgerDetails" Type="Self.VoucherLedgerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LedgerDetails">
+              <PropertyRef Name="LedgerDetailID" />
+            </Principal>
+            <Dependent Role="VoucherLedgerDetails">
+              <PropertyRef Name="LedgerDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubLedgers_Ledgers">
+          <End Role="Ledgers" Type="Self.Ledger" Multiplicity="0..1" />
+          <End Role="SubLedgers" Type="Self.SubLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledgers">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="SubLedgers">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubLedgers_SubLedgerType">
+          <End Role="SubLedgerType" Type="Self.SubLedgerType" Multiplicity="0..1" />
+          <End Role="SubLedgers" Type="Self.SubLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgerType">
+              <PropertyRef Name="SubLedgerTypeID" />
+            </Principal>
+            <Dependent Role="SubLedgers">
+              <PropertyRef Name="SubLedgerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PanchayatEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Citizens" EntityType="Self.Citizen" />
+          <EntitySet Name="Corrections" EntityType="Self.Correction" />
+          <EntitySet Name="Form1" EntityType="Self.Form1" />
+          <EntitySet Name="Form10" EntityType="Self.Form10" />
+          <EntitySet Name="Form10Det" EntityType="Self.Form10Det" />
+          <EntitySet Name="Form2" EntityType="Self.Form2" />
+          <EntitySet Name="Form3" EntityType="Self.Form3" />
+          <EntitySet Name="Form4" EntityType="Self.Form4" />
+          <EntitySet Name="LedgerDetails" EntityType="Self.LedgerDetail" />
+          <EntitySet Name="Ledgers" EntityType="Self.Ledger" />
+          <EntitySet Name="SubLedgers" EntityType="Self.SubLedger" />
+          <EntitySet Name="SubLedgerTypes" EntityType="Self.SubLedgerType" />
+          <EntitySet Name="VoucherLedgerDetails" EntityType="Self.VoucherLedgerDetail" />
+          <AssociationSet Name="FK_Form4_Citizen" Association="Self.FK_Form4_Citizen">
+            <End Role="Citizen" EntitySet="Citizens" />
+            <End Role="Form4" EntitySet="Form4" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Corrections_Reciept" Association="Self.FK_Corrections_Reciept">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="Corrections" EntitySet="Corrections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form1_Ledger" Association="Self.FK_Form1_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Form1" EntitySet="Form1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form1_SubLedger" Association="Self.FK_Form1_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Form1" EntitySet="Form1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form10Det_Form10" Association="Self.FK_Form10Det_Form10">
+            <End Role="Form10" EntitySet="Form10" />
+            <End Role="Form10Det" EntitySet="Form10Det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form10Det_Ledger" Association="Self.FK_Form10Det_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Form10Det" EntitySet="Form10Det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form10Det_SubLedger" Association="Self.FK_Form10Det_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Form10Det" EntitySet="Form10Det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form2_Ledger" Association="Self.FK_Form2_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Form2" EntitySet="Form2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form2_SubLedger" Association="Self.FK_Form2_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Form2" EntitySet="Form2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form3_Ledger" Association="Self.FK_Form3_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Form3" EntitySet="Form3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form3_SubLedger" Association="Self.FK_Form3_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Form3" EntitySet="Form3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form4_Ledger" Association="Self.FK_Form4_Ledger">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="Form4" EntitySet="Form4" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form4_SubLedger" Association="Self.FK_Form4_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Form4" EntitySet="Form4" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LedgerDetails_SubLedger" Association="Self.FK_LedgerDetails_SubLedger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="LedgerDetails" EntitySet="LedgerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_LedgerDetail" Association="Self.FK_Voucher_LedgerDetail">
+            <End Role="LedgerDetails" EntitySet="LedgerDetails" />
+            <End Role="VoucherLedgerDetails" EntitySet="VoucherLedgerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubLedgers_Ledgers" Association="Self.FK_SubLedgers_Ledgers">
+            <End Role="Ledgers" EntitySet="Ledgers" />
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubLedgers_SubLedgerType" Association="Self.FK_SubLedgers_SubLedgerType">
+            <End Role="SubLedgerType" EntitySet="SubLedgerTypes" />
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+          </AssociationSet>
+          <EntitySet Name="RVdetails" EntityType="PanchayatModel.RVdetail" />
+          <AssociationSet Name="FK_RVdetails_ToReceipt" Association="PanchayatModel.FK_RVdetails_ToReceipt">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="RVdetail" EntitySet="RVdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RVDetails_LederDetail" Association="PanchayatModel.FK_RVDetails_LederDetail">
+            <End Role="LedgerDetail" EntitySet="LedgerDetails" />
+            <End Role="RVdetail" EntitySet="RVdetails" />
+          </AssociationSet>
+          <EntitySet Name="Period" EntityType="PanchayatModel.Period" />
+          <EntitySet Name="Vouchers" EntityType="PanchayatModel.Voucher" />
+          <AssociationSet Name="FK_Corrections_Voucher" Association="PanchayatModel.FK_Corrections_Voucher">
+            <End Role="Voucher" EntitySet="Vouchers" />
+            <End Role="Correction" EntitySet="Corrections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Ledger" Association="PanchayatModel.FK_Voucher_Ledger">
+            <End Role="Ledger" EntitySet="Ledgers" />
+            <End Role="Voucher" EntitySet="Vouchers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RVdetails_ToVoucher" Association="PanchayatModel.FK_RVdetails_ToVoucher">
+            <End Role="Voucher" EntitySet="Vouchers" />
+            <End Role="RVdetail" EntitySet="RVdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_SubLedger" Association="PanchayatModel.FK_Voucher_SubLedger">
+            <End Role="SubLedger" EntitySet="SubLedgers" />
+            <End Role="Voucher" EntitySet="Vouchers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_VouLedger" Association="PanchayatModel.FK_Voucher_VouLedger">
+            <End Role="Voucher" EntitySet="Vouchers" />
+            <End Role="VoucherLedgerDetail" EntitySet="VoucherLedgerDetails" />
+          </AssociationSet>
+          <EntitySet Name="Configs" EntityType="PanchayatModel.Config" />
+          <EntitySet Name="DemandDetails" EntityType="PanchayatModel.DemandDetail" />
+          <EntitySet Name="DemandPeriods" EntityType="PanchayatModel.DemandPeriod" />
+          <EntitySet Name="DemandYears" EntityType="PanchayatModel.DemandYear" />
+          <AssociationSet Name="FK_DemandDetails_SubLedgerID" Association="PanchayatModel.FK_DemandDetails_SubLedgerID">
+            <End Role="SubLedger" EntitySet="SubLedgers" />
+            <End Role="DemandDetail" EntitySet="DemandDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandPeriod_ToDemandDetails" Association="PanchayatModel.FK_DemandPeriod_ToDemandDetails">
+            <End Role="DemandDetail" EntitySet="DemandDetails" />
+            <End Role="DemandPeriod" EntitySet="DemandPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandYear_ToDemandDetails" Association="PanchayatModel.FK_DemandYear_ToDemandDetails">
+            <End Role="DemandDetail" EntitySet="DemandDetails" />
+            <End Role="DemandYear" EntitySet="DemandYears" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandPeriod_ToPeriod" Association="PanchayatModel.FK_DemandPeriod_ToPeriod">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="DemandPeriod" EntitySet="DemandPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandYear_ToForm4" Association="PanchayatModel.FK_DemandYear_ToForm4">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="DemandYear" EntitySet="DemandYears" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandYear_ToPeriod" Association="PanchayatModel.FK_DemandYear_ToPeriod">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="DemandYear" EntitySet="DemandYears" />
+          </AssociationSet>
+          <EntitySet Name="PeriodSLs" EntityType="PanchayatModel.PeriodSL" />
+          <EntitySet Name="DemandLedgerDetails" EntityType="PanchayatModel.DemandLedgerDetail" />
+          <AssociationSet Name="FK_DemandLedgerDetails_Demand" Association="PanchayatModel.FK_DemandLedgerDetails_Demand">
+            <End Role="DemandDetail" EntitySet="DemandDetails" />
+            <End Role="DemandLedgerDetail" EntitySet="DemandLedgerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandLedgerDetails_LederDetail" Association="PanchayatModel.FK_DemandLedgerDetails_LederDetail">
+            <End Role="LedgerDetail" EntitySet="LedgerDetails" />
+            <End Role="DemandLedgerDetail" EntitySet="DemandLedgerDetails" />
+          </AssociationSet>
+          <EntitySet Name="Demands" EntityType="PanchayatModel.Demand" />
+          <AssociationSet Name="FK_Demand_CitizenID" Association="PanchayatModel.FK_Demand_CitizenID">
+            <End Role="Citizen" EntitySet="Citizens" />
+            <End Role="Demand" EntitySet="Demands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandDetails_Demand" Association="PanchayatModel.FK_DemandDetails_Demand">
+            <End Role="Demand" EntitySet="Demands" />
+            <End Role="DemandDetail" EntitySet="DemandDetails" />
+          </AssociationSet>
+          <EntitySet Name="CBRunnings" EntityType="PanchayatModel.CBRunning" />
+          </EntityContainer>
+        <EntityType Name="RVdetail">
+          <Key>
+            <PropertyRef Name="RVdetailID" />
+          </Key>
+          <Property Name="RVdetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptNo" Type="Int32" />
+          <Property Name="VoucherID" Type="Int32" />
+          <Property Name="LedgerDetailID" Type="Int32" Nullable="false" />
+          <Property Name="RVDetail1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Form4" Relationship="PanchayatModel.FK_RVdetails_ToReceipt" FromRole="RVdetail" ToRole="Form4" />
+          <NavigationProperty Name="LedgerDetail" Relationship="PanchayatModel.FK_RVDetails_LederDetail" FromRole="RVdetail" ToRole="LedgerDetail" />
+          <NavigationProperty Name="Voucher" Relationship="PanchayatModel.FK_RVdetails_ToVoucher" FromRole="RVdetail" ToRole="Voucher" />
+        </EntityType>
+        <Association Name="FK_RVdetails_ToReceipt">
+          <End Type="PanchayatModel.Form4" Role="Form4" Multiplicity="0..1" />
+          <End Type="PanchayatModel.RVdetail" Role="RVdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="RVdetail">
+              <PropertyRef Name="ReceiptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RVDetails_LederDetail">
+          <End Type="PanchayatModel.LedgerDetail" Role="LedgerDetail" Multiplicity="1" />
+          <End Type="PanchayatModel.RVdetail" Role="RVdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LedgerDetail">
+              <PropertyRef Name="LedgerDetailID" />
+            </Principal>
+            <Dependent Role="RVdetail">
+              <PropertyRef Name="LedgerDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="PeriodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FromYr" Type="Int32" Nullable="false" />
+          <Property Name="ToYr" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DemandPeriods" Relationship="PanchayatModel.FK_DemandPeriod_ToPeriod" FromRole="Period" ToRole="DemandPeriod" />
+          <NavigationProperty Name="DemandYears" Relationship="PanchayatModel.FK_DemandYear_ToPeriod" FromRole="Period" ToRole="DemandYear" />
+        </EntityType>
+        <EntityType Name="Voucher">
+          <Key>
+            <PropertyRef Name="VoucherID" />
+          </Key>
+          <Property Name="VoucherID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PassedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="of" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ActualAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="For" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PayDate" Type="DateTime" Precision="0" />
+          <Property Name="CBfolio" Type="Int32" />
+          <Property Name="ResNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HeldOn" Type="DateTime" Precision="0" />
+          <Property Name="Meeting" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LedgerID" Type="Int32" />
+          <Property Name="SubLedgerID" Type="Int32" />
+          <NavigationProperty Name="Corrections" Relationship="PanchayatModel.FK_Corrections_Voucher" FromRole="Voucher" ToRole="Correction" />
+          <NavigationProperty Name="Ledger" Relationship="PanchayatModel.FK_Voucher_Ledger" FromRole="Voucher" ToRole="Ledger" />
+          <NavigationProperty Name="RVdetails" Relationship="PanchayatModel.FK_RVdetails_ToVoucher" FromRole="Voucher" ToRole="RVdetail" />
+          <NavigationProperty Name="SubLedger" Relationship="PanchayatModel.FK_Voucher_SubLedger" FromRole="Voucher" ToRole="SubLedger" />
+          <NavigationProperty Name="VoucherLedgerDetails" Relationship="PanchayatModel.FK_Voucher_VouLedger" FromRole="Voucher" ToRole="VoucherLedgerDetail" />
+        </EntityType>
+        <Association Name="FK_Corrections_Voucher">
+          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Correction" Role="Correction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voucher">
+              <PropertyRef Name="VoucherID" />
+            </Principal>
+            <Dependent Role="Correction">
+              <PropertyRef Name="VoucherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Ledger">
+          <End Type="PanchayatModel.Ledger" Role="Ledger" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledger">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RVdetails_ToVoucher">
+          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="0..1" />
+          <End Type="PanchayatModel.RVdetail" Role="RVdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voucher">
+              <PropertyRef Name="VoucherID" />
+            </Principal>
+            <Dependent Role="RVdetail">
+              <PropertyRef Name="VoucherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_SubLedger">
+          <End Type="PanchayatModel.SubLedger" Role="SubLedger" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedger">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_VouLedger">
+          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="0..1" />
+          <End Type="PanchayatModel.VoucherLedgerDetail" Role="VoucherLedgerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voucher">
+              <PropertyRef Name="VoucherID" />
+            </Principal>
+            <Dependent Role="VoucherLedgerDetail">
+              <PropertyRef Name="VoucherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="ConfigID" />
+          </Key>
+          <Property Name="ConfigID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DemandIncPerc" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ArrearsPerc" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="RowsPerPage" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DemandDetail">
+          <Key>
+            <PropertyRef Name="DDID" />
+          </Key>
+          <Property Name="DDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DemandID" Type="Int32" Nullable="false" />
+          <Property Name="SubLedgerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SubLedger" Relationship="PanchayatModel.FK_DemandDetails_SubLedgerID" FromRole="DemandDetail" ToRole="SubLedger" />
+          <NavigationProperty Name="DemandPeriods" Relationship="PanchayatModel.FK_DemandPeriod_ToDemandDetails" FromRole="DemandDetail" ToRole="DemandPeriod" />
+          <NavigationProperty Name="DemandYears" Relationship="PanchayatModel.FK_DemandYear_ToDemandDetails" FromRole="DemandDetail" ToRole="DemandYear" />
+          <NavigationProperty Name="DemandLedgerDetails" Relationship="PanchayatModel.FK_DemandLedgerDetails_Demand" FromRole="DemandDetail" ToRole="DemandLedgerDetail" />
+          <NavigationProperty Name="Demand" Relationship="PanchayatModel.FK_DemandDetails_Demand" FromRole="DemandDetail" ToRole="Demand" />
+        </EntityType>
+        <EntityType Name="DemandPeriod">
+          <Key>
+            <PropertyRef Name="DDID" />
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="DDID" Type="Int32" Nullable="false" />
+          <Property Name="PeriodID" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="DemandDetail" Relationship="PanchayatModel.FK_DemandPeriod_ToDemandDetails" FromRole="DemandPeriod" ToRole="DemandDetail" />
+          <NavigationProperty Name="Period" Relationship="PanchayatModel.FK_DemandPeriod_ToPeriod" FromRole="DemandPeriod" ToRole="Period" />
+          <Property Name="SysAmt" Type="Decimal" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="DemandYear">
+          <Key>
+            <PropertyRef Name="DemandYear1" />
+            <PropertyRef Name="DDID" />
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="DemandYear1" Type="Int32" Nullable="false" />
+          <Property Name="DDID" Type="Int32" Nullable="false" />
+          <Property Name="PeriodID" Type="Int32" Nullable="false" />
+          <Property Name="Arrears" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RecieptNo" Type="Int32" />
+          <NavigationProperty Name="DemandDetail" Relationship="PanchayatModel.FK_DemandYear_ToDemandDetails" FromRole="DemandYear" ToRole="DemandDetail" />
+          <NavigationProperty Name="Form4" Relationship="PanchayatModel.FK_DemandYear_ToForm4" FromRole="DemandYear" ToRole="Form4" />
+          <NavigationProperty Name="Period" Relationship="PanchayatModel.FK_DemandYear_ToPeriod" FromRole="DemandYear" ToRole="Period" />
+          <Property Name="RecptAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RecptDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_DemandDetails_SubLedgerID">
+          <End Type="PanchayatModel.SubLedger" Role="SubLedger" Multiplicity="1" />
+          <End Type="PanchayatModel.DemandDetail" Role="DemandDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedger">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="DemandDetail">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandPeriod_ToDemandDetails">
+          <End Type="PanchayatModel.DemandDetail" Role="DemandDetail" Multiplicity="1" />
+          <End Type="PanchayatModel.DemandPeriod" Role="DemandPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DemandDetail">
+              <PropertyRef Name="DDID" />
+            </Principal>
+            <Dependent Role="DemandPeriod">
+              <PropertyRef Name="DDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandYear_ToDemandDetails">
+          <End Type="PanchayatModel.DemandDetail" Role="DemandDetail" Multiplicity="1" />
+          <End Type="PanchayatModel.DemandYear" Role="DemandYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DemandDetail">
+              <PropertyRef Name="DDID" />
+            </Principal>
+            <Dependent Role="DemandYear">
+              <PropertyRef Name="DDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandPeriod_ToPeriod">
+          <End Type="PanchayatModel.Period" Role="Period" Multiplicity="1" />
+          <End Type="PanchayatModel.DemandPeriod" Role="DemandPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="DemandPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandYear_ToForm4">
+          <End Type="PanchayatModel.Form4" Role="Form4" Multiplicity="0..1" />
+          <End Type="PanchayatModel.DemandYear" Role="DemandYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="DemandYear">
+              <PropertyRef Name="RecieptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandYear_ToPeriod">
+          <End Type="PanchayatModel.Period" Role="Period" Multiplicity="1" />
+          <End Type="PanchayatModel.DemandYear" Role="DemandYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="DemandYear">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PeriodSL">
+          <Key>
+            <PropertyRef Name="PeriodID" />
+            <PropertyRef Name="PeriodSL1" />
+          </Key>
+          <Property Name="PeriodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeriodSL1" Type="String" Nullable="false" MaxLength="28" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DemandLedgerDetail">
+          <Key>
+            <PropertyRef Name="DemandLedgerDetailsID" />
+          </Key>
+          <Property Name="DemandLedgerDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DDID" Type="Int32" />
+          <Property Name="LedgerDetailID" Type="Int32" />
+          <Property Name="DemandLedgerDetail1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DemandDetail" Relationship="PanchayatModel.FK_DemandLedgerDetails_Demand" FromRole="DemandLedgerDetail" ToRole="DemandDetail" />
+          <NavigationProperty Name="LedgerDetail" Relationship="PanchayatModel.FK_DemandLedgerDetails_LederDetail" FromRole="DemandLedgerDetail" ToRole="LedgerDetail" />
+        </EntityType>
+        <Association Name="FK_DemandLedgerDetails_Demand">
+          <End Type="PanchayatModel.DemandDetail" Role="DemandDetail" Multiplicity="0..1" />
+          <End Type="PanchayatModel.DemandLedgerDetail" Role="DemandLedgerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DemandDetail">
+              <PropertyRef Name="DDID" />
+            </Principal>
+            <Dependent Role="DemandLedgerDetail">
+              <PropertyRef Name="DDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandLedgerDetails_LederDetail">
+          <End Type="PanchayatModel.LedgerDetail" Role="LedgerDetail" Multiplicity="0..1" />
+          <End Type="PanchayatModel.DemandLedgerDetail" Role="DemandLedgerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LedgerDetail">
+              <PropertyRef Name="LedgerDetailID" />
+            </Principal>
+            <Dependent Role="DemandLedgerDetail">
+              <PropertyRef Name="LedgerDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Demand">
+          <Key>
+            <PropertyRef Name="DemandID" />
+          </Key>
+          <Property Name="DemandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CitizenID" Type="Int32" />
+          <Property Name="HouseNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="StopDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Citizen" Relationship="PanchayatModel.FK_Demand_CitizenID" FromRole="Demand" ToRole="Citizen" />
+          <NavigationProperty Name="DemandDetails" Relationship="PanchayatModel.FK_DemandDetails_Demand" FromRole="Demand" ToRole="DemandDetail" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <Association Name="FK_Demand_CitizenID">
+          <End Type="PanchayatModel.Citizen" Role="Citizen" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Demand" Role="Demand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citizen">
+              <PropertyRef Name="CitizenID" />
+            </Principal>
+            <Dependent Role="Demand">
+              <PropertyRef Name="CitizenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandDetails_Demand">
+          <End Type="PanchayatModel.Demand" Role="Demand" Multiplicity="1" />
+          <End Type="PanchayatModel.DemandDetail" Role="DemandDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Demand">
+              <PropertyRef Name="DemandID" />
+            </Principal>
+            <Dependent Role="DemandDetail">
+              <PropertyRef Name="DemandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CBRunning">
+          <Key>
+            <PropertyRef Name="EntryDate" />
+          </Key>
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TotalInflow" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalOutflow" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CBTotal" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PanchayatModelStoreContainer" CdmEntityContainer="PanchayatEntities">
+          <EntitySetMapping Name="Citizens">
+            <EntityTypeMapping TypeName="PanchayatModel.Citizen">
+              <MappingFragment StoreEntitySet="Citizen">
+                <ScalarProperty Name="CitizenID" ColumnName="CitizenID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ResAddress" ColumnName="ResAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Corrections">
+            <EntityTypeMapping TypeName="PanchayatModel.Correction">
+              <MappingFragment StoreEntitySet="Corrections">
+                <ScalarProperty Name="CorrectionID" ColumnName="CorrectionID" />
+                <ScalarProperty Name="CorrectionDate" ColumnName="CorrectionDate" />
+                <ScalarProperty Name="RecieptID" ColumnName="RecieptID" />
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Form1">
+            <EntityTypeMapping TypeName="PanchayatModel.Form1">
+              <MappingFragment StoreEntitySet="Form1">
+                <ScalarProperty Name="Form1ID" ColumnName="Form1ID" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Particulars" ColumnName="Particulars" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Progressive" ColumnName="Progressive" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Form10">
+            <EntityTypeMapping TypeName="PanchayatModel.Form10">
+              <MappingFragment StoreEntitySet="Form10">
+                <ScalarProperty Name="Form10ID" ColumnName="Form10ID" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="OB" ColumnName="OB" />
+                <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Form10Det">
+            <EntityTypeMapping TypeName="PanchayatModel.Form10Det">
+              <MappingFragment StoreEntitySet="Form10Det">
+                <ScalarProperty Name="Form10DetID" ColumnName="Form10DetID" />
+                <ScalarProperty Name="Form10ID" ColumnName="Form10ID" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Form2">
+            <EntityTypeMapping TypeName="PanchayatModel.Form2">
+              <MappingFragment StoreEntitySet="Form2">
+                <ScalarProperty Name="Form2ID" ColumnName="Form2ID" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+                <ScalarProperty Name="ShortParticaulars" ColumnName="ShortParticaulars" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Progressive" ColumnName="Progressive" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Form3">
+            <EntityTypeMapping TypeName="PanchayatModel.Form3">
+              <MappingFragment StoreEntitySet="Form3">
+                <ScalarProperty Name="TransPerson" ColumnName="TransPerson" />
+                <ScalarProperty Name="TransNo" ColumnName="TransNo" />
+                <ScalarProperty Name="CashBookID" ColumnName="CashBookID" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Form4">
+            <EntityTypeMapping TypeName="PanchayatModel.Form4">
+              <MappingFragment StoreEntitySet="Form4">
+                <ScalarProperty Name="HouseNo" ColumnName="HouseNo" />
+                <ScalarProperty Name="RecvdFrom" ColumnName="RecvdFrom" />
+                <ScalarProperty Name="RecieptNo" ColumnName="RecieptNo" />
+                <ScalarProperty Name="CitizenID" ColumnName="CitizenID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LedgerDetails">
+            <EntityTypeMapping TypeName="PanchayatModel.LedgerDetail">
+              <MappingFragment StoreEntitySet="LedgerDetails">
+                <ScalarProperty Name="LedgerDetailID" ColumnName="LedgerDetailID" />
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+                <ScalarProperty Name="LedgerDetail1" ColumnName="LedgerDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ledgers">
+            <EntityTypeMapping TypeName="PanchayatModel.Ledger">
+              <MappingFragment StoreEntitySet="Ledgers">
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="Ledger1" ColumnName="Ledger" />
+                <ScalarProperty Name="IsIncome" ColumnName="IsIncome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubLedgers">
+            <EntityTypeMapping TypeName="PanchayatModel.SubLedger">
+              <MappingFragment StoreEntitySet="SubLedgers">
+                <ScalarProperty Name="HasDemand" ColumnName="HasDemand" />
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="SubLedgerTypeID" ColumnName="SubLedgerTypeID" />
+                <ScalarProperty Name="Ledger" ColumnName="Ledger" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubLedgerTypes">
+            <EntityTypeMapping TypeName="PanchayatModel.SubLedgerType">
+              <MappingFragment StoreEntitySet="SubLedgerType">
+                <ScalarProperty Name="SubLedgerTypeID" ColumnName="SubLedgerTypeID" />
+                <ScalarProperty Name="SubLedgerType1" ColumnName="SubLedgerType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VoucherLedgerDetails">
+            <EntityTypeMapping TypeName="PanchayatModel.VoucherLedgerDetail">
+              <MappingFragment StoreEntitySet="VoucherLedgerDetails">
+                <ScalarProperty Name="VocherLedgerDetailID" ColumnName="VocherLedgerDetailID" />
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+                <ScalarProperty Name="LedgerDetailID" ColumnName="LedgerDetailID" />
+                <ScalarProperty Name="VoucherLedgerDetail1" ColumnName="VoucherLedgerDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RVdetails">
+            <EntityTypeMapping TypeName="PanchayatModel.RVdetail">
+              <MappingFragment StoreEntitySet="RVdetails">
+                <ScalarProperty Name="RVDetail1" ColumnName="RVDetail" />
+                <ScalarProperty Name="LedgerDetailID" ColumnName="LedgerDetailID" />
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="RVdetailID" ColumnName="RVdetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Period">
+            <EntityTypeMapping TypeName="PanchayatModel.Period">
+              <MappingFragment StoreEntitySet="Period">
+                <ScalarProperty Name="ToYr" ColumnName="ToYr" />
+                <ScalarProperty Name="FromYr" ColumnName="FromYr" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vouchers">
+            <EntityTypeMapping TypeName="PanchayatModel.Voucher">
+              <MappingFragment StoreEntitySet="Voucher">
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="Meeting" ColumnName="Meeting" />
+                <ScalarProperty Name="HeldOn" ColumnName="HeldOn" />
+                <ScalarProperty Name="ResNo" ColumnName="ResNo" />
+                <ScalarProperty Name="CBfolio" ColumnName="CBfolio" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="For" ColumnName="For" />
+                <ScalarProperty Name="ActualAmount" ColumnName="ActualAmount" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="of" ColumnName="of" />
+                <ScalarProperty Name="PassedBy" ColumnName="PassedBy" />
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configs">
+            <EntityTypeMapping TypeName="PanchayatModel.Config">
+              <MappingFragment StoreEntitySet="Config">
+                <ScalarProperty Name="RowsPerPage" ColumnName="RowsPerPage" />
+                <ScalarProperty Name="ArrearsPerc" ColumnName="ArrearsPerc" />
+                <ScalarProperty Name="DemandIncPerc" ColumnName="DemandIncPerc" />
+                <ScalarProperty Name="VP" ColumnName="VP" />
+                <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DemandDetails">
+            <EntityTypeMapping TypeName="PanchayatModel.DemandDetail">
+              <MappingFragment StoreEntitySet="DemandDetails">
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+                <ScalarProperty Name="DemandID" ColumnName="DemandID" />
+                <ScalarProperty Name="DDID" ColumnName="DDID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DemandPeriods">
+            <EntityTypeMapping TypeName="PanchayatModel.DemandPeriod">
+              <MappingFragment StoreEntitySet="DemandPeriod">
+                <ScalarProperty Name="SysAmt" ColumnName="SysAmt" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+                <ScalarProperty Name="DDID" ColumnName="DDID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DemandYears">
+            <EntityTypeMapping TypeName="PanchayatModel.DemandYear">
+              <MappingFragment StoreEntitySet="DemandYear">
+                <ScalarProperty Name="RecptDate" ColumnName="RecptDate" />
+                <ScalarProperty Name="RecptAmt" ColumnName="RecptAmt" />
+                <ScalarProperty Name="RecieptNo" ColumnName="RecieptNo" />
+                <ScalarProperty Name="Arrears" ColumnName="Arrears" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+                <ScalarProperty Name="DDID" ColumnName="DDID" />
+                <ScalarProperty Name="DemandYear1" ColumnName="DemandYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PeriodSLs">
+            <EntityTypeMapping TypeName="PanchayatModel.PeriodSL">
+              <MappingFragment StoreEntitySet="PeriodSLs">
+                <ScalarProperty Name="PeriodSL1" ColumnName="PeriodSL" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DemandLedgerDetails">
+            <EntityTypeMapping TypeName="PanchayatModel.DemandLedgerDetail">
+              <MappingFragment StoreEntitySet="DemandLedgerDetails">
+                <ScalarProperty Name="DemandLedgerDetail1" ColumnName="DemandLedgerDetail" />
+                <ScalarProperty Name="LedgerDetailID" ColumnName="LedgerDetailID" />
+                <ScalarProperty Name="DDID" ColumnName="DDID" />
+                <ScalarProperty Name="DemandLedgerDetailsID" ColumnName="DemandLedgerDetailsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Demands">
+            <EntityTypeMapping TypeName="PanchayatModel.Demand">
+              <MappingFragment StoreEntitySet="Demand">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="StopDate" ColumnName="StopDate" />
+                <ScalarProperty Name="HouseNo" ColumnName="HouseNo" />
+                <ScalarProperty Name="CitizenID" ColumnName="CitizenID" />
+                <ScalarProperty Name="DemandID" ColumnName="DemandID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CBRunnings">
+            <EntityTypeMapping TypeName="PanchayatModel.CBRunning">
+              <MappingFragment StoreEntitySet="CBRunning">
+                <ScalarProperty Name="CBTotal" ColumnName="CBTotal" />
+                <ScalarProperty Name="TotalOutflow" ColumnName="TotalOutflow" />
+                <ScalarProperty Name="TotalInflow" ColumnName="TotalInflow" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
