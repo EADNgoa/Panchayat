@@ -195,6 +195,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Audit.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="CBRunning.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -205,6 +208,7 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuditsController.cs" />
     <Compile Include="Controllers\CitizensController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\CorrectionsController.cs" />
@@ -523,6 +527,11 @@
     <Content Include="Views\Periods\Index.cshtml" />
     <Content Include="Views\Reports\Form8Report.cshtml" />
     <Content Include="Views\Reports\Form10Report.cshtml" />
+    <Content Include="Views\Audits\Create.cshtml" />
+    <Content Include="Views\Audits\Delete.cshtml" />
+    <Content Include="Views\Audits\Details.cshtml" />
+    <Content Include="Views\Audits\Edit.cshtml" />
+    <Content Include="Views\Audits\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

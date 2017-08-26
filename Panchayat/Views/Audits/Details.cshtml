@@ -1,0 +1,50 @@
+﻿@model Panchayat.Audit
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Audit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AuditNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuditNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ListOfAuditObjection)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ListOfAuditObjection)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActionsTaken)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActionsTaken)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AuditID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
