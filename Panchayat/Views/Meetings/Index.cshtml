@@ -4,38 +4,61 @@
     @{
         ViewBag.Title = "Index";
     }
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
 
-    <h2>Meeting</h2>
-@using (Html.BeginForm("Index", "Meetings", FormMethod.Get))
-{
-    <div class="row">
-        <div>
-            <table>
-                <tr>
-                    <td></td>
-                    <td> Proposer Name:</td>
-                    <td> @Html.TextBox("pn", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+<center>
+    <h2 class="section-to-print">Meeting</h2>
+    <br />
+    @using (Html.BeginForm("Index", "Meetings", FormMethod.Get))
+    {
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td> Proposer Name:</td>
+                        <td> @Html.TextBox("pn", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
 
 
-                    <td> Meeting Date:</td>
-                    <td> @Html.TextBox("md", ViewBag.CurrentFilter as string, new { type = "date", @class="form-control"})</td>
+                        <td> Meeting Date:</td>
+                        <td> @Html.TextBox("md", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
 
-                    <td class="col-lg-1"></td>
-                    <td><input type="submit" value="Search" class="btn btn-default" /></td>
-                </tr>
-            </table>
-
-
+                        <td class="col-lg-1"></td>
+                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
 
 
+
+
+            </div>
         </div>
-    </div>
-}
+    }
+</center>
 <br />
     <p>
         @Html.ActionLink("Create New", "Create")
+        <span class="pull-right">
+            <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+        </span>
     </p>
-    <table class="table">
+    <table class="table section-to-print">
         <tr>
             <th>
                 Subject
@@ -93,10 +116,10 @@
                     @Html.DisplayFor(modelItem => item.Remark)
                 </td>
           
-                <td>
+                <td class="section-to-Not-print">
                     @Html.ActionLink("Edit", "Edit", new { id = item.MeetingID }) |
                     @Html.ActionLink("Details", "Details", new { id = item.MeetingID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MeetingID })
+                
                 </td>
             </tr>
         }

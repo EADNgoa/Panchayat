@@ -1,0 +1,90 @@
+﻿@model Panchayat.Outward
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Outward</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfDisp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfDisp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToWhom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToWhom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileReferenceNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileReferenceNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileReferenceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileReferenceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubjectMatter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubjectMatter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostageDrawn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostageDrawn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostageExtended)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostageExtended)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterType.RegisterType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterType.RegisterType1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OutwardID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -54,5 +54,6 @@ namespace Panchayat
         public virtual DbSet<Meeting> Meetings { get; set; }
         public virtual DbSet<IllegalConstruction> IllegalConstructions { get; set; }
         public virtual DbSet<Inward> Inwards { get; set; }
+        public virtual DbSet<Outward> Outwards { get; set; }
     }
 }

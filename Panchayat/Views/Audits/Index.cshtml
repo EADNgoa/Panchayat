@@ -4,37 +4,43 @@
 @{
     ViewBag.Title = "Audit";
 }
+<center>
+    <h2 class="section-to-print">Audit Register</h2>
+    <br />
 
-<h2>Audit</h2>
-
-
-@using (Html.BeginForm("Index", "Audits", FormMethod.Get))
-{
-    <div class="row">
-        <div>
-            <table>
-                <tr>
-                    <td></td>
-                    <td> Audit No:</td><td> @Html.TextBox("No", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
-                 
-
-                   <td> Year:</td><td> @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.YearBox, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
-              <td class="col-lg-1"></td>
-                    <td><input type="submit" value="Search" class="btn btn-default"/></td>
-                </tr>
-          </table>
+    @using (Html.BeginForm("Index", "Audits", FormMethod.Get))
+    {
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td> Audit No:</td>
+                        <td> @Html.TextBox("No", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
 
 
-          
-           
+                        <td> Year:</td>
+                        <td> @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.YearBox, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
+                        <td class="col-lg-1"></td>
+                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
         </div>
-    </div>
-}
+    }
+</center>
 <br />
 <p>
     @Html.ActionLink("Create New", "Create")
+    <span class="pull-right">
+        <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+    </span>
 </p>
-<table class="table">
+<table class="table section-to-print">
     <tr>
         <th>
             Audit No
@@ -65,10 +71,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Year)
         </td>
-        <td>
+        <td class="section-to-Not-print">
             @Html.ActionLink("Edit", "Edit", new { id=item.AuditID }) |
             @Html.ActionLink("Details", "Details", new { id=item.AuditID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AuditID })
+           
         </td>
     </tr>
 }

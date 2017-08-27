@@ -177,7 +177,10 @@ input, textarea, select {
         visibility: visible;
     }
 
-
+        .section-to-Not-print, .section-to-Not-print * {
+            visibility: hidden;
+            display:none;
+        }
 
     
 }

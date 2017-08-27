@@ -59,6 +59,7 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IllegalConID,DateOfComp,NameOfPr,AddressOfPr,NatOfCon,OccasOfCons,ActionTaken,Remarks,RegisterTypeID")] IllegalConstruction illegalConstruction)
         {
+            illegalConstruction.RegisterTypeID = 4 ;
             if (ModelState.IsValid)
             {
                 db.IllegalConstructions.Add(illegalConstruction);
@@ -93,6 +94,7 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IllegalConID,DateOfComp,NameOfPr,AddressOfPr,NatOfCon,OccasOfCons,ActionTaken,Remarks,RegisterTypeID")] IllegalConstruction illegalConstruction)
         {
+            illegalConstruction.RegisterTypeID = 4;
             if (ModelState.IsValid)
             {
                 db.Entry(illegalConstruction).State = EntityState.Modified;
