@@ -193,6 +193,21 @@
           <Property Name="Remarks" Type="varchar" MaxLength="350" />
           <Property Name="RegisterTypeID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Inward">
+          <Key>
+            <PropertyRef Name="InwardID" />
+          </Key>
+          <Property Name="InwardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOfReciept" Type="date" />
+          <Property Name="FromWhereRec" Type="varchar" MaxLength="150" />
+          <Property Name="NoOfLett" Type="varchar" MaxLength="30" />
+          <Property Name="DateOfLett" Type="date" />
+          <Property Name="FileNo" Type="varchar" MaxLength="100" />
+          <Property Name="SubjectMatter" Type="varchar" MaxLength="150" />
+          <Property Name="ActionTaken" Type="varchar" MaxLength="150" />
+          <Property Name="Remark" Type="varchar" MaxLength="250" />
+          <Property Name="RegisterTypeID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="LedgerDetails">
           <Key>
             <PropertyRef Name="LedgerDetailID" />
@@ -603,6 +618,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Inward_RegisterTypes">
+          <End Role="RegisterTypes" Type="Self.RegisterTypes" Multiplicity="1" />
+          <End Role="Inward" Type="Self.Inward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterTypes">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="Inward">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LedgerDetails_SubLedger">
           <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="0..1" />
           <End Role="LedgerDetails" Type="Self.LedgerDetails" Multiplicity="*" />
@@ -753,6 +780,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <EntitySet Name="Form3" EntityType="Self.Form3" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Form4" EntityType="Self.Form4" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IllegalConstruction" EntityType="Self.IllegalConstruction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inward" EntityType="Self.Inward" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LedgerDetails" EntityType="Self.LedgerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ledgers" EntityType="Self.Ledgers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Meeting" EntityType="Self.Meeting" Schema="dbo" store:Type="Tables" />
@@ -868,6 +896,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_IllegalConstruction_RegisterTypes" Association="Self.FK_IllegalConstruction_RegisterTypes">
             <End Role="RegisterTypes" EntitySet="RegisterTypes" />
             <End Role="IllegalConstruction" EntitySet="IllegalConstruction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inward_RegisterTypes" Association="Self.FK_Inward_RegisterTypes">
+            <End Role="RegisterTypes" EntitySet="RegisterTypes" />
+            <End Role="Inward" EntitySet="Inward" />
           </AssociationSet>
           <AssociationSet Name="FK_LedgerDetails_SubLedger" Association="Self.FK_LedgerDetails_SubLedger">
             <End Role="SubLedgers" EntitySet="SubLedgers" />
@@ -1474,6 +1506,11 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="RegisterType" EntitySet="RegisterTypes" />
             <End Role="IllegalConstruction" EntitySet="IllegalConstructions" />
           </AssociationSet>
+          <EntitySet Name="Inwards" EntityType="PanchayatModel.Inward" />
+          <AssociationSet Name="FK_Inward_RegisterTypes" Association="PanchayatModel.FK_Inward_RegisterTypes">
+            <End Role="RegisterType" EntitySet="RegisterTypes" />
+            <End Role="Inward" EntitySet="Inwards" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -1836,6 +1873,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="RegisterType1" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Meetings" Relationship="PanchayatModel.FK_Meeting_RegisterType" FromRole="RegisterType" ToRole="Meeting" />
           <NavigationProperty Name="IllegalConstructions" Relationship="PanchayatModel.FK_IllegalConstruction_RegisterTypes" FromRole="RegisterType" ToRole="IllegalConstruction" />
+          <NavigationProperty Name="Inwards" Relationship="PanchayatModel.FK_Inward_RegisterTypes" FromRole="RegisterType" ToRole="Inward" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -1888,6 +1926,34 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
               <PropertyRef Name="RegisterTypeID" />
             </Principal>
             <Dependent Role="IllegalConstruction">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Inward">
+          <Key>
+            <PropertyRef Name="InwardID" />
+          </Key>
+          <Property Name="InwardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfReciept" Type="DateTime" Precision="0" />
+          <Property Name="FromWhereRec" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NoOfLett" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfLett" Type="DateTime" Precision="0" />
+          <Property Name="FileNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SubjectMatter" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ActionTaken" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="RegisterTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_Inward_RegisterTypes" FromRole="Inward" ToRole="RegisterType" />
+        </EntityType>
+        <Association Name="FK_Inward_RegisterTypes">
+          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="1" />
+          <End Type="PanchayatModel.Inward" Role="Inward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterType">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="Inward">
               <PropertyRef Name="RegisterTypeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2215,6 +2281,22 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="NameOfPr" ColumnName="NameOfPr" />
                 <ScalarProperty Name="DateOfComp" ColumnName="DateOfComp" />
                 <ScalarProperty Name="IllegalConID" ColumnName="IllegalConID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inwards">
+            <EntityTypeMapping TypeName="PanchayatModel.Inward">
+              <MappingFragment StoreEntitySet="Inward">
+                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ActionTaken" ColumnName="ActionTaken" />
+                <ScalarProperty Name="SubjectMatter" ColumnName="SubjectMatter" />
+                <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+                <ScalarProperty Name="DateOfLett" ColumnName="DateOfLett" />
+                <ScalarProperty Name="NoOfLett" ColumnName="NoOfLett" />
+                <ScalarProperty Name="FromWhereRec" ColumnName="FromWhereRec" />
+                <ScalarProperty Name="DateOfReciept" ColumnName="DateOfReciept" />
+                <ScalarProperty Name="InwardID" ColumnName="InwardID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
