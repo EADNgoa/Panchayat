@@ -16,9 +16,17 @@ namespace Panchayat.Controllers
         private PanchayatEntities db = new PanchayatEntities();
 
         // GET: IllegalConstructions
-        public ActionResult Index(int? page,DateTime? dc,int? rt)
+        public ActionResult Index(int? page,DateTime? dc,int? rt,int? cm)
         {
-            ViewBag.RegisterTypeID = rt;
+            if (rt != null)
+            {
+                ViewBag.RegisterTypeID = rt;
+            }
+            if (rt != null)
+            {
+                ViewBag.RegisterTypeID = cm;
+            }
+           
             var illegalConstructions = db.IllegalConstructions.Where(x => x.RegisterTypeID == rt);
 
             if (dc != null)

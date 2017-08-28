@@ -7,11 +7,19 @@
 <h2>Details</h2>
 
 <div>
-    <h4>IllegalConstruction</h4>
+    <h4>
+        @if (ViewBag.RegisterTypeID == 6)
+        {
+            <p>Public Griveance</p>
+        }
+        @if (ViewBag.RegisterTypeID == 4)
+        {
+            <p>Illegal Constrution</p>
+        }</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.DateOfComp)
+            Date Of Completion
         </dt>
 
         <dd>
