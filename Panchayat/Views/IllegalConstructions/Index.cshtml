@@ -8,7 +8,19 @@
     ViewBag.Title = "Index";
 }
 <center>
-    <h2 class="section-to-print">Illegal Construction</h2>
+    <h2 class="section-to-print">
+        @if (ViewBag.RegisterTypeID == 6)
+        {
+            <p>Public Grievance</p>
+        }
+        @if (ViewBag.RegisterTypeID == 4)
+        {
+            <p>Illegal Construction</p>
+        }
+
+    
+    
+    </h2>
     <br/>
     @using (Html.BeginForm("Index", "IllegalConstructions", FormMethod.Get))
     {
@@ -34,7 +46,15 @@
 </center>
 <br />
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (ViewBag.RegisterTypeID == 6)
+    {
+    <p>@Html.ActionLink("Create New", "Create", new { rt = 6})</p>
+    }
+    else
+    {
+        <p>@Html.ActionLink("Create New", "Create") </p>
+    }
+
     <span class="pull-right">
         <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
     </span>
@@ -51,10 +71,29 @@
            Name And Adress Of Person Doing Complain
         </th>
         <th>
-           Name Of Construction
+           
+                @if(ViewBag.RegisterTypeID == 6)
+                {
+                    <p>Name of Complain</p>
+                }
+                @if (ViewBag.RegisterTypeID == 4)
+                {
+                   <p>Name Of Constrution</p>
+                }
+
+
+
+
         </th>
         <th>
-            Occasion Of Construction
+            @if (ViewBag.RegisterTypeID == 6)
+            {
+                <p>Occasion of Complain</p>
+            }
+            @if (ViewBag.RegisterTypeID == 4)
+            {
+                <p>Occasion Of Constrution</p>
+            }
         </th>
         <th>
            Action Taken
@@ -91,8 +130,19 @@
         </td>
      
         <td class="section-to-Not-print">
-            @Html.ActionLink("Edit", "Edit", new { id=item.IllegalConID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IllegalConID }) |
+            @if (ViewBag.RegisterTypeID == 6)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.IllegalConID })
+                @Html.ActionLink("Details", "Details", new { id = item.IllegalConID })
+            }
+            @if (ViewBag.RegisterTypeID == 4)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.IllegalConID })
+                @Html.ActionLink("Details", "Details", new { id = item.IllegalConID })
+            }
+
+          
+          
           
         </td>
     </tr>
