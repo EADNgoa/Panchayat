@@ -1,0 +1,96 @@
+﻿@model Panchayat.Outward
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Outward</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfDisp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfDisp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToWhom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToWhom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileReferenceNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileReferenceNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileReferenceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileReferenceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubjectMatter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubjectMatter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostageDrawn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostageDrawn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostageExtended)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostageExtended)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterType.RegisterType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterType.RegisterType1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

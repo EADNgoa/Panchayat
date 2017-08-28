@@ -1,0 +1,133 @@
+﻿@model PagedList.IPagedList<Panchayat.Outward>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+}
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+<center>
+    <h2 class="section-to-print">Outward Correspondence</h2>
+<br />
+    @using (Html.BeginForm("Index", "Outwards", FormMethod.Get))
+    {
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td> File Reference No:</td>
+                        <td> @Html.TextBox("frn", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
+
+
+                        <td> Date Of Dispatch:</td>
+                        <td> @Html.TextBox("dod", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+                        <td> File Reference Date:</td>
+                        <td> @Html.TextBox("frd", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+
+                        <td class="col-lg-1"></td>
+                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    }
+</center>
+
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <span class="pull-right">
+        <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+    </span>
+</p>
+<table class="table section-to-print">
+    <tr>
+        <th>
+           Date Of Dispatch
+        </th>
+        <th>
+            To Whom Sent
+        </th>
+        <th>
+           File Reference No
+        </th>
+        <th>
+           File Reference Date
+        </th>
+        <th>
+           subject Matter
+        </th>
+        <th>
+           Postage Drawn
+        </th>
+        <th>
+           Postage Extended
+        </th>
+        <th>
+          Remark
+        </th>
+  
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfDisp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToWhom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileReferenceNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileReferenceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubjectMatter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostageDrawn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostageExtended)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remark)
+        </td>
+     
+        <td class="section-to-Not-print">
+            @Html.ActionLink("Edit", "Edit", new { id=item.OutwardID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OutwardID }) |
+          
+        </td>
+    </tr>
+}
+
+</table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerID = ViewBag.LedgerID }))

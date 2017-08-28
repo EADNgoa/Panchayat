@@ -217,6 +217,7 @@
     <Compile Include="Controllers\IllegalConstructionsController.cs" />
     <Compile Include="Controllers\InwardsController.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />
+    <Compile Include="Controllers\OutwardsController.cs" />
     <Compile Include="Controllers\PeriodsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\EAController.cs" />
@@ -287,6 +288,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\PartialClasses.cs" />
+    <Compile Include="Outward.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="PanchayatMdl.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -562,6 +566,11 @@
     <Content Include="Views\Inwards\Details.cshtml" />
     <Content Include="Views\Inwards\Edit.cshtml" />
     <Content Include="Views\Inwards\Index.cshtml" />
+    <Content Include="Views\Outwards\Create.cshtml" />
+    <Content Include="Views\Outwards\Delete.cshtml" />
+    <Content Include="Views\Outwards\Details.cshtml" />
+    <Content Include="Views\Outwards\Edit.cshtml" />
+    <Content Include="Views\Outwards\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

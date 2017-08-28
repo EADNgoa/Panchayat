@@ -71,6 +71,8 @@
         <AssociationConnector Association="PanchayatModel.FK_IllegalConstruction_RegisterTypes" />
         <EntityTypeShape EntityType="PanchayatModel.Inward" Width="1.5" PointX="13.625" PointY="12.125" />
         <AssociationConnector Association="PanchayatModel.FK_Inward_RegisterTypes" />
+        <EntityTypeShape EntityType="PanchayatModel.Outward" Width="1.5" PointX="13.625" PointY="21.25" />
+        <AssociationConnector Association="PanchayatModel.FK_Outward_ToTable" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

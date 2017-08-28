@@ -98,6 +98,7 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "InwardID,DateOfReciept,FromWhereRec,NoOfLett,DateOfLett,FileNo,SubjectMatter,ActionTaken,Remark,RegisterTypeID")] Inward inward)
         {
+            inward.RegisterTypeID = 2;
             if (ModelState.IsValid)
             {
                 db.Entry(inward).State = EntityState.Modified;

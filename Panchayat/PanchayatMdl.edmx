@@ -239,6 +239,21 @@
           <Property Name="Remark" Type="varchar" MaxLength="350" />
           <Property Name="RegisterTypeID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Outward">
+          <Key>
+            <PropertyRef Name="OutwardID" />
+          </Key>
+          <Property Name="OutwardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOfDisp" Type="date" />
+          <Property Name="ToWhom" Type="varchar" MaxLength="250" />
+          <Property Name="FileReferenceNo" Type="varchar" MaxLength="30" />
+          <Property Name="FileReferenceDate" Type="date" />
+          <Property Name="SubjectMatter" Type="varchar" MaxLength="350" />
+          <Property Name="PostageDrawn" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PostageExtended" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Remark" Type="varchar" MaxLength="250" />
+          <Property Name="RegisterTypeID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Period">
           <Key>
             <PropertyRef Name="PeriodID" />
@@ -654,6 +669,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Outward_ToTable">
+          <End Role="RegisterTypes" Type="Self.RegisterTypes" Multiplicity="1" />
+          <End Role="Outward" Type="Self.Outward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterTypes">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="Outward">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RVDetails_LederDetail">
           <End Role="LedgerDetails" Type="Self.LedgerDetails" Multiplicity="1" />
           <End Role="RVdetails" Type="Self.RVdetails" Multiplicity="*" />
@@ -784,6 +811,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <EntitySet Name="LedgerDetails" EntityType="Self.LedgerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ledgers" EntityType="Self.Ledgers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Meeting" EntityType="Self.Meeting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Outward" EntityType="Self.Outward" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegisterTypes" EntityType="Self.RegisterTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RVdetails" EntityType="Self.RVdetails" Schema="dbo" store:Type="Tables" />
@@ -908,6 +936,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_Meeting_RegisterType" Association="Self.FK_Meeting_RegisterType">
             <End Role="RegisterTypes" EntitySet="RegisterTypes" />
             <End Role="Meeting" EntitySet="Meeting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Outward_ToTable" Association="Self.FK_Outward_ToTable">
+            <End Role="RegisterTypes" EntitySet="RegisterTypes" />
+            <End Role="Outward" EntitySet="Outward" />
           </AssociationSet>
           <AssociationSet Name="FK_RVDetails_LederDetail" Association="Self.FK_RVDetails_LederDetail">
             <End Role="LedgerDetails" EntitySet="LedgerDetails" />
@@ -1511,6 +1543,11 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="RegisterType" EntitySet="RegisterTypes" />
             <End Role="Inward" EntitySet="Inwards" />
           </AssociationSet>
+          <EntitySet Name="Outwards" EntityType="PanchayatModel.Outward" />
+          <AssociationSet Name="FK_Outward_ToTable" Association="PanchayatModel.FK_Outward_ToTable">
+            <End Role="RegisterType" EntitySet="RegisterTypes" />
+            <End Role="Outward" EntitySet="Outwards" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -1874,6 +1911,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <NavigationProperty Name="Meetings" Relationship="PanchayatModel.FK_Meeting_RegisterType" FromRole="RegisterType" ToRole="Meeting" />
           <NavigationProperty Name="IllegalConstructions" Relationship="PanchayatModel.FK_IllegalConstruction_RegisterTypes" FromRole="RegisterType" ToRole="IllegalConstruction" />
           <NavigationProperty Name="Inwards" Relationship="PanchayatModel.FK_Inward_RegisterTypes" FromRole="RegisterType" ToRole="Inward" />
+          <NavigationProperty Name="Outwards" Relationship="PanchayatModel.FK_Outward_ToTable" FromRole="RegisterType" ToRole="Outward" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -1954,6 +1992,34 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
               <PropertyRef Name="RegisterTypeID" />
             </Principal>
             <Dependent Role="Inward">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Outward">
+          <Key>
+            <PropertyRef Name="OutwardID" />
+          </Key>
+          <Property Name="OutwardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfDisp" Type="DateTime" Precision="0" />
+          <Property Name="ToWhom" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FileReferenceNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FileReferenceDate" Type="DateTime" Precision="0" />
+          <Property Name="SubjectMatter" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="PostageDrawn" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PostageExtended" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Remark" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="RegisterTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_Outward_ToTable" FromRole="Outward" ToRole="RegisterType" />
+        </EntityType>
+        <Association Name="FK_Outward_ToTable">
+          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="1" />
+          <End Type="PanchayatModel.Outward" Role="Outward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterType">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="Outward">
               <PropertyRef Name="RegisterTypeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2297,6 +2363,22 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="FromWhereRec" ColumnName="FromWhereRec" />
                 <ScalarProperty Name="DateOfReciept" ColumnName="DateOfReciept" />
                 <ScalarProperty Name="InwardID" ColumnName="InwardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Outwards">
+            <EntityTypeMapping TypeName="PanchayatModel.Outward">
+              <MappingFragment StoreEntitySet="Outward">
+                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="PostageExtended" ColumnName="PostageExtended" />
+                <ScalarProperty Name="PostageDrawn" ColumnName="PostageDrawn" />
+                <ScalarProperty Name="SubjectMatter" ColumnName="SubjectMatter" />
+                <ScalarProperty Name="FileReferenceDate" ColumnName="FileReferenceDate" />
+                <ScalarProperty Name="FileReferenceNo" ColumnName="FileReferenceNo" />
+                <ScalarProperty Name="ToWhom" ColumnName="ToWhom" />
+                <ScalarProperty Name="DateOfDisp" ColumnName="DateOfDisp" />
+                <ScalarProperty Name="OutwardID" ColumnName="OutwardID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

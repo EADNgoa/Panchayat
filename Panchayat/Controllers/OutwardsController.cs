@@ -11,130 +11,129 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class MeetingsController : Controller
+    public class OutwardsController : Controller
     {
         private PanchayatEntities db = new PanchayatEntities();
 
-        // GET: Meetings
-        public ActionResult Index(bool? poa,string pn,DateTime? md,int? page)
+        // GET: Outwards
+        public ActionResult Index(int? page,DateTime? dod,DateTime? frd,string frn)
         {
-            var meetings = db.Meetings.Where(x=>x.MeetingID>0);
-
-            if (!string.IsNullOrEmpty(pn))
+            var outwards = db.Outwards.Where(o => o.OutwardID>0);
+            if(dod!=null)
             {
-                meetings = meetings.Where(p => p.ProposerName.Contains(pn));
-
-                page = 1;
+                outwards = outwards.Where(x=>x.DateOfDisp==dod);
             }
-            if(md !=null)
+            if (frd != null)
             {
-                meetings = meetings.Where(p => p.MeetingDate ==md);
-                page = 1;
+                outwards = outwards.Where(x => x.FileReferenceDate == frd);
             }
-         
+            if (frn != null)
+            {
+                outwards = outwards.Where(x => x.FileReferenceNo == frn);
+            }
+
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
-            return View(meetings.ToList().ToPagedList(pageNumber, pageSize));
+            return View(outwards.ToList().ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Meetings/Details/5
+        // GET: Outwards/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
-            if (meeting == null)
+            Outward outward = db.Outwards.Find(id);
+            if (outward == null)
             {
                 return HttpNotFound();
             }
-            return View(meeting);
+            return View(outward);
         }
 
-        // GET: Meetings/Create
+        // GET: Outwards/Create
         public ActionResult Create()
         {
             ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1");
             return View();
         }
 
-        // POST: Meetings/Create
+        // POST: Outwards/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MeetingID,Subject,ProposerName,PropOrAmend,For,Against,MeetingDate,Resolution,Remark,RegisterTypeID")] Meeting meeting)
+        public ActionResult Create([Bind(Include = "OutwardID,DateOfDisp,ToWhom,FileReferenceNo,FileReferenceDate,SubjectMatter,PostageDrawn,PostageExtended,Remark,RegisterTypeID")] Outward outward)
         {
-            meeting.RegisterTypeID = 1;
+            outward.RegisterTypeID = 3;
             if (ModelState.IsValid)
             {
-                
-                db.Meetings.Add(meeting);
+                db.Outwards.Add(outward);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", meeting.RegisterTypeID);
-            return View(meeting);
+            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", outward.RegisterTypeID);
+            return View(outward);
         }
 
-        // GET: Meetings/Edit/5
+        // GET: Outwards/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
-            if (meeting == null)
+            Outward outward = db.Outwards.Find(id);
+            if (outward == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", meeting.RegisterTypeID);
-            return View(meeting);
+            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", outward.RegisterTypeID);
+            return View(outward);
         }
 
-        // POST: Meetings/Edit/5
+        // POST: Outwards/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MeetingID,Subject,ProposerName,PropOrAmend,For,Against,MeetingDate,Resolution,Remark,RegisterTypeID")] Meeting meeting)
+        public ActionResult Edit([Bind(Include = "OutwardID,DateOfDisp,ToWhom,FileReferenceNo,FileReferenceDate,SubjectMatter,PostageDrawn,PostageExtended,Remark,RegisterTypeID")] Outward outward)
         {
-            meeting.RegisterTypeID = 1;
+            outward.RegisterTypeID = 3;
             if (ModelState.IsValid)
             {
-                db.Entry(meeting).State = EntityState.Modified;
+                db.Entry(outward).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", meeting.RegisterTypeID);
-            return View(meeting);
+            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", outward.RegisterTypeID);
+            return View(outward);
         }
 
-        // GET: Meetings/Delete/5
+        // GET: Outwards/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
-            if (meeting == null)
+            Outward outward = db.Outwards.Find(id);
+            if (outward == null)
             {
                 return HttpNotFound();
             }
-            return View(meeting);
+            return View(outward);
         }
 
-        // POST: Meetings/Delete/5
+        // POST: Outwards/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Meeting meeting = db.Meetings.Find(id);
-            db.Meetings.Remove(meeting);
+            Outward outward = db.Outwards.Find(id);
+            db.Outwards.Remove(outward);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
