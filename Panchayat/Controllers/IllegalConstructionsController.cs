@@ -16,9 +16,10 @@ namespace Panchayat.Controllers
         private PanchayatEntities db = new PanchayatEntities();
 
         // GET: IllegalConstructions
-        public ActionResult Index(int? page,DateTime? dc)
+        public ActionResult Index(int? page,DateTime? dc,int? rt)
         {
-            var illegalConstructions = db.IllegalConstructions.Where(x=>x.IllegalConID>0);
+            ViewBag.RegisterTypeID = rt;
+            var illegalConstructions = db.IllegalConstructions.Where(x => x.RegisterTypeID == rt);
 
             if (dc != null)
             {
@@ -38,6 +39,7 @@ namespace Panchayat.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             IllegalConstruction illegalConstruction = db.IllegalConstructions.Find(id);
+            ViewBag.RegisterTypeID = illegalConstruction.RegisterTypeID;
             if (illegalConstruction == null)
             {
                 return HttpNotFound();
@@ -46,9 +48,14 @@ namespace Panchayat.Controllers
         }
 
         // GET: IllegalConstructions/Create
-        public ActionResult Create()
+        public ActionResult Create(int? rt)
         {
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1");
+            if (rt != null)
+            {
+                ViewBag.RegisterTypeID = rt;
+
+            }
+        
             return View();
         }
 
@@ -59,7 +66,7 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IllegalConID,DateOfComp,NameOfPr,AddressOfPr,NatOfCon,OccasOfCons,ActionTaken,Remarks,RegisterTypeID")] IllegalConstruction illegalConstruction)
         {
-            illegalConstruction.RegisterTypeID = 4 ;
+           
             if (ModelState.IsValid)
             {
                 db.IllegalConstructions.Add(illegalConstruction);
@@ -74,16 +81,18 @@ namespace Panchayat.Controllers
         // GET: IllegalConstructions/Edit/5
         public ActionResult Edit(int? id)
         {
+        
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             IllegalConstruction illegalConstruction = db.IllegalConstructions.Find(id);
+            ViewBag.RegisterTypeID = illegalConstruction.RegisterTypeID;
+            
             if (illegalConstruction == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", illegalConstruction.RegisterTypeID);
             return View(illegalConstruction);
         }
 
@@ -92,16 +101,16 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IllegalConID,DateOfComp,NameOfPr,AddressOfPr,NatOfCon,OccasOfCons,ActionTaken,Remarks,RegisterTypeID")] IllegalConstruction illegalConstruction)
+        public ActionResult Edit([Bind(Include = "IllegalConID,DateOfComp,NameOfPr,AddressOfPr,NatOfCon,OccasOfCons,ActionTaken,Remarks,RegisterTypeID")] IllegalConstruction illegalConstruction,int? rt)
         {
-            illegalConstruction.RegisterTypeID = 4;
+            ViewBag.RegisterTypeID = illegalConstruction.RegisterTypeID;
             if (ModelState.IsValid)
             {
                 db.Entry(illegalConstruction).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {rt=illegalConstruction.RegisterTypeID });
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", illegalConstruction.RegisterTypeID);
+            
             return View(illegalConstruction);
         }
 
