@@ -22,11 +22,11 @@ namespace Panchayat.Controllers
             var inwards = db.Inwards.Where(x=>x.InwardID>0);
             if (dr != null)
             {
-                inwards = db.Inwards.Where(x => x.DateOfReciept >dr);
+                inwards = db.Inwards.Where(x => x.DateOfReciept == dr);
             }
-            if (dr != null)
+            if (dl != null)
             {
-                inwards = db.Inwards.Where(x => x.DateOfLett > dl);
+                inwards = db.Inwards.Where(x => x.DateOfLett == dl);
             }
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);

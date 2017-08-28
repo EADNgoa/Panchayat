@@ -4,6 +4,24 @@
 @{
     ViewBag.Title = "Index";
 }
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>s
 <center>
     <h2 class="section-to-print">Inward Correspondence</h2>
 </center>
@@ -25,10 +43,6 @@
                         <td><input type="submit" value="Search" class="btn btn-default" /></td>
                     </tr>
                 </table>
-
-
-
-
             </div>
         </div>
         <br />
