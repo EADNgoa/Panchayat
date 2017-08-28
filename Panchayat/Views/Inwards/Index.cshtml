@@ -1,0 +1,112 @@
+﻿@model PagedList.IPagedList<Panchayat.Inward>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2 class="section-to-print">Inward Correspondence</h2>
+</center>
+<br />
+<br />
+<center class="section-to-not-print">
+    @using (Html.BeginForm("Index", "Inwards", FormMethod.Get))
+    {
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td> Date Of Reciept:</td>
+                        <td> @Html.TextBox("dr", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+                        <td> Date Of Letter:</td>
+                        <td> @Html.TextBox("dl", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+                        <td class="col-lg-1"></td>
+                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+        </div>
+        <br />
+    }
+</center>
+<p>
+    @Html.ActionLink("Create New", "Create")
+<span class="pull-right">
+    <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+</span>
+</p>
+
+<table class="table section-to-print">
+    <tr>
+        <th>
+            Date Of Reciept
+        </th>
+        <th>
+            From Where Recieved
+        </th>
+        <th>
+           No Of Letter
+        </th>
+        <th>
+            Date Of Letter
+        </th>
+        <th>
+            File No
+        </th>
+        <th>
+           Subject Matter
+        </th>
+        <th>
+            Action Taken
+        </th>
+        <th>
+          Remark
+        </th>
+     
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfReciept)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromWhereRec)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfLett)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfLett)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubjectMatter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActionTaken)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remark)
+        </td>
+   
+        <td class="section-to-not-print">
+            @Html.ActionLink("Edit", "Edit", new { id=item.InwardID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.InwardID }) |
+        </td>
+    </tr>
+}
+
+</table>
+ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerID = ViewBag.LedgerID }))

@@ -215,6 +215,7 @@
     <Compile Include="Controllers\DemandsController.cs" />
     <Compile Include="Controllers\Form4Controller.cs" />
     <Compile Include="Controllers\IllegalConstructionsController.cs" />
+    <Compile Include="Controllers\InwardsController.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Controllers\PeriodsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -266,6 +267,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IllegalConstruction.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inward.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Ledger.cs">
@@ -553,6 +557,11 @@
     <Content Include="Views\IllegalConstructions\Details.cshtml" />
     <Content Include="Views\IllegalConstructions\Edit.cshtml" />
     <Content Include="Views\IllegalConstructions\Index.cshtml" />
+    <Content Include="Views\Inwards\Create.cshtml" />
+    <Content Include="Views\Inwards\Delete.cshtml" />
+    <Content Include="Views\Inwards\Details.cshtml" />
+    <Content Include="Views\Inwards\Edit.cshtml" />
+    <Content Include="Views\Inwards\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
