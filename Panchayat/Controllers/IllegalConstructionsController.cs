@@ -18,9 +18,16 @@ namespace Panchayat.Controllers
         // GET: IllegalConstructions
         public ActionResult Index(int? page,DateTime? dc,int? rt)
         {
-            ViewBag.RegisterTypeID = rt;
-            var illegalConstructions = db.IllegalConstructions.Where(x => x.RegisterTypeID == rt);
-
+         
+           
+            var illegalConstructions = db.IllegalConstructions.Where(x => x.RegisterTypeID >0);
+            if (rt != null)
+            {
+                ViewBag.RegisterTypeID = rt;
+     
+                illegalConstructions = db.IllegalConstructions.Where(x => x.RegisterTypeID == rt);
+            
+            }
             if (dc != null)
             {
                 illegalConstructions = illegalConstructions.Where(p => p.DateOfComp == dc);
@@ -55,7 +62,7 @@ namespace Panchayat.Controllers
                 ViewBag.RegisterTypeID = rt;
 
             }
-        
+      
             return View();
         }
 
@@ -71,7 +78,10 @@ namespace Panchayat.Controllers
             {
                 db.IllegalConstructions.Add(illegalConstruction);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+             
+                    return RedirectToAction("Index", new { rt = illegalConstruction.RegisterTypeID });
+             
+                
             }
 
             ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", illegalConstruction.RegisterTypeID);

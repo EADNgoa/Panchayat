@@ -16,10 +16,17 @@ namespace Panchayat.Controllers
         private PanchayatEntities db = new PanchayatEntities();
 
         // GET: Meetings
-        public ActionResult Index(bool? poa,string pn,DateTime? md,int? page)
+        public ActionResult Index(bool? poa,string pn,DateTime? md,int? page,int? rt)
         {
             var meetings = db.Meetings.Where(x=>x.MeetingID>0);
 
+            if (rt != null)
+            {
+                ViewBag.RegisterTypeID = rt;
+
+                meetings = db.Meetings.Where(x => x.RegisterTypeID == rt);
+
+            }
             if (!string.IsNullOrEmpty(pn))
             {
                 meetings = meetings.Where(p => p.ProposerName.Contains(pn));
