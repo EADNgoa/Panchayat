@@ -180,7 +180,7 @@
 @if (ViewBag.RegisterTypeID == 7)
 {
     @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, cm = 7 }))
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 7 }))
 }
 @if (ViewBag.RegisterTypeID == 6)
 {
@@ -190,5 +190,5 @@
 @if (ViewBag.RegisterTypeID == 4)
 {
     @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, ic = 4 }))
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 4 }))
 }

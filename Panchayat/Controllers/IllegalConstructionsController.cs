@@ -55,18 +55,14 @@ namespace Panchayat.Controllers
         }
 
         // GET: IllegalConstructions/Create
-        public ActionResult Create(int? rt,int? cm)
+        public ActionResult Create(int? rt)
         {
             if (rt != null)
             {
                 ViewBag.RegisterTypeID = rt;
 
             }
-          if (cm != null)
-            {
-                ViewBag.RegisterTypeID = cm;
-
-            }
+      
             return View();
         }
 
@@ -82,18 +78,10 @@ namespace Panchayat.Controllers
             {
                 db.IllegalConstructions.Add(illegalConstruction);
                 db.SaveChanges();
-                if(illegalConstruction.RegisterTypeID == 4)
-                {
+             
                     return RedirectToAction("Index", new { rt = illegalConstruction.RegisterTypeID });
-                }
-                if (illegalConstruction.RegisterTypeID == 6)
-                {
-                    return RedirectToAction("Index", new { rt = illegalConstruction.RegisterTypeID });
-                }
-                if (illegalConstruction.RegisterTypeID == 7)
-                {
-                    return RedirectToAction("Index", new { cm = illegalConstruction.RegisterTypeID });
-                }
+             
+                
             }
 
             ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", illegalConstruction.RegisterTypeID);
@@ -130,7 +118,7 @@ namespace Panchayat.Controllers
             {
                 db.Entry(illegalConstruction).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", new {id=illegalConstruction.RegisterTypeID });
+                return RedirectToAction("Index", new {rt=illegalConstruction.RegisterTypeID });
             }
             
             return View(illegalConstruction);
