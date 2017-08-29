@@ -151,25 +151,8 @@
         </td>
      
         <td class="section-to-Not-print">
-            @if (ViewBag.RegisterTypeID == 6)
-            {
                 @Html.ActionLink("Edit", "Edit", new { id = item.IllegalConID })
                 @Html.ActionLink("Details", "Details", new { id = item.IllegalConID })
-            }
-            @if (ViewBag.RegisterTypeID == 4)
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.IllegalConID })
-                @Html.ActionLink("Details", "Details", new { id = item.IllegalConID })
-            }
-            @if (ViewBag.RegisterTypeID == 7)
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.IllegalConID })
-                @Html.ActionLink("Details", "Details", new { id = item.IllegalConID })
-            }
-
-          
-          
-          
         </td>
     </tr>
 }

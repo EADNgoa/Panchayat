@@ -10,9 +10,16 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+    @Html.Hidden("RegisterTypeID", (int)ViewBag.RegisterTypeID);
     <div class="form-horizontal">
-        <h4>Meeting</h4>
+        @if (ViewBag.RegisterTypeID == 1)
+        {
+            <<h4>p> Meeting</h4>
+        }
+        @if (ViewBag.RegisterTypeID == 8)
+        {
+            <h4>Gram Sabha</h4>
+        }
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
