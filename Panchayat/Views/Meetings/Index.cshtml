@@ -23,10 +23,21 @@
     }
 </style>
 <center>
-    <h2 class="section-to-print">Meeting</h2>
+    <h2 class="section-to-print" >
+        @if (ViewBag.RegisterTypeID == 1)
+        {
+            <p>Meeting</p>
+        }
+        @if (ViewBag.RegisterTypeID == 10)
+        {
+            <p>Gram Sabha</p>
+        }
+    </h2>
     <br />
     @using (Html.BeginForm("Index", "Meetings", FormMethod.Get))
     {
+
+        @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
         <div class="row">
             <div>
                 <table>
@@ -53,7 +64,14 @@
 </center>
 <br />
     <p>
-        @Html.ActionLink("Create New", "Create")
+    @if (ViewBag.RegisterTypeID == 1)
+    {
+    <p>@Html.ActionLink("Create New", "Create", new { rt = 1 })</p>
+    }
+    @if (ViewBag.RegisterTypeID == 10)
+    {
+        <p>@Html.ActionLink("Create New", "Create", new { rt = 10 }) </p>
+    }
         <span class="pull-right">
             <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
         </span>

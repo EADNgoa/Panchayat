@@ -16,10 +16,17 @@ namespace Panchayat.Controllers
         private PanchayatEntities db = new PanchayatEntities();
 
         // GET: Meetings
-        public ActionResult Index(bool? poa,string pn,DateTime? md,int? page)
+        public ActionResult Index(bool? poa,string pn,DateTime? md,int? page,int? rt)
         {
             var meetings = db.Meetings.Where(x=>x.MeetingID>0);
 
+            if (rt != null)
+            {
+                ViewBag.RegisterTypeID = rt;
+
+                meetings = db.Meetings.Where(x => x.RegisterTypeID == rt);
+
+            }
             if (!string.IsNullOrEmpty(pn))
             {
                 meetings = meetings.Where(p => p.ProposerName.Contains(pn));
@@ -53,9 +60,13 @@ namespace Panchayat.Controllers
         }
 
         // GET: Meetings/Create
-        public ActionResult Create()
+        public ActionResult Create(int? rt)
         {
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1");
+            if (rt != null)
+            {
+                ViewBag.RegisterTypeID = rt;
+
+            }
             return View();
         }
 
@@ -66,13 +77,12 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MeetingID,Subject,ProposerName,PropOrAmend,For,Against,MeetingDate,Resolution,Remark,RegisterTypeID")] Meeting meeting)
         {
-            meeting.RegisterTypeID = 1;
-            if (ModelState.IsValid)
-            {
-                
+          ViewBag.RegisterTypeID = meeting.RegisterTypeID;
+          if (ModelState.IsValid)
+            {               
                 db.Meetings.Add(meeting);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { rt=meeting.RegisterTypeID});
             }
 
             ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", meeting.RegisterTypeID);
@@ -82,16 +92,17 @@ namespace Panchayat.Controllers
         // GET: Meetings/Edit/5
         public ActionResult Edit(int? id)
         {
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Meeting meeting = db.Meetings.Find(id);
+            ViewBag.RegisterTypeID = meeting.RegisterTypeID;
             if (meeting == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", meeting.RegisterTypeID);
             return View(meeting);
         }
 
@@ -102,14 +113,14 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MeetingID,Subject,ProposerName,PropOrAmend,For,Against,MeetingDate,Resolution,Remark,RegisterTypeID")] Meeting meeting)
         {
-            meeting.RegisterTypeID = 1;
+            ViewBag.RegisterTypeID = meeting.RegisterTypeID;
             if (ModelState.IsValid)
             {
                 db.Entry(meeting).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new {rt=meeting.RegisterTypeID });
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", meeting.RegisterTypeID);
+          
             return View(meeting);
         }
 

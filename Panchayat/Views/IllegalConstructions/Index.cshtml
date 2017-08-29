@@ -17,32 +17,41 @@
         {
             <p>Illegal Construction</p>
         }
-
+        @if (ViewBag.RegisterTypeID == 7)
+        {
+            <p>Court Matters</p>
+        }
     
     
     </h2>
     <br/>
-    @using (Html.BeginForm("Index", "IllegalConstructions", FormMethod.Get))
-    {
-        <div class="row">
-            <div>
-                <table>
-                    <tr>
-                        <td></td>
-                        <td> Date Of Complain:</td>
-                        <td> @Html.TextBox("dc", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+   
+        @using (Html.BeginForm("Index", "IllegalConstructions", FormMethod.Get))
+        {
+            @Html.Hidden("rt", (int) ViewBag.RegisterTypeID)
+            <div class="row">
+                <div>
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td> Date Of Complain:</td>
+                            <td> @Html.TextBox("dc", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
 
-                        <td class="col-lg-1"></td>
-                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
-                    </tr>
-                </table>
+                            <td class="col-lg-1"></td>
+                            <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                        </tr>
+                    </table>
 
 
 
 
+                </div>
             </div>
-        </div>
-    }
+        }
+    
+
+
+   
 </center>
 <br />
 <p>
@@ -50,10 +59,14 @@
     {
     <p>@Html.ActionLink("Create New", "Create", new { rt = 6})</p>
     }
-    else
-    {
-        <p>@Html.ActionLink("Create New", "Create") </p>
+   @if (ViewBag.RegisterTypeID == 4)
+   {
+        <p>@Html.ActionLink("Create New", "Create", new { rt = 4 }) </p>
     }
+@if (ViewBag.RegisterTypeID == 7)
+{
+    <p>@Html.ActionLink("Create New", "Create", new { rt = 7 }) </p>
+}
 
     <span class="pull-right">
         <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
@@ -80,7 +93,10 @@
                 {
                    <p>Name Of Constrution</p>
                 }
-
+            @if (ViewBag.RegisterTypeID == 7)
+            {
+                <p>Name Of Court</p>
+            }
 
 
 
@@ -94,6 +110,11 @@
             {
                 <p>Occasion Of Constrution</p>
             }
+            @if (ViewBag.RegisterTypeID == 7)
+            {
+                <p>Court</p>
+            }
+
         </th>
         <th>
            Action Taken
@@ -130,26 +151,29 @@
         </td>
      
         <td class="section-to-Not-print">
-            @if (ViewBag.RegisterTypeID == 6)
-            {
+           
                 @Html.ActionLink("Edit", "Edit", new { id = item.IllegalConID })
                 @Html.ActionLink("Details", "Details", new { id = item.IllegalConID })
-            }
-            @if (ViewBag.RegisterTypeID == 4)
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.IllegalConID })
-                @Html.ActionLink("Details", "Details", new { id = item.IllegalConID })
-            }
-
-          
-          
-          
+       
         </td>
     </tr>
 }
 
 </table>
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@if (ViewBag.RegisterTypeID == 7)
+{
     @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerID = ViewBag.LedgerID }))
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 7 }))
+}
+@if (ViewBag.RegisterTypeID == 6)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 6 }))
+}
+@if (ViewBag.RegisterTypeID == 4)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 4 }))
+}
