@@ -23,7 +23,8 @@
     }
 </style>
 <center>
-    <h2 class="section-to-print">
+
+    <h2 class="section-to-print" >
         @if (ViewBag.RegisterTypeID == 1)
         {
             <p>Meeting</p>
@@ -65,12 +66,14 @@
     <p>
     @if (ViewBag.RegisterTypeID == 1)
     {
-    <p>@Html.ActionLink("Create New", "Create", new { rt = 1 }) </p>
+      <p>@Html.ActionLink("Create New", "Create", new { rt = 1 })</p>
     }
+
     @if (ViewBag.RegisterTypeID == 8)
     {
         <p>@Html.ActionLink("Create New", "Create", new { rt = 8 }) </p>
     }
+
 
         <span class="pull-right">
             <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />

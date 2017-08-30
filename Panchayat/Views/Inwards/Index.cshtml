@@ -23,13 +23,27 @@
     }
 </style>
 <center>
-    <h2 class="section-to-print">Inward Correspondence</h2>
+    <h2 class="section-to-print">
+        @if (ViewBag.RegisterTypeID == 2)
+        {
+            <p>Inward Correspondence</p>
+        }
+        @if (ViewBag.RegisterTypeID == 9)
+        {
+            <p>Govt. Dept Reference</p>
+        }
+        @if (ViewBag.RegisterTypeID == 10)
+        {
+            <p>Register Of Birth</p>
+        }
+        </h2>
 </center>
 <br />
 <br />
 <center class="section-to-not-print">
     @using (Html.BeginForm("Index", "Inwards", FormMethod.Get))
     {
+        @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
         <div class="row">
             <div>
                 <table>
@@ -49,7 +63,19 @@
     }
 </center>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (ViewBag.RegisterTypeID == 2)
+    {
+    <p>@Html.ActionLink("Create New", "Create", new { rt = 2})</p>
+    }
+    @if (ViewBag.RegisterTypeID == 9)
+    {
+        <p>@Html.ActionLink("Create New", "Create", new { rt = 9 }) </p>
+    }
+    @if (ViewBag.RegisterTypeID == 10)
+    {
+        <p>@Html.ActionLink("Create New", "Create", new { rt = 10 }) </p>
+    }
+
 <span class="pull-right">
     <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
 </span>
@@ -58,25 +84,102 @@
 <table class="table section-to-print">
     <tr>
         <th>
-            Date Of Reciept
+           @if (ViewBag.RegisterTypeID == 2)
+           {
+            <p>Date Of Reciept</p>
+           }
+        @if (ViewBag.RegisterTypeID == 9)
+        {
+            <p>Date Of Reciept</p>
+        }
+        @if (ViewBag.RegisterTypeID == 10)
+        {
+            <p>Date Of Birth</p>
+        }
         </th>
         <th>
-            From Where Recieved
+           @if (ViewBag.RegisterTypeID == 2)
+           {
+            <p>From Where Recieved</p>
+           }
+        @if (ViewBag.RegisterTypeID == 9)
+        {
+            <p>From Where Recieved</p>
+        }
+        @if (ViewBag.RegisterTypeID == 10)
+        {
+            <p>Place Of Birth</p>
+        }
         </th>
         <th>
-           No Of Letter
+          @if (ViewBag.RegisterTypeID == 2)
+          {
+            <p>No Of Letter</p>
+          }
+        @if (ViewBag.RegisterTypeID == 9)
+        {
+            <p>No Of letter</p>
+        }
+        @if (ViewBag.RegisterTypeID == 10)
+        {
+            <p>br</p>
+        }
         </th>
         <th>
-            Date Of Letter
+            @if (ViewBag.RegisterTypeID == 2)
+            {
+                <p>Date Of Letter</p>
+            }
+            @if (ViewBag.RegisterTypeID == 9)
+            {
+                <p>gdr</p>
+            }
+            @if (ViewBag.RegisterTypeID == 10)
+            {
+                <p>br</p>
+            }
         </th>
         <th>
-            File No
+            @if (ViewBag.RegisterTypeID == 2)
+            {
+                <p>File No</p>
+            }
+            @if (ViewBag.RegisterTypeID == 9)
+            {
+                <p>gdrer</p>
+            }
+            @if (ViewBag.RegisterTypeID == 10)
+            {
+                <p>br</p>
+            }
         </th>
         <th>
-           Subject Matter
+            @if (ViewBag.RegisterTypeID == 2)
+            {
+                <p>subject Matter</p>
+            }
+            @if (ViewBag.RegisterTypeID == 9)
+            {
+                <p>gdr</p>
+            }
+            @if (ViewBag.RegisterTypeID == 10)
+            {
+                <p>br</p>
+            }
         </th>
         <th>
-            Action Taken
+            @if (ViewBag.RegisterTypeID == 2)
+            {
+                <p>Action Taken</p>
+            }
+            @if (ViewBag.RegisterTypeID == 9)
+            {
+                <p>No Of letter</p>
+            }
+            @if (ViewBag.RegisterTypeID == 10)
+            {
+                <p>br</p>
+            }
         </th>
         <th>
           Remark
@@ -120,7 +223,19 @@
 }
 
 </table>
- Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerID = ViewBag.LedgerID }))
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @if (ViewBag.RegisterTypeID == 2)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 2 }))
+    }
+    @if (ViewBag.RegisterTypeID == 9)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 9 }))
+    }
+    @if (ViewBag.RegisterTypeID == 10)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 10 }))
+    }
