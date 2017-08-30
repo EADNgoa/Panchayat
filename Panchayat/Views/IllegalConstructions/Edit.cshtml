@@ -12,16 +12,18 @@
     @Html.AntiForgeryToken()
     @Html.Hidden("RegisterTypeID", (int)ViewBag.RegisterTypeID);
     <div class="form-horizontal">
-        <h4>
-            @if (ViewBag.RegisterTypeID == 6)
-            {
-                <p> Public Grievance</p>
-            }
-            @if (ViewBag.RegisterTypeID == 4)
-            {
-                <p>Illegal Construction</p>
-            }
-        </h4>
+        @if (ViewBag.RegisterTypeID == 6)
+        {
+            <<h4>p> Public Grievance</h4>
+        }
+        @if (ViewBag.RegisterTypeID == 4)
+        {
+            <h4>Illegal Construction</h4>
+        }
+        @if (ViewBag.RegisterTypeID == 7)
+        {
+            <h4>Court Matters</h4>
+        }
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IllegalConID)
@@ -51,7 +53,20 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Name Of Construction:</label>
+            <label class="control-label col-md-2">
+                @if (ViewBag.RegisterTypeID == 6)
+                {
+                    <label>$$$$$</label>
+                }
+                @if (ViewBag.RegisterTypeID == 4)
+                {
+                    <label> Name Of Illegal Construction</label>
+                }
+                @if (ViewBag.RegisterTypeID == 7)
+                {
+                    <label>Sections</label>
+                }
+            </label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NatOfCon, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NatOfCon, "", new { @class = "text-danger" })
@@ -59,12 +74,25 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.OccasOfCons, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OccasOfCons, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OccasOfCons, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <label class="control-label col-md-2">
+                @if (ViewBag.RegisterTypeID == 6)
+                {
+                    <label>$$$$$</label>
+                }
+                @if (ViewBag.RegisterTypeID == 4)
+                {
+                    <label> Occasion Of Illegal Construction</label>
+                }
+                @if (ViewBag.RegisterTypeID == 7)
+                {
+                    <label>Court matter</label>
+                }
+                </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.OccasOfCons, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OccasOfCons, "", new { @class = "text-danger" })
+                </div>
+</div>
 
         <div class="form-group">
             <label class="control-label col-md-2">Action Taken:</label>
@@ -93,7 +121,21 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @if (ViewBag.RegisterTypeID == 7)
+            {
+        @Html.ActionLink("Back to List", "Index", new { cm = (int)ViewBag.RegisterTypeID })
+
+    }
+    @if (ViewBag.RegisterTypeID == 4)
+            {
+        @Html.ActionLink("Back to List", "Index", new { ic = (int)ViewBag.RegisterTypeID })
+
+    }
+    @if (ViewBag.RegisterTypeID == 6)
+            {
+        @Html.ActionLink("Back to List", "Index", new { rt = (int)ViewBag.RegisterTypeID })
+
+    }
 </div>
 
 @section Scripts {
