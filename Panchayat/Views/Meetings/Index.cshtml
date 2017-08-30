@@ -23,22 +23,32 @@
     }
 </style>
 <center>
-    <h2 class="section-to-print" >
+    <h2 >
         @if (ViewBag.RegisterTypeID == 1)
         {
-            <p>Meeting</p>
+            <p class="section-to-Not-print">Meeting</p>
+            <p class="section-to-print" style="visibility:hidden"><font style="font-size:large">Proceeding Of The_______________ Meeting</font></p>
+            <p>
+        <span class="pull-right section-to-print" style="visibility:hidden"><font style="font-size:18px">Village Panchayat:___________</font></span>
+        
+        </p>
         }
         @if (ViewBag.RegisterTypeID == 10)
         {
-            <p>Gram Sabha</p>
+            <p class="section-to-Not-print">Gram Sabha</p>
+            <p class="section-to-print" style="visibility:hidden"><font style="font-size:large">Proceeding Of The_______________ Gram Sabha Meeting</font></p>
+            <p>
+                <span class="pull-right section-to-print" style="visibility:hidden"><font style="font-size:15px">Village Panchayat:___________</font></span>
+
+            </p>
         }
     </h2>
-    <br />
+    <br class="section-to-Not-print" />
     @using (Html.BeginForm("Index", "Meetings", FormMethod.Get))
     {
 
         @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
-        <div class="row">
+        <div class="row  class="section-to-Not-print"">
             <div>
                 <table>
                     <tr>
@@ -62,15 +72,15 @@
         </div>
     }
 </center>
-<br />
-    <p>
+<br class="section-to-Not-print" />
+    <p  class="section-to-Not-print">
     @if (ViewBag.RegisterTypeID == 1)
     {
     <p>@Html.ActionLink("Create New", "Create", new { rt = 1 })</p>
     }
     @if (ViewBag.RegisterTypeID == 10)
     {
-        <p>@Html.ActionLink("Create New", "Create", new { rt = 10 }) </p>
+        <p>@Html.ActionLink("Create New", "Create", new { rt = 8 }) </p>
     }
         <span class="pull-right">
             <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
@@ -104,7 +114,34 @@
             </th>
            
             <th></th>
-        </tr>
+        </tr><tr>
+    <th>
+      1
+    </th>
+    <th>
+      2
+    </th>
+    <th>
+      3
+    </th>
+    <th>
+      4
+    </th>
+    <th>
+      5
+    </th>
+    <th>
+      6
+    </th>
+    <th>
+      7
+    </th>
+    <th>
+      8
+    </th>
+
+    <th></th>
+</tr>
 
         @foreach (var item in Model)
         {
@@ -144,6 +181,11 @@
 
     </table>
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
+@if (ViewBag.RegisterTypeID == 1)
+{
     @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerID = ViewBag.LedgerID }))
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 1 }))}
+@if (ViewBag.RegisterTypeID == 10)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 8 }))}
