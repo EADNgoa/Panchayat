@@ -23,12 +23,13 @@
     }
 </style>
 <center>
+
     <h2 class="section-to-print" >
         @if (ViewBag.RegisterTypeID == 1)
         {
             <p>Meeting</p>
         }
-        @if (ViewBag.RegisterTypeID == 10)
+        @if (ViewBag.RegisterTypeID == 8)
         {
             <p>Gram Sabha</p>
         }
@@ -36,7 +37,6 @@
     <br />
     @using (Html.BeginForm("Index", "Meetings", FormMethod.Get))
     {
-
         @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
         <div class="row">
             <div>
@@ -66,12 +66,15 @@
     <p>
     @if (ViewBag.RegisterTypeID == 1)
     {
-    <p>@Html.ActionLink("Create New", "Create", new { rt = 1 })</p>
+      <p>@Html.ActionLink("Create New", "Create", new { rt = 1 })</p>
     }
-    @if (ViewBag.RegisterTypeID == 10)
+
+    @if (ViewBag.RegisterTypeID == 8)
     {
-        <p>@Html.ActionLink("Create New", "Create", new { rt = 10 }) </p>
+        <p>@Html.ActionLink("Create New", "Create", new { rt = 8 }) </p>
     }
+
+
         <span class="pull-right">
             <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
         </span>
@@ -143,7 +146,16 @@
         }
 
     </table>
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-    @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerID = ViewBag.LedgerID }))
+     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @if (ViewBag.RegisterTypeID == 1)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 1}))
+    }
+    @if (ViewBag.RegisterTypeID == 8)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 8 }))
+    }
+  
+    s
