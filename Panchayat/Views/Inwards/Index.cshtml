@@ -38,9 +38,9 @@
         }
         </h2>
 </center>
-<br />
-<br />
-<center class="section-to-not-print">
+<br class="section-to-Not-print"/>
+<br class="section-to-Not-print"/>
+<center class="section-to-Not-print">
     @using (Html.BeginForm("Index", "Inwards", FormMethod.Get))
     {
         @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
@@ -62,7 +62,7 @@
         <br />
     }
 </center>
-<p>
+<p class="section-to-Not-print">
     @if (ViewBag.RegisterTypeID == 2)
     {
     <p>@Html.ActionLink("Create New", "Create", new { rt = 2})</p>

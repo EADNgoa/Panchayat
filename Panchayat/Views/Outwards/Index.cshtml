@@ -23,11 +23,23 @@
     }
 </style>
 <center>
-    <h2 class="section-to-print">Outward Correspondence</h2>
+    <h2 class="section-to-print">
+        @if (ViewBag.RegisterTypeID == 3)
+        {
+            <p>Outward Corepondece</p>
+
+        }
+        @if (ViewBag.RegisterTypeID == 11)
+        {
+            <p>Death Register</p>
+        }
+    </h2>
+
 <br />
     @using (Html.BeginForm("Index", "Outwards", FormMethod.Get))
     {
-        <div class="row">
+        @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
+        <div class="row section-to-Not-print">
             <div>
                 <table>
                     <tr>
@@ -56,7 +68,15 @@
 
 <br />
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (ViewBag.RegisterTypeID == 3)
+    {
+        @Html.ActionLink("Create New", "Create",new { rt=3})
+    }
+    @if (ViewBag.RegisterTypeID == 11)
+    {
+        @Html.ActionLink("Create New", "Create", new { rt = 11 })
+    }
+   
     <span class="pull-right">
         <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
     </span>
@@ -64,25 +84,73 @@
 <table class="table section-to-print">
     <tr>
         <th>
-           Date Of Dispatch
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                    <p> Date Of Dispatch</p>            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <p> Date Of Birth</p>        
+            }
+          
         </th>
         <th>
-            To Whom Sent
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <p> To Whom Sent</p>            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <p> Date Of Birth</p>
+            }
         </th>
         <th>
-           File Reference No
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <p>  File Reference No</p>            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <p> Date Of Birth</p>
+            }
+          
         </th>
         <th>
-           File Reference Date
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <p> File Reference Date</p>            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <p> Date Of Birth</p>
+            }
+           
         </th>
         <th>
-           subject Matter
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <p>   subject Matter</p>            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <p> Date Of Birth</p>
+            }
+         
         </th>
         <th>
-           Postage Drawn
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <p>  Postage Drawn</p>            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <p> Date Of Birth</p>
+            }
+
         </th>
         <th>
-           Postage Extended
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <p>   Postage Extended</p>            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <p> Date Of Birth</p>
+            }
+
         </th>
         <th>
           Remark
@@ -128,6 +196,13 @@
 
 </table>
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
+@if (ViewBag.RegisterTypeID == 3)
+{
     @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, LedgerID = ViewBag.LedgerID }))
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 3 }))
+}
+@if (ViewBag.RegisterTypeID == 11)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 11 }))
+}

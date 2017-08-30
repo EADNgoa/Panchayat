@@ -5,12 +5,20 @@
     ViewBag.Title = "Audit";
 }
 <center>
-    <h2 class="section-to-print">Audit Register</h2>
+ <h1 style="visibility:hidden"><font style="font-size:17px"class="section-to-print">Village Panchayat___________</font></h1>
+    <h2 class="section-to-print" style="visibility:hidden"><u style="font-size:15px">Audit Register</u>
+    <br />
+        <span class="pull-right " style="visibility:hidden"> <font style="font-size:15px" >Year Of Audit___________</font></span> 
+    </h2>
+        <h2 class="section-to-Not-print "><u style="font-size:25px">Audit Register</u>
+
+
+    </h2>
     <br />
 
     @using (Html.BeginForm("Index", "Audits", FormMethod.Get))
     {
-        <div class="row">
+        <div class="row section-to-Not-print">
             <div>
                 <table>
                     <tr>
@@ -34,7 +42,7 @@
     }
 </center>
 <br />
-<p>
+<p class="section-to-Not-print">
     @Html.ActionLink("Create New", "Create")
     <span class="pull-right">
         <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
@@ -42,6 +50,9 @@
 </p>
 <table class="table section-to-print">
     <tr>
+        <th>
+            Sr No.
+        </th>
         <th>
             Audit No
         </th>
@@ -51,7 +62,7 @@
         <th>
           Actions Taken
         </th>
-        <th>
+        <th class="section-to-Not-print">
            year
         </th>
         <th></th>
@@ -59,6 +70,11 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuditID)
+
+
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.AuditNo)
         </td>
@@ -68,7 +84,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.ActionsTaken)
         </td>
-        <td>
+        <td class="section-to-Not-print">
             @Html.DisplayFor(modelItem => item.Year)
         </td>
         <td class="section-to-Not-print">

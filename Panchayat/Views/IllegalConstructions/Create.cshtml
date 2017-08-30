@@ -122,21 +122,10 @@
 }
 
 <div>
-    @if (ViewBag.RegisterTypeID == 7)
-            {
+    
         @Html.ActionLink("Back to List", "Index",new {cm=(int)ViewBag.RegisterTypeID })
      
-    }
-    @if (ViewBag.RegisterTypeID == 4)
-            {
-        @Html.ActionLink("Back to List", "Index", new { ic = (int)ViewBag.RegisterTypeID })
-
-    }
-    @if (ViewBag.RegisterTypeID == 6)
-            {
-        @Html.ActionLink("Back to List", "Index", new { rt = (int)ViewBag.RegisterTypeID })
-
-    }
+    
 </div>
 
 @section Scripts {

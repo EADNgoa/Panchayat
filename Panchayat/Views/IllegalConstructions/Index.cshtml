@@ -25,7 +25,7 @@
     
     </h2>
     <br/>
-   
+   <p class="section-to-Not-print">
         @using (Html.BeginForm("Index", "IllegalConstructions", FormMethod.Get))
         {
             @Html.Hidden("rt", (int) ViewBag.RegisterTypeID)
@@ -48,13 +48,10 @@
                 </div>
             </div>
         }
-    
-
-
-   
+   </p>   
 </center>
-<br />
-<p>
+<br class="section-to-Not-print" />
+<div class="section-to-Not-print">
     @if (ViewBag.RegisterTypeID == 6)
     {
     <p>@Html.ActionLink("Create New", "Create", new { rt = 6})</p>
@@ -71,11 +68,11 @@
     <span class="pull-right">
         <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
     </span>
-</p>
+</div>
 <table class="table section-to-print">
     <tr>
         <th>
-           Date Of Complain
+           Date Of The Reciept Of the Complain
         </th>
         <th>
            Name And Address Of Complain
@@ -93,10 +90,10 @@
                 {
                    <p>Name Of Constrution</p>
                 }
-            @if (ViewBag.RegisterTypeID == 7)
-            {
-                <p>Name Of Court</p>
-            }
+               @if (ViewBag.RegisterTypeID == 7)
+                {
+                    <p>Name Of Court</p>
+                }
 
 
 
