@@ -16,10 +16,18 @@ namespace Panchayat.Controllers
         private PanchayatEntities db = new PanchayatEntities();
 
         // GET: Outwards
-        public ActionResult Index(int? page,DateTime? dod,DateTime? frd,string frn)
+        public ActionResult Index(int? page,DateTime? dod,DateTime? frd,string frn,int? rt)
         {
+
             var outwards = db.Outwards.Where(o => o.OutwardID>0);
-            if(dod!=null)
+            if (rt != null)
+            {
+                ViewBag.RegisterTypeID = rt;
+
+                outwards = db.Outwards.Where(x => x.RegisterTypeID == rt);
+
+            }
+            if (dod!=null)
             {
                 outwards = outwards.Where(x=>x.DateOfDisp==dod);
             }
@@ -53,9 +61,9 @@ namespace Panchayat.Controllers
         }
 
         // GET: Outwards/Create
-        public ActionResult Create()
+        public ActionResult Create(int? rt)
         {
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1");
+            ViewBag.RegisterTypeID =rt;
             return View();
         }
 
@@ -66,7 +74,7 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OutwardID,DateOfDisp,ToWhom,FileReferenceNo,FileReferenceDate,SubjectMatter,PostageDrawn,PostageExtended,Remark,RegisterTypeID")] Outward outward)
         {
-            outward.RegisterTypeID = 3;
+             ViewBag.RegisterTypeID = outward.RegisterTypeID;
             if (ModelState.IsValid)
             {
                 db.Outwards.Add(outward);
@@ -74,7 +82,6 @@ namespace Panchayat.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", outward.RegisterTypeID);
             return View(outward);
         }
 
@@ -86,11 +93,11 @@ namespace Panchayat.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Outward outward = db.Outwards.Find(id);
+            ViewBag.RegisterTypeID = outward.RegisterTypeID;
             if (outward == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", outward.RegisterTypeID);
             return View(outward);
         }
 
@@ -101,7 +108,7 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "OutwardID,DateOfDisp,ToWhom,FileReferenceNo,FileReferenceDate,SubjectMatter,PostageDrawn,PostageExtended,Remark,RegisterTypeID")] Outward outward)
         {
-            outward.RegisterTypeID = 3;
+            ViewBag.RegisterTypeID = outward.RegisterTypeID;
             if (ModelState.IsValid)
             {
                 db.Entry(outward).State = EntityState.Modified;

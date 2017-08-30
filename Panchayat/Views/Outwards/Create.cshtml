@@ -10,13 +10,29 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+    @Html.Hidden("RegisterTypeID", (int)ViewBag.RegisterTypeID);
     <div class="form-horizontal">
-        <h4>Outward</h4>
+        @if (ViewBag.RegisterTypeID == 3)
+        {
+            <h4>Outward Correspondence</h4>
+        }
+        @if (ViewBag.RegisterTypeID == 11)
+        {
+            <h4>Death Register</h4>
+        }
+    
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <label class="control-label col-md-2">Date Of Dispatch:</label>
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <label class="control-label col-md-2">Date Of Dispatch:</label>
+            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <label class="control-label col-md-2">Date Of Death:</label>
+            }
+           
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DateOfDisp, new { htmlAttributes = new { @class = "form-control", @Type = "date" } })
                 @Html.ValidationMessageFor(model => model.DateOfDisp, "", new { @class = "text-danger" })
@@ -24,7 +40,17 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">To Whom Sent:</label>
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <label class="control-label col-md-2">To Whom Sent:</label>
+                
+            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <label class="control-label col-md-2">Date Of Death:</label>
+            }
+            
+            
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ToWhom, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ToWhom, "", new { @class = "text-danger" })
@@ -32,7 +58,16 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">File Reference No:</label>
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <label class="control-label col-md-2">File Reference No:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <label class="control-label col-md-2">Date Of Death:</label>
+            }
+            
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FileReferenceNo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FileReferenceNo, "", new { @class = "text-danger" })
@@ -40,7 +75,17 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">File Reference Date:</label>
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <label class="control-label col-md-2">File Reference Date:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <label class="control-label col-md-2">Date Of Birth:</label>
+            }
+
+          
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FileReferenceDate, new { htmlAttributes = new { @class = "form-control", @Type = "date" } })
                 @Html.ValidationMessageFor(model => model.FileReferenceDate, "", new { @class = "text-danger" })
@@ -48,7 +93,17 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Subject Matter:</label>
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <label class="control-label col-md-2">Subject Matter:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <label class="control-label col-md-2">Date Of Birth:</label>
+            }
+
+           
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SubjectMatter, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SubjectMatter, "", new { @class = "text-danger" })
@@ -56,7 +111,17 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Postage Drawn:</label>
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <label class="control-label col-md-2">Postage Drawn:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <label class="control-label col-md-2">Date Of Birth:</label>
+            }
+
+            
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PostageDrawn, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PostageDrawn, "", new { @class = "text-danger" })
@@ -64,7 +129,15 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Postage Extended:</label>
+            @if (ViewBag.RegisterTypeID == 3)
+            {
+                <label class="control-label col-md-2">Postage Extended:</label>
+            }
+            @if (ViewBag.RegisterTypeID == 11)
+            {
+                <label class="control-label col-md-2">Date Of Birth:</label>
+            }
+           
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PostageExtended, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PostageExtended, "", new { @class = "text-danger" })
@@ -88,7 +161,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index",new { rt = (int)ViewBag.RegisterTypeID })
 </div>
 
 @section Scripts {
