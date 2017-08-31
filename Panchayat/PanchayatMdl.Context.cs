@@ -55,5 +55,9 @@ namespace Panchayat
         public virtual DbSet<IllegalConstruction> IllegalConstructions { get; set; }
         public virtual DbSet<Inward> Inwards { get; set; }
         public virtual DbSet<Outward> Outwards { get; set; }
+        public virtual DbSet<InOutRegsIssue> InOutRegsIssues { get; set; }
+        public virtual DbSet<InOutRegsRecpt> InOutRegsRecpts { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<InvItem> InvItems { get; set; }
     }
 }
