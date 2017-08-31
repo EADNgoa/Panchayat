@@ -73,15 +73,6 @@
         <AssociationConnector Association="PanchayatModel.FK_Inward_RegisterTypes" />
         <EntityTypeShape EntityType="PanchayatModel.Outward" Width="1.5" PointX="13.625" PointY="21.25" />
         <AssociationConnector Association="PanchayatModel.FK_Outward_ToTable" />
-        <EntityTypeShape EntityType="PanchayatModel.InOutRegsIssue" Width="1.5" PointX="18.625" PointY="5.625" />
-        <EntityTypeShape EntityType="PanchayatModel.InOutRegsRecpt" Width="1.5" PointX="21.625" PointY="5.875" />
-        <EntityTypeShape EntityType="PanchayatModel.Inventory" Width="1.5" PointX="18.625" PointY="16" />
-        <EntityTypeShape EntityType="PanchayatModel.InvItem" Width="1.5" PointX="16.375" PointY="8.625" />
-        <AssociationConnector Association="PanchayatModel.FK_InOutRegsIssu_ToInvItems" />
-        <AssociationConnector Association="PanchayatModel.FK_InOutRegsIssu_ToRegType" />
-        <AssociationConnector Association="PanchayatModel.FK_InOutRegsRecpt_ToInvItems" />
-        <AssociationConnector Association="PanchayatModel.FK_InOutRegsRecpt_ToRegType" />
-        <AssociationConnector Association="PanchayatModel.FK_Inventory_ToInvItems" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
