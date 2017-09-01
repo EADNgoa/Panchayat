@@ -217,6 +217,7 @@
     <Compile Include="Controllers\IllegalConstructionsController.cs" />
     <Compile Include="Controllers\InwardsController.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />
+    <Compile Include="Controllers\NocsController.cs" />
     <Compile Include="Controllers\OutwardsController.cs" />
     <Compile Include="Controllers\PeriodsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -288,6 +289,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\PartialClasses.cs" />
+    <Compile Include="Noc.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="Outward.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -572,6 +576,11 @@
     <Content Include="Views\Outwards\Edit.cshtml" />
     <Content Include="Views\Outwards\Index.cshtml" />
     <Content Include="Views\Reports\Balwadi rent.cshtml" />
+    <Content Include="Views\Nocs\Create.cshtml" />
+    <Content Include="Views\Nocs\Delete.cshtml" />
+    <Content Include="Views\Nocs\Details.cshtml" />
+    <Content Include="Views\Nocs\Edit.cshtml" />
+    <Content Include="Views\Nocs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -21,6 +21,7 @@ namespace Panchayat
             this.IllegalConstructions = new HashSet<IllegalConstruction>();
             this.Inwards = new HashSet<Inward>();
             this.Outwards = new HashSet<Outward>();
+            this.Nocs = new HashSet<Noc>();
         }
     
         public int RegisterTypeID { get; set; }
@@ -34,5 +35,7 @@ namespace Panchayat
         public virtual ICollection<Inward> Inwards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Outward> Outwards { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Noc> Nocs { get; set; }
     }
 }

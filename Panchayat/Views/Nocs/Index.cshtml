@@ -1,0 +1,388 @@
+﻿@model PagedList.IPagedList<Panchayat.Noc>
+@using PagedList.Mvc
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2 class="section-to-print">
+        @if (ViewBag.RegisterTypeID == 12)
+    {
+        <p>Register Of Noc's/Income Certificate & Certificate Issued By The Village Panchayat </p>
+
+    }
+    @if (ViewBag.RegisterTypeID == 13)
+    {
+        <p>Noc Electric Connection</p>
+    }
+    @if (ViewBag.RegisterTypeID == 14)
+    {
+        <p>Noc Water</p>
+    }
+
+    @if (ViewBag.RegisterTypeID == 15)
+    {
+        <p>Noc Trade</p>
+    }
+    @if (ViewBag.RegisterTypeID == 16)
+    {
+        <p>Noc Bar</p>
+    }
+</h2>
+    <br />
+
+    @using (Html.BeginForm("Index", "Nocs", FormMethod.Get))
+    {
+        @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
+        <div class="row section-to-Not-print">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td> Date Of Reciept:</td>
+                        <td> @Html.TextBox("dor", ViewBag.CurrentFilter as string, htmlAttributes: new { type = "date", @class = "form-control" })</td>
+
+
+                        <td> Date Of Issue:</td>
+                        <td> @Html.TextBox("doi", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+                        <td> Issue Or Reject:</td>
+                        <td> @Html.TextBox("ior", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+                        <td> Date Of Vp Register:</td>
+
+                        <td> @Html.TextBox("dov", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+
+                        <td class="col-lg-1"></td>
+                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    }
+</center>
+<br />
+<br />
+<p>
+    @if (ViewBag.RegisterTypeID == 12)
+    {
+        @Html.ActionLink("Create New", "Create", new { rt = 12 })
+    }
+    @if (ViewBag.RegisterTypeID == 13)
+    {
+        @Html.ActionLink("Create New", "Create", new { rt = 13 })
+    }
+    @if (ViewBag.RegisterTypeID == 14)
+    {
+        @Html.ActionLink("Create New", "Create", new { rt = 14 })
+    }
+    @if (ViewBag.RegisterTypeID == 15)
+    {
+        @Html.ActionLink("Create New", "Create", new { rt = 15 })
+    }
+    @if (ViewBag.RegisterTypeID == 16)
+    {
+        @Html.ActionLink("Create New", "Create", new { rt = 16 })
+    }
+    <span class="pull-right">
+        <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+    </span>
+   
+</p>
+<table class="table section-to-print">
+    <tr>
+        <th>
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+              <p>Date Of Reciept Of Aplication:</p>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+          
+        </th>
+        <th>
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <p>Name And Address Of Application:</p>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }        </th>
+        <th>
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <p>Nature Of N.O.C.S/Certificate Applied For:</p>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }           </th>
+        <th>
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <p>Date Of Vp Register In Which Applicant Was Discussed:</p>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            } 
+        </th>
+        <th>
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <p>No Of Resolution:</p>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }         </th>
+        <th>
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <p>Whether Decide To Reject Or Issue:</p>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }    
+        </th>
+        <th>
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <p>If Rejected Give Reason:</p>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            } 
+        </th>
+        <th>
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <p>Whether Decide To Reject Or Issue:</p>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <p>Date Of Issue/Communication To Party:</p>
+
+            } 
+        </th>
+        <th>
+           Remark
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfReciept)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameAndAdressAppl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NatOfNoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfVp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfResolution)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueOrReject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RejectedReason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfComm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+      
+        <td class="section-to-Not-print">
+            @Html.ActionLink("Edit", "Edit", new { id=item.NocID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NocID }) |
+        </td>
+    </tr>
+}
+
+</table>
+@if (ViewBag.RegisterTypeID == 12)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 12 }))
+}
+@if (ViewBag.RegisterTypeID == 13)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 13 }))
+}
+@if (ViewBag.RegisterTypeID == 14)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 14 }))
+}
+@if (ViewBag.RegisterTypeID == 15)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 15 }))
+}
+@if (ViewBag.RegisterTypeID == 16)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 16 }))
+}
