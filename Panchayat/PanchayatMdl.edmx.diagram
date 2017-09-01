@@ -73,6 +73,8 @@
         <AssociationConnector Association="PanchayatModel.FK_Inward_RegisterTypes" />
         <EntityTypeShape EntityType="PanchayatModel.Outward" Width="1.5" PointX="13.625" PointY="21.25" />
         <AssociationConnector Association="PanchayatModel.FK_Outward_ToTable" />
+        <EntityTypeShape EntityType="PanchayatModel.Noc" Width="1.5" PointX="13.625" PointY="25.25" />
+        <AssociationConnector Association="PanchayatModel.FK_Noc_RegisterType" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

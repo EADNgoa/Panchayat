@@ -239,6 +239,22 @@
           <Property Name="Remark" Type="varchar" MaxLength="350" />
           <Property Name="RegisterTypeID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Noc">
+          <Key>
+            <PropertyRef Name="NocID" />
+          </Key>
+          <Property Name="NocID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOfReciept" Type="date" />
+          <Property Name="NameAndAdressAppl" Type="varchar" MaxLength="350" />
+          <Property Name="NatOfNoc" Type="varchar" MaxLength="350" />
+          <Property Name="DateOfVp" Type="date" />
+          <Property Name="NoOfResolution" Type="int" />
+          <Property Name="IssueOrReject" Type="nchar" MaxLength="10" />
+          <Property Name="RejectedReason" Type="nchar" MaxLength="10" />
+          <Property Name="DateOfComm" Type="date" />
+          <Property Name="Remarks" Type="varbinary" MaxLength="150" />
+          <Property Name="RegisterTypeID" Type="int" />
+        </EntityType>
         <EntityType Name="Outward">
           <Key>
             <PropertyRef Name="OutwardID" />
@@ -669,6 +685,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Noc_RegisterType">
+          <End Role="RegisterTypes" Type="Self.RegisterTypes" Multiplicity="0..1" />
+          <End Role="Noc" Type="Self.Noc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterTypes">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="Noc">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Outward_ToTable">
           <End Role="RegisterTypes" Type="Self.RegisterTypes" Multiplicity="1" />
           <End Role="Outward" Type="Self.Outward" Multiplicity="*" />
@@ -811,6 +839,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <EntitySet Name="LedgerDetails" EntityType="Self.LedgerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ledgers" EntityType="Self.Ledgers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Meeting" EntityType="Self.Meeting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Noc" EntityType="Self.Noc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Outward" EntityType="Self.Outward" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegisterTypes" EntityType="Self.RegisterTypes" Schema="dbo" store:Type="Tables" />
@@ -936,6 +965,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_Meeting_RegisterType" Association="Self.FK_Meeting_RegisterType">
             <End Role="RegisterTypes" EntitySet="RegisterTypes" />
             <End Role="Meeting" EntitySet="Meeting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Noc_RegisterType" Association="Self.FK_Noc_RegisterType">
+            <End Role="RegisterTypes" EntitySet="RegisterTypes" />
+            <End Role="Noc" EntitySet="Noc" />
           </AssociationSet>
           <AssociationSet Name="FK_Outward_ToTable" Association="Self.FK_Outward_ToTable">
             <End Role="RegisterTypes" EntitySet="RegisterTypes" />
@@ -1548,6 +1581,11 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="RegisterType" EntitySet="RegisterTypes" />
             <End Role="Outward" EntitySet="Outwards" />
           </AssociationSet>
+          <EntitySet Name="Nocs" EntityType="PanchayatModel.Noc" />
+          <AssociationSet Name="FK_Noc_RegisterType" Association="PanchayatModel.FK_Noc_RegisterType">
+            <End Role="RegisterType" EntitySet="RegisterTypes" />
+            <End Role="Noc" EntitySet="Nocs" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -1912,6 +1950,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <NavigationProperty Name="IllegalConstructions" Relationship="PanchayatModel.FK_IllegalConstruction_RegisterTypes" FromRole="RegisterType" ToRole="IllegalConstruction" />
           <NavigationProperty Name="Inwards" Relationship="PanchayatModel.FK_Inward_RegisterTypes" FromRole="RegisterType" ToRole="Inward" />
           <NavigationProperty Name="Outwards" Relationship="PanchayatModel.FK_Outward_ToTable" FromRole="RegisterType" ToRole="Outward" />
+          <NavigationProperty Name="Nocs" Relationship="PanchayatModel.FK_Noc_RegisterType" FromRole="RegisterType" ToRole="Noc" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -2020,6 +2059,35 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
               <PropertyRef Name="RegisterTypeID" />
             </Principal>
             <Dependent Role="Outward">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Noc">
+          <Key>
+            <PropertyRef Name="NocID" />
+          </Key>
+          <Property Name="NocID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfReciept" Type="DateTime" Precision="0" />
+          <Property Name="NameAndAdressAppl" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="NatOfNoc" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfVp" Type="DateTime" Precision="0" />
+          <Property Name="NoOfResolution" Type="Int32" />
+          <Property Name="IssueOrReject" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RejectedReason" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateOfComm" Type="DateTime" Precision="0" />
+          <Property Name="Remarks" Type="Binary" MaxLength="150" FixedLength="false" />
+          <Property Name="RegisterTypeID" Type="Int32" />
+          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_Noc_RegisterType" FromRole="Noc" ToRole="RegisterType" />
+        </EntityType>
+        <Association Name="FK_Noc_RegisterType">
+          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Noc" Role="Noc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterType">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="Noc">
               <PropertyRef Name="RegisterTypeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2379,6 +2447,23 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="ToWhom" ColumnName="ToWhom" />
                 <ScalarProperty Name="DateOfDisp" ColumnName="DateOfDisp" />
                 <ScalarProperty Name="OutwardID" ColumnName="OutwardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nocs">
+            <EntityTypeMapping TypeName="PanchayatModel.Noc">
+              <MappingFragment StoreEntitySet="Noc">
+                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="DateOfComm" ColumnName="DateOfComm" />
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="IssueOrReject" ColumnName="IssueOrReject" />
+                <ScalarProperty Name="NoOfResolution" ColumnName="NoOfResolution" />
+                <ScalarProperty Name="DateOfVp" ColumnName="DateOfVp" />
+                <ScalarProperty Name="NatOfNoc" ColumnName="NatOfNoc" />
+                <ScalarProperty Name="NameAndAdressAppl" ColumnName="NameAndAdressAppl" />
+                <ScalarProperty Name="DateOfReciept" ColumnName="DateOfReciept" />
+                <ScalarProperty Name="NocID" ColumnName="NocID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
