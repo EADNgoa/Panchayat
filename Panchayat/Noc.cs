@@ -20,10 +20,10 @@ namespace Panchayat
         public string NatOfNoc { get; set; }
         public Nullable<System.DateTime> DateOfVp { get; set; }
         public Nullable<int> NoOfResolution { get; set; }
-        public string IssueOrReject { get; set; }
+        public Nullable<bool> IssueOrReject { get; set; }
         public string RejectedReason { get; set; }
         public Nullable<System.DateTime> DateOfComm { get; set; }
-        public byte[] Remarks { get; set; }
+        public string Remarks { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }
     
         public virtual RegisterType RegisterType { get; set; }

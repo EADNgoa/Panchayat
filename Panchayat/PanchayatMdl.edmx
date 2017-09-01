@@ -249,10 +249,10 @@
           <Property Name="NatOfNoc" Type="varchar" MaxLength="350" />
           <Property Name="DateOfVp" Type="date" />
           <Property Name="NoOfResolution" Type="int" />
-          <Property Name="IssueOrReject" Type="nchar" MaxLength="10" />
-          <Property Name="RejectedReason" Type="nchar" MaxLength="10" />
+          <Property Name="IssueOrReject" Type="bit" />
+          <Property Name="RejectedReason" Type="varchar" MaxLength="250" />
           <Property Name="DateOfComm" Type="date" />
-          <Property Name="Remarks" Type="varbinary" MaxLength="150" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
           <Property Name="RegisterTypeID" Type="int" />
         </EntityType>
         <EntityType Name="Outward">
@@ -2073,10 +2073,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="NatOfNoc" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
           <Property Name="DateOfVp" Type="DateTime" Precision="0" />
           <Property Name="NoOfResolution" Type="Int32" />
-          <Property Name="IssueOrReject" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="RejectedReason" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IssueOrReject" Type="Boolean" />
+          <Property Name="RejectedReason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="DateOfComm" Type="DateTime" Precision="0" />
-          <Property Name="Remarks" Type="Binary" MaxLength="150" FixedLength="false" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="RegisterTypeID" Type="Int32" />
           <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_Noc_RegisterType" FromRole="Noc" ToRole="RegisterType" />
         </EntityType>
