@@ -60,7 +60,7 @@
             </div>
         }
 
-        @if (ViewBag.SubLedger != null)
+        @if (ViewBag.SubLedger != null && (int)ViewBag.SubLedger==1)
         {
             @Html.Hidden("SubLedgerID")
             <div class="form-group">
@@ -69,6 +69,10 @@
                     <input type="text" id="SubLedgerID" name="SubLedger" style="color:black;" data-autocomplete-idholder="#SubLedgerID" data-autocombo-url="@Url.Action("AutoCompleteSubLedgs")" class="form-control" />  
                 </div>
             </div>
+        }
+        else if (ViewBag.SubLedger != null && (int)ViewBag.SubLedger > 1)
+        {
+            @Html.Hidden("SubLedgerID", (int)ViewBag.SubLedger)
         }
 
         <div class="form-group">

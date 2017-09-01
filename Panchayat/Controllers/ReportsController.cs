@@ -337,6 +337,48 @@ namespace Panchayat.Controllers
             return PartialView("_GenericReportDetails", res);
         }
 
+        public ActionResult RVRptRq(int Id)
+        {
+            ViewBag.YearBox = MyExtensions.MakeYrRq(5, 1, DateTime.Today.Year);
+            ViewBag.SubLedger = Id;
+            ViewBag.Title = db.SubLedgers.Find(Id).Ledger;
+            ViewBag.ReturnAction = "RVReport";
+
+            return View("ReportRq");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RVReport(int RptYear, int SubLedgerID)
+        {
+            if (ModelState.IsValid )
+            {
+                var sl = db.SubLedgers.Find(SubLedgerID);
+                string RptName = sl.Ledger;
+                IEnumerable<RVReport> res = (sl.Ledger1.IsIncome) ?
+                    db.Form4.Where(f => f.SubLedgerID == SubLedgerID && ((DateTime)f.PayDate).Year == RptYear).Select(f => new RVReport { Amount = (decimal)f.Amount, RVid = f.RecieptNo, Tdate = (DateTime)f.PayDate }).ToList()
+                    : db.Vouchers.Where(f => f.SubLedgerID == SubLedgerID && ((DateTime)f.PayDate).Year == RptYear).Select(f => new RVReport { Amount = (decimal)f.Amount, RVid = f.VoucherID, Tdate = (DateTime)f.PayDate }).ToList();
+
+                //Fetch Detail Data
+                foreach (var r in res)
+                {
+                    r.DetailData = db.LedgerDetails.Where(l => l.SubLedgerID == SubLedgerID).ToDictionary(l => l.LedgerDetail1, l => "");
+
+                    List<RVdetail> detvals = (sl.Ledger1.IsIncome) ? db.RVdetails.Where(rv => rv.ReceiptNo == r.RVid).ToList() : db.RVdetails.Where(rv => rv.VoucherID == r.RVid).ToList();
+                    int i = 0;
+                    foreach (var item in r.DetailData.Keys.ToList())
+                    {
+                        r.DetailData[item] = detvals[i].RVDetail1;
+                        i++;
+                    }
+                }
+                return View(RptName, res);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

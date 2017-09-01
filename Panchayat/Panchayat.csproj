@@ -575,6 +575,7 @@
     <Content Include="Views\Outwards\Details.cshtml" />
     <Content Include="Views\Outwards\Edit.cshtml" />
     <Content Include="Views\Outwards\Index.cshtml" />
+    <Content Include="Views\Reports\Balwadi rent.cshtml" />
     <Content Include="Views\Nocs\Create.cshtml" />
     <Content Include="Views\Nocs\Delete.cshtml" />
     <Content Include="Views\Nocs\Details.cshtml" />

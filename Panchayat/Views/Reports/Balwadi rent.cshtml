@@ -1,0 +1,57 @@
+﻿@model IEnumerable<RVReport>
+
+
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+
+<h3 class="section-to-print">@ViewBag.Title</h3>
+
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th>
+               Pay Date
+            </th>
+            <th>Wealth Index of parents</th>
+            <th>
+               Recpt/ Vouch No.
+            </th>
+            <th>No of kids</th>
+            <th>
+                Amount
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach(RVReport item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DetailData["Wealth Index of parents"])</td>
+                    <td>@Html.DisplayFor(modelItem => item.RVid)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DetailData["No of kids"])</td>
+                    <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                    
+                </tr>
+
+            }
+    </tbody>
+</table>
+
