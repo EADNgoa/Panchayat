@@ -1,0 +1,302 @@
+﻿@model Panchayat.Noc
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Noc</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.NocID)
+
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <label class="control-label col-md-2">Date Of Reciept Of Aplication:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <label class="control-label col-md-2">Date Of Reciept Of Aplication:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <label class="control-label col-md-2">Date Of Reciept Of Aplication:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <label class="control-label col-md-2">Date Of Reciept Of Aplication:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <label class="control-label col-md-2">Date Of Reciept Of Aplication:</label>
+
+            }
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfReciept, new { htmlAttributes = new { @class = "form-control", @Type = "date" } })
+                @Html.ValidationMessageFor(model => model.DateOfReciept, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <label class="control-label col-md-2">Name And Address Of Applicant:</label>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <label class="control-label col-md-2"> noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NameAndAdressAppl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameAndAdressAppl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <label class="control-label col-md-2">Nature Of N.O.C.S/Certificate Applied For:</label>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <label class="control-label col-md-2"> noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NatOfNoc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NatOfNoc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <label class="control-label col-md-2">Date Of V.P Register In Which Aplication Was Discussed :</label>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <label class="control-label col-md-2"> noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfVp, new { htmlAttributes = new { @class = "form-control", @Type = "date" } })
+                @Html.ValidationMessageFor(model => model.DateOfVp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <label class="control-label col-md-2">No Of Resolution:</label>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <label class="control-label col-md-2"> noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NoOfResolution, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NoOfResolution, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <label class="control-label col-md-2">Whether Decided To Issue Or Reject:</label>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <label class="control-label col-md-2"> noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+
+
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IssueOrReject, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IssueOrReject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <label class="control-label col-md-2">If Rejected Give Reason:</label>            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <label class="control-label col-md-2"> noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RejectedReason, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RejectedReason, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 12)
+            {
+                <label class="control-label col-md-2">Date Of Issue/Communication To Party:</label>
+            }
+            @if (ViewBag.RegisterTypeID == 13)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 14)
+            {
+                <label class="control-label col-md-2"> noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 15)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            @if (ViewBag.RegisterTypeID == 16)
+            {
+                <label class="control-label col-md-2">noc:</label>
+
+            }
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfComm, new { htmlAttributes = new { @class = "form-control", @Type = "date" } })
+                @Html.ValidationMessageFor(model => model.DateOfComm, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
