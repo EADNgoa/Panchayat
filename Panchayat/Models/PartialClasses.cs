@@ -128,7 +128,14 @@ namespace Panchayat
         public decimal Amount { get; set; }
         public DateTime Tdate { get; set; } //Transaction date
     }
-    
+
+    public class RVReport
+    {
+        public int RVid { get; set; } //Receipt of Voucher ID
+        public decimal Amount { get; set; }
+        public DateTime Tdate { get; set; } //Transaction date
+        public Dictionary<string, string> DetailData { get; set; }
+    }
 
     enum SubLedgerNamer : byte
     {

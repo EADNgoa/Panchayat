@@ -571,6 +571,7 @@
     <Content Include="Views\Outwards\Details.cshtml" />
     <Content Include="Views\Outwards\Edit.cshtml" />
     <Content Include="Views\Outwards\Index.cshtml" />
+    <Content Include="Views\Reports\Balwadi rent.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
