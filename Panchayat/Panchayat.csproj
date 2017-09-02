@@ -581,6 +581,7 @@
     <Content Include="Views\Nocs\Details.cshtml" />
     <Content Include="Views\Nocs\Edit.cshtml" />
     <Content Include="Views\Nocs\Index.cshtml" />
+    <Content Include="Views\Reports\Payment of VAT Tax.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
