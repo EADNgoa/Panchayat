@@ -135,6 +135,8 @@ namespace Panchayat
         public decimal Amount { get; set; }
         public DateTime Tdate { get; set; } //Transaction date
         public Dictionary<string, string> DetailData { get; set; }
+
+
     }
 
     enum SubLedgerNamer : byte

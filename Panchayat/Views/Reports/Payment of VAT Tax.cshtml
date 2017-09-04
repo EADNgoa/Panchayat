@@ -64,12 +64,12 @@
        @{ var i = 1; }
         @foreach (RVReport item in Model)
         {
-          
+
             <tr>
                 <td>@i</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Contractor"])</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Work"])</td>
-                <td>@Html.DisplayFor(modelItem => item.RVid)</td>
+                <td>@Html.DisplayFor(modelItem => item.RVid + ",") @ViewBag.date</td>
                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Details Of Name Of Bank"])</td>
                 <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
