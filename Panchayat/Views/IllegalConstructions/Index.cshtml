@@ -70,7 +70,7 @@
     </span>
 </div>
 <table class="table section-to-print">
-    <tr>
+    <tr><th>Sr No</th>
         <th>
            Date Of The Reciept Of the Complain
         </th>
@@ -122,9 +122,19 @@
     
         <th></th>
     </tr>
-
+    <tr>
+        @for (int c = 1; c < 9; c++)
+            {
+            <th>@c</th>
+        }
+        <th></th>
+    </tr>
+    @{var i=1; }
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @i
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateOfComp)
         </td>
@@ -155,6 +165,7 @@
        
         </td>
     </tr>
+    i++;
 }
 
 </table>

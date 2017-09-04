@@ -29,18 +29,18 @@
         @if (ViewBag.RegisterTypeID == 1)
         {
             <p class="section-to-Not-print">Meeting</p>
-            <p class="section-to-print" style="visibility:hidden"><font style="font-size:large">Proceeding Of The_______________ Meeting</font></p>
+            <p class="section-to-print" style="visibility:hidden"><font style="font-size:large">Proceeding Of The&nbsp;<u>@ViewBag.MeetingD</u> &nbsp;Meeting</font></p>
             <p>
-        <span class="pull-right section-to-print" style="visibility:hidden"><font style="font-size:18px">Village Panchayat:___________</font></span>
+        <span class="pull-right section-to-print" style="visibility:hidden"><font style="font-size:18px">Village Panchayat: &nbsp;<u>@ViewBag.PanchName</u>&nbsp;</font></span>
         
         </p>
         }
         @if (ViewBag.RegisterTypeID == 8)
         {
             <p class="section-to-Not-print">Gram Sabha</p>
-            <p class="section-to-print" style="visibility:hidden"><font style="font-size:large">Proceeding Of The_______________ Gram Sabha Meeting</font></p>
+            <p class="section-to-print" style="visibility:hidden"><font style="font-size:large">Proceeding Of The&nbsp;<u>@Model.FirstOrDefault().MeetingDate</u> &nbsp; Gram Sabha Meeting</font></p>
             <p>
-                <span class="pull-right section-to-print" style="visibility:hidden"><font style="font-size:15px">Village Panchayat:___________</font></span>
+                <span class="pull-right section-to-print" style="visibility:hidden"><font style="font-size:15px">Village Panchayat: &nbsp;<u>@ViewBag.PanchName</u>&nbsp;</font></span>
 
             </p>
         }
@@ -92,6 +92,9 @@
     </p>
     <table class="table section-to-print">
         <tr>
+        <th>
+            Sr No
+        </th>
             <th>
                 Subject
             </th>
@@ -146,10 +149,15 @@
 
     <th></th>
 </tr>
-
+        @{
+            var i = 1;
+         }
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @i
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Subject)
                 </td>
@@ -181,6 +189,7 @@
                 
                 </td>
             </tr>
+            i++;
         }
 
     </table>

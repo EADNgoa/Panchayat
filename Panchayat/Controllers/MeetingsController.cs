@@ -38,7 +38,8 @@ namespace Panchayat.Controllers
                 meetings = meetings.Where(p => p.MeetingDate ==md);
                 page = 1;
             }
-         
+            ViewBag.PanchName = db.Configs.FirstOrDefault().VP;
+            ViewBag.MeetingD = md;
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
             return View(meetings.ToList().ToPagedList(pageNumber, pageSize));

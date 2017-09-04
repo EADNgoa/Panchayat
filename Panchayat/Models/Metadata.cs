@@ -171,7 +171,153 @@ namespace Panchayat
         [StringLength(30)]
         public int LedgerDetail1;
     }
+    public class AuditMetadata
+    {
+        [Required]
+        public int AuditNo;
 
-  
+        [Required]
+        public string ListOfAuditObjection;
+
+        [Required]
+        public string ActionsTaken;
+    }
+
+    public class IllegalMetadata
+    {
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfComp;
+
+        [StringLength(100)]
+        [Required]
+        public string NameOfPr;
+
+        [StringLength(250)]
+        [Required]
+        public string AddressOfPr;
+
+        [Required]
+        [StringLength(300)]
+        public string NatOfCon;
+
+        [Required]
+        [StringLength(50)]
+        public string OccasOfCons;
+
+        [Required]
+        [StringLength(350)]
+        public string ActionTaken;
+
+        [Required]
+        [StringLength(350)]
+        public string Remarks;
+
+    }
+
+    public class InwardMetadata
+    {
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfReciept;
+
+        [Required]
+        [StringLength(150)]
+        public string FromWhereRec;
+
+        [Required]
+        [StringLength(30)]
+        public string NoOfLett;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfLett;
+
+        [Required]
+        public int FileNo;
+
+
+        [Required]
+        [StringLength(150)]
+        public string SubjectMatter;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime ActionTaken;
+
+        [Required]
+        [StringLength(350)]
+        public string Remark;
+
+    }
+
+    public class MeetingMetadata
+    {
+        [Required]
+        [StringLength(350)]
+        public string Subject;
+
+        [Required]
+        [StringLength(100)]
+        public string ProposerName;
+
+        [Required]
+        public bool PropOrAmend;
+
+        [Required]
+        public int For;
+
+        [Required]
+        public int Against;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime MeetingDate;
+
+        [Required]
+        public string Resolution;
+
+        [Required]
+        public string Remark;
+
+
+    }
+
+    public class OutwardMetadata
+    {
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfDisp;
+
+        [Required]
+        [StringLength(250)]
+        public string ToWhom;
+
+
+        [Required]
+        [StringLength(30)]
+        public string FileReferenceNo;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime FileReferenceDate;
+
+        [Required]
+        [StringLength(350)]
+        public string SubjectMatter;
+
+        [Range(0.0, Double.MaxValue)]
+        public Decimal PostageDrawn;
+
+        [Range(0.0, Double.MaxValue)]
+        public Decimal PostageExtended;
+
+        [Required]
+        public string Remark;
+
+    }
+
+
 
 }

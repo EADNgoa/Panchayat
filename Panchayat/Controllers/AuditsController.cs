@@ -33,6 +33,7 @@ namespace Panchayat.Controllers
                 page = 1;
             }
             ViewBag.YearBox = MyExtensions.MakeYrRq(8, 1, DateTime.Today.Year);
+            ViewBag.PanchName = db.Configs.FirstOrDefault().VP;
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
             return View(audits.ToList().ToPagedList(pageNumber, pageSize));
