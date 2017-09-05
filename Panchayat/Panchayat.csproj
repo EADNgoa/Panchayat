@@ -582,6 +582,15 @@
     <Content Include="Views\Nocs\Edit.cshtml" />
     <Content Include="Views\Nocs\Index.cshtml" />
     <Content Include="Views\Reports\Payment of VAT Tax.cshtml" />
+    <Content Include="Views\Reports\Payment of Income Tax.cshtml" />
+    <Content Include="Views\Reports\Payment of Royalty.cshtml" />
+    <Content Include="Views\Reports\Security Deposit.cshtml" />
+    <Content Include="Views\Reports\E.M.D Deposit.cshtml" />
+    <Content Include="Views\Reports\Other Fees.cshtml" />
+    <Content Include="Views\Reports\Certificate Fees.cshtml" />
+    <Content Include="Views\Reports\Other Misc.cshtml" />
+    <Content Include="Views\Reports\Fine.cshtml" />
+    <Content Include="Views\Reports\Const. Lic Fees.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

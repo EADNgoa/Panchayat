@@ -23,7 +23,7 @@
     }
 </style>
 <center>
-    <h3 class="section-to-print">Sales Tax/Vat Register</h3>
+    <h3 class="section-to-print">Gst</h3>
 </center>
 <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
 <table class="table section-to-print">
@@ -52,16 +52,14 @@
             <th>
                 Challan No
             </th>
+
             <th>
-                Amount Balance
-            </th>
-            <th>
-                Remrk
+                Remark
             </th>
         </tr>
     </thead>
     <tbody>
-       @{ var i = 1; }
+        @{ var i = 1; }
         @foreach (RVReport item in Model)
         {
 
@@ -69,13 +67,12 @@
                 <td>@i</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Contractor"])</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Work"])</td>
-                <td>@Html.DisplayFor(modelItem => item.RVid) @Html.DisplayFor(modelItem => item.Tdate)</td>
+                <td>@Html.DisplayFor(modelItem => item.RVid),@Html.DisplayFor(modelItem => item.Tdate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Details Of Name Of Bank"])</td>
                 <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Challan No"])</td>
-                <td>0.00</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Remark"])</td>
             </tr>
             i++;

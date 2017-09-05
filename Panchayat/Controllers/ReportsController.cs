@@ -365,7 +365,7 @@ namespace Panchayat.Controllers
                     r.DetailData = db.LedgerDetails.Where(l => l.SubLedgerID == SubLedgerID).ToDictionary(l => l.LedgerDetail1, l => "");
 
                     List<RVdetail> detvals = (sl.Ledger1.IsIncome) ? db.RVdetails.Where(rv => rv.ReceiptNo == r.RVid).ToList() : db.RVdetails.Where(rv => rv.VoucherID == r.RVid).ToList();
-                    ViewBag.date =db.Form4.Where(x => x.RecieptNo == r.RVid).Select(x=>x.PayDate).FirstOrDefault();
+                   
                     int i = 0;
                     foreach (var item in r.DetailData.Keys.ToList())
                     {
