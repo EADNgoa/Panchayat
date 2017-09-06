@@ -591,6 +591,9 @@
     <Content Include="Views\Reports\Other Misc.cshtml" />
     <Content Include="Views\Reports\Fine.cshtml" />
     <Content Include="Views\Reports\Const. Lic Fees.cshtml" />
+    <Content Include="Views\Reports\Extension of Street light lines with poles.cshtml" />
+    <Content Include="Views\Reports\Maintenance of jeep vehicle and truck.cshtml" />
+    <Content Include="Views\Reports\Maintenance of community hall.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
