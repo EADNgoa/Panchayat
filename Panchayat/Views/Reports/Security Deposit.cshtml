@@ -23,7 +23,7 @@
     }
 </style>
 <center>
-    <h3 class="section-to-print">Sales Tax/Vat Register</h3>
+    <h3 class="section-to-print">Security Deposit Register</h3>
 </center>
 <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
 <table class="table section-to-print">
@@ -34,34 +34,31 @@
             </th>
             <th>Name Of contractor</th>
             <th>
+                Purpose Of Deposit or
                 Name Of Work
             </th>
             <th>Valuation Certificate No.Reciept No. Date</th>
             <th>
-                Amount Of Sales Tax/Vat Tax
+                Amount 
             </th>
             <th>
-                Details Of Name Of Bank
+               Voucher No. & Date
             </th>
-            <th>
-                Date Of Credit
-            </th>
+      
             <th>
                 Amount
             </th>
             <th>
-                Challan No
+                Reason For Refund SD
             </th>
+        
             <th>
-                Amount Balance
-            </th>
-            <th>
-                Remrk
+                Remarks
             </th>
         </tr>
     </thead>
     <tbody>
-       @{ var i = 1; }
+        @{ var i = 1; }
         @foreach (RVReport item in Model)
         {
 
@@ -71,11 +68,10 @@
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Work"])</td>
                 <td>@Html.DisplayFor(modelItem => item.RVid) @Html.DisplayFor(modelItem => item.Tdate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-                <td>@Html.DisplayFor(modelItem => item.DetailData["Details Of Name Of Bank"])</td>
-                <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
+                <td>@Html.DisplayFor(modelItem => item.RVid) @Html.DisplayFor(modelItem => item.Tdate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-                <td>@Html.DisplayFor(modelItem => item.DetailData["Challan No"])</td>
-                <td>0.00</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Reason For Refund"])</td>
+           
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Remark"])</td>
             </tr>
             i++;
