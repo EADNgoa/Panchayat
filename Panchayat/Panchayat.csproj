@@ -586,14 +586,14 @@
     <Content Include="Views\Reports\Payment of Royalty.cshtml" />
     <Content Include="Views\Reports\Security Deposit.cshtml" />
     <Content Include="Views\Reports\E.M.D Deposit.cshtml" />
-    <Content Include="Views\Reports\Other Fees.cshtml" />
-    <Content Include="Views\Reports\Certificate Fees.cshtml" />
+    <Content Include="Views\Reports\Income Certificate.cshtml" />
+    <Content Include="Views\Reports\Issue BND Certificate.cshtml" />
+    <Content Include="Views\Reports\Residence Certificate.cshtml" />
+    <Content Include="Views\Reports\Divergence Certificate.cshtml" />
     <Content Include="Views\Reports\Other Misc.cshtml" />
-    <Content Include="Views\Reports\Fine.cshtml" />
-    <Content Include="Views\Reports\Const. Lic Fees.cshtml" />
-    <Content Include="Views\Reports\Extension of Street light lines with poles.cshtml" />
-    <Content Include="Views\Reports\Maintenance of jeep vehicle and truck.cshtml" />
+    <Content Include="Views\Reports\GST.cshtml" />
     <Content Include="Views\Reports\Maintenance of community hall.cshtml" />
+    <Content Include="Views\Reports\Right To Information.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

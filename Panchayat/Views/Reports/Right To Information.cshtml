@@ -23,7 +23,7 @@
     }
 </style>
 <center>
-    <h3 class="section-to-print">Divergence Certificate</h3>
+    <h3 class="section-to-print">Cases Under Right To Information</h3>
 </center>
 <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
 <table class="table section-to-print">
@@ -32,20 +32,23 @@
             <th>
                 Sr No
             </th>
-            <th>Invoice No</th>
+            <th>Date Of Reciept Of Application</th>
             <th>
-                Date
+                Applicant Fees
             </th>
-            <th>Name Of Applicant</th>
+            <th>Name and Address Of Partt</th>
             <th>
-                Address
+                Nature Of Information Sought
             </th>
             <th>
-                Amount
+                Date Of Furnishing Informaation
             </th>
 
             <th>
-                Purpose
+                Challan No
+            </th>
+            <th>
+Amount
             </th>
             <th>
                 Remarks
@@ -60,15 +63,18 @@
 
             <tr>
                 <td>@i</td>
-                <td>@Html.DisplayFor(modelItem => item.RVid)</td>
+                
                 <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
-                <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Applicant"])</td>
-                <td>@Html.DisplayFor(modelItem => item.DetailData["Address"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Applicant Fees"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Name And Address Of Party"])</td>
+                
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Nature Of Information Sought"])</td>
+
+
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Date Of Information"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Challan No/date"])</td>
                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-                <td>@Html.DisplayFor(modelItem => item.DetailData["Purpose"])</td>
-
-
-                <td>@Html.DisplayFor(modelItem => item.DetailData["Remark"])</td>
+              <td>@Html.DisplayFor(modelItem => item.DetailData["Remark"])</td>
 
 
 
