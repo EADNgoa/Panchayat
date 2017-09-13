@@ -134,6 +134,7 @@ namespace Panchayat
         public int RVid { get; set; } //Receipt of Voucher ID
         public decimal Amount { get; set; }
         public DateTime Tdate { get; set; } //Transaction date
+        public bool form6 { get; set; }
         public Dictionary<string, string> DetailData { get; set; }
 
 

@@ -23,8 +23,8 @@ namespace Panchayat
             this.Form3 = new HashSet<Form3>();
             this.Form4 = new HashSet<Form4>();
             this.LedgerDetails = new HashSet<LedgerDetail>();
-            this.Vouchers = new HashSet<Voucher>();
             this.DemandDetails = new HashSet<DemandDetail>();
+            this.Vouchers = new HashSet<Voucher>();
         }
     
         public int SubLedgerID { get; set; }
@@ -48,8 +48,8 @@ namespace Panchayat
         public virtual Ledger Ledger1 { get; set; }
         public virtual SubLedgerType SubLedgerType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Voucher> Vouchers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DemandDetail> DemandDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Voucher> Vouchers { get; set; }
     }
 }

@@ -37,10 +37,8 @@ namespace Panchayat
         public virtual DbSet<Ledger> Ledgers { get; set; }
         public virtual DbSet<SubLedger> SubLedgers { get; set; }
         public virtual DbSet<SubLedgerType> SubLedgerTypes { get; set; }
-        public virtual DbSet<VoucherLedgerDetail> VoucherLedgerDetails { get; set; }
         public virtual DbSet<RVdetail> RVdetails { get; set; }
         public virtual DbSet<Period> Period { get; set; }
-        public virtual DbSet<Voucher> Vouchers { get; set; }
         public virtual DbSet<Config> Configs { get; set; }
         public virtual DbSet<DemandDetail> DemandDetails { get; set; }
         public virtual DbSet<DemandPeriod> DemandPeriods { get; set; }
@@ -53,8 +51,13 @@ namespace Panchayat
         public virtual DbSet<RegisterType> RegisterTypes { get; set; }
         public virtual DbSet<Meeting> Meetings { get; set; }
         public virtual DbSet<IllegalConstruction> IllegalConstructions { get; set; }
-        public virtual DbSet<Inward> Inwards { get; set; }
         public virtual DbSet<Outward> Outwards { get; set; }
         public virtual DbSet<Noc> Nocs { get; set; }
+        public virtual DbSet<Voucher> Vouchers { get; set; }
+        public virtual DbSet<Inward> Inwards { get; set; }
+        public virtual DbSet<InOutRegsIssue> InOutRegsIssues { get; set; }
+        public virtual DbSet<InOutRegsRecpt> InOutRegsRecpts { get; set; }
+        public virtual DbSet<InvItem> InvItems { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
     }
 }

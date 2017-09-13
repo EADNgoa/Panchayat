@@ -1,0 +1,93 @@
+﻿@model IEnumerable<RVReport>
+
+
+
+
+
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+<center>
+    <h3 class="section-to-print"><b>Form No. 6</b></h3>
+    <h4>Registers Of Properties and Assets</h4>
+</center>
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th>
+                Sr No. of Entry
+            </th>
+            <th>Date of Acquisition</th>
+            <th>
+              Particulars Of Property
+            </th>
+            <th>Price Paid</th>
+            <th>
+                Where Placed Or Situated
+            </th>
+            <th>
+               Date
+            </th>
+            <th>
+               Amount Realised if Sold
+            </th>
+            <th>
+               Signature of Attesting officer
+            </th>
+            <th>
+                Remark(give all relevant office reference)
+            </th>
+
+            <th>
+                Cerrtificate of Verification
+            </th>
+        </tr>
+        <tr>
+            @for(var c = 0; c < 11; c++)
+            {
+                <th>
+                    @c;
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @{ var i = 1; }
+        @foreach (RVReport item in Model)
+        {
+
+            <tr>
+                <td>@i</td>
+                <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Particulars Of Property"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Price Paid"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Where Placed Or Situated"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Date"])</td>   
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Amount Realised if Sold"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Signature of Attesting Officer"])</td>
+
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Remarks"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Certificate Of Verification"])</td>
+        
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+

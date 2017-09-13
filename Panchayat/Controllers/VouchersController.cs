@@ -19,7 +19,7 @@ namespace Panchayat.Controllers
         // GET: Vouchers
         public ActionResult Index(int? page, int? SearchRecieptNo, string PassedBy, DateTime? tdate, DateTime? fdate, decimal? fAmount, decimal? tAmount)
         {
-            var Vouc = db.Vouchers.Where(f => f.VoucherID> 0);
+           var Vouc = db.Vouchers.Where(f => f.VoucherID> 0);
 
             if (SearchRecieptNo != null)
             {
@@ -77,7 +77,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VoucherID,PassedBy,of,Amount,ActualAmount,For,CBfolio,ResNo,HeldOn,Meeting, SubLedgerID")] Voucher voucher, FormCollection fm)
+        public ActionResult Create([Bind(Include = "VoucherID,PassedBy,of,Amount,ActualAmount,For,CBfolio,ResNo,HeldOn,Meeting,Form6,SubLedgerID")] Voucher voucher, FormCollection fm)
         {
             if (ModelState.IsValid)
             {
@@ -139,7 +139,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VoucherID,PassedBy,of,Amount,ActualAmount,For,PayDate,CBfolio,ResNo,HeldOn,Meeting,SubLedgerID,LedgerID")] Voucher voucher, FormCollection fm)
+        public ActionResult Edit([Bind(Include = "VoucherID,PassedBy,of,Amount,ActualAmount,For,PayDate,CBfolio,ResNo,HeldOn,Meeting,SubLedgerID,Form6,LedgerID")] Voucher voucher, FormCollection fm)
         {
             if (ModelState.IsValid && voucher.PayDate==DateTime.Today)
             {

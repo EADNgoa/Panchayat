@@ -80,6 +80,8 @@
                 @Html.ValidationMessageFor(model => model.Meeting, "", new { @class = "text-danger" })
             </div>
         </div>
+   
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.SubLedgerID, "SubLedger", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -89,7 +91,15 @@
                 @Html.ValidationMessageFor(model => model.SubLedgerID, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            <label class="control-label col-md-2">Form 6? :</label>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Form6)
+                    @Html.ValidationMessageFor(model => model.Form6, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
         <div id="CLDdiv">&nbsp;</div>
 
         <div class="form-group">

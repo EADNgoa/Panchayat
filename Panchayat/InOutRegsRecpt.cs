@@ -12,19 +12,17 @@ namespace Panchayat
     using System;
     using System.Collections.Generic;
     
-    public partial class Inward
+    public partial class InOutRegsRecpt
     {
-        public int InwardID { get; set; }
-        public Nullable<System.DateTime> DateOfReciept { get; set; }
-        public string FromWhereRec { get; set; }
-        public string NoOfLett { get; set; }
-        public Nullable<System.DateTime> DateOfLett { get; set; }
-        public string FileNo { get; set; }
-        public string SubjectMatter { get; set; }
-        public Nullable<System.DateTime> ActionTaken { get; set; }
-        public string Remark { get; set; }
-        public int RegisterTypeID { get; set; }
+        public int IORecptID { get; set; }
+        public Nullable<int> RegisterTypeID { get; set; }
+        public Nullable<System.DateTime> TDate { get; set; }
+        public Nullable<int> ItemID { get; set; }
+        public Nullable<int> Qty { get; set; }
+        public Nullable<decimal> Value { get; set; }
+        public Nullable<int> RVno { get; set; }
     
         public virtual RegisterType RegisterType { get; set; }
+        public virtual InvItem InvItem { get; set; }
     }
 }

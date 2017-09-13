@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Panchayat.InOutRegsRecpt>
+
+@{
+    ViewBag.Title = "Index";
+}
+<center class="section-to-print">
+    @if (ViewBag.RegisterTypeID == 17)
+    {
+        <h4>Stationary</h4>
+    }
+    @if (ViewBag.RegisterTypeID == 18)
+    {
+        <h4>Stamp</h4>
+    }
+    @if (ViewBag.RegisterTypeID == 19)
+    {
+        <h4>DeadStock</h4>
+    }
+</center>
+
+
+<p class="section-to-Not-print">
+    @Html.ActionLink("Create New", "Create",new {rt = ViewBag.RegisterTypeID})
+
+    <span class="pull-right">
+        <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+    </span>
+</p>
+<table class="table section-to-print">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+           
+            Quantity
+        </th>
+        <th>
+           Value
+        </th>
+        <th>
+           Voucher No
+        </th>
+   
+        <th>
+        Item   
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RVno)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.InvItem.Item)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IORecptID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IORecptID }) |
+            
+        </td>
+    </tr>
+}
+
+</table>

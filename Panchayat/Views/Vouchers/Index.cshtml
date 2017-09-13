@@ -48,6 +48,7 @@
         <th>
             Sub Ledger
         </th>
+        <th>Is Form6?</th>
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Amount)            
         </th>
@@ -76,6 +77,11 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SubLedger.Ledger)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Form6)
+
+
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Amount)
