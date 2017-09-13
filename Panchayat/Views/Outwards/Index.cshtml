@@ -83,13 +83,14 @@
 </p>
 <table class="table section-to-print">
     <tr>
+        <th>Sr No</th>
         <th>
             @if (ViewBag.RegisterTypeID == 3)
             {
                     <p> Date Of Dispatch</p>            }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <p> Date Of Birth</p>        
+                <p> Date Of Death</p>        
             }
           
         </th>
@@ -99,7 +100,7 @@
                 <p> To Whom Sent</p>            }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <p> Date Of Birth</p>
+                <p> To Whom Sent</p>
             }
         </th>
         <th>
@@ -108,7 +109,7 @@
                 <p>  File Reference No</p>            }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <p> Date Of Birth</p>
+                <p> File Reference No</p>
             }
           
         </th>
@@ -128,7 +129,7 @@
                 <p>   subject Matter</p>            }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <p> Date Of Birth</p>
+                <p>Subject Matter</p>
             }
          
         </th>
@@ -138,7 +139,7 @@
                 <p>  Postage Drawn</p>            }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <p> Date Of Birth</p>
+                <p>Postae Drawn</p>
             }
 
         </th>
@@ -148,7 +149,7 @@
                 <p>   Postage Extended</p>            }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <p> Date Of Birth</p>
+                <p> Postage extended</p>
             }
 
         </th>
@@ -158,9 +159,19 @@
   
         <th></th>
     </tr>
-
+    <tr>
+        @for (int c = 1; c < 10; c++)
+            {
+            <th>@c</th>
+        }
+        <th></th>
+    </tr>
+    @{ var i = 1;}
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @i
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateOfDisp)
         </td>
@@ -192,6 +203,7 @@
           
         </td>
     </tr>
+    i++;
 }
 
 </table>

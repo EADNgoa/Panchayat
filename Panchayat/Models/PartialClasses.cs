@@ -56,6 +56,35 @@ namespace Panchayat
     {
     }
 
+    [MetadataType(typeof(AuditMetadata))]
+    public partial class Audit
+    {
+    }
+
+    [MetadataType(typeof(IllegalMetadata))]
+    public partial class IllegalConstruction
+    {
+    }
+
+    [MetadataType(typeof(InwardMetadata))]
+    public partial class Inward
+    {
+    }
+
+    [MetadataType(typeof(MeetingMetadata))]
+    public partial class Meeting
+    {
+
+    }
+
+
+    [MetadataType(typeof(OutwardMetadata))]
+    public partial class Outward
+    {
+    }
+
+
+
     public class Form10rpt
     {
         public string Ledger { get; set; }

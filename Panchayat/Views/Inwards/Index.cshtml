@@ -84,6 +84,9 @@
 <table class="table section-to-print">
     <tr>
         <th>
+            Sr No
+        </th>
+        <th>
            @if (ViewBag.RegisterTypeID == 2)
            {
             <p>Date Of Reciept</p>
@@ -122,7 +125,7 @@
         }
         @if (ViewBag.RegisterTypeID == 10)
         {
-            <p>br</p>
+            <p>No. of babies Born</p>
         }
         </th>
         <th>
@@ -132,11 +135,11 @@
             }
             @if (ViewBag.RegisterTypeID == 9)
             {
-                <p>gdr</p>
+                <p>Date Of Letter</p>
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <p>br</p>
+                <p>Date Of Birth</p>
             }
         </th>
         <th>
@@ -146,11 +149,11 @@
             }
             @if (ViewBag.RegisterTypeID == 9)
             {
-                <p>gdrer</p>
+                <p>File No</p>
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <p>br</p>
+                <p>File No</p>
             }
         </th>
         <th>
@@ -174,11 +177,11 @@
             }
             @if (ViewBag.RegisterTypeID == 9)
             {
-                <p>No Of letter</p>
+                <p>Action Taken</p>
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <p>br</p>
+                <p>Acction Taken</p>
             }
         </th>
         <th>
@@ -186,10 +189,23 @@
         </th>
      
         <th></th>
-    </tr>
 
+    </tr>
+    <tr>
+        @for (int c = 1; c < 10; c++)
+            {
+            <th>@c</th>
+        }
+        <th></th>
+    </tr>
+@{ 
+    var i = 1;
+}
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @i
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateOfReciept)
         </td>
@@ -220,6 +236,7 @@
             @Html.ActionLink("Details", "Details", new { id=item.InwardID }) |
         </td>
     </tr>
+    i++;
 }
 
 </table>

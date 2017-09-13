@@ -5,10 +5,10 @@
     ViewBag.Title = "Audit";
 }
 <center>
- <h1 style="visibility:hidden"><font style="font-size:17px"class="section-to-print">Village Panchayat___________</font></h1>
+ <h1 style="visibility:hidden"><font style="font-size:17px"class="section-to-print">Village Panchayat <span><u>@ViewBag.PanchName</u></span></font></h1>
     <h2 class="section-to-print" style="visibility:hidden"><u style="font-size:15px">Audit Register</u>
     <br />
-        <span class="pull-right " style="visibility:hidden"> <font style="font-size:15px" >Year Of Audit___________</font></span> 
+        <span class="pull-right " style="visibility:hidden"> <font style="font-size:15px" >Year Of Audit <span><u>@Model.FirstOrDefault().Year</u></span></font></span> 
     </h2>
         <h2 class="section-to-Not-print "><u style="font-size:25px">Audit Register</u>
 

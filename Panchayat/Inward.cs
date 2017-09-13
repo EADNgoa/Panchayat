@@ -21,7 +21,7 @@ namespace Panchayat
         public Nullable<System.DateTime> DateOfLett { get; set; }
         public string FileNo { get; set; }
         public string SubjectMatter { get; set; }
-        public string ActionTaken { get; set; }
+        public Nullable<System.DateTime> ActionTaken { get; set; }
         public string Remark { get; set; }
         public int RegisterTypeID { get; set; }
     
