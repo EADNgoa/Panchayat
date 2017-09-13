@@ -582,6 +582,18 @@
     <Content Include="Views\Nocs\Edit.cshtml" />
     <Content Include="Views\Nocs\Index.cshtml" />
     <Content Include="Views\Reports\Payment of VAT Tax.cshtml" />
+    <Content Include="Views\Reports\Payment of Income Tax.cshtml" />
+    <Content Include="Views\Reports\Payment of Royalty.cshtml" />
+    <Content Include="Views\Reports\Security Deposit.cshtml" />
+    <Content Include="Views\Reports\E.M.D Deposit.cshtml" />
+    <Content Include="Views\Reports\Other Fees.cshtml" />
+    <Content Include="Views\Reports\Certificate Fees.cshtml" />
+    <Content Include="Views\Reports\Other Misc.cshtml" />
+    <Content Include="Views\Reports\Fine.cshtml" />
+    <Content Include="Views\Reports\Const. Lic Fees.cshtml" />
+    <Content Include="Views\Reports\Extension of Street light lines with poles.cshtml" />
+    <Content Include="Views\Reports\Maintenance of jeep vehicle and truck.cshtml" />
+    <Content Include="Views\Reports\Maintenance of community hall.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

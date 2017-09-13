@@ -23,7 +23,7 @@
     }
 </style>
 <center>
-    <h3 class="section-to-print">Gst</h3>
+    <h3 class="section-to-print">Earnest Money Desposit Register</h3>
 </center>
 <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
 <table class="table section-to-print">
@@ -34,29 +34,26 @@
             </th>
             <th>Name Of contractor</th>
             <th>
+                Purpose Of Deposit or
                 Name Of Work
             </th>
-            <th>Valuation Certificate No.Reciept No. Date</th>
+            <th>Reciept No & Date</th>
             <th>
-                Amount Of Sales Tax/Vat Tax
+                Ant. of E.M.D Recieved
             </th>
             <th>
-                Details Of Name Of Bank
-            </th>
-            <th>
-                Date Of Credit
-            </th>
-            <th>
-
-                Amount
-
-            </th>
-            <th>
-                Challan No
+                Voucher No. & Date of E.M.D Refunded
             </th>
 
             <th>
-                Remark
+                Amount Refunded
+            </th>
+            <th>
+                Reason For Refund E.M.D
+            </th>
+
+            <th>
+                Remarks
             </th>
         </tr>
     </thead>
@@ -69,12 +66,12 @@
                 <td>@i</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Contractor"])</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Work"])</td>
-                <td>@Html.DisplayFor(modelItem => item.RVid),@Html.DisplayFor(modelItem => item.Tdate)</td>
+                <td>@Html.DisplayFor(modelItem => item.RVid) @Html.DisplayFor(modelItem => item.Tdate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-                <td>@Html.DisplayFor(modelItem => item.DetailData["Details Of Name Of Bank"])</td>
-                <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
+                <td>@Html.DisplayFor(modelItem => item.RVid) @Html.DisplayFor(modelItem => item.Tdate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-                <td>@Html.DisplayFor(modelItem => item.DetailData["Challan No"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Reason For Refund"])</td>
+
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Remark"])</td>
             </tr>
             i++;

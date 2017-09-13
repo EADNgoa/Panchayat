@@ -23,7 +23,7 @@
     }
 </style>
 <center>
-    <h3 class="section-to-print">Gst</h3>
+    <h3 class="section-to-print">ROYALTY REGISTER</h3>
 </center>
 <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
 <table class="table section-to-print">
@@ -38,23 +38,23 @@
             </th>
             <th>Valuation Certificate No.Reciept No. Date</th>
             <th>
-                Amount Of Sales Tax/Vat Tax
+                Amount Of Royalty Collected
             </th>
             <th>
-                Details Of Name Of Bank
+               Name Of Bank
             </th>
             <th>
                 Date Of Credit
             </th>
             <th>
-
-                Amount
-
+                Amount 
             </th>
             <th>
                 Challan No
             </th>
-
+            <th>
+                Amount Balance
+            </th>
             <th>
                 Remark
             </th>
@@ -75,6 +75,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Challan No"])</td>
+                <td>0.0</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Remark"])</td>
             </tr>
             i++;
