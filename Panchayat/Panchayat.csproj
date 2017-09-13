@@ -582,8 +582,8 @@
     <Content Include="Views\Nocs\Edit.cshtml" />
     <Content Include="Views\Nocs\Index.cshtml" />
     <Content Include="Views\Reports\Payment of VAT Tax.cshtml" />
-    <Content Include="Views\Reports\Payment of Income Tax.cshtml" />
-    <Content Include="Views\Reports\Payment of Royalty.cshtml" />
+    <Content Include="Views\Reports\Income Tax.cshtml" />
+    <Content Include="Views\Reports\Royalty.cshtml" />
     <Content Include="Views\Reports\Security Deposit.cshtml" />
     <Content Include="Views\Reports\E.M.D Deposit.cshtml" />
     <Content Include="Views\Reports\Other Fees.cshtml" />

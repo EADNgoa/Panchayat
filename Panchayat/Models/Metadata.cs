@@ -178,8 +178,7 @@ namespace Panchayat
 
         [Required]
         public string ListOfAuditObjection;
-
-        [Required]
+                
         public string ActionsTaken;
     }
 
