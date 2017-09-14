@@ -215,6 +215,7 @@
     <Compile Include="Controllers\DemandsController.cs" />
     <Compile Include="Controllers\Form4Controller.cs" />
     <Compile Include="Controllers\IllegalConstructionsController.cs" />
+    <Compile Include="Controllers\InOutRegsIssuesController.cs" />
     <Compile Include="Controllers\InOutRegsRecptsController.cs" />
     <Compile Include="Controllers\InvItemsController.cs" />
     <Compile Include="Controllers\InwardsController.cs" />
@@ -619,6 +620,11 @@
     <Content Include="Views\InOutRegsRecpts\Details.cshtml" />
     <Content Include="Views\InOutRegsRecpts\Edit.cshtml" />
     <Content Include="Views\InOutRegsRecpts\Index.cshtml" />
+    <Content Include="Views\InOutRegsIssues\Create.cshtml" />
+    <Content Include="Views\InOutRegsIssues\Delete.cshtml" />
+    <Content Include="Views\InOutRegsIssues\Details.cshtml" />
+    <Content Include="Views\InOutRegsIssues\Edit.cshtml" />
+    <Content Include="Views\InOutRegsIssues\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -6,8 +6,7 @@
 <center class="section-to-print">
     @if (ViewBag.RegisterTypeID == 17)
     {
-        <h4>Stationary</h4>
-    }
+        <h4>Register Of Stock  Of Consumable Store And Stationary</h4>    }
     @if (ViewBag.RegisterTypeID == 18)
     {
         <h4>Stamp</h4>
@@ -45,7 +44,7 @@
         <th>
         Item   
         </th>
-        <th></th>
+        <th class="section-to-Not-print"></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -66,7 +65,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.InvItem.Item)
         </td>
-        <td>
+        <td class="section-to-Not-print">
             @Html.ActionLink("Edit", "Edit", new { id=item.IORecptID }) |
             @Html.ActionLink("Details", "Details", new { id=item.IORecptID }) |
             

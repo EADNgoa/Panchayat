@@ -24,7 +24,6 @@ namespace Panchayat.Controllers
             {
                 inOutRegsRecpts = inOutRegsRecpts.Where(x => x.RegisterTypeID == rt);
             }
-            ViewBag.ItemID = new SelectList(db.InvItems, "ItemID", "Item");
 
             return View(inOutRegsRecpts.ToList());
         }
@@ -80,7 +79,7 @@ namespace Panchayat.Controllers
             }
 
             var pn = db.Configs.Select(x=>x.VP).FirstOrDefault();
-            var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value, ActualAmount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, For =null,PayDate=inOutRegsRecpt.TDate,CBfolio = null,ResNo= null,HeldOn= inOutRegsRecpt.TDate,Meeting="N/A",LedgerID = lid,SubLedgerID=sid,Form6=false};
+            var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, ActualAmount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, For =null,PayDate=inOutRegsRecpt.TDate,CBfolio = null,ResNo= null,HeldOn= inOutRegsRecpt.TDate,Meeting="N/A",LedgerID = lid,SubLedgerID=sid,Form6=false};
             db.Vouchers.Add(item);
             db.SaveChanges();
             if (ModelState.IsValid)
@@ -103,7 +102,7 @@ namespace Panchayat.Controllers
                     db.SaveChanges();
                 }
 
-                return RedirectToAction("Index",new {rt= 17 });
+                return RedirectToAction("Index",new {rt= inOutRegsRecpt.RegisterTypeID });
             }
 
          
@@ -146,7 +145,7 @@ namespace Panchayat.Controllers
             {
                 int id = (int)inOutRegsRecpt.RVno;
                 var voucher = db.Vouchers.Find(id);
-                voucher.Amount = inOutRegsRecpt.Qty ;
+                voucher.Amount = inOutRegsRecpt.Qty * inOutRegsRecpt.Value;
                 db.Entry(voucher).Property(a => a.Amount).IsModified = true;
 
                 voucher.ActualAmount = inOutRegsRecpt.Qty * inOutRegsRecpt.Value;
@@ -168,7 +167,7 @@ namespace Panchayat.Controllers
                 }
               
 
-                return RedirectToAction("Index", new { rt = 17 });
+                return RedirectToAction("Index", new { rt = inOutRegsRecpt.RegisterTypeID });
             }
             ViewBag.RegisterTypeID = inOutRegsRecpt.RegisterTypeID;
             ViewBag.ItemID = new SelectList(db.InvItems, "ItemID", "Item", inOutRegsRecpt.ItemID);
