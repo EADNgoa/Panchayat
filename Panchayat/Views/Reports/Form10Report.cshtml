@@ -35,27 +35,32 @@
 
             <tr>
                 <th class="col-md-2">
-                    Particulars of Income
+                    <h1>Particulars of Income</h1>
                 </th>
                 <th class="col-md-3">
-                    Amount
+                    <h1>Amount</h1>
                 </th>                
             </tr>
-             
-              
+            
+            <tr>
+                <td><h4><strong>Closing of the last Month/Year</strong></h4></td>
+                <td><h4><strong>@ViewBag.OpeningBalance</strong> </h4></td>
+            </tr>  
         </thead>
         <tbody>            
             @{ decimal tot = 0;
                 decimal sltot = 0;
                 string CurLedg = "";
-                var ExpRecs = Model.Where(m => m.isIncome = true);
+                decimal GrandTot = 0;
+                var ExpRecs = Model.Where(m => m.isIncome == true).ToList();
+
              }
 
             @foreach (var item in ExpRecs)
             {
-                if(CurLedg!=item.Ledger)
+                if (CurLedg != item.Ledger)
                 {
-                    if (sltot>0)
+                    if (sltot > 0)
                     {
                         <tr>
                             <td><h4><strong>Ledger Total</strong></h4></td>
@@ -69,44 +74,47 @@
                         <td><h3>@CurLedg</h3></td>
                         <td></td>
                     </tr>
-                } else
-                {
-                    sltot += item.Amount;
-                    tot += item.Amount;
+                }
+                sltot += item.Amount;
+                tot += item.Amount;
                     <tr>
                         <td>@item.SubLedger</td>
                         <td>@item.Amount</td>
                     </tr>
-                }            
-            }
 
+            }
+            <tr>
+                <td><h4><strong>Ledger Total</strong></h4></td>
+                <td><h4><strong>@sltot</strong> </h4></td>
+            </tr>
             <tr>
                 <td>TOTAL RECEIPT</td>
                 <td>@tot</td>
             </tr>
             <tr>
                 <td>OPENING BALANCE</td>
-                <td></td>
+                <td>@ViewBag.OpeningBalance</td>
             </tr>
             <tr>
                 <td>GRAND TOTAL</td>
-                <td>@tot</td>
+                @{ GrandTot = tot + (decimal)ViewBag.OpeningBalance; }
+                <td>@GrandTot</td>
             </tr>
         </tbody>
     </table>
-<hr />
-<hr />
-<hr />
+<br />
+<br />
+<br />
 
 <table class="table section-to-print">
     <thead>
 
         <tr>
             <th class="col-md-2">
-                Particulars of Expenditure
+                <h1>Particulars of Expenditure</h1>
             </th>
             <th class="col-md-3">
-                Amount
+                <h1>Amount</h1>
             </th>
         </tr>
 
@@ -116,7 +124,7 @@
         @{  tot = 0;
             sltot = 0;
             CurLedg = "";
-            var RecpRecs = Model.Where(m => m.isIncome = false);
+            var RecpRecs = Model.Where(m => m.isIncome == false);
         }
 
         @foreach (var item in RecpRecs)
@@ -138,28 +146,30 @@
                     <td></td>
                 </tr>
             }
-            else
-            {
+            
                 sltot += item.Amount;
                 tot += item.Amount;
                 <tr>
                     <td>@item.SubLedger</td>
                     <td>@item.Amount</td>
                 </tr>
-            }
+            
         }
-
         <tr>
-            <td>TOTAL RECEIPT</td>
+            <td><h4><strong>Ledger Total</strong></h4></td>
+            <td><h4><strong>@sltot</strong> </h4></td>
+        </tr>
+        <tr>
+            <td>EXPENDITURE RECEIPT</td>
             <td>@tot</td>
         </tr>
         <tr>
-            <td>OPENING BALANCE</td>
-            <td></td>
+            <td>CLOSING BALANCE</td>
+            <td>@(GrandTot-tot)</td>
         </tr>
         <tr>
             <td>GRAND TOTAL</td>
-            <td>@tot</td>
+            <td>@GrandTot</td>
         </tr>
     </tbody>
 </table>

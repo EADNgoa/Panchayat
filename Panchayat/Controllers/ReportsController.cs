@@ -61,6 +61,10 @@ namespace Panchayat.Controllers
             ViewBag.vpname = db.Configs.Find(1).VP;
             ViewBag.MonYr = MyExtensions.MonthFromInt(RptMon) + " " + RptYr;
 
+            //Fetch Opening balance
+            DateTime lastMonDate = DateTime.Parse($"01/{RptMon}/{RptYr}").AddDays(-1);
+            var ob = db.CBRunnings.FirstOrDefault(r => r.EntryDate == lastMonDate);
+            ViewBag.OpeningBalance = ob.CBTotal;
             return View("Form10Report", Form10.ToList());
         }
 
