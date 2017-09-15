@@ -62,6 +62,7 @@ namespace Panchayat.Controllers
                         {
                             dmdID = new Demand { CitizenID = demand.CitizenID, HouseNo = demand.HouseNo, Remarks = demand.Remarks };
                             dmdID.StopDate = DateTime.Parse("31-Mar-3999");
+                            dmdID.CreatedOn = DateTime.Today;
                             db.Demands.Add(dmdID);
                         }
                         db.SaveChanges();
