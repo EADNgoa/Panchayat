@@ -19,7 +19,6 @@ namespace Panchayat
         {
             this.Corrections = new HashSet<Correction>();
             this.RVdetails = new HashSet<RVdetail>();
-            this.VoucherLedgerDetails = new HashSet<VoucherLedgerDetail>();
         }
     
         public int VoucherID { get; set; }
@@ -35,6 +34,7 @@ namespace Panchayat
         public string Meeting { get; set; }
         public Nullable<int> LedgerID { get; set; }
         public Nullable<int> SubLedgerID { get; set; }
+        public Nullable<bool> Form6 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Correction> Corrections { get; set; }
@@ -42,7 +42,5 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RVdetail> RVdetails { get; set; }
         public virtual SubLedger SubLedger { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VoucherLedgerDetail> VoucherLedgerDetails { get; set; }
     }
 }

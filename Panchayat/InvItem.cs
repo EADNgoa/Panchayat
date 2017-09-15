@@ -12,23 +12,22 @@ namespace Panchayat
     using System;
     using System.Collections.Generic;
     
-    public partial class LedgerDetail
+    public partial class InvItem
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LedgerDetail()
+        public InvItem()
         {
-            this.RVdetails = new HashSet<RVdetail>();
-            this.DemandLedgerDetails = new HashSet<DemandLedgerDetail>();
+            this.InOutRegsIssues = new HashSet<InOutRegsIssue>();
+            this.InOutRegsRecpts = new HashSet<InOutRegsRecpt>();
         }
     
-        public int LedgerDetailID { get; set; }
-        public Nullable<int> SubLedgerID { get; set; }
-        public string LedgerDetail1 { get; set; }
+        public int ItemID { get; set; }
+        public string Item { get; set; }
     
-        public virtual SubLedger SubLedger { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RVdetail> RVdetails { get; set; }
+        public virtual ICollection<InOutRegsIssue> InOutRegsIssues { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DemandLedgerDetail> DemandLedgerDetails { get; set; }
+        public virtual ICollection<InOutRegsRecpt> InOutRegsRecpts { get; set; }
+        public virtual Inventory Inventory { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Panchayat;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace Panchayat.Controllers
 {
@@ -16,7 +17,7 @@ namespace Panchayat.Controllers
         private PanchayatEntities db = new PanchayatEntities();
 
         // GET: InOutRegsRecpts
-        public ActionResult Index(int? page, int? rt)
+        public ActionResult Index(int? page, int? rt,DateTime? dr)
         {
             ViewBag.RegisterTypeID =rt;
             var inOutRegsRecpts = db.InOutRegsRecpts.Where(x=>x.IORecptID>0);
@@ -24,8 +25,14 @@ namespace Panchayat.Controllers
             {
                 inOutRegsRecpts = inOutRegsRecpts.Where(x => x.RegisterTypeID == rt);
             }
+            if (dr != null)
+            {
 
-            return View(inOutRegsRecpts.ToList());
+                inOutRegsRecpts = inOutRegsRecpts.Where(x => x.TDate == dr);
+            }
+            int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
+            int pageNumber = (page ?? 1);
+            return View(inOutRegsRecpts.ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: InOutRegsRecpts/Details/5
@@ -77,7 +84,11 @@ namespace Panchayat.Controllers
                  lid = 8;
                  sid = 138;
             }
-
+            if (inOutRegsRecpt.RegisterTypeID == 20)
+            {
+                lid = 8;
+                sid = 139;
+            }
             var pn = db.Configs.Select(x=>x.VP).FirstOrDefault();
             var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, ActualAmount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, For =null,PayDate=inOutRegsRecpt.TDate,CBfolio = null,ResNo= null,HeldOn= inOutRegsRecpt.TDate,Meeting="N/A",LedgerID = lid,SubLedgerID=sid,Form6=false};
             db.Vouchers.Add(item);

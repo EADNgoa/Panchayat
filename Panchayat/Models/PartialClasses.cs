@@ -83,7 +83,15 @@ namespace Panchayat
     {
     }
 
+    [MetadataType(typeof(InOutRegsRecptsMetadata))]
+    public partial class InOutRegsRecpt
+    {
+    }
 
+    [MetadataType(typeof(InOutRegsIssuesMetadata))]
+    public partial class InOutRegsIssue
+    {
+    }
 
     public class Form10rpt
     {

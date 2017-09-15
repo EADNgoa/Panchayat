@@ -348,9 +348,6 @@
     <Compile Include="Voucher.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
-    <Compile Include="VoucherLedgerDetail.cs">
-      <DependentUpon>PanchayatMdl.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Panchayat.mdf" />

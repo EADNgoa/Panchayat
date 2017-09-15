@@ -25,6 +25,10 @@
         {
             <h4>DeadStock</h4>
         }
+        @if (ViewBag.RegisterTypeID == 20)
+        {
+            <h4>Street Light Articles</h4>
+        }
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

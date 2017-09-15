@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Panchayat;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace Panchayat.Controllers
 {
@@ -16,7 +17,7 @@ namespace Panchayat.Controllers
         private PanchayatEntities db = new PanchayatEntities();
 
         // GET: InOutRegsIssues
-        public ActionResult Index(int? page,int? rt)
+        public ActionResult Index(int? page,int? rt,DateTime? di)
         {
             
             var inOutRegsIssue = db.InOutRegsIssues.Where(x => x.IOissueID > 0);
@@ -26,7 +27,14 @@ namespace Panchayat.Controllers
                
                 inOutRegsIssue = inOutRegsIssue.Where(x => x.RegisterTypeID == rt);
             }
-            return View(inOutRegsIssue.ToList());
+            if (di != null)
+            {
+
+                inOutRegsIssue = inOutRegsIssue.Where(x => x.TDate == di);
+            }
+            int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
+            int pageNumber = (page ?? 1);
+            return View(inOutRegsIssue.ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: InOutRegsIssues/Details/5
@@ -76,6 +84,12 @@ namespace Panchayat.Controllers
             {
                 lid = 8;
                 sid = 138;
+            }
+
+            if (inOutRegsIssue.RegisterTypeID == 20)
+            {
+                lid = 8;
+                sid = 139;
             }
 
             var pn = db.Configs.Select(x => x.VP).FirstOrDefault();

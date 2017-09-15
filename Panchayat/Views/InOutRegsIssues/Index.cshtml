@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Panchayat.InOutRegsIssue>
+﻿@model PagedList.IPagedList<Panchayat.InOutRegsIssue>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -16,7 +17,34 @@
 {
     <h4>DeadStock</h4>
 }
+    @if (ViewBag.RegisterTypeID == 20)
+    {
+        <h4>Register Street Light Articles</h4>
+    }
     </center>
+<br class="section-to-Not-print" />
+<br class="section-to-Not-print" />
+<center class="section-to-Not-print">
+    @using (Html.BeginForm("Index", "InOutRegsIssues", FormMethod.Get))
+    {
+        @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td> Date Of Issue:</td>
+                        <td> @Html.TextBox("di", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+
+                        <td class="col-lg-1"></td>
+                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br />
+    }
+</center>
 
 <p class="section-to-Not-print">
     @Html.ActionLink("Create New", "Create", new { rt = ViewBag.RegisterTypeID })
@@ -24,36 +52,125 @@
         <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
     </span>
 </p>
+@if (ViewBag.RegisterTypeID == 20)
+{
+    <table class="table section-to-print">
+        <tr>
+
+            <th>
+                Date of Purchase
+            </th>
+            <th>
+                V. No
+            </th>
+            <th>
+                No. Of Articles Purchased
+            </th>
+            <th>
+                Amount Paid
+            </th>
+            <th>
+                No. Of Articles Disposed
+            </th>
+            <th>
+                Balance Stock
+            </th>
+            <th>
+                Pole No to Which Replaced
+            </th>
+            <th>
+                Signature of The Reciever
+            </th>
+            <th>
+                Initials of the V.P secretary
+            </th>
+            <th>
+                Remarks
+            </th>
+          
+            <th class="section-to-Not-print"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RVno)
+                  
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Qty)
+                  
+                </td>
+                <td>
+                    @{ int a = (int)item.Qty, b = (int)item.Value, c = 0;
+                        c = a * b;
+                    }
+                    @c
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IssuedTo)
+                </td>
+                <td>
+                   
+                </td>
+                <td>
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remarks)
+                </td>
+                <td class="section-to-Not-print">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IOissueID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IOissueID }) |
+
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+
 <table class="table section-to-print">
     <tr>
        
         <th>
-            @Html.DisplayNameFor(model => model.TDate)
+           Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Qty)
+           Particulars of Articles Issued
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Value)
+           To Whom Issued
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IssuedTo)
+Quantity
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Balance)
+           Total
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Remarks)
+          Balance After Issues
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RVno)
+            Signature Of Issuing Authority
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegisterType.RegisterType1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InvItem.Item)
-        </th>
+      
+      
         <th class="section-to-Not-print"></th>
     </tr>
 
@@ -64,29 +181,29 @@
             @Html.DisplayFor(modelItem => item.TDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Qty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Value)
+            @Html.DisplayFor(modelItem => item.InvItem.Item)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IssuedTo)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Qty)
+        </td><td>
+                 @{ int a = (int)item.Qty, b = (int)item.Value, c = 0;
+                     c = a * b;
+                 }
+                 @c
+</td>
+  
+        <td>
             @Html.DisplayFor(modelItem => item.Balance)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Remarks)
+
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RVno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegisterType.RegisterType1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InvItem.Item)
-        </td>
+   
+     
+ 
         <td class="section-to-Not-print">
             @Html.ActionLink("Edit", "Edit", new { id=item.IOissueID }) |
             @Html.ActionLink("Details", "Details", new { id=item.IOissueID }) |
@@ -96,3 +213,25 @@
 }
 
 </table>
+}
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @if (ViewBag.RegisterTypeID == 17)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 17 }))
+    }
+    @if (ViewBag.RegisterTypeID == 18)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 18 }))
+    }
+    @if (ViewBag.RegisterTypeID == 19)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 19 }))
+    }
+@if (ViewBag.RegisterTypeID == 20)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 20 }))
+}
