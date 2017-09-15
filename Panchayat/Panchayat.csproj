@@ -215,6 +215,9 @@
     <Compile Include="Controllers\DemandsController.cs" />
     <Compile Include="Controllers\Form4Controller.cs" />
     <Compile Include="Controllers\IllegalConstructionsController.cs" />
+    <Compile Include="Controllers\InOutRegsIssuesController.cs" />
+    <Compile Include="Controllers\InOutRegsRecptsController.cs" />
+    <Compile Include="Controllers\InvItemsController.cs" />
     <Compile Include="Controllers\InwardsController.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Controllers\NocsController.cs" />
@@ -269,6 +272,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IllegalConstruction.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InOutRegsIssue.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InOutRegsRecpt.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvItem.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Inward.cs">
@@ -582,18 +597,34 @@
     <Content Include="Views\Nocs\Edit.cshtml" />
     <Content Include="Views\Nocs\Index.cshtml" />
     <Content Include="Views\Reports\Payment of VAT Tax.cshtml" />
-    <Content Include="Views\Reports\Income Tax.cshtml" />
-    <Content Include="Views\Reports\Royalty.cshtml" />
+    <Content Include="Views\Reports\Payment of Income Tax.cshtml" />
+    <Content Include="Views\Reports\Payment of Royalty.cshtml" />
     <Content Include="Views\Reports\Security Deposit.cshtml" />
     <Content Include="Views\Reports\E.M.D Deposit.cshtml" />
-    <Content Include="Views\Reports\Other Fees.cshtml" />
-    <Content Include="Views\Reports\Certificate Fees.cshtml" />
+    <Content Include="Views\Reports\Income Certificate.cshtml" />
+    <Content Include="Views\Reports\Issue BND Certificate.cshtml" />
+    <Content Include="Views\Reports\Residence Certificate.cshtml" />
+    <Content Include="Views\Reports\Divergence Certificate.cshtml" />
     <Content Include="Views\Reports\Other Misc.cshtml" />
-    <Content Include="Views\Reports\Fine.cshtml" />
-    <Content Include="Views\Reports\Const. Lic Fees.cshtml" />
-    <Content Include="Views\Reports\Extension of Street light lines with poles.cshtml" />
-    <Content Include="Views\Reports\Maintenance of jeep vehicle and truck.cshtml" />
+    <Content Include="Views\Reports\GST.cshtml" />
     <Content Include="Views\Reports\Maintenance of community hall.cshtml" />
+    <Content Include="Views\Reports\Right To Information.cshtml" />
+    <Content Include="Views\Reports\Form6.cshtml" />
+    <Content Include="Views\InvItems\Create.cshtml" />
+    <Content Include="Views\InvItems\Delete.cshtml" />
+    <Content Include="Views\InvItems\Details.cshtml" />
+    <Content Include="Views\InvItems\Edit.cshtml" />
+    <Content Include="Views\InvItems\Index.cshtml" />
+    <Content Include="Views\InOutRegsRecpts\Create.cshtml" />
+    <Content Include="Views\InOutRegsRecpts\Delete.cshtml" />
+    <Content Include="Views\InOutRegsRecpts\Details.cshtml" />
+    <Content Include="Views\InOutRegsRecpts\Edit.cshtml" />
+    <Content Include="Views\InOutRegsRecpts\Index.cshtml" />
+    <Content Include="Views\InOutRegsIssues\Create.cshtml" />
+    <Content Include="Views\InOutRegsIssues\Delete.cshtml" />
+    <Content Include="Views\InOutRegsIssues\Details.cshtml" />
+    <Content Include="Views\InOutRegsIssues\Edit.cshtml" />
+    <Content Include="Views\InOutRegsIssues\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
