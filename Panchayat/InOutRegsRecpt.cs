@@ -12,14 +12,17 @@ namespace Panchayat
     using System;
     using System.Collections.Generic;
     
-    public partial class VoucherLedgerDetail
+    public partial class InOutRegsRecpt
     {
-        public int VocherLedgerDetailID { get; set; }
-        public Nullable<int> VoucherID { get; set; }
-        public Nullable<int> LedgerDetailID { get; set; }
-        public string VoucherLedgerDetail1 { get; set; }
+        public int IORecptID { get; set; }
+        public Nullable<int> RegisterTypeID { get; set; }
+        public Nullable<System.DateTime> TDate { get; set; }
+        public Nullable<int> ItemID { get; set; }
+        public Nullable<int> Qty { get; set; }
+        public Nullable<decimal> Value { get; set; }
+        public Nullable<int> RVno { get; set; }
     
-        public virtual LedgerDetail LedgerDetail { get; set; }
-        public virtual Voucher Voucher { get; set; }
+        public virtual RegisterType RegisterType { get; set; }
+        public virtual InvItem InvItem { get; set; }
     }
 }

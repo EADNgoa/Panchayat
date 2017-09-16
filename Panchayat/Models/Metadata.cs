@@ -316,6 +316,22 @@ namespace Panchayat
         public string Remark;
 
     }
+   
+
+    public class InOutRegsRecptsMetadata
+    {
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime TDate;
+    }
+
+    public class InOutRegsIssuesMetadata
+    {
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime TDate;
+    }
+
 
 
 

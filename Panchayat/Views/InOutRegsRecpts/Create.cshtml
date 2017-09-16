@@ -1,0 +1,81 @@
+﻿@model Panchayat.InOutRegsRecpt
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("RegisterTypeID", (int)ViewBag.RegisterTypeID);
+
+    <div class="form-horizontal">
+        @if (ViewBag.RegisterTypeID == 17)
+        {
+            <h4>Stationary</h4>
+        }
+        @if (ViewBag.RegisterTypeID == 18)
+        {
+            <h4>Stamp</h4>
+        }
+        @if (ViewBag.RegisterTypeID == 19)
+        {
+            <h4>DeadStock</h4>
+        }
+        @if (ViewBag.RegisterTypeID == 20)
+        {
+            <h4>Street Light Articles</h4>
+        }
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Date</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TDate, new { htmlAttributes = new { @class = "form-control" ,@type = "date"} })
+                @Html.ValidationMessageFor(model => model.TDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Item</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Quantity </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Value </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

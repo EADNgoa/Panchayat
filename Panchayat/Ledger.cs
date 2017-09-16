@@ -18,7 +18,6 @@ namespace Panchayat
         public Ledger()
         {
             this.Form1 = new HashSet<Form1>();
-            this.Form10Det = new HashSet<Form10Det>();
             this.Form2 = new HashSet<Form2>();
             this.Form3 = new HashSet<Form3>();
             this.Form4 = new HashSet<Form4>();
@@ -32,8 +31,6 @@ namespace Panchayat
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Form1> Form1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Form10Det> Form10Det { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Form2> Form2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

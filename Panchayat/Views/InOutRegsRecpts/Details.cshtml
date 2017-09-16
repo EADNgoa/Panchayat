@@ -1,0 +1,66 @@
+﻿@model Panchayat.InOutRegsRecpt
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InOutRegsRecpt</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RVno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RVno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterType.RegisterType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterType.RegisterType1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvItem.Item)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvItem.Item)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IORecptID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

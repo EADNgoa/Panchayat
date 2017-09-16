@@ -1,0 +1,142 @@
+﻿@model PagedList.IPagedList<Panchayat.InOutRegsRecpt>
+@using PagedList.Mvc;
+
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+<center class="section-to-print">
+    @if (ViewBag.RegisterTypeID == 17)
+    {
+        <h4>Register Of Stock  Of Consumable Store And Stationary</h4>    }
+    @if (ViewBag.RegisterTypeID == 18)
+    {
+        <h4>Stamp</h4>
+    }
+    @if (ViewBag.RegisterTypeID == 19)
+    {
+        <h4>DeadStock</h4>
+    }
+    @if (ViewBag.RegisterTypeID == 20)
+    {
+        <h4> Register Of Street Light Articles</h4>
+    }
+</center>
+<br class="section-to-Not-print" />
+<br class="section-to-Not-print" />
+<center class="section-to-Not-print">
+    @using (Html.BeginForm("Index", "InOutRegsRecpts", FormMethod.Get))
+    {
+        @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td> Date Of Reciept:</td>
+                        <td> @Html.TextBox("dr", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+                       
+                        <td class="col-lg-1"></td>
+                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br />
+    }
+</center>
+
+<p class="section-to-Not-print">
+    @Html.ActionLink("Create New", "Create",new {rt = ViewBag.RegisterTypeID})
+
+    <span class="pull-right">
+        <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+    </span>
+</p>
+
+<table class="table section-to-print">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+           
+            Particular and From Whom Recieved
+        </th>
+        <th>
+          Bill No. Date
+        </th>
+        <th>
+          Quantity
+        </th>
+   
+        <th>
+        Value Per Unit   
+        </th>
+        <th>
+        Total
+        </th>
+        <th class="section-to-Not-print"></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvItem.Item)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RVno)/
+            @Html.DisplayFor(modelItem => item.TDate)
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Value)
+        </td>
+       
+      
+        <td>@{ int a = (int)item.Qty, b = (int)item.Value, c = 0;
+            c = a * b;
+        }
+           @c
+
+              
+        </td>
+        <td class="section-to-Not-print">
+            @Html.ActionLink("Edit", "Edit", new { id = item.IORecptID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.IORecptID }) |
+            
+        </td>
+    </tr>
+            }
+
+</table>
+     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @if (ViewBag.RegisterTypeID == 17)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 17 }))
+    }
+    @if (ViewBag.RegisterTypeID == 18)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 18 }))
+    }
+    @if (ViewBag.RegisterTypeID == 19)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 19 }))
+    }
+    @if (ViewBag.RegisterTypeID == 20)
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 20 }))
+    }           
