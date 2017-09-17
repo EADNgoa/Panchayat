@@ -15,6 +15,17 @@
           <Property Name="ActionsTaken" Type="varchar(max)" />
           <Property Name="Year" Type="int" />
         </EntityType>
+        <EntityType Name="Budget">
+          <Key>
+            <PropertyRef Name="BudgetID" />
+          </Key>
+          <Property Name="BudgetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BudgtFY" Type="int" />
+          <Property Name="SubLedgerID" Type="int" Nullable="false" />
+          <Property Name="BudgetAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ActualAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OpeningBalance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="CBRunning">
           <Key>
             <PropertyRef Name="EntryDate" />
@@ -363,6 +374,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="PeriodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PeriodSL" Type="varchar" MaxLength="28" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Budget_ToSubledger">
+          <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="1" />
+          <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedgers">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Budget">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Corrections_Reciept">
           <End Role="Form4" Type="Self.Form4" Multiplicity="0..1" />
           <End Role="Corrections" Type="Self.Corrections" Multiplicity="*" />
@@ -833,6 +856,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
         </Association>
         <EntityContainer Name="PanchayatModelStoreContainer">
           <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Budget" EntityType="Self.Budget" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CBRunning" EntityType="Self.CBRunning" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Citizen" EntityType="Self.Citizen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
@@ -869,6 +893,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
     [PeriodSLs].[PeriodSL] AS [PeriodSL]
     FROM [dbo].[PeriodSLs] AS [PeriodSLs]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Budget_ToSubledger" Association="Self.FK_Budget_ToSubledger">
+            <End Role="SubLedgers" EntitySet="SubLedgers" />
+            <End Role="Budget" EntitySet="Budget" />
+          </AssociationSet>
           <AssociationSet Name="FK_Corrections_Reciept" Association="Self.FK_Corrections_Reciept">
             <End Role="Form4" EntitySet="Form4" />
             <End Role="Corrections" EntitySet="Corrections" />
@@ -1162,6 +1190,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="HasDemand" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DemandDetails" Relationship="PanchayatModel.FK_DemandDetails_SubLedgerID" FromRole="SubLedger" ToRole="DemandDetail" />
           <NavigationProperty Name="Vouchers" Relationship="PanchayatModel.FK_Voucher_SubLedger" FromRole="SubLedger" ToRole="Voucher" />
+          <NavigationProperty Name="Budgets" Relationship="PanchayatModel.FK_Budget_ToSubledger" FromRole="SubLedger" ToRole="Budget" />
         </EntityType>
         <EntityType Name="SubLedgerType">
           <Key>
@@ -1515,6 +1544,11 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_Voucher_SubLedger" Association="PanchayatModel.FK_Voucher_SubLedger">
             <End Role="SubLedger" EntitySet="SubLedgers" />
             <End Role="Voucher" EntitySet="Vouchers" />
+          </AssociationSet>
+          <EntitySet Name="Budgets" EntityType="PanchayatModel.Budget" />
+          <AssociationSet Name="FK_Budget_ToSubledger" Association="PanchayatModel.FK_Budget_ToSubledger">
+            <End Role="SubLedger" EntitySet="SubLedgers" />
+            <End Role="Budget" EntitySet="Budgets" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="RVdetail">
@@ -2122,6 +2156,30 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Budget">
+          <Key>
+            <PropertyRef Name="BudgetID" />
+          </Key>
+          <Property Name="BudgetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BudgtFY" Type="Int32" />
+          <Property Name="SubLedgerID" Type="Int32" Nullable="false" />
+          <Property Name="BudgetAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ActualAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OpeningBalance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="SubLedger" Relationship="PanchayatModel.FK_Budget_ToSubledger" FromRole="Budget" ToRole="SubLedger" />
+        </EntityType>
+        <Association Name="FK_Budget_ToSubledger">
+          <End Type="PanchayatModel.SubLedger" Role="SubLedger" Multiplicity="1" />
+          <End Type="PanchayatModel.Budget" Role="Budget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedger">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Budget">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2509,6 +2567,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="of" ColumnName="of" />
                 <ScalarProperty Name="PassedBy" ColumnName="PassedBy" />
                 <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Budgets">
+            <EntityTypeMapping TypeName="PanchayatModel.Budget">
+              <MappingFragment StoreEntitySet="Budget">
+                <ScalarProperty Name="OpeningBalance" ColumnName="OpeningBalance" />
+                <ScalarProperty Name="ActualAmount" ColumnName="ActualAmount" />
+                <ScalarProperty Name="BudgetAmount" ColumnName="BudgetAmount" />
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+                <ScalarProperty Name="BudgtFY" ColumnName="BudgtFY" />
+                <ScalarProperty Name="BudgetID" ColumnName="BudgetID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

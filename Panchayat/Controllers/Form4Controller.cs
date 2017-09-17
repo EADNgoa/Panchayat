@@ -79,31 +79,49 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
-                form4.LedgerID = db.SubLedgers.Find(form4.SubLedgerID).LedgerID;
-
-                //if a citizen was entered by mistake and then a non citizen was entered ignore the citizen
-                if (form4.RecvdFrom != null)
-                    form4.CitizenID = null;
-
-                form4.HouseNo = form4.HouseNo?.ToUpper().Trim();
-                form4.PayDate = DateTime.Today;
-                db.Form4.Add(form4);
-
-
-                //For receipts for subledgers that do not have demand records we need to store the LedgerDetails at this point
-                foreach (var item in fm)
+                using (var transaction = db.Database.BeginTransaction())
                 {
-                    if (item.ToString().Length > 5 && item.ToString().Substring(0, 5) == "data-")
+                    try
                     {
-                        int iLedDetID = int.Parse(item.ToString().Substring(item.ToString().LastIndexOf('-') + 1));
+                        form4.LedgerID = db.SubLedgers.Find(form4.SubLedgerID).LedgerID;
 
-                        //Prevent overposting attack by checking that only valid LedgerDetails for the given subledger are saved
-                        if (db.LedgerDetails.Any(l => l.LedgerDetailID == iLedDetID && l.SubLedgerID == form4.SubLedgerID))
-                            db.RVdetails.Add(new RVdetail { LedgerDetailID = iLedDetID, RVDetail1 = fm[item.ToString()], ReceiptNo = form4.RecieptNo });
+                        //if a citizen was entered by mistake and then a non citizen was entered ignore the citizen
+                        if (form4.RecvdFrom != null)
+                            form4.CitizenID = null;
+
+                        form4.HouseNo = form4.HouseNo?.ToUpper().Trim();
+                        form4.PayDate = DateTime.Today;
+                        db.Form4.Add(form4);
+
+
+                        //For receipts for subledgers that do not have demand records we need to store the LedgerDetails at this point
+                        foreach (var item in fm)
+                        {
+                            if (item.ToString().Length > 5 && item.ToString().Substring(0, 5) == "data-")
+                            {
+                                int iLedDetID = int.Parse(item.ToString().Substring(item.ToString().LastIndexOf('-') + 1));
+
+                                //Prevent overposting attack by checking that only valid LedgerDetails for the given subledger are saved
+                                if (db.LedgerDetails.Any(l => l.LedgerDetailID == iLedDetID && l.SubLedgerID == form4.SubLedgerID))
+                                    db.RVdetails.Add(new RVdetail { LedgerDetailID = iLedDetID, RVDetail1 = fm[item.ToString()], ReceiptNo = form4.RecieptNo });
+                            }
+                        }
+
+                        //Update our Budget
+                        int budYr = ((DateTime)form4.PayDate).Month > 3 ? ((DateTime)form4.PayDate).Year : ((DateTime)form4.PayDate).Year - 1;
+                        var bud = db.Budgets.FirstOrDefault(b => b.SubLedgerID == form4.SubLedgerID && b.BudgtFY == budYr);
+                        bud.ActualAmount += form4.Amount??0;
+                        db.Entry(bud).State = EntityState.Modified;
+
+                        db.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
                     }
                 }
-
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -156,26 +174,48 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid && form4.PayDate==DateTime.Today)
             {
-                form4.HouseNo = form4.HouseNo?.ToUpper().Trim();
-                db.Entry(form4).State = EntityState.Modified;
-
-
-                foreach (var item in fm)
+                using (var transaction = db.Database.BeginTransaction())
                 {
-                    if (item.ToString().Length > 5 && item.ToString().Substring(0, 5) == "data-")
+                    try
                     {
-                        int iLedDetID = int.Parse(item.ToString().Substring(item.ToString().LastIndexOf('-') + 1));
-
-                        var cld = db.RVdetails.Find(iLedDetID);
-                        cld.RVDetail1 = fm[item.ToString()];
-
-                        db.Entry(cld).State = EntityState.Modified;
-                    }
-                }
+                        form4.HouseNo = form4.HouseNo?.ToUpper().Trim();
+                        db.Entry(form4).State = EntityState.Modified;
 
 
+                        foreach (var item in fm)
+                        {
+                            if (item.ToString().Length > 5 && item.ToString().Substring(0, 5) == "data-")
+                            {
+                                int iLedDetID = int.Parse(item.ToString().Substring(item.ToString().LastIndexOf('-') + 1));
+
+                                var cld = db.RVdetails.Find(iLedDetID);
+                                cld.RVDetail1 = fm[item.ToString()];
+
+                                db.Entry(cld).State = EntityState.Modified;
+                            }
+                        }
+
+                        //Update the Budget
+                        int budYr = ((DateTime)form4.PayDate).Month > 3 ? ((DateTime)form4.PayDate).Year : ((DateTime)form4.PayDate).Year - 1;
+                        var bud = db.Budgets.FirstOrDefault(b => b.SubLedgerID == form4.SubLedgerID && b.BudgtFY == budYr);
+
+                        var CurrAmt = db.Entry(form4).CurrentValues.Clone();
+                        db.Entry(form4).Reload();
+                        bud.ActualAmount -= form4.Amount ?? 0; //minus the old value
+                        bud.ActualAmount += (decimal)CurrAmt["Amount"] ; //add the new value
+                        db.Entry(form4).CurrentValues.SetValues(CurrAmt);
+                        db.Entry(form4).State = EntityState.Modified;
+                        db.Entry(bud).State = EntityState.Modified;
 
                         db.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch(Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
                 return RedirectToAction("Index");
             }
             

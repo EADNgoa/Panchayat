@@ -81,7 +81,11 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
-                voucher.LedgerID = db.SubLedgers.Find(voucher.SubLedgerID).LedgerID;
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        voucher.LedgerID = db.SubLedgers.Find(voucher.SubLedgerID).LedgerID;
                 voucher.PayDate = DateTime.Today;
                 db.Vouchers.Add(voucher);
 
@@ -98,7 +102,21 @@ namespace Panchayat.Controllers
                     }
                 }
 
-                db.SaveChanges();
+                        //Update our Budget
+                        int budYr = ((DateTime)voucher.PayDate).Month > 3 ? ((DateTime)voucher.PayDate).Year : ((DateTime)voucher.PayDate).Year - 1;
+                        var bud = db.Budgets.FirstOrDefault(b => b.SubLedgerID == voucher.SubLedgerID && b.BudgtFY == budYr);
+                        bud.ActualAmount += voucher.ActualAmount?? 0;
+                        db.Entry(bud).State = EntityState.Modified;
+
+                        db.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
                 return RedirectToAction("Index");
             }
 
@@ -143,22 +161,46 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid && voucher.PayDate==DateTime.Today)
             {
-                db.Entry(voucher).State = EntityState.Modified;
-
-                foreach (var item in fm)
+                using (var transaction = db.Database.BeginTransaction())
                 {
-                    if (item.ToString().Length > 5 && item.ToString().Substring(0, 5) == "data-")
+                    try
                     {
-                        int iLedDetID = int.Parse(item.ToString().Substring(item.ToString().LastIndexOf('-') + 1));
+                        db.Entry(voucher).State = EntityState.Modified;
 
-                        var cld = db.RVdetails.Find(iLedDetID);
-                        cld.RVDetail1 = fm[item.ToString()];
+                        foreach (var item in fm)
+                        {
+                            if (item.ToString().Length > 5 && item.ToString().Substring(0, 5) == "data-")
+                            {
+                                int iLedDetID = int.Parse(item.ToString().Substring(item.ToString().LastIndexOf('-') + 1));
 
-                        db.Entry(cld).State = EntityState.Modified;
+                                var cld = db.RVdetails.Find(iLedDetID);
+                                cld.RVDetail1 = fm[item.ToString()];
+
+                                db.Entry(cld).State = EntityState.Modified;
+                            }
+                        }
+
+                        //Update the Budget
+                        int budYr = ((DateTime)voucher.PayDate).Month > 3 ? ((DateTime)voucher.PayDate).Year : ((DateTime)voucher.PayDate).Year - 1;
+                        var bud = db.Budgets.FirstOrDefault(b => b.SubLedgerID == voucher.SubLedgerID && b.BudgtFY == budYr);
+
+                        var CurrAmt = db.Entry(voucher).CurrentValues.Clone();
+                        db.Entry(voucher).Reload();
+                        bud.ActualAmount -= voucher.ActualAmount?? 0; //minus the old value
+                        bud.ActualAmount += (decimal)CurrAmt["ActualAmount"]; //add the new value
+                        db.Entry(voucher).CurrentValues.SetValues(CurrAmt);
+                        db.Entry(voucher).State = EntityState.Modified;
+                        db.Entry(bud).State = EntityState.Modified;
+
+                        db.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
                     }
                 }
-
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 

@@ -24,6 +24,7 @@ namespace Panchayat
             this.LedgerDetails = new HashSet<LedgerDetail>();
             this.DemandDetails = new HashSet<DemandDetail>();
             this.Vouchers = new HashSet<Voucher>();
+            this.Budgets = new HashSet<Budget>();
         }
     
         public int SubLedgerID { get; set; }
@@ -48,5 +49,7 @@ namespace Panchayat
         public virtual ICollection<DemandDetail> DemandDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Voucher> Vouchers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Budget> Budgets { get; set; }
     }
 }
