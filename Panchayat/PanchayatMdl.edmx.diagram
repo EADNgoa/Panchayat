@@ -79,6 +79,8 @@
         <AssociationConnector Association="PanchayatModel.FK_Voucher_Ledger" />
         <AssociationConnector Association="PanchayatModel.FK_RVdetails_ToVoucher" />
         <AssociationConnector Association="PanchayatModel.FK_Voucher_SubLedger" />
+        <EntityTypeShape EntityType="PanchayatModel.Budget" Width="1.5" PointX="8.875" PointY="25.5" />
+        <AssociationConnector Association="PanchayatModel.FK_Budget_ToSubledger" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

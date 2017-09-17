@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Panchayat.Budget>
+
+@{
+    ViewBag.Title = "Budget";
+}
+
+<h2>Budget</h2>
+@using (Html.BeginForm("Index", "Budgets", FormMethod.Get,new { @class = "form-inline"}))
+{
+    <p>
+        Choose Budget Financial Year: @Html.DropDownList("BudFYr", (IEnumerable<SelectListItem>)ViewBag.YearBox, htmlAttributes: new { @class = "form-control" })
+        <input class="form-control" type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr><td colspan="7"><h3>Receipt Side</h3></td></tr>
+    <tr>
+        <th>
+            Ledger
+        </th>
+        <th>
+            SubLedger
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpeningBalance)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.BudgetAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActualAmount)
+        </th>
+        <th>Balance</th>
+        <th></th>
+    </tr>
+@foreach (var item in Model.Where(m=>m.SubLedger.Ledger1.IsIncome==true).OrderBy(m =>m.SubLedger.Ledger1.Ledger1).ThenBy(m=>m.SubLedger.Ledger)) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubLedger.Ledger1.Ledger1)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.SubLedger.Ledger)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.OpeningBalance)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.BudgetAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActualAmount)
+        </td>
+        <td>
+            @(item.OpeningBalance+item.BudgetAmount-item.ActualAmount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BudgetID }) 
+        </td>
+    </tr>
+}
+    <tr><td colspan="7"><h3>Expenditure Side</h3></td></tr>
+    <tr>
+        <th>
+            Ledger
+        </th>
+        <th>
+            SubLedger
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpeningBalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BudgetAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActualAmount)
+        </th>
+        <th>Balance</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Where(m => m.SubLedger.Ledger1.IsIncome == false).OrderBy(m => m.SubLedger.Ledger1.Ledger1).ThenBy(m => m.SubLedger.Ledger))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubLedger.Ledger1.Ledger1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubLedger.Ledger)
+            </td>        
+            <td>
+                @Html.DisplayFor(modelItem => item.OpeningBalance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BudgetAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualAmount)
+            </td>
+            <td>
+                @(item.OpeningBalance + item.BudgetAmount - item.ActualAmount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.BudgetID })
+            </td>
+        </tr>
+    }
+</table>

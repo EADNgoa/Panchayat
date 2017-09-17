@@ -12,16 +12,15 @@ namespace Panchayat
     using System;
     using System.Collections.Generic;
     
-    public partial class Form10Det
+    public partial class Budget
     {
-        public int Form10DetID { get; set; }
-        public Nullable<int> Form10ID { get; set; }
-        public Nullable<int> LedgerID { get; set; }
-        public Nullable<int> SubLedgerID { get; set; }
-        public Nullable<decimal> Amount { get; set; }
+        public int BudgetID { get; set; }
+        public Nullable<int> BudgtFY { get; set; }
+        public int SubLedgerID { get; set; }
+        public decimal BudgetAmount { get; set; }
+        public decimal ActualAmount { get; set; }
+        public decimal OpeningBalance { get; set; }
     
-        public virtual Form10 Form10 { get; set; }
-        public virtual Ledger Ledger { get; set; }
         public virtual SubLedger SubLedger { get; set; }
     }
 }
