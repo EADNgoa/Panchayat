@@ -1,0 +1,146 @@
+﻿@model Panchayat.PropertyBooking
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PropertyBooking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Inward_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inward_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameOfApplicant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameOfApplicant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityDepositAmt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecurityDepositAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplForSDRefund)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplForSDRefund)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullPayAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullPayAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentOfLuxTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentOfLuxTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Form4.RecvdFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Form4.RecvdFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Form41.RecvdFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Form41.RecvdFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Form42.RecvdFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Form42.RecvdFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Property.PropertyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Property.PropertyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Voucher.PassedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voucher.PassedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PropertyBookingID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
