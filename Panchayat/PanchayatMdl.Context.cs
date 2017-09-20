@@ -58,5 +58,7 @@ namespace Panchayat
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
         public virtual DbSet<Budget> Budgets { get; set; }
+        public virtual DbSet<Property> Properties { get; set; }
+        public virtual DbSet<PropertyBooking> PropertyBookings { get; set; }
     }
 }

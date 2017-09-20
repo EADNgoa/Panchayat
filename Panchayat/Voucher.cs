@@ -19,6 +19,7 @@ namespace Panchayat
         {
             this.Corrections = new HashSet<Correction>();
             this.RVdetails = new HashSet<RVdetail>();
+            this.PropertyBookings = new HashSet<PropertyBooking>();
         }
     
         public int VoucherID { get; set; }
@@ -42,5 +43,7 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RVdetail> RVdetails { get; set; }
         public virtual SubLedger SubLedger { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PropertyBooking> PropertyBookings { get; set; }
     }
 }

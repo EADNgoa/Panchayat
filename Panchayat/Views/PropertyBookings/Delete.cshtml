@@ -1,0 +1,152 @@
+﻿@model Panchayat.PropertyBooking
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PropertyBooking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Inward_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inward_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameOfApplicant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameOfApplicant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityDepositAmt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecurityDepositAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplForSDRefund)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplForSDRefund)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullPayAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullPayAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentOfLuxTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentOfLuxTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Form4.RecvdFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Form4.RecvdFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Form41.RecvdFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Form41.RecvdFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Form42.RecvdFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Form42.RecvdFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Property.PropertyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Property.PropertyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Voucher.PassedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voucher.PassedBy)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

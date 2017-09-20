@@ -1,0 +1,171 @@
+﻿@model PagedList.IPagedList<Panchayat.PropertyBooking>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2 class="section-to-print">Community hall Booking Rent Register</h2>
+    <br />
+
+    @using (Html.BeginForm("Index", "PropertyBookings", FormMethod.Get))
+    {
+
+        <div class="row section-to-Not-print">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>Hall Booking Date:</td>
+                        <td> @Html.TextBox("hbd", ViewBag.CurrentFilter as string, htmlAttributes: new { type = "date", @class = "form-control col-md-3 input-sm" })</td>
+
+
+                        <td> Date Of Reciept:</td>
+                        <td> @Html.TextBox("dor", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+                        <td> File Reference Date:</td>
+
+                        <td class="col-lg-1"></td>
+                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    }
+</center>
+<br />
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <span class="pull-right">
+        <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+
+
+    </span>
+</p>
+<table class="table section-to-print">
+    <tr>
+        <th>
+            Sr No
+        </th>
+        <th>
+           Inward No & Date; 
+        </th>
+        <th>
+           
+           Name Of Applicant & Address
+        </th>
+        <th>
+         Phone No
+        </th>
+        <th>
+          Date For Hall Booking
+        </th>
+        <th>
+          Reciept No & Date.
+        </th>
+        <th>
+         Amount Advance
+        </th>
+        <th>
+           R.No & Date For Full Pay
+        </th>
+        <th>
+          Security Deposit
+        </th>
+        <th>
+           R.No Dt. For Lux Taxes
+        </th>
+        <th>
+          Application For Refund OF Secuity Deposit
+        </th>
+        <th>
+          Dt. of Refund of SD with V.No
+        </th>
+        <th>
+           Paymnet Of Lux taxes To Govt With Date
+        </th>
+    
+        <th>
+        Remarks
+        </th>
+        
+        <th class="section-to-Not-print"></th>
+    </tr>
+    <tr>
+        @for (int c = 1; c < 15; c++)
+            {
+            <th>@c</th>
+        }
+        <th></th>
+    </tr>
+    @{ var i = 1; }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @i
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inward_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfApplicant)
+           
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNo)
+           
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HDate)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.AdvReceiptNo),@Html.DisplayFor(modelItem => item.TDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdvAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullPayReceiptNo)
+        </td>
+    
+        <td>
+            @Html.DisplayFor(modelItem => item.SecurityDepositAmt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LuxTaxReceiptNo)
+        </td>
+    
+    
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplForSDRefund)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RefundSDVoucherNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentOfLuxTax)
+        </td>
+    
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+     
+        <td class="section-to-Not-print">
+            @Html.ActionLink("Edit", "Edit", new { id=item.PropertyBookingID }) |
+       
+        
+        </td>
+    </tr>
+    i++;
+}
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, SubLedgerID = ViewBag.SubLedgerID }))

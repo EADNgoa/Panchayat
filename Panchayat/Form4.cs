@@ -20,6 +20,9 @@ namespace Panchayat
             this.Corrections = new HashSet<Correction>();
             this.RVdetails = new HashSet<RVdetail>();
             this.DemandYears = new HashSet<DemandYear>();
+            this.PropertyBookings = new HashSet<PropertyBooking>();
+            this.PropertyBookings1 = new HashSet<PropertyBooking>();
+            this.PropertyBookings2 = new HashSet<PropertyBooking>();
         }
     
         public int RecieptNo { get; set; }
@@ -40,5 +43,11 @@ namespace Panchayat
         public virtual ICollection<RVdetail> RVdetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DemandYear> DemandYears { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PropertyBooking> PropertyBookings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PropertyBooking> PropertyBookings1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PropertyBooking> PropertyBookings2 { get; set; }
     }
 }
