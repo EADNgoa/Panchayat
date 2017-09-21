@@ -41,16 +41,16 @@
         @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
         <div class="row section-to-Not-print">
             <div>
-                <table>
+                <table width="100%">
                     <tr>
                         <td></td>
-                        <td> File Reference No:</td>
+                        <td align="right"> File Reference No:</td>
                         <td> @Html.TextBox("frn", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
 
 
-                        <td> Date Of Dispatch:</td>
+                        <td align="right"> Date Of Dispatch:</td>
                         <td> @Html.TextBox("dod", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
-                        <td> File Reference Date:</td>
+                        <td align="right"> File Reference Date:</td>
                         <td> @Html.TextBox("frd", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
 
                         <td class="col-lg-1"></td>
@@ -126,7 +126,7 @@
         <th>
             @if (ViewBag.RegisterTypeID == 3)
             {
-                <p>   subject Matter</p>            }
+                <p>   Subject Matter</p>            }
             @if (ViewBag.RegisterTypeID == 11)
             {
                 <p>Subject Matter</p>
@@ -198,9 +198,7 @@
         </td>
      
         <td class="section-to-Not-print">
-            @Html.ActionLink("Edit", "Edit", new { id=item.OutwardID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OutwardID }) |
-          
+            @Html.ActionLink("Edit", "Edit", new { id=item.OutwardID })           
         </td>
     </tr>
     i++;

@@ -37,6 +37,10 @@ namespace Panchayat.Controllers
             {
                 meetings = meetings.Where(p => p.MeetingDate ==md);
                 page = 1;
+            } else
+            {
+                int FinYr = MyExtensions.GetFinYr();
+                meetings = meetings.Where(p => ((DateTime)p.MeetingDate).Year == FinYr);
             }
             ViewBag.PanchName = db.Configs.FirstOrDefault().VP;
             ViewBag.MeetingD = md;

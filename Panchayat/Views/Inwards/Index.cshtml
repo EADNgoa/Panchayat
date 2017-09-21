@@ -46,12 +46,12 @@
         @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
         <div class="row">
             <div>
-                <table>
+                <table width="80%">
                     <tr>
                         <td></td>
-                        <td> Date Of Reciept:</td>
+                        <td align="right"> Date Of Reciept:</td>
                         <td> @Html.TextBox("dr", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
-                        <td> Date Of Letter:</td>
+                        <td align="right"> Date Of Letter:</td>
                         <td> @Html.TextBox("dl", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
                         <td class="col-lg-1"></td>
                         <td><input type="submit" value="Search" class="btn btn-default" /></td>
@@ -232,8 +232,7 @@
         </td>
    
         <td class="section-to-Not-print">
-            @Html.ActionLink("Edit", "Edit", new { id=item.InwardID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.InwardID }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.InwardID }) 
         </td>
     </tr>
     i++;

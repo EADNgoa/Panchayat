@@ -44,7 +44,7 @@
             <label class="control-label col-md-2">Proposal Or Amendment:</label>
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.PropOrAmend)
+                    @Html.DropDownListFor(model => model.PropOrAmend,new List<SelectListItem>() { new SelectListItem { Value="false", Text="Proposal" }, new SelectListItem { Value="true", Text="Amendment"} })
                     @Html.ValidationMessageFor(model => model.PropOrAmend, "", new { @class = "text-danger" })
                 </div>
             </div>

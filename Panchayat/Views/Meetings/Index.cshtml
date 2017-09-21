@@ -51,14 +51,14 @@
         @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
         <div class="row  class="section-to-Not-print"">
             <div>
-                <table>
+                <table width="80%">
                     <tr>
                         <td></td>
-                        <td> Proposer Name:</td>
+                        <td align="right"> Proposer Name:</td>
                         <td> @Html.TextBox("pn", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
+                        <td>&nbsp;</td>
 
-
-                        <td> Meeting Date:</td>
+                        <td align="right"> Meeting Date:</td>
                         <td> @Html.TextBox("md", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
 
                         <td class="col-lg-1"></td>
@@ -117,7 +117,7 @@
                Resolution
             </th>
             <th>
-               Remark
+               Remarks
             </th>
            
             <th></th>
@@ -165,7 +165,7 @@
                     @Html.DisplayFor(modelItem => item.ProposerName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PropOrAmend)
+                    @((item.PropOrAmend ?? false) ? "Amendment" : "Proposal")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.For)
@@ -184,8 +184,8 @@
                 </td>
           
                 <td class="section-to-Not-print">
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MeetingID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MeetingID }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MeetingID }) 
+                    
                 
                 </td>
             </tr>

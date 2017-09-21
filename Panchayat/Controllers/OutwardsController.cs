@@ -35,10 +35,18 @@ namespace Panchayat.Controllers
             {
                 outwards = outwards.Where(x => x.FileReferenceDate == frd);
             }
+            if (dod == null && frd == null)
+            {
+                int FinYr = MyExtensions.GetFinYr();
+                outwards = outwards.Where(x => ((DateTime)x.FileReferenceDate).Year == FinYr);
+            }
+
             if (frn != null)
             {
                 outwards = outwards.Where(x => x.FileReferenceNo == frn);
             }
+            
+
 
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);

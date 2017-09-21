@@ -26,14 +26,13 @@ namespace Panchayat.Controllers
 
                 page = 1;
             }
-            if (Year != null)
-            {
-                audits = audits.Where(a => a.Year == Year);
-
-                page = 1;
-            }
+            if (Year == null)
+                Year = MyExtensions.GetFinYr();//default to the current year
+    
+            audits = audits.Where(a => a.Year == Year);
             ViewBag.YearBox = MyExtensions.MakeYrRq(8, 1, DateTime.Today.Year);
             ViewBag.PanchName = db.Configs.FirstOrDefault().VP;
+            ViewBag.ReportYr = Year;
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
             return View(audits.ToList().ToPagedList(pageNumber, pageSize));
