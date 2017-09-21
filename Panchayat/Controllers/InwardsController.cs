@@ -30,11 +30,17 @@ namespace Panchayat.Controllers
             }
             if (dr != null)
             {
-                inwards = db.Inwards.Where(x => x.DateOfReciept == dr);
+                inwards = inwards.Where(x => x.DateOfReciept == dr);
+                page = 1;
             }
             if (dl != null)
             {
                 inwards = db.Inwards.Where(x => x.DateOfLett == dl);
+            }
+            else
+            {
+                int FinYr = MyExtensions.GetFinYr();
+                inwards = inwards.Where(x => ((DateTime)x.DateOfReciept).Year == FinYr);
             }
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);

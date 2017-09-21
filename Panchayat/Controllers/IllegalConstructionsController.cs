@@ -24,14 +24,16 @@ namespace Panchayat.Controllers
             if (rt != null)
             {
                 ViewBag.RegisterTypeID = rt;
-     
-                illegalConstructions = db.IllegalConstructions.Where(x => x.RegisterTypeID == rt);
-            
+                illegalConstructions = db.IllegalConstructions.Where(x => x.RegisterTypeID == rt);            
             }
             if (dc != null)
             {
                 illegalConstructions = illegalConstructions.Where(p => p.DateOfComp == dc);
                 page = 1;
+            } else
+            {
+                int FinYr = MyExtensions.GetFinYr();
+                illegalConstructions = illegalConstructions.Where(x=> ((DateTime)x.DateOfComp).Year == FinYr);
             }
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);

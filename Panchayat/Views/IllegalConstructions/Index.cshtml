@@ -72,7 +72,7 @@
 <table class="table section-to-print">
     <tr><th>Sr No</th>
         <th>
-           Date Of The Reciept Of the Complain
+           Date Of The Reciept Of the Complaint
         </th>
         <th>
            Name And Address Of Complain
@@ -157,12 +157,8 @@
             @Html.DisplayFor(modelItem => item.Remarks)
         </td>
      
-        <td class="section-to-Not-print">
-
-           
-                @Html.ActionLink("Edit", "Edit", new { id = item.IllegalConID })
-                @Html.ActionLink("Details", "Details", new { id = item.IllegalConID })
-       
+        <td class="section-to-Not-print">           
+                @Html.ActionLink("Edit", "Edit", new { id = item.IllegalConID })                       
         </td>
     </tr>
     i++;

@@ -8,7 +8,7 @@
  <h1 style="visibility:hidden"><font style="font-size:17px"class="section-to-print">Village Panchayat <span><u>@ViewBag.PanchName</u></span></font></h1>
     <h2 class="section-to-print" style="visibility:hidden"><u style="font-size:15px">Audit Register</u>
     <br />
-        <span class="pull-right " style="visibility:hidden"> <font style="font-size:15px" >Year Of Audit <span><u>@Model.FirstOrDefault().Year</u></span></font></span> 
+        <span class="pull-right " style="visibility:hidden"> <font style="font-size:15px" >Year Of Audit <span><u>@ViewBag.ReportYr</u></span></font></span> 
     </h2>
         <h2 class="section-to-Not-print "><u style="font-size:25px">Audit Register</u>
 
@@ -89,7 +89,7 @@
         </td>
         <td class="section-to-Not-print">
             @Html.ActionLink("Edit", "Edit", new { id=item.AuditID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AuditID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AuditID }) 
            
         </td>
     </tr>

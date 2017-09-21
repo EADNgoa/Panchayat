@@ -26,7 +26,16 @@ namespace Panchayat
     public static class MyExtensions
     {
                
-        
+        /// <summary>
+        /// Gets the current financial year 
+        /// </summary>
+        /// <param name="NededDate">Defaults to today</param>
+        public static int GetFinYr(DateTime? NeededDate = null) 
+        {
+            DateTime TmpDate = NeededDate ?? DateTime.Today;
+            return TmpDate.Month < 4 ? TmpDate.Year - 1 : TmpDate.Year;
+        }
+
         /// <summary>
         /// Populate the ViewBag with a selectlist for a Year Dropdown
         /// </summary>
