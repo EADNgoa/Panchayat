@@ -5,18 +5,19 @@
 }
 
 <h2>Create</h2>
-
+<span>NOTE!: This screen auto-generates reciepts and vouchers on initial entry of the marked fields. </span>
+<span>If you need to change the amounts you have initially entered, you will need to manually make Correction entries </span>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>PropertyBooking</h4>
+        <h4>Property Booking</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.PropertyID, "PropertyID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PropertyID, "Property", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("PropertyID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PropertyID, "", new { @class = "text-danger" })
@@ -24,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Inward_No, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Inward_No,"Inward No. and Date", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Inward_No, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Inward_No, "", new { @class = "text-danger" })
@@ -34,7 +35,7 @@
     
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NameOfApplicant, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.NameOfApplicant,"Applicant Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NameOfApplicant, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NameOfApplicant, "", new { @class = "text-danger" })
@@ -42,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PhoneNo, "Phone No.",htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
@@ -50,7 +51,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.HDate, "Booked for Date", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.HDate, new { htmlAttributes = new { @class = "form-control",@type="date" } })
                 @Html.ValidationMessageFor(model => model.HDate, "", new { @class = "text-danger" })
@@ -60,15 +61,16 @@
    
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AdvAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AdvAmount,"Advance Amount", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AdvAmount, new { htmlAttributes = new { @class = "form-control" } })
+                <span>NOTE: If an entry is made here a Receipt will be generated for the Full Pay Amount.</span>
                 @Html.ValidationMessageFor(model => model.AdvAmount, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SecurityDepositAmt, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SecurityDepositAmt,"Security Deposit Amount", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SecurityDepositAmt, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SecurityDepositAmt, "", new { @class = "text-danger" })

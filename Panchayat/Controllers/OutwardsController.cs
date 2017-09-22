@@ -11,10 +11,9 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class OutwardsController : Controller
+    [Authorize(Roles = "Boss,Type1")]
+    public class OutwardsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
-
         // GET: Outwards
         public ActionResult Index(int? page,DateTime? dod,DateTime? frd,string frn,int? rt)
         {
@@ -41,7 +40,7 @@ namespace Panchayat.Controllers
                 outwards = outwards.Where(x => ((DateTime)x.FileReferenceDate).Year == FinYr);
             }
 
-            if (frn != null)
+            if (frn?.Length>0)
             {
                 outwards = outwards.Where(x => x.FileReferenceNo == frn);
             }

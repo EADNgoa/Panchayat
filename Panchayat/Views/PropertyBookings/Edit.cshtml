@@ -5,8 +5,8 @@
 }
 
 <h2>Edit</h2>
-
-
+<span>NOTE!: This screen auto-generates reciepts and vouchers on initial entry of the marked fields. </span>
+<span>If you need to change the amounts you have initially entered, you will need to manually make Correction entries </span>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -16,15 +16,16 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.PropertyBookingID)
-        @Html.HiddenFor(model =>model.TDate);
-        @Html.HiddenFor(model => model.AdvReceiptNo);
-        @Html.HiddenFor(model => model.AdvAmount);
-        @Html.HiddenFor(model => model.SecurityDepositAmt);
-        @Html.HiddenFor(model => model.FullPayReceiptNo);
-
+        @Html.HiddenFor(model =>model.TDate)
+        @Html.HiddenFor(model => model.AdvReceiptNo)
+        @Html.HiddenFor(model => model.AdvAmount)
+        @Html.HiddenFor(model => model.SecurityDepositAmt)
+        @Html.HiddenFor(model => model.FullPayReceiptNo)
+        @Html.HiddenFor(model => model.LuxTaxReceiptNo)
+        @Html.HiddenFor(model => model.RefundSDVoucherNo)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PropertyID, "PropertyID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PropertyID, "Property", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("PropertyID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PropertyID, "", new { @class = "text-danger" })
@@ -32,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Inward_No, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Inward_No,"Inward No. and Date", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Inward_No, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Inward_No, "", new { @class = "text-danger" })
@@ -40,7 +41,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TDate,"Reservation Date", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.TDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TDate, "", new { @class = "text-danger" })
@@ -48,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NameOfApplicant, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.NameOfApplicant,"Applicant Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NameOfApplicant, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NameOfApplicant, "", new { @class = "text-danger" })
@@ -56,7 +57,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PhoneNo, "Phone No.", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
@@ -64,23 +65,23 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.HDate,"Booked for Date", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.HDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.HDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AdvReceiptNo, "AdvReceiptNo", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AdvReceiptNo, "Advance Receipt No", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model =>model.AdvReceiptNo)
+                <a href="/form4/Details?id=@Model.AdvReceiptNo" target="_blank">@Model.AdvReceiptNo</a>                
                 @Html.ValidationMessageFor(model => model.AdvReceiptNo, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AdvAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AdvAmount,"Advance. Amount", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.AdvAmount, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AdvAmount, "", new { @class = "text-danger" })
@@ -88,7 +89,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SecurityDepositAmt, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SecurityDepositAmt, "Security Deposit Amt.", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.SecurityDepositAmt, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SecurityDepositAmt, "", new { @class = "text-danger" })
@@ -96,31 +97,33 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ApplForSDRefund, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ApplForSDRefund, "Appl. for SD Refund", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ApplForSDRefund, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ApplForSDRefund, new { htmlAttributes = new { @class = "form-control" } }) 
+                <span>NOTE: If an entry is made here a Voucher will be generated for the Security Deposit.</span>
                 @Html.ValidationMessageFor(model => model.ApplForSDRefund, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FullPayReceiptNo, "FullPayReceiptNo", htmlAttributes: new { @class = "control-label col-md-2" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.FullPayReceiptNo, "Full Pay Receipt No.", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model =>model.FullPayReceiptNo)
                 @Html.ValidationMessageFor(model => model.FullPayReceiptNo, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FullPayAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FullPayAmount, "Full Pay Amount", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FullPayAmount, new { htmlAttributes = new { @class = "form-control" } })
+                <span>NOTE: If an entry is made here a Receipt will be generated for the Full Pay Amount.</span>
                 @Html.ValidationMessageFor(model => model.FullPayAmount, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LuxTaxReceiptNo, "LuxTaxReceiptNo", htmlAttributes: new { @class = "control-label col-md-2" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.LuxTaxReceiptNo, "Lux. Tax Receipt No.", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.LuxTaxReceiptNo)
                 @Html.ValidationMessageFor(model => model.LuxTaxReceiptNo, "", new { @class = "text-danger" })
@@ -128,17 +131,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RefundSDVoucherNo, "RefundSDVoucherNo", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RefundSDVoucherNo, "Refund SD Voucher No.", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.RefundSDVoucherNo)
                 @Html.ValidationMessageFor(model => model.RefundSDVoucherNo, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PaymentOfLuxTax, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PaymentOfLuxTax, "Payment Of Lux. Tax", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PaymentOfLuxTax, new { htmlAttributes = new { @class = "form-control" } })
+                <span>NOTE: If an entry is made here a Receipt will be generated for the Lux. Tax paid</span>
                 @Html.ValidationMessageFor(model => model.PaymentOfLuxTax, "", new { @class = "text-danger" })
             </div>
         </div>

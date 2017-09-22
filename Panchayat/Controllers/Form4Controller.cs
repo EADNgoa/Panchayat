@@ -108,7 +108,7 @@ namespace Panchayat.Controllers
                         }
 
                         //Update our Budget
-                        int budYr = ((DateTime)form4.PayDate).Month > 3 ? ((DateTime)form4.PayDate).Year : ((DateTime)form4.PayDate).Year - 1;
+                        int budYr = MyExtensions.GetFinYr((DateTime)form4.PayDate);
                         var bud = db.Budgets.FirstOrDefault(b => b.SubLedgerID == form4.SubLedgerID && b.BudgtFY == budYr);
                         bud.ActualAmount += form4.Amount??0;
                         db.Entry(bud).State = EntityState.Modified;
@@ -196,7 +196,7 @@ namespace Panchayat.Controllers
                         }
 
                         //Update the Budget
-                        int budYr = ((DateTime)form4.PayDate).Month > 3 ? ((DateTime)form4.PayDate).Year : ((DateTime)form4.PayDate).Year - 1;
+                        int budYr = MyExtensions.GetFinYr((DateTime)form4.PayDate);
                         var bud = db.Budgets.FirstOrDefault(b => b.SubLedgerID == form4.SubLedgerID && b.BudgtFY == budYr);
 
                         var CurrAmt = db.Entry(form4).CurrentValues.Clone();

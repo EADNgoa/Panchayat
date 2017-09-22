@@ -332,7 +332,13 @@ namespace Panchayat
         public DateTime TDate;
     }
 
-
-
+    public class PropertyBookingMetadata
+    {
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Booked For date")]
+        [Required]
+        public DateTime HDate;
+    }
 
 }

@@ -12,10 +12,9 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class InOutRegsIssuesController : Controller
+    [Authorize(Roles = "Boss,Type1")]
+    public class InOutRegsIssuesController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
-
         // GET: InOutRegsIssues
         public ActionResult Index(int? page,int? rt,DateTime? di)
         {

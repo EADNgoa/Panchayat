@@ -11,10 +11,9 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class InwardsController : Controller
+    [Authorize(Roles = "Boss,Type1")]
+    public class InwardsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
-
         // GET: Inwards
         public ActionResult Index(int? page, DateTime? dr,DateTime? dl,int? rt)
         {
@@ -37,7 +36,7 @@ namespace Panchayat.Controllers
             {
                 inwards = db.Inwards.Where(x => x.DateOfLett == dl);
             }
-            else
+            if (dr == null && dl == null)
             {
                 int FinYr = MyExtensions.GetFinYr();
                 inwards = inwards.Where(x => ((DateTime)x.DateOfReciept).Year == FinYr);
