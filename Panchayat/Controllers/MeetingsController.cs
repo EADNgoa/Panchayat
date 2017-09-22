@@ -11,12 +11,11 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class MeetingsController : Controller
+    [Authorize(Roles = "Boss,Type1")]
+    public class MeetingsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
-
         // GET: Meetings
-        public ActionResult Index(bool? poa,string pn,DateTime? md,int? page,int? rt)
+        public ActionResult Index(string pn,DateTime? md,int? page,int? rt)
         {
             var meetings = db.Meetings.Where(x=>x.MeetingID>0);
 
@@ -37,7 +36,8 @@ namespace Panchayat.Controllers
             {
                 meetings = meetings.Where(p => p.MeetingDate ==md);
                 page = 1;
-            } else
+            } 
+            if (md==null && pn.Length==0)
             {
                 int FinYr = MyExtensions.GetFinYr();
                 meetings = meetings.Where(p => ((DateTime)p.MeetingDate).Year == FinYr);

@@ -11,9 +11,9 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class AuditsController : Controller
-    {
-        private PanchayatEntities db = new PanchayatEntities();
+    [Authorize(Roles = "Boss,Type1")]
+    public class AuditsController : EAController
+    {       
 
         // GET: Audits
         public ActionResult Index(int? page,int? No,int? Year)

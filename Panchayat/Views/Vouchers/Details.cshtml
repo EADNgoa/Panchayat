@@ -119,6 +119,13 @@
 <br />
 <p>
 <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VoucherID }) |
+    @if (Model.PayDate == DateTime.Today)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.VoucherID });
+        @:|
+    } else {
+        @Html.ActionLink("Correct", "Create", "Corrections", new { VoucherID = Model.VoucherID }, null) 
+        @:|
+        }
     @Html.ActionLink("Back to List", "Index")
 </p>

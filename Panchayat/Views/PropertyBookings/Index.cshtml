@@ -2,10 +2,10 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rent Register";
 }
 <center>
-    <h2 class="section-to-print">Community hall Booking Rent Register</h2>
+    <h2 class="section-to-print">Community Hall Booking Rent Register</h2>
     <br />
 
     @using (Html.BeginForm("Index", "PropertyBookings", FormMethod.Get))
@@ -13,18 +13,16 @@
 
         <div class="row section-to-Not-print">
             <div>
-                <table>
+                <table width="80%">
                     <tr>
                         <td></td>
-                        <td>Hall Booking Date:</td>
+                        <td align="right">Hall Booking Date:</td>
                         <td> @Html.TextBox("hbd", ViewBag.CurrentFilter as string, htmlAttributes: new { type = "date", @class = "form-control col-md-3 input-sm" })</td>
 
 
-                        <td> Date Of Reciept:</td>
+                        <td align="right"> Date Of Reciept:</td>
                         <td> @Html.TextBox("dor", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
-                        <td> File Reference Date:</td>
-
-                        <td class="col-lg-1"></td>
+                        <td>&nbsp;</td>
                         <td><input type="submit" value="Search" class="btn btn-default" /></td>
                     </tr>
                 </table>
@@ -52,7 +50,7 @@
             Sr No
         </th>
         <th>
-           Inward No & Date; 
+           Inward No & Date
         </th>
         <th>
            
@@ -124,28 +122,35 @@
         </td>
 
         <td>
-            @Html.DisplayFor(modelItem => item.AdvReceiptNo),@Html.DisplayFor(modelItem => item.TDate)
+            <a href="/form4/Details?id=@item.AdvReceiptNo" target="_blank">@item.AdvReceiptNo</a>,@Html.DisplayFor(modelItem => item.TDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AdvAmount)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FullPayReceiptNo)
+            @if (item.FullPayReceiptNo != null)
+            {
+                <a href="/form4/Details?id=@item.FullPayReceiptNo" target="_blank">@item.FullPayReceiptNo</a>
+            }
         </td>
     
         <td>
             @Html.DisplayFor(modelItem => item.SecurityDepositAmt)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LuxTaxReceiptNo)
+            @if (item.LuxTaxReceiptNo != null)
+            {
+                <a href="/form4/Details?id=@item.LuxTaxReceiptNo" target="_blank">@item.LuxTaxReceiptNo</a>
+            }
         </td>
-    
-    
         <td>
             @Html.DisplayFor(modelItem => item.ApplForSDRefund)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RefundSDVoucherNo)
+            @if (item.RefundSDVoucherNo != null)
+            {
+                <a href="/vouchers/Details?id=@item.RefundSDVoucherNo" target="_blank">@item.RefundSDVoucherNo</a>
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PaymentOfLuxTax)
@@ -156,7 +161,7 @@
         </td>
      
         <td class="section-to-Not-print">
-            @Html.ActionLink("Edit", "Edit", new { id=item.PropertyBookingID }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.PropertyBookingID })
        
         
         </td>

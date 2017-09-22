@@ -10,10 +10,9 @@ using Panchayat;
 
 namespace Panchayat.Controllers
 {
-    public class InvItemsController : Controller
+    [Authorize(Roles = "Boss,Type1")]
+    public class InvItemsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
-
         // GET: InvItems
         public ActionResult Index()
         {

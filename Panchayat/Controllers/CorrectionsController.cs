@@ -64,7 +64,7 @@ namespace Panchayat.Controllers
             {
                 cor = new Correction { RecieptID = (int)ReceiptID };
                 var FaultyRec = db.Form4.Find(ReceiptID);
-                ViewBag.Heading = String.Format("Receipt of {0} created on {1:dd-MMM-yyyy} against subledger: {2}", FaultyRec.Citizen.Name + FaultyRec.RecvdFrom, FaultyRec.PayDate, FaultyRec.Ledger.Ledger1 + " >> " + FaultyRec.SubLedger.Ledger);
+                ViewBag.Heading = String.Format("Receipt of {0} created on {1:dd-MMM-yyyy} against subledger: {2}", FaultyRec.Citizen?.Name + FaultyRec.RecvdFrom, FaultyRec.PayDate, FaultyRec.Ledger.Ledger1 + " >> " + FaultyRec.SubLedger.Ledger);
             }
 
             if (cor == null)

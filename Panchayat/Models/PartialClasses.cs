@@ -93,6 +93,11 @@ namespace Panchayat
     {
     }
 
+    [MetadataType(typeof(PropertyBookingMetadata))]
+    public partial class PropertyBooking
+    {
+    }
+
     public class Form10rpt
     {
         public string Ledger { get; set; }

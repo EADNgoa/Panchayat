@@ -11,10 +11,9 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class NocsController : Controller
+    [Authorize(Roles = "Boss,Type1")]
+    public class NocsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
-
         // GET: Nocs
         public ActionResult Index(int? page,int? rt,DateTime? dor,DateTime? doi,bool? ior,DateTime? dov)
         {

@@ -227,7 +227,7 @@
     <Compile Include="Controllers\NocsController.cs" />
     <Compile Include="Controllers\OutwardsController.cs" />
     <Compile Include="Controllers\PeriodsController.cs" />
-    <Compile Include="Controllers\PropertiesController.cs" />
+    <Compile Include="Controllers\RentPropertiesController.cs" />
     <Compile Include="Controllers\PropertyBookingsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\EAController.cs" />
@@ -633,11 +633,11 @@
     <Content Include="Views\Budgets\Details.cshtml" />
     <Content Include="Views\Budgets\Edit.cshtml" />
     <Content Include="Views\Budgets\Index.cshtml" />
-    <Content Include="Views\Properties\Create.cshtml" />
-    <Content Include="Views\Properties\Delete.cshtml" />
-    <Content Include="Views\Properties\Details.cshtml" />
-    <Content Include="Views\Properties\Edit.cshtml" />
-    <Content Include="Views\Properties\Index.cshtml" />
+    <Content Include="Views\RentProperties\Create.cshtml" />
+    <Content Include="Views\RentProperties\Delete.cshtml" />
+    <Content Include="Views\RentProperties\Details.cshtml" />
+    <Content Include="Views\RentProperties\Edit.cshtml" />
+    <Content Include="Views\RentProperties\Index.cshtml" />
     <Content Include="Views\PropertyBookings\Create.cshtml" />
     <Content Include="Views\PropertyBookings\Delete.cshtml" />
     <Content Include="Views\PropertyBookings\Details.cshtml" />

@@ -12,10 +12,9 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class PropertyBookingsController : Controller
-    {
-        private PanchayatEntities db = new PanchayatEntities();
-
+    [Authorize(Roles = "Boss,Type1")]
+    public class PropertyBookingsController : EAController
+    {        
         // GET: PropertyBookings
         public ActionResult Index(int? page, DateTime? hbd,DateTime? dor)
         {
@@ -28,7 +27,11 @@ namespace Panchayat.Controllers
             {
                 propertyBookings = db.PropertyBookings.Where(a => a.HDate == dor);
             }
-
+            if(hbd==null && dor==null)
+            {
+                int FinYr = MyExtensions.GetFinYr();
+                propertyBookings = propertyBookings.Where(p => ((DateTime)p.TDate).Year == FinYr);
+            }
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
             return View(propertyBookings.ToList().ToPagedList(pageNumber, pageSize));
@@ -52,11 +55,7 @@ namespace Panchayat.Controllers
         // GET: PropertyBookings/Create
         public ActionResult Create()
         {
-            ViewBag.AdvReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom");
-            ViewBag.FullPayReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom");
-            ViewBag.LuxTaxReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom");
             ViewBag.PropertyID = new SelectList(db.Properties, "PropertyID", "PropertyName");
-            ViewBag.RefundSDVoucherNo = new SelectList(db.Vouchers, "VoucherID", "PassedBy");
             return View();
         }
 
@@ -98,11 +97,7 @@ namespace Panchayat.Controllers
                 }
             }
 
-            ViewBag.AdvReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom", propertyBooking.AdvReceiptNo);
-            ViewBag.FullPayReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom", propertyBooking.FullPayReceiptNo);
-            ViewBag.LuxTaxReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom", propertyBooking.LuxTaxReceiptNo);
             ViewBag.PropertyID = new SelectList(db.Properties, "PropertyID", "PropertyName", propertyBooking.PropertyID);
-            ViewBag.RefundSDVoucherNo = new SelectList(db.Vouchers, "VoucherID", "PassedBy", propertyBooking.RefundSDVoucherNo);
             return View(propertyBooking);
         }
 
@@ -118,11 +113,7 @@ namespace Panchayat.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AdvReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom", propertyBooking.AdvReceiptNo);
-            ViewBag.FullPayReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom", propertyBooking.FullPayReceiptNo);
-            ViewBag.LuxTaxReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom", propertyBooking.LuxTaxReceiptNo);
             ViewBag.PropertyID = new SelectList(db.Properties, "PropertyID", "PropertyName", propertyBooking.PropertyID);
-            ViewBag.RefundSDVoucherNo = new SelectList(db.Vouchers, "VoucherID", "PassedBy", propertyBooking.RefundSDVoucherNo);
             return View(propertyBooking);
         }
 
@@ -142,29 +133,37 @@ namespace Panchayat.Controllers
                         db.Entry(propertyBooking).State = EntityState.Modified;
                         if (propertyBooking.FullPayAmount != null)
                         {
-                            var fullPayRcpt = new Form4 { CitizenID = null, Amount = propertyBooking.FullPayAmount, PayDate = DateTime.Now, LedgerID = 7, SubLedgerID = 3, RecvdFrom = propertyBooking.NameOfApplicant, HouseNo = null };
-                            db.Form4.Add(fullPayRcpt);
-                            db.SaveChanges();
-                            propertyBooking.FullPayReceiptNo = fullPayRcpt.RecieptNo;
+                            if (!propertyBooking.FullPayReceiptNo.HasValue)//Create a receipt only if it is the initial edit
+                            {
+                                var fullPayRcpt = new Form4 { CitizenID = null, Amount = propertyBooking.FullPayAmount, PayDate = DateTime.Now, LedgerID = 7, SubLedgerID = 3, RecvdFrom = propertyBooking.NameOfApplicant, HouseNo = null };
+                                db.Form4.Add(fullPayRcpt);
+                                db.SaveChanges();
+                                propertyBooking.FullPayReceiptNo = fullPayRcpt.RecieptNo;
+                            }
                         }
                         if (propertyBooking.PaymentOfLuxTax != null)
                         {
-                            var LuxTax = new Form4 { CitizenID = null, Amount = propertyBooking.PaymentOfLuxTax, PayDate = DateTime.Now, LedgerID = 7, SubLedgerID = 3, RecvdFrom = propertyBooking.NameOfApplicant, HouseNo = null };
-                            db.Form4.Add(LuxTax);
-                            db.SaveChanges();
-                            propertyBooking.LuxTaxReceiptNo = LuxTax.RecieptNo;
-
+                            if (!propertyBooking.LuxTaxReceiptNo.HasValue)
+                            {
+                                var LuxTax = new Form4 { CitizenID = null, Amount = propertyBooking.PaymentOfLuxTax, PayDate = DateTime.Now, LedgerID = 7, SubLedgerID = 3, RecvdFrom = propertyBooking.NameOfApplicant, HouseNo = null };
+                                db.Form4.Add(LuxTax);
+                                db.SaveChanges();
+                                propertyBooking.LuxTaxReceiptNo = LuxTax.RecieptNo;
+                            }
                         }
                         if (propertyBooking.ApplForSDRefund != null)
                         {
-                            string UserID = User.Identity.GetUserName();
-                            var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
+                            if (!propertyBooking.RefundSDVoucherNo.HasValue)
+                            {
+                                string UserID = User.Identity.GetUserName();
+                                var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
 
 
-                            var RefundSD = new Voucher { PassedBy = UserID, of = pn, Amount = propertyBooking.SecurityDepositAmt, ActualAmount = propertyBooking.SecurityDepositAmt, For = null, PayDate = propertyBooking.TDate, CBfolio = null, ResNo = null, HeldOn = propertyBooking.HDate, Meeting = "N/A", LedgerID = 7, SubLedgerID = 3, Form6 = false };
-                            db.Vouchers.Add(RefundSD);
-                            db.SaveChanges();
-                            propertyBooking.RefundSDVoucherNo = RefundSD.VoucherID;
+                                var RefundSD = new Voucher { PassedBy = UserID, of = pn, Amount = propertyBooking.SecurityDepositAmt, ActualAmount = propertyBooking.SecurityDepositAmt, For = "Security Deposit refund of property booking", PayDate = propertyBooking.TDate, CBfolio = null, ResNo = null, HeldOn = propertyBooking.HDate, Meeting = "N/A", LedgerID = 7, SubLedgerID = 3, Form6 = false };
+                                db.Vouchers.Add(RefundSD);
+                                db.SaveChanges();
+                                propertyBooking.RefundSDVoucherNo = RefundSD.VoucherID;
+                            }
                         }
                         db.SaveChanges();
                         transaction.Commit();
@@ -179,11 +178,7 @@ namespace Panchayat.Controllers
                     return RedirectToAction("Index");
                 
             }
-            ViewBag.AdvReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom", propertyBooking.AdvReceiptNo);
-            ViewBag.FullPayReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom", propertyBooking.FullPayReceiptNo);
-            ViewBag.LuxTaxReceiptNo = new SelectList(db.Form4, "RecieptNo", "RecvdFrom", propertyBooking.LuxTaxReceiptNo);
             ViewBag.PropertyID = new SelectList(db.Properties, "PropertyID", "PropertyName", propertyBooking.PropertyID);
-            ViewBag.RefundSDVoucherNo = new SelectList(db.Vouchers, "VoucherID", "PassedBy", propertyBooking.RefundSDVoucherNo);
             return View(propertyBooking);
         }
 

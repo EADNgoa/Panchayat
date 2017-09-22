@@ -11,10 +11,9 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class IllegalConstructionsController : Controller
+    [Authorize(Roles = "Boss,Type1")]
+    public class IllegalConstructionsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
-
         // GET: IllegalConstructions
         public ActionResult Index(int? page,DateTime? dc,int? rt)
         {

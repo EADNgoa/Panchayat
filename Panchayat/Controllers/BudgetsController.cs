@@ -10,10 +10,9 @@ using Panchayat;
 
 namespace Panchayat.Controllers
 {
-    public class BudgetsController : Controller
+    [Authorize(Roles = "Boss,Type1")]
+    public class BudgetsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
-
         // GET: Budgets                
         public ActionResult Index(int? BudFYr)
         {

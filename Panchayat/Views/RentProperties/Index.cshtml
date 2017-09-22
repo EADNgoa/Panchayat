@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Panchayat.Property>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Properties For Rent";
 }
 
-<h2>Index</h2>
+<h2>Properties For Rent</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -29,9 +29,7 @@
             @Html.DisplayFor(modelItem => item.Remarks)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PropertyID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PropertyID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PropertyID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.PropertyID }) 
         </td>
     </tr>
 }
