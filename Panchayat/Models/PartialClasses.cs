@@ -97,6 +97,10 @@ namespace Panchayat
     public partial class PropertyBooking
     {
     }
+    [MetadataType(typeof(PropertyMetadata))]
+    public partial class Property
+    {
+    }
 
     public class Form10rpt
     {

@@ -11,7 +11,7 @@ namespace Panchayat
     {
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Pay Date")]        
+        [Display(Name = "Pay Date")]
         public DateTime PayDate;
     }
 
@@ -19,7 +19,7 @@ namespace Panchayat
     {
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Pay Date")]        
+        [Display(Name = "Pay Date")]
         public DateTime PayDate;
 
         [DataType(DataType.Date)]
@@ -69,7 +69,7 @@ namespace Panchayat
         [StringLength(25)]
         public String Mobile;
 
-        [Display(Name = "Email")]        
+        [Display(Name = "Email")]
         [StringLength(30)]
 
         public String Email;
@@ -118,7 +118,7 @@ namespace Panchayat
         public String Ledger1;
 
         [Display(Name = "Is Income(Yes or No)")]
-        [Required]        
+        [Required]
         public bool IsIncome;
 
     }
@@ -178,7 +178,7 @@ namespace Panchayat
 
         [Required]
         public string ListOfAuditObjection;
-                
+
         public string ActionsTaken;
     }
 
@@ -316,13 +316,20 @@ namespace Panchayat
         public string Remark;
 
     }
-   
+
 
     public class InOutRegsRecptsMetadata
     {
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime TDate;
+
+        [Required]
+        public int Qty;
+
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal Value;
     }
 
     public class InOutRegsIssuesMetadata
@@ -330,7 +337,29 @@ namespace Panchayat
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime TDate;
+
+        [Required]
+        public int Qty;
+
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal Value;
+
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal Balance;
+
+        [Required]
+        [StringLength(350)]
+        public string IssuedTo;
+
+        [Required]
+        [StringLength(350)]
+        public string Remarks;
+
     }
+
+
 
     public class PropertyBookingMetadata
     {
@@ -339,6 +368,64 @@ namespace Panchayat
         [Display(Name = "Booked For date")]
         [Required]
         public DateTime HDate;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Booked For date")]
+        [Required]
+        public DateTime TDate;
+
+
+        [StringLength(250)]
+        [Required]
+        public string NameOfApplicant;
+
+
+        [StringLength(15)]
+        [Required]
+        public string PhoneNo;
+
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal AdvAmount;
+
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal SecurityDepositAmt;
+
+        [StringLength(250)]
+        [Required]
+        public string ApplForSDRefund;
+
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal FullPayAmount;
+
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal PaymentOfLuxTax;
+
+
+        [StringLength(250)]
+        [Required]
+        public string Remarks;
+
     }
 
+    public class PropertyMetadata
+    {
+        [StringLength(100)]
+        [Required]
+        public string PropertyName;
+
+
+        [StringLength(250)]
+        [Required]
+        public string Remarks;
+    }
+
+
+
+
 }
+
