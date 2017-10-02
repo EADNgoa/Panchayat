@@ -29,13 +29,25 @@
         {
             <h4>DeadStock</h4>
         }
+        @if (ViewBag.RegisterTypeID == 21)
+        {
+            <h4>Form 9</h4>
+        }
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IORecptID)
 
 
         <div class="form-group">
-            <label class="control-label col-md-2">Date</label>
+            @if (ViewBag.RegisterTypeID == 21)
+            {
+                <label class="control-label col-md-2">Date</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Date</label>
+
+            }
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.TDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TDate, "", new { @class = "text-danger" })
@@ -43,25 +55,54 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Item</label>
-            <div class="col-md-10">
-                @Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
-            </div>
+            @if (ViewBag.RegisterTypeID == 21)
+            {
+                @Html.Hidden("ItemID", 4)
+            }
+            else
+            {
+                <label class="control-label col-md-2">Item</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
+                </div>
+
+            }
+
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Quantity</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
-            </div>
+            @if (ViewBag.RegisterTypeID == 21)
+            {
+                <label class="control-label col-md-2">Period Within Which To Be Spent</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
+                </div>
+
+            }
+            else
+            {
+                <label class="control-label col-md-2">Quantity </label>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
+                </div>
+
+            }
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Value</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+            @if (ViewBag.RegisterTypeID == 21)
+            {
+                <label class="control-label col-md-2">Amount</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Value</label>
+
+            }            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
             </div>
         </div>

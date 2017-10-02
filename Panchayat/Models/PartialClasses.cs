@@ -142,11 +142,16 @@ namespace Panchayat
     public class Form7Rpt
     {
         public int form7ID { get; set; }
+
         public int CitID { get; set; }
         public string CitName { get; set; }
         public string House { get; set; }
         public List<TaxDmd> TaxDmd { get; set; }
         public string Remarks { get; set; }
+        public Dictionary<int, TaxActuals> TaxActuals { get; set; }
+        public Dictionary<string, string> DetailData { get; set; }
+
+
     }
 
     public class TaxDmd
@@ -161,6 +166,8 @@ namespace Panchayat
     public class TaxActuals
     {
         public int f8yr { get; set; }
+        public int DDID { get; set; }
+
         public decimal Arrears { get; set; } = 0;
         public int ReceiptNo { get; set; } 
         public Nullable<DateTime> PayDate { get; set; } 

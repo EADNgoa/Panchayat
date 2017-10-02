@@ -16,9 +16,10 @@ namespace Panchayat.Controllers
     public class InOutRegsRecptsController : EAController
     {
         // GET: InOutRegsRecpts
-        public ActionResult Index(int? page, int? rt,DateTime? dr)
+        public ActionResult Index(int? page, int? rt,DateTime? dr, int? IORecieptID)
         {
             ViewBag.RegisterTypeID =rt;
+            ViewBag.IORcpt = IORecieptID ?? null;
             var inOutRegsRecpts = db.InOutRegsRecpts.Where(x=>x.IORecptID>0);
             if (rt != null)
             {
@@ -65,50 +66,95 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IORecptID,RegisterTypeID,TDate,ItemID,Qty,Value,RVno")] InOutRegsRecpt inOutRegsRecpt)
         {
-            int lid=0, sid=0;
-            string UserID = User.Identity.GetUserName();
-
-            if (inOutRegsRecpt.RegisterTypeID == 17)
-            {
-                lid = 8;
-                sid = 42;
-            }
-            if (inOutRegsRecpt.RegisterTypeID == 18)
-            {
-                 lid = 8;
-                 sid = 137;
-            }
-            if (inOutRegsRecpt.RegisterTypeID == 19)
-            {
-                 lid = 8;
-                 sid = 138;
-            }
-            if (inOutRegsRecpt.RegisterTypeID == 20)
-            {
-                lid = 8;
-                sid = 139;
-            }
-            var pn = db.Configs.Select(x=>x.VP).FirstOrDefault();
-            var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, ActualAmount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, For =null,PayDate=inOutRegsRecpt.TDate,CBfolio = null,ResNo= null,HeldOn= inOutRegsRecpt.TDate,Meeting="N/A",LedgerID = lid,SubLedgerID=sid,Form6=false};
-            db.Vouchers.Add(item);
-            db.SaveChanges();
+           
             if (ModelState.IsValid)
             {
-                inOutRegsRecpt.RVno = item.VoucherID;
-                db.InOutRegsRecpts.Add(inOutRegsRecpt);           
+           
+                inOutRegsRecpt.TDate = DateTime.Now;
                 db.SaveChanges();
-                var itemID = db.Inventories.Where(x => x.ItemID == inOutRegsRecpt.ItemID).Select(x=>x.ItemID).FirstOrDefault();
-                if (itemID != 0)
+                int lid = 0, sid = 0;
+                string UserID = User.Identity.GetUserName();
+
+                if (inOutRegsRecpt.RegisterTypeID == 17)
                 {
-                    var ExQty = db.Inventories.Find(itemID);
-                    ExQty.Qty = ExQty.Qty+(int)inOutRegsRecpt.Qty;
-                    db.Entry(ExQty).Property(a => a.Qty).IsModified = true;
+                    lid = 8;
+                    sid = 42;
+                }
+                if (inOutRegsRecpt.RegisterTypeID == 18)
+                {
+                    lid = 8;
+                    sid = 137;
+                }
+                if (inOutRegsRecpt.RegisterTypeID == 19)
+                {
+                    lid = 8;
+                    sid = 138;
+                }
+                if (inOutRegsRecpt.RegisterTypeID == 20)
+                {
+                    lid = 8;
+                    sid = 139;
+                }
+
+                int vid = 0;
+                if (inOutRegsRecpt.RegisterTypeID == 21)
+                {
+                    lid = 8;
+                    sid = 139;
+                    var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
+                    var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value, ActualAmount = inOutRegsRecpt.Value, For = null, PayDate = inOutRegsRecpt.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsRecpt.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid, Form6 = false };
+                    db.Vouchers.Add(item);
                     db.SaveChanges();
+                    vid = item.VoucherID;
                 }
                 else
                 {
-                    var item2 = new Inventory {ItemID = (int)inOutRegsRecpt.ItemID ,Qty =(int)inOutRegsRecpt.Qty };
-                    db.Inventories.Add(item2);
+
+                    var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
+                    var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, ActualAmount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, For = null, PayDate = inOutRegsRecpt.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsRecpt.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid, Form6 = false };
+                    db.Vouchers.Add(item);
+                    db.SaveChanges();
+                    vid = item.VoucherID;
+                }
+                inOutRegsRecpt.RVno = vid;
+                db.InOutRegsRecpts.Add(inOutRegsRecpt);           
+                db.SaveChanges();
+                var item1 = db.Inventories.Where(x => x.ItemID == inOutRegsRecpt.ItemID).FirstOrDefault();
+                if (item1 != null)
+                {
+                    if (inOutRegsRecpt.RegisterTypeID == 21)
+                    {
+                       
+                        item1.Qty = item1.Qty + (int)inOutRegsRecpt.Value;
+                        db.Entry(item1).Property(a => a.Qty).IsModified = true;
+                        inOutRegsRecpt.Qty = (int)inOutRegsRecpt.Value;
+
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                    
+                        item1.Qty = item1.Qty + (int)inOutRegsRecpt.Qty;
+                        db.Entry(item1).Property(a => a.Qty).IsModified = true;
+                        db.SaveChanges();
+                    }
+                 
+                }
+                else
+                {
+                    if (inOutRegsRecpt.RegisterTypeID != 21)
+                    {
+                
+                        var item2 = new Inventory { ItemID = (int)inOutRegsRecpt.ItemID, Qty = (int)inOutRegsRecpt.Qty };
+                        db.Inventories.Add(item2);
+                    }
+                    else
+                    {
+                        inOutRegsRecpt.Qty =(int) inOutRegsRecpt.Value;
+                        var item2 = new Inventory { ItemID = (int)inOutRegsRecpt.ItemID, Qty = (int)inOutRegsRecpt.Value };
+                        db.Inventories.Add(item2);
+                    }
+                   
                     db.SaveChanges();
                 }
 
@@ -155,26 +201,42 @@ namespace Panchayat.Controllers
             {
                 int id = (int)inOutRegsRecpt.RVno;
                 var voucher = db.Vouchers.Find(id);
-                voucher.Amount = inOutRegsRecpt.Qty * inOutRegsRecpt.Value;
-                db.Entry(voucher).Property(a => a.Amount).IsModified = true;
-
-                voucher.ActualAmount = inOutRegsRecpt.Qty * inOutRegsRecpt.Value;
-                db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
-
-
-
-                var itemID = db.Inventories.Where(x => x.ItemID == inOutRegsRecpt.ItemID).Select(x => x.ItemID).FirstOrDefault();
-                if (itemID != 0)
+                if(inOutRegsRecpt.RegisterTypeID==21)
                 {
                     db.Entry(inOutRegsRecpt).State = EntityState.Modified;
-                    db.SaveChanges();
-                    var ExQty = db.Inventories.Find(itemID);
-                    ExQty.Qty = ExQty.Qty - (int)OldQty;
-                    ExQty.Qty = ExQty.Qty +(int) inOutRegsRecpt.Qty;
+                    voucher.Amount =  inOutRegsRecpt.Value;
+                    db.Entry(voucher).Property(a => a.Amount).IsModified = true;
 
-                    db.Entry(ExQty).Property(a => a.Qty).IsModified = true;
+                    voucher.ActualAmount = inOutRegsRecpt.Value;
+                    db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
                     db.SaveChanges();
+            
                 }
+                else
+                {
+                    voucher.Amount = inOutRegsRecpt.Qty * inOutRegsRecpt.Value;
+                    db.Entry(voucher).Property(a => a.Amount).IsModified = true;
+
+                    voucher.ActualAmount = inOutRegsRecpt.Qty * inOutRegsRecpt.Value;
+                    db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
+
+                    var item = db.Inventories.Where(x => x.ItemID == inOutRegsRecpt.ItemID).FirstOrDefault();
+                    if (item != null)
+                    {
+                        db.Entry(inOutRegsRecpt).State = EntityState.Modified;
+                        item.Qty = item.Qty - (int)OldQty;
+                        item.Qty = item.Qty + (int)inOutRegsRecpt.Qty;
+
+                        db.Entry(item).Property(a => a.Qty).IsModified = true;
+                        inOutRegsRecpt.Qty = (int)inOutRegsRecpt.Value;
+                        db.SaveChanges();
+                    }
+                }
+              
+
+
+
+
               
 
                 return RedirectToAction("Index", new { rt = inOutRegsRecpt.RegisterTypeID });

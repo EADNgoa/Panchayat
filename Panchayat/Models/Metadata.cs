@@ -320,12 +320,12 @@ namespace Panchayat
 
     public class InOutRegsRecptsMetadata
     {
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date)] 
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime TDate;
 
-        [Required]
-        public int Qty;
+
+        public string Qty;
 
         [Required]
         [Range(0.0, Double.MaxValue)]
@@ -338,14 +338,14 @@ namespace Panchayat
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime TDate;
 
-        [Required]
+   
         public int Qty;
 
         [Required]
         [Range(0.0, Double.MaxValue)]
         public decimal Value;
 
-        [Required]
+     
         [Range(0.0, Double.MaxValue)]
         public decimal Balance;
 

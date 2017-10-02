@@ -248,6 +248,59 @@ namespace Panchayat.Controllers
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
+
+        public ActionResult TaxRptRq(int Id)
+        {
+            ViewBag.YearBox = MyExtensions.MakeYrRq(8, 1, DateTime.Today.Year);
+            ViewBag.SubLedger = Id;
+
+
+            ViewBag.ReturnAction = "TaxRpt";
+
+            return View("ReportRq");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TaxRpt(int SubLedgerID,FormCollection fm)
+        {
+            if (fm["RptYear"] == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            int yr = int.Parse(fm["RptYear"]);
+          
+            if (ModelState.IsValid)
+            {
+                ViewBag.fyr = yr - 1;
+                ViewBag.tyr = yr;              
+                var ln = db.SubLedgers.Find(SubLedgerID);
+                string RptName = ln.Ledger;
+                List<Form7Rpt> tax = db.Demands.Where(d => d.StopDate.Year >= yr && d.CreatedOn.Year == yr)
+                    .Select(g => new Form7Rpt
+                    {
+                        form7ID = g.DemandID,
+                        CitID = (int)g.CitizenID,
+                        CitName = g.Citizen.Name,
+                        House = g.HouseNo,
+                        Remarks = g.Remarks,
+                     
+                    }).ToList<Form7Rpt>();
+
+                foreach (var td in tax)
+                {
+
+         
+                   td.TaxActuals = db.DemandYears.Where(y => y.DemandYear1 == yr  && y.DemandDetail.SubLedgerID == SubLedgerID)
+                  .Where(c => c.DemandDetail.DemandID == td.form7ID )
+                  .Select(y => new TaxActuals { Arrears = (y.Arrears ?? 0), f8yr = y.DemandYear1, PaidAmt =(y.RecptAmt ?? 0), PayDate = (DateTime)y.RecptDate, ReceiptNo = (y.RecieptNo ?? 0) ,DDID =y.DemandDetail.DDID})
+                  .ToDictionary(r => r.f8yr);
+                    
+                }
+
+                ViewBag.IncPer = db.Configs.Select(a=>a.ArrearsPerc).FirstOrDefault();
+                return View(RptName,tax);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult Form7Report(int RptYear)

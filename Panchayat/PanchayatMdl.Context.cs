@@ -52,13 +52,13 @@ namespace Panchayat
         public virtual DbSet<Outward> Outwards { get; set; }
         public virtual DbSet<Noc> Nocs { get; set; }
         public virtual DbSet<Inward> Inwards { get; set; }
-        public virtual DbSet<InOutRegsIssue> InOutRegsIssues { get; set; }
-        public virtual DbSet<InOutRegsRecpt> InOutRegsRecpts { get; set; }
         public virtual DbSet<InvItem> InvItems { get; set; }
-        public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
         public virtual DbSet<Budget> Budgets { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<PropertyBooking> PropertyBookings { get; set; }
+        public virtual DbSet<InOutRegsRecpt> InOutRegsRecpts { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<InOutRegsIssue> InOutRegsIssues { get; set; }
     }
 }

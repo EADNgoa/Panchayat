@@ -14,6 +14,12 @@ namespace Panchayat
     
     public partial class InOutRegsRecpt
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public InOutRegsRecpt()
+        {
+            this.InOutRegsIssues = new HashSet<InOutRegsIssue>();
+        }
+    
         public int IORecptID { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }
         public Nullable<System.DateTime> TDate { get; set; }
@@ -22,7 +28,9 @@ namespace Panchayat
         public Nullable<decimal> Value { get; set; }
         public Nullable<int> RVno { get; set; }
     
-        public virtual RegisterType RegisterType { get; set; }
         public virtual InvItem InvItem { get; set; }
+        public virtual RegisterType RegisterType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InOutRegsIssue> InOutRegsIssues { get; set; }
     }
 }
