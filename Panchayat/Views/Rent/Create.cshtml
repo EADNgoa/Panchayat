@@ -1,0 +1,155 @@
+﻿@model Panchayat.Form4
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.CitizenID)
+    @Html.HiddenFor(model => model.SubLedgerID)
+    @Html.HiddenFor(model => model.HouseNo)
+
+    <div class="form-horizontal">
+        <h4>Rent</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CitizenID, "Citizen", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" id="Citizen" name="Citizen" style="color:black;" data-autocomplete-idholder="#CitizenID" data-autocitizen-url="@Url.Action("AutoCompleteCitz")" class="form-control" />
+
+                @Html.ValidationMessageFor(model => model.CitizenID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+ 
+
+        <div class="form-group">
+<label class="control-label col-md-2" > Current</label>       
+            <div class="col-md-10">
+                <input type="text" name="data-90" class="form-control"/>
+            </div>
+        </div>
+
+
+
+
+     
+
+     
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('*[data-autoledger-url]')
+            .each(function () {
+                $(this).autocomplete({
+                    source: $(this).data("autoledger-url"),
+                    minLenght: 3,
+                    delay: 500,
+                    select: function (event, ui) {
+                        //save the Subledger ID
+                        $($(this).data("autocomplete-idholder")).val(ui.item.id);
+
+                        //Clear the contents of the placeholder Div
+                        $('#CLDdiv').html("");
+
+                        //Put our dynamic fields in the placeholder div
+                        $('#CLDdiv').load(
+                                '@Url.Action("CreateLedgDetsPartial")',
+                                { id: ui.item.id }
+                            );
+
+                        }
+                    });
+                });
+    });
+
+              $(document).ready(function () {
+            $('*[data-autocitizen-url]')
+                .each(function () {
+                    $(this).autocomplete({
+                        source: $(this).data("autocitizen-url"),
+                        minLenght: 3,
+                        delay: 500,
+                        select: function (event, ui) {
+                            //save the Citizen ID
+                            $($(this).data("autocomplete-idholder")).val(ui.item.id);
+
+                            //Clear the contents of the placeholder Div
+                            $('#ExistingDataDiv').html("");
+
+                            //Put our dynamic fields in the placeholder div
+                            $('#ExistingDataDiv').load(
+                                '@Url.Action("FetchCitDmd", "Citizens")',
+                                { id: ui.item.id }
+                            );
+
+                        }
+                    });
+                });
+        });
+
+              //Autocomplete on any view with id
+              $(document).ready(function () {
+                  $('*[data-autohouse-url]')
+                      .each(function () {
+                          $(this).autocomplete({
+                              source: function (request, response) {
+                                  $.ajax({
+                                      url: '@Url.Action("AutoCompleteHouseNo")',
+                                      dataType: "json",
+                                      data: {
+                                          term: request.term,
+                                          Cit: $('#CitizenID').val()
+                                      },
+                                      success: function (data) {
+                                          response(data);
+                                      }
+                                  });
+                              },
+
+                              minLenght: 3,
+                              delay: 500,
+                              select: function (event, ui) {
+                                  $($(this).data("autocomplete-idholder")).val(ui.item.id);
+                              }
+                          });
+                      });
+              });
+
+    </script>
+
+
+}

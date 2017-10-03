@@ -15,7 +15,7 @@ namespace Panchayat
     public partial class Inventory
     {
         public int ItemID { get; set; }
-        public int Qty { get; set; }
+        public decimal Qty { get; set; }
     
         public virtual InvItem InvItem { get; set; }
     }

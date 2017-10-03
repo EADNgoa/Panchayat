@@ -1,0 +1,163 @@
+﻿@model List<Form7Rpt>
+@{
+    ViewBag.Title = String.Format("Sign Board Tax Demand Register For The Year ");
+}
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        1 display: table-footer-group
+    }
+</style>
+
+
+@*<style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>*@
+
+<center><h3 class="section-to-print">@ViewBag.Title:&nbsp;@ViewBag.fyr -@ViewBag.tyr</h3></center>
+
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th class=" section-to-Not-print" colspan="5">Yearwise demand and the amount collection</th>
+
+        </tr>
+        <tr>
+            <th>
+                License No.
+            </th>
+            <th width="30%">
+                Name Of Proprieter
+            </th>
+            <th>
+               Words Displayed On SignBoard
+            </th>
+            <th>Ward No.</th>
+            <th>
+               Size
+            </th>
+            @for (int i = 0; i <= 1; i++)
+            {
+                <th>Arrears</th>
+                <th>Fine</th>
+                <th>Current</th>
+                <th>Total</th>
+            }
+            <th>
+                Balance
+            </th>
+            <th>
+                Sub Rpt No
+            </th>
+            <th>
+                Reciept Date
+            </th>
+            <th>Remarks</th>
+        </tr>
+        <tr>
+            @for (int i = 1; i < 18; i++)
+            {
+                <th>@i</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @*A new row for each Citizen's House*@
+        @foreach (Form7Rpt item in Model)
+        {
+
+            <tr>
+                <td>
+                    License No
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => item.CitName)
+                </td>
+                <td>
+                  Words Displayed On Sign Board
+                </td>
+                <td>@Html.DisplayFor(model => item.House)</td>
+                <td>Size</td>
+
+                @foreach (var ta in item.TaxActuals)
+                {
+                    for (int i = 0; i <= 1; i++)
+                    {
+                        <td>
+                            @Html.DisplayFor(model => ta.Value.Arrears)
+                        </td>
+                        <td>
+
+                            @ViewBag.IncPer
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => ta.Value.PaidAmt)
+                        </td>
+                        <td>
+                            @{
+                                decimal paid = ta.Value.PaidAmt;
+                                decimal arr = ta.Value.Arrears;
+                                decimal inc = arr * ViewBag.IncPer / 100;
+                                decimal act;
+                                if (arr != 0)
+                                {
+                                    act = arr + inc - paid;
+                                }
+                                else
+                                {
+                                    act = arr + paid;
+                                }
+                                @act
+                            }
+                        </td>
+                                }
+                                <td>
+                                    @{
+                                        decimal paid2 = ta.Value.PaidAmt;
+                                        decimal arr1 = 0;
+                                        if (arr1 != 0)
+                                        {
+                                            arr1 = ta.Value.Arrears - paid2;
+                                        }
+                                        else
+                                        {
+                                            arr1 = ta.Value.Arrears;
+                                        }
+                                    }
+                                    @arr1
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => ta.Value.ReceiptNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => ta.Value.PayDate)
+                                </td>
+                                <td>
+                                    Remark
+                                </td>
+                                        }
+
+
+
+            </tr>
+                                        }
+    </tbody>
+</table>

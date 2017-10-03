@@ -1,0 +1,74 @@
+﻿@model Panchayat.Form4
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Form4</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecvdFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecvdFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HouseNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HouseNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Citizen.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Citizen.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ledger.Ledger1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ledger.Ledger1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubLedger.Ledger)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubLedger.Ledger)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RecieptNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

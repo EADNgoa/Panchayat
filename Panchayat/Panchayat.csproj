@@ -643,6 +643,8 @@
     <Content Include="Views\PropertyBookings\Details.cshtml" />
     <Content Include="Views\PropertyBookings\Edit.cshtml" />
     <Content Include="Views\PropertyBookings\Index.cshtml" />
+    <Content Include="Views\Reports\Professional Tax.cshtml" />
+    <Content Include="Views\Reports\Sign Board Tax.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

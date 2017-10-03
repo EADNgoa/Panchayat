@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Panchayat.Form4>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Sr No 
+        </th>
+        <th>
+            Name Of the Rent Payer
+        </th>
+        <th>
+           Month
+        </th>
+        <th>
+            Arrears
+        </th>
+        <th>
+           Current
+        </th>
+        <th>
+           Amount
+        </th>
+        <th>
+           Date
+        </th>
+        <th>
+            Arrears
+        </th>
+        <th>
+            Current 
+        </th>
+        <th>
+            Total
+        </th>
+        <th></th>
+    </tr>
+    @{ var i = 1; }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @i
+          
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Citizen.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayDate.Value.Month)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RVdetails.FirstOrDefault(a => a.LedgerDetailID == 89 && a.ReceiptNo == item.RecieptNo && item.PayDate == item.PayDate.Value.AddMonths(-1)).RVDetail1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RVdetails.FirstOrDefault(a => a.LedgerDetailID == 90 && a.ReceiptNo == item.RecieptNo && item.PayDate == item.PayDate.Value.AddMonths(-1)).RVDetail1))
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RVdetails.FirstOrDefault(a => a.LedgerDetailID == 89 ))
+
+            @{ decimal Arear = Convert.ToInt32(item.RVdetails.FirstOrDefault(a => a.LedgerDetailID == 89)); }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RVdetails.FirstOrDefault(a => a.LedgerDetailID == 90 ))
+
+            @{decimal curr = Convert.ToInt32(item.RVdetails.FirstOrDefault(a => a.LedgerDetailID == 90)); }
+
+
+        </td>
+        <td>
+            @{decimal tot = Arear + curr; }
+            @tot
+        </td>
+  
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RecieptNo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RecieptNo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RecieptNo })
+        </td>
+    </tr>
+    i++;
+}
+
+</table>

@@ -26,7 +26,8 @@ namespace Panchayat
         public string Remarks { get; set; }
         public Nullable<int> RVno { get; set; }
     
-        public virtual RegisterType RegisterType { get; set; }
         public virtual InvItem InvItem { get; set; }
+        public virtual RegisterType RegisterType { get; set; }
+        public virtual InOutRegsRecpt InOutRegsRecpt { get; set; }
     }
 }

@@ -23,6 +23,13 @@
     {
         <h4> Register Of Street Light Articles</h4>
     }
+
+    @if (ViewBag.RegisterTypeID == 21)
+    {
+       <h5><b>Form No. 9</b></h5>
+        <small>See Rule 20[vii]</small>
+        <h4> Register For Conditional Grants Sanctioned During Year</h4>
+    }
 </center>
 <br class="section-to-Not-print" />
 <br class="section-to-Not-print" />
@@ -37,7 +44,7 @@
                         <td></td>
                         <td> Date Of Reciept:</td>
                         <td> @Html.TextBox("dr", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
-                       
+
                         <td class="col-lg-1"></td>
                         <td><input type="submit" value="Search" class="btn btn-default" /></td>
                     </tr>
@@ -49,94 +56,193 @@
 </center>
 
 <p class="section-to-Not-print">
-    @Html.ActionLink("Create New", "Create",new {rt = ViewBag.RegisterTypeID})
+    @Html.ActionLink("Create New", "Create", new { rt = ViewBag.RegisterTypeID })
 
     <span class="pull-right">
         <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
     </span>
 </p>
-
-<table class="table section-to-print">
-    <tr>
-        <th>
-            Date
-        </th>
-        <th>
-           
-            Particular and From Whom Recieved
-        </th>
-        <th>
-          Bill No. Date
-        </th>
-        <th>
-          Quantity
-        </th>
-   
-        <th>
-        Value Per Unit   
-        </th>
-        <th>
-        Total
-        </th>
-        <th class="section-to-Not-print"></th>
-    </tr>
-
-@foreach (var item in Model)
+@if (ViewBag.RegisterTypeID == 21)
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InvItem.Item)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RVno)/
-            @Html.DisplayFor(modelItem => item.TDate)
-            
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Qty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Value)
-        </td>
-       
-      
-        <td>@{ int a = (int)item.Qty, b = (int)item.Value, c = 0;
-            c = a * b;
+    <table class="table section-to-print">
+        <tr>
+            <th>
+                Sr No
+            </th>
+            <th>
+
+                No and Date Of The Sanction
+            </th>
+            <th>
+                By Whom Sanctioned
+            </th>
+            <th>
+                Purpose For Which Given
+            </th>
+
+            <th>
+                Period Within Which To be Spent
+            </th>
+            <th>
+                Amount Of the Grant
+            </th>
+            <th>
+
+                No & Date of Treasury Voucher On Which The Amount is drawn
+            </th>
+            <th>
+                No & Date Of Voucher
+            </th>
+            <th>
+                Amount Drawn
+            </th>
+            <th>
+                Balance After Each Transaction
+            </th>
+            <th>
+                Remark
+            </th>
+            <th class="section-to-Not-print"></th>
+        </tr>
+        @{int i = 1;
         }
-           @c
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RVno),
+                    @Html.DisplayFor(modelItem => item.TDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvItem.Item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RVno)
+                    @Html.DisplayFor(modelItem => item.TDate)
 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
               
-        </td>
-        <td class="section-to-Not-print">
-            @Html.ActionLink("Edit", "Edit", new { id = item.IORecptID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IORecptID }) |
-            
-        </td>
-    </tr>
-            }
+                <td>@Html.DisplayFor(modelItem => item.RVno),@Html.DisplayFor(modelItem => item.TDate)</td>
+                <td colspan="4">
+                   
+                    <table class="table" style="background-color:saddlebrown !important">
+                        @{decimal 
+                                PreBal = 0;
+                                
+                        }
 
-</table>
-     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    @if (ViewBag.RegisterTypeID == 17)
-    {
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 17 }))
-    }
-    @if (ViewBag.RegisterTypeID == 18)
-    {
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 18 }))
-    }
-    @if (ViewBag.RegisterTypeID == 19)
-    {
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 19 }))
-    }
-    @if (ViewBag.RegisterTypeID == 20)
-    {
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 20 }))
-    }           
+                        @foreach (var item2 in item.InOutRegsIssues)
+                        {
+                           foreach(var bal in item2.InOutRegsRecpt.InOutRegsIssues)
+                           {
+                               PreBal += (decimal)bal.Value; 
+                           }
+                            <tr>
+                                <td colspan="1">@Html.DisplayFor(modelItem => item2.InOutRegsRecpt.RVno),@Html.DisplayFor(modelItem => item2.InOutRegsRecpt.TDate)</td>
+                                <td>@Html.DisplayFor(modelItem => item2.Value)</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item2.Balance)
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item2.Remarks)</td>
+                                <td></td>
+                            </tr>
+                        }
+
+                    </table>
+                </td>
+
+
+                <td class="section-to-Not-print">
+
+
+                    <a href="~/InOutRegsIssues/Create/?rt=21&IORecieptID=@item.IORecptID">Issue Grants</a>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IORecptID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IORecptID }) |
+
+                </td>
+            </tr>
+            i++;
+        }
+
+    </table>
+
+            }
+            else
+            {
+    <table class="table section-to-print">
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+
+                Particular and From Whom Recieved
+            </th>
+            <th>
+                Bill No. Date
+            </th>
+            <th>
+                Quantity
+            </th>
+
+            <th>
+                Value Per Unit
+            </th>
+            <th>
+                Total
+            </th>
+            <th class="section-to-Not-print"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvItem.Item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RVno)/
+                    @Html.DisplayFor(modelItem => item.TDate)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+
+
+                <td>
+                    @{ int a = (int)item.Qty, b = (int)item.Value, c = 0;
+                    c = a * b;
+                }
+                @c
+
+
+            </td>
+            <td class="section-to-Not-print">
+                @Html.ActionLink("Edit", "Edit", new { id = item.IORecptID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IORecptID }) |
+
+            </td>
+        </tr>
+                    }
+
+    </table>
+      }
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = ViewBag.RegisterTypeID }))
