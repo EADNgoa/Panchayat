@@ -613,11 +613,6 @@
     <Content Include="Views\Reports\Maintenance of community hall.cshtml" />
     <Content Include="Views\Reports\Right To Information.cshtml" />
     <Content Include="Views\Reports\Form6.cshtml" />
-    <Content Include="Views\InvItems\Create.cshtml" />
-    <Content Include="Views\InvItems\Delete.cshtml" />
-    <Content Include="Views\InvItems\Details.cshtml" />
-    <Content Include="Views\InvItems\Edit.cshtml" />
-    <Content Include="Views\InvItems\Index.cshtml" />
     <Content Include="Views\InOutRegsRecpts\Create.cshtml" />
     <Content Include="Views\InOutRegsRecpts\Delete.cshtml" />
     <Content Include="Views\InOutRegsRecpts\Details.cshtml" />
@@ -645,6 +640,11 @@
     <Content Include="Views\PropertyBookings\Index.cshtml" />
     <Content Include="Views\Reports\Professional Tax.cshtml" />
     <Content Include="Views\Reports\Sign Board Tax.cshtml" />
+    <Content Include="Views\InvItems\Create.cshtml" />
+    <Content Include="Views\InvItems\Delete.cshtml" />
+    <Content Include="Views\InvItems\Details.cshtml" />
+    <Content Include="Views\InvItems\Edit.cshtml" />
+    <Content Include="Views\InvItems\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

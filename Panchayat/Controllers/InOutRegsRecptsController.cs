@@ -32,7 +32,7 @@ namespace Panchayat.Controllers
             }
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
-            return View(inOutRegsRecpts.ToList().ToPagedList(pageNumber, pageSize));
+            return View(inOutRegsRecpts.OrderByDescending(a => a.TDate).ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: InOutRegsRecpts/Details/5

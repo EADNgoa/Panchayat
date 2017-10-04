@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f6045e67b3384e138fe1a60d2b0f7bb4" Name="Diagram1" ZoomLevel="67">
+      <Diagram DiagramId="f6045e67b3384e138fe1a60d2b0f7bb4" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="PanchayatModel.Citizen" Width="1.5" PointX="4.375" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Correction" Width="1.5" PointX="11.875" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Form1" Width="1.5" PointX="3.625" PointY="12.25" IsExpanded="true" />
@@ -83,12 +83,13 @@
         <EntityTypeShape EntityType="PanchayatModel.InOutRegsRecpt" Width="1.5" PointX="16.625" PointY="13.375" />
         <AssociationConnector Association="PanchayatModel.FK_InOutRegsRecpt_ToInvItems" />
         <AssociationConnector Association="PanchayatModel.FK_InOutRegsRecpt_ToRegType" />
-        <EntityTypeShape EntityType="PanchayatModel.Inventory" Width="1.5" PointX="3" PointY="24" />
-        <AssociationConnector Association="PanchayatModel.FK_Inventory_ToInvItems" />
         <EntityTypeShape EntityType="PanchayatModel.InOutRegsIssue" Width="1.5" PointX="18.875" PointY="12.875" />
         <AssociationConnector Association="PanchayatModel.FK_InOutRegsIssu_ToInvItems" />
         <AssociationConnector Association="PanchayatModel.FK_InOutRegsIssu_ToRegType" />
         <AssociationConnector Association="PanchayatModel.FK_InOutRegsIssue_ToIORecptID" />
+        <AssociationConnector Association="PanchayatModel.FK_InvItems_ToRegisterTypes" />
+        <EntityTypeShape EntityType="PanchayatModel.Inventory" Width="1.5" PointX="3" PointY="24.125" />
+        <AssociationConnector Association="PanchayatModel.FK_Inventory_ToInvItems" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
