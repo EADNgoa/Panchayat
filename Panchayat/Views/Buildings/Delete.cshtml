@@ -1,0 +1,136 @@
+﻿@model Panchayat.Building
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Building</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WardNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WardNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.House_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.House_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameOfConstructioin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameOfConstructioin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfAppl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfAppl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoOfRes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoOfRes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfPermision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfPermision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountPaid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountPaid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfCompletion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfCompletion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfOcccp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfOcccp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfAsses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfAsses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HouseTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HouseTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

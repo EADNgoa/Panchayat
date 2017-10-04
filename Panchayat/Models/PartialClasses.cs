@@ -101,6 +101,10 @@ namespace Panchayat
     public partial class Property
     {
     }
+    [MetadataType(typeof(BuildingMetadata))]
+    public partial class Building
+    {
+    }
 
     public class Form10rpt
     {

@@ -201,6 +201,9 @@
     <Compile Include="Budget.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
+    <Compile Include="Building.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="CBRunning.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -213,6 +216,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuditsController.cs" />
     <Compile Include="Controllers\BudgetsController.cs" />
+    <Compile Include="Controllers\BuildingsController.cs" />
     <Compile Include="Controllers\CitizensController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\CorrectionsController.cs" />
@@ -640,11 +644,19 @@
     <Content Include="Views\PropertyBookings\Index.cshtml" />
     <Content Include="Views\Reports\Professional Tax.cshtml" />
     <Content Include="Views\Reports\Sign Board Tax.cshtml" />
+
+    <Content Include="Views\Buildings\Create.cshtml" />
+    <Content Include="Views\Buildings\Delete.cshtml" />
+    <Content Include="Views\Buildings\Details.cshtml" />
+    <Content Include="Views\Buildings\Edit.cshtml" />
+    <Content Include="Views\Buildings\Index.cshtml" />
+
     <Content Include="Views\InvItems\Create.cshtml" />
     <Content Include="Views\InvItems\Delete.cshtml" />
     <Content Include="Views\InvItems\Details.cshtml" />
     <Content Include="Views\InvItems\Edit.cshtml" />
     <Content Include="Views\InvItems\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

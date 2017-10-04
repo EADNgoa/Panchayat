@@ -423,6 +423,66 @@ namespace Panchayat
         public string Remarks;
     }
 
+    public class BuildingMetadata
+    {
+        [Required]
+        public int WardNo;
+
+        [Required]
+        public int House_No;
+
+        [StringLength(100)]
+        [Required]
+        public string OwnerName;
+
+        [StringLength(250)]
+        [Required]
+        public string NameOfConstructioin;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)] 
+        [Required]
+        public DateTime DateOfAppl;
+
+        [Required]
+        public int NoOfRes;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        [Required]
+        public DateTime DateOfPermision;
+
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal EstimatedCost;
+
+        [Required]
+        public int AmountPaid;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfCompletion;
+
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfOcccp;
+
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfAsses;
+
+        [Range(0.0, Double.MaxValue)]
+        public decimal HouseTax;
+
+        [Required]
+        [StringLength(250)]
+        public string Remarks;
+
+
+    }
+
 
 
 
