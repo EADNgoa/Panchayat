@@ -26,6 +26,26 @@
           <Property Name="ActualAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="OpeningBalance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="BuildingID" />
+          </Key>
+          <Property Name="BuildingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WardNo" Type="int" />
+          <Property Name="House No" Type="int" />
+          <Property Name="OwnerName" Type="varchar" MaxLength="100" />
+          <Property Name="NameOfConstructioin" Type="varchar" MaxLength="250" />
+          <Property Name="DateOfAppl" Type="date" />
+          <Property Name="NoOfRes" Type="int" />
+          <Property Name="DateOfPermision" Type="date" />
+          <Property Name="EstimatedCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AmountPaid" Type="int" />
+          <Property Name="DateOfCompletion" Type="date" />
+          <Property Name="DateOfOcccp" Type="date" />
+          <Property Name="DateOfAsses" Type="date" />
+          <Property Name="HouseTax" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="CBRunning">
           <Key>
             <PropertyRef Name="EntryDate" />
@@ -959,6 +979,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
         <EntityContainer Name="PanchayatModelStoreContainer">
           <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Budget" EntityType="Self.Budget" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Building" EntityType="Self.Building" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CBRunning" EntityType="Self.CBRunning" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Citizen" EntityType="Self.Citizen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
@@ -1707,6 +1728,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="InOutRegsRecpt" EntitySet="InOutRegsRecpts" />
             <End Role="InOutRegsIssue" EntitySet="InOutRegsIssues" />
           </AssociationSet>
+          <EntitySet Name="Buildings" EntityType="PanchayatModel.Building" />
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -2448,6 +2470,26 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="BuildingID" />
+          </Key>
+          <Property Name="BuildingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WardNo" Type="Int32" />
+          <Property Name="House_No" Type="Int32" />
+          <Property Name="OwnerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NameOfConstructioin" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfAppl" Type="DateTime" Precision="0" />
+          <Property Name="NoOfRes" Type="Int32" />
+          <Property Name="DateOfPermision" Type="DateTime" Precision="0" />
+          <Property Name="EstimatedCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AmountPaid" Type="Int32" />
+          <Property Name="DateOfCompletion" Type="DateTime" Precision="0" />
+          <Property Name="DateOfOcccp" Type="DateTime" Precision="0" />
+          <Property Name="DateOfAsses" Type="DateTime" Precision="0" />
+          <Property Name="HouseTax" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2879,6 +2921,27 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
                 <ScalarProperty Name="IORecptID" ColumnName="IORecptID" />
                 <ScalarProperty Name="IOissueID" ColumnName="IOissueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="PanchayatModel.Building">
+              <MappingFragment StoreEntitySet="Building">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="HouseTax" ColumnName="HouseTax" />
+                <ScalarProperty Name="DateOfAsses" ColumnName="DateOfAsses" />
+                <ScalarProperty Name="DateOfOcccp" ColumnName="DateOfOcccp" />
+                <ScalarProperty Name="DateOfCompletion" ColumnName="DateOfCompletion" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
+                <ScalarProperty Name="DateOfPermision" ColumnName="DateOfPermision" />
+                <ScalarProperty Name="NoOfRes" ColumnName="NoOfRes" />
+                <ScalarProperty Name="DateOfAppl" ColumnName="DateOfAppl" />
+                <ScalarProperty Name="NameOfConstructioin" ColumnName="NameOfConstructioin" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="House_No" ColumnName="House No" />
+                <ScalarProperty Name="WardNo" ColumnName="WardNo" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

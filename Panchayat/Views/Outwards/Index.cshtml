@@ -68,14 +68,10 @@
 
 <br />
 <p>
-    @if (ViewBag.RegisterTypeID == 3)
-    {
-        @Html.ActionLink("Create New", "Create",new { rt=3})
-    }
-    @if (ViewBag.RegisterTypeID == 11)
-    {
-        @Html.ActionLink("Create New", "Create", new { rt = 11 })
-    }
+  
+
+        @Html.ActionLink("Create New", "Create", new { rt = ViewBag.RegisterTypeID })
+    
    
     <span class="pull-right">
         <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />

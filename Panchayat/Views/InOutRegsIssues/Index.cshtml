@@ -209,23 +209,6 @@
                             </table>
                                                 }
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    @if (ViewBag.RegisterTypeID == 17)
-    {
+  
         @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 17 }))
-    }
-    @if (ViewBag.RegisterTypeID == 18)
-    {
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 18 }))
-    }
-    @if (ViewBag.RegisterTypeID == 19)
-    {
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 19 }))
-    }
-    @if (ViewBag.RegisterTypeID == 20)
-    {
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 20 }))
-    }
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = ViewBag.RegisterTypeID }))

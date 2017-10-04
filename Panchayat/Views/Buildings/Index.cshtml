@@ -1,0 +1,148 @@
+﻿@model PagedList.IPagedList<Panchayat.Building>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2 class="section-to-print">Register For Building Permision</h2>
+    <br />
+    @using (Html.BeginForm("Index", "Buildings", FormMethod.Get))
+    {
+        
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>Ward No:</td>
+                        <td> @Html.TextBox("wn", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
+                        <td>House No:</td>
+                        <td> @Html.TextBox("hn", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control col-md-3 input-sm" })</td>
+                        <td> Date Of Application:</td>
+                        <td> @Html.TextBox("doa", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+                     
+
+                        <td class="col-lg-1"></td>
+                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br />
+    }
+    
+    
+    
+    
+    
+    </center>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+
+    <span class="pull-right">
+        <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+    </span>
+</p>
+<table class="table section-to-print">
+    <tr>
+        <th>Ward No
+        </th>
+        <th>
+           House No
+        </th>
+        <th>
+          Owners Name
+        </th>
+        <th>
+          Name Of Construction
+        </th>
+        <th>
+            Date Of Application
+        </th>
+        <th>
+           Date & No Of Resolution of VP
+        </th>
+        <th>
+           Date Of Permision
+        </th>
+        <th>
+           Estimated Cost Of Construction
+        </th>
+        <th>
+           Amount Of License Fee Paid
+        </th>
+        <th>
+           Date Of Completion
+        </th>
+        <th>
+            Date Of Occupation
+       </th>
+        <th>
+         Date Of Assesment Of House Tax
+        </th>
+        <th>
+           House Tax Payable   </th>
+        <th>
+Remarks        </th>
+        <th class="section-to-Not-print"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.WardNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.House_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OwnerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfConstructioin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfAppl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfRes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfPermision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstimatedCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountPaid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfCompletion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfOcccp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfAsses)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HouseTax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+        <td class="section-to-Not-print">
+            @Html.ActionLink("Edit", "Edit", new { id=item.BuildingID }) |
+         
+        </td>
+    </tr>
+}
+
+</table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = ViewBag.RegisterTypeID }))
