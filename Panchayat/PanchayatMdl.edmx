@@ -245,6 +245,7 @@
           </Key>
           <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Item" Type="varchar" MaxLength="350" />
+          <Property Name="RegisterTypeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inward">
           <Key>
@@ -772,6 +773,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_InvItems_ToRegisterTypes">
+          <End Role="RegisterTypes" Type="Self.RegisterTypes" Multiplicity="1" />
+          <End Role="InvItems" Type="Self.InvItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterTypes">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="InvItems">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Inward_RegisterTypes">
           <End Role="RegisterTypes" Type="Self.RegisterTypes" Multiplicity="1" />
           <End Role="Inward" Type="Self.Inward" Multiplicity="*" />
@@ -1133,6 +1146,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_Inventory_ToInvItems" Association="Self.FK_Inventory_ToInvItems">
             <End Role="InvItems" EntitySet="InvItems" />
             <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvItems_ToRegisterTypes" Association="Self.FK_InvItems_ToRegisterTypes">
+            <End Role="RegisterTypes" EntitySet="RegisterTypes" />
+            <End Role="InvItems" EntitySet="InvItems" />
           </AssociationSet>
           <AssociationSet Name="FK_Inward_RegisterTypes" Association="Self.FK_Inward_RegisterTypes">
             <End Role="RegisterTypes" EntitySet="RegisterTypes" />
@@ -1710,11 +1727,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="RegisterType" EntitySet="RegisterTypes" />
             <End Role="InOutRegsRecpt" EntitySet="InOutRegsRecpts" />
           </AssociationSet>
-          <EntitySet Name="Inventories" EntityType="PanchayatModel.Inventory" />
-          <AssociationSet Name="FK_Inventory_ToInvItems" Association="PanchayatModel.FK_Inventory_ToInvItems">
-            <End Role="InvItem" EntitySet="InvItems" />
-            <End Role="Inventory" EntitySet="Inventories" />
-          </AssociationSet>
           <EntitySet Name="InOutRegsIssues" EntityType="PanchayatModel.InOutRegsIssue" />
           <AssociationSet Name="FK_InOutRegsIssu_ToInvItems" Association="PanchayatModel.FK_InOutRegsIssu_ToInvItems">
             <End Role="InvItem" EntitySet="InvItems" />
@@ -1728,7 +1740,19 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="InOutRegsRecpt" EntitySet="InOutRegsRecpts" />
             <End Role="InOutRegsIssue" EntitySet="InOutRegsIssues" />
           </AssociationSet>
+
           <EntitySet Name="Buildings" EntityType="PanchayatModel.Building" />
+
+          <AssociationSet Name="FK_InvItems_ToRegisterTypes" Association="PanchayatModel.FK_InvItems_ToRegisterTypes">
+            <End Role="RegisterType" EntitySet="RegisterTypes" />
+            <End Role="InvItem" EntitySet="InvItems" />
+          </AssociationSet>
+          <EntitySet Name="Inventories" EntityType="PanchayatModel.Inventory" />
+          <AssociationSet Name="FK_Inventory_ToInvItems" Association="PanchayatModel.FK_Inventory_ToInvItems">
+            <End Role="InvItem" EntitySet="InvItems" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
+
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -2013,6 +2037,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <NavigationProperty Name="Inwards" Relationship="PanchayatModel.FK_Inward_RegisterTypes" FromRole="RegisterType" ToRole="Inward" />
           <NavigationProperty Name="InOutRegsRecpts" Relationship="PanchayatModel.FK_InOutRegsRecpt_ToRegType" FromRole="RegisterType" ToRole="InOutRegsRecpt" />
           <NavigationProperty Name="InOutRegsIssues" Relationship="PanchayatModel.FK_InOutRegsIssu_ToRegType" FromRole="RegisterType" ToRole="InOutRegsIssue" />
+          <NavigationProperty Name="InvItems" Relationship="PanchayatModel.FK_InvItems_ToRegisterTypes" FromRole="RegisterType" ToRole="InvItem" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -2161,8 +2186,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Item" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="InOutRegsRecpts" Relationship="PanchayatModel.FK_InOutRegsRecpt_ToInvItems" FromRole="InvItem" ToRole="InOutRegsRecpt" />
-          <NavigationProperty Name="Inventory" Relationship="PanchayatModel.FK_Inventory_ToInvItems" FromRole="InvItem" ToRole="Inventory" />
           <NavigationProperty Name="InOutRegsIssues" Relationship="PanchayatModel.FK_InOutRegsIssu_ToInvItems" FromRole="InvItem" ToRole="InOutRegsIssue" />
+          <Property Name="RegisterTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_InvItems_ToRegisterTypes" FromRole="InvItem" ToRole="RegisterType" />
+          <NavigationProperty Name="Inventory" Relationship="PanchayatModel.FK_Inventory_ToInvItems" FromRole="InvItem" ToRole="Inventory" />
         </EntityType>
         <EntityType Name="Voucher">
           <Key>
@@ -2395,26 +2422,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Inventory">
-          <Key>
-            <PropertyRef Name="ItemID" />
-          </Key>
-          <Property Name="ItemID" Type="Int32" Nullable="false" />
-          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <NavigationProperty Name="InvItem" Relationship="PanchayatModel.FK_Inventory_ToInvItems" FromRole="Inventory" ToRole="InvItem" />
-        </EntityType>
-        <Association Name="FK_Inventory_ToInvItems">
-          <End Type="PanchayatModel.InvItem" Role="InvItem" Multiplicity="1" />
-          <End Type="PanchayatModel.Inventory" Role="Inventory" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="InvItem">
-              <PropertyRef Name="ItemID" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="ItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="InOutRegsIssue">
           <Key>
             <PropertyRef Name="IOissueID" />
@@ -2470,6 +2477,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
         <EntityType Name="Building">
           <Key>
             <PropertyRef Name="BuildingID" />
@@ -2490,6 +2498,40 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="HouseTax" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
+
+        <Association Name="FK_InvItems_ToRegisterTypes">
+          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="1" />
+          <End Type="PanchayatModel.InvItem" Role="InvItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterType">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="InvItem">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="InvItem" Relationship="PanchayatModel.FK_Inventory_ToInvItems" FromRole="Inventory" ToRole="InvItem" />
+        </EntityType>
+        <Association Name="FK_Inventory_ToInvItems">
+          <End Type="PanchayatModel.InvItem" Role="InvItem" Multiplicity="1" />
+          <End Type="PanchayatModel.Inventory" Role="Inventory" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="InvItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2817,6 +2859,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <EntitySetMapping Name="InvItems">
             <EntityTypeMapping TypeName="PanchayatModel.InvItem">
               <MappingFragment StoreEntitySet="InvItems">
+                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
                 <ScalarProperty Name="Item" ColumnName="Item" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
               </MappingFragment>
@@ -2899,14 +2942,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Inventories">
-            <EntityTypeMapping TypeName="PanchayatModel.Inventory">
-              <MappingFragment StoreEntitySet="Inventory">
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="InOutRegsIssues">
             <EntityTypeMapping TypeName="PanchayatModel.InOutRegsIssue">
               <MappingFragment StoreEntitySet="InOutRegsIssue">
@@ -2924,6 +2959,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="Buildings">
             <EntityTypeMapping TypeName="PanchayatModel.Building">
               <MappingFragment StoreEntitySet="Building">
@@ -2942,6 +2978,13 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="House_No" ColumnName="House No" />
                 <ScalarProperty Name="WardNo" ColumnName="WardNo" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="PanchayatModel.Inventory">
+              <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

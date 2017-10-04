@@ -5,16 +5,26 @@
 }
 
 <h2>Edit</h2>
-
+<div class="alert alert-danger">
+    @if(Model.TDate.Value.Date == DateTime.Now.Date)
+    {
+        @: <strong>Note!</strong> Please remember to Correct the corresponding voucher <a target="_blank" href="/Vouchers/Edit/@Model.RVno">here</a>
+    }
+    else
+    {
+        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?VoucherID=@Model.RVno">here</a>
+    }
+</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.Hidden("RegisterTypeID", (int)ViewBag.RegisterTypeID);
-    @Html.Hidden("OldQty", (int)ViewBag.OldQty);
-    @Html.HiddenFor(x=>x.TDate);
+    @Html.Hidden("RegisterTypeID", (int)ViewBag.RegisterTypeID)
+    @Html.Hidden("OldQty", (int)ViewBag.OldQty)
+    @Html.HiddenFor(x=>x.TDate)
+    @Html.HiddenFor(x => x.ItemID)
 
-    @Html.HiddenFor(model => model.RVno);
+    @Html.HiddenFor(model => model.RVno)
 
     <div class="form-horizontal">
         @if (ViewBag.RegisterTypeID == 17)
@@ -63,7 +73,7 @@
             {
                 <label class="control-label col-md-2">Item</label>
                 <div class="col-md-10">
-                    @Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DisplayFor(model => model.InvItem.Item, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
                 </div>
 
@@ -76,7 +86,7 @@
             {
                 <label class="control-label col-md-2">Period Within Which To Be Spent</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control", @type = "date" , min=0} })
                     @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
                 </div>
 
@@ -85,7 +95,7 @@
             {
                 <label class="control-label col-md-2">Quantity </label>
                 <div class="col-md-10">
-                    @Html.DisplayFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control", min = 0 } })
                     @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
                 </div>
 
@@ -99,10 +109,10 @@
             }
             else
             {
-                <label class="control-label col-md-2">Value</label>
+                <label class="control-label col-md-2">Value per unit</label>
 
             }            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -118,7 +128,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { rt = Model.RegisterTypeID })
 </div>
 
 @section Scripts {

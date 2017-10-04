@@ -37,13 +37,13 @@ namespace Panchayat.Controllers
                 meetings = meetings.Where(p => p.MeetingDate ==md);
                 page = 1;
             } 
-            if (md==null && pn.Length==0)
+            if (md==null && pn?.Length==0)
             {
                 int FinYr = MyExtensions.GetFinYr();
                 meetings = meetings.Where(p => ((DateTime)p.MeetingDate).Year == FinYr);
             }
             ViewBag.PanchName = db.Configs.FirstOrDefault().VP;
-            ViewBag.MeetingD = md;
+            ViewBag.MeetingD = md?.ToString("dd/MMM/yyyy") ?? "";
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
             return View(meetings.ToList().ToPagedList(pageNumber, pageSize));

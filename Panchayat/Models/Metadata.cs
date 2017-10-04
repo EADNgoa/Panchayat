@@ -340,8 +340,7 @@ namespace Panchayat
 
    
         public int Qty;
-
-        [Required]
+                
         [Range(0.0, Double.MaxValue)]
         public decimal Value;
 

@@ -29,7 +29,7 @@
         @Html.HiddenFor(model => model.IllegalConID)
 
         <div class="form-group">
-            <label class="control-label col-md-2">Date Of Complain:</label>
+            <label class="control-label col-md-2">Date Of Complaint:</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DateOfComp, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.DateOfComp, "", new { @class = "text-danger" })
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Name And Address Of The Complain:</label>
+            <label class="control-label col-md-2">Name And Address Of The Complaint:</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NameOfPr, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NameOfPr, "", new { @class = "text-danger" })
@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Name And Address Of Person Doing Complain:</label>
+            <label class="control-label col-md-2">Name And Address Of Person Doing offence:</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AddressOfPr, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AddressOfPr, "", new { @class = "text-danger" })
@@ -56,15 +56,15 @@
             <label class="control-label col-md-2">
                 @if (ViewBag.RegisterTypeID == 6)
                 {
-                    <label>$$$$$</label>
+                    <label>Nature of Complaint</label>
                 }
                 @if (ViewBag.RegisterTypeID == 4)
                 {
-                    <label> Name Of Illegal Construction</label>
+                    <label>Nature of Construction</label>
                 }
                 @if (ViewBag.RegisterTypeID == 7)
                 {
-                    <label>Sections</label>
+                    <label>Nature of Matter</label>
                 }
             </label>
             <div class="col-md-10">
@@ -77,15 +77,15 @@
             <label class="control-label col-md-2">
                 @if (ViewBag.RegisterTypeID == 6)
                 {
-                    <label>$$$$$</label>
+                    <label>Occasion</label>
                 }
                 @if (ViewBag.RegisterTypeID == 4)
                 {
-                    <label> Occasion Of Illegal Construction</label>
+                    <label> Occasion Of Construction</label>
                 }
                 @if (ViewBag.RegisterTypeID == 7)
                 {
-                    <label>Court matter</label>
+                    <label>Occasion of matter</label>
                 }
                 </label>
                 <div class="col-md-10">
@@ -121,21 +121,7 @@
 }
 
 <div>
-    @if (ViewBag.RegisterTypeID == 7)
-            {
-        @Html.ActionLink("Back to List", "Index", new { cm = (int)ViewBag.RegisterTypeID })
-
-    }
-    @if (ViewBag.RegisterTypeID == 4)
-            {
-        @Html.ActionLink("Back to List", "Index", new { ic = (int)ViewBag.RegisterTypeID })
-
-    }
-    @if (ViewBag.RegisterTypeID == 6)
-            {
         @Html.ActionLink("Back to List", "Index", new { rt = (int)ViewBag.RegisterTypeID })
-
-    }
 </div>
 
 @section Scripts {

@@ -56,7 +56,8 @@ namespace Panchayat.Controllers
         // GET: Audits/Create
         public ActionResult Create()
         {
-            return View();
+            var a = new Audit { Year = DateTime.Today.Year };
+            return View(a);
         }
 
         // POST: Audits/Create

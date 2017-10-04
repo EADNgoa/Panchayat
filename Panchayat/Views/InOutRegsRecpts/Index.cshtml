@@ -10,18 +10,18 @@
 <center class="section-to-print">
     @if (ViewBag.RegisterTypeID == 17)
     {
-        <h4>Register Of Stock  Of Consumable Store And Stationary</h4>    }
+        <h2>Register Of Stock  Of Consumable Store And Stationary: Receipts</h2>    }
     @if (ViewBag.RegisterTypeID == 18)
     {
-        <h4>Stamp</h4>
+        <h2>Stamp: Receipts</h2>
     }
     @if (ViewBag.RegisterTypeID == 19)
     {
-        <h4>DeadStock</h4>
+        <h2>Dead Stock: Receipts</h2>
     }
     @if (ViewBag.RegisterTypeID == 20)
     {
-        <h4> Register Of Street Light Articles</h4>
+        <h2> Register Of Street Light Articles: Receipts</h2>
     }
 
     @if (ViewBag.RegisterTypeID == 21)
@@ -164,8 +164,7 @@
 
                     <a href="~/InOutRegsIssues/Create/?rt=21&IORecieptID=@item.IORecptID">Issue Grants</a>
 
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IORecptID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.IORecptID }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IORecptID }) 
 
                 </td>
             </tr>
@@ -233,9 +232,7 @@
 
             </td>
             <td class="section-to-Not-print">
-                @Html.ActionLink("Edit", "Edit", new { id = item.IORecptID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IORecptID }) |
-
+                @Html.ActionLink("Edit", "Edit", new { id = item.IORecptID }) 
             </td>
         </tr>
                     }

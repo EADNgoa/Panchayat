@@ -10,13 +10,14 @@ using Panchayat;
 
 namespace Panchayat.Controllers
 {
-    [Authorize(Roles = "Boss,Type1")]
-    public class InvItemsController : EAController
+    public class InvItemsController : Controller
     {
+        private PanchayatEntities db = new PanchayatEntities();
+
         // GET: InvItems
         public ActionResult Index()
         {
-            var invItems = db.InvItems.Include(i => i.Inventory);
+            var invItems = db.InvItems.Include(i => i.RegisterType).Include(i => i.Inventory);
             return View(invItems.ToList());
         }
 
@@ -38,6 +39,7 @@ namespace Panchayat.Controllers
         // GET: InvItems/Create
         public ActionResult Create()
         {
+            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1");
             ViewBag.ItemID = new SelectList(db.Inventories, "ItemID", "ItemID");
             return View();
         }
@@ -47,7 +49,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemID,Item")] InvItem invItem)
+        public ActionResult Create([Bind(Include = "ItemID,Item,RegisterTypeID")] InvItem invItem)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace Panchayat.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", invItem.RegisterTypeID);
             ViewBag.ItemID = new SelectList(db.Inventories, "ItemID", "ItemID", invItem.ItemID);
             return View(invItem);
         }
@@ -72,6 +75,7 @@ namespace Panchayat.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", invItem.RegisterTypeID);
             ViewBag.ItemID = new SelectList(db.Inventories, "ItemID", "ItemID", invItem.ItemID);
             return View(invItem);
         }
@@ -81,7 +85,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemID,Item")] InvItem invItem)
+        public ActionResult Edit([Bind(Include = "ItemID,Item,RegisterTypeID")] InvItem invItem)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +93,7 @@ namespace Panchayat.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", invItem.RegisterTypeID);
             ViewBag.ItemID = new SelectList(db.Inventories, "ItemID", "ItemID", invItem.ItemID);
             return View(invItem);
         }
@@ -118,6 +123,13 @@ namespace Panchayat.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult AutoCompleteInvItems(string term, int rt)
+        {
+            var h = db.InvItems.Where(d => d.RegisterTypeID == rt && d.Item.Contains(term)).Select(c => new { id = c.ItemID, value = c.Item });
+            return Json(h, JsonRequestBehavior.AllowGet);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

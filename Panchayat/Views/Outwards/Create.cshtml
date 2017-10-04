@@ -47,7 +47,7 @@
             }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <label class="control-label col-md-2">Date Of Death:</label>
+                <label class="control-label col-md-2">Name of Deceased:</label>
             }
             
             
@@ -65,7 +65,7 @@
             }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <label class="control-label col-md-2">Date Of Death:</label>
+                <label class="control-label col-md-2">File Reference No:</label>
             }
             
             <div class="col-md-10">
@@ -82,7 +82,7 @@
             }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <label class="control-label col-md-2">Date Of Birth:</label>
+                <label class="control-label col-md-2">File Reference Date:</label>
             }
 
           
@@ -100,7 +100,7 @@
             }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <label class="control-label col-md-2">Date Of Birth:</label>
+                <label class="control-label col-md-2">Cause of Death:</label>
             }
 
            
@@ -115,37 +115,27 @@
             {
                 <label class="control-label col-md-2">Postage Drawn:</label>
 
-            }
-            @if (ViewBag.RegisterTypeID == 11)
-            {
-                <label class="control-label col-md-2">Date Of Birth:</label>
-            }
-
-            
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PostageDrawn, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PostageDrawn, "", new { @class = "text-danger" })
             </div>
+            }
         </div>
 
         <div class="form-group">
             @if (ViewBag.RegisterTypeID == 3)
             {
                 <label class="control-label col-md-2">Postage Extended:</label>
-            }
-            @if (ViewBag.RegisterTypeID == 11)
-            {
-                <label class="control-label col-md-2">Date Of Birth:</label>
-            }
-           
+
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PostageExtended, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PostageExtended, "", new { @class = "text-danger" })
             </div>
+            }
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Remark,"Remarks:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
