@@ -100,72 +100,42 @@
                 <p> To Whom Sent</p>            }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <p> Name of Person</p>
+                <p> Name of Deceased</p>
             }
         </th>
         <th>
-            @if (ViewBag.RegisterTypeID == 3)
-            {
-                <p>  File Reference No</p>            }
-            @if (ViewBag.RegisterTypeID == 11)
-            {
-                <p> File Reference No</p>
-            }
-          
+                <p>  File Reference No. and Date</p>            
+            
         </th>
-        <th>
-            @if (ViewBag.RegisterTypeID == 3)
-            {
-                <p> File Reference Date</p>            }
-            @if (ViewBag.RegisterTypeID == 11)
-            {
-                <p> Date Of File Ref.</p>
-            }
-           
-        </th>
+        
         <th>
             @if (ViewBag.RegisterTypeID == 3)
             {
                 <p>   Subject Matter</p>            }
             @if (ViewBag.RegisterTypeID == 11)
             {
-                <p>Subject Matter</p>
+                <p>Cause of Death</p>
             }
          
         </th>
-        <th>
             @if (ViewBag.RegisterTypeID == 3)
             {
-                <p>  Postage Drawn</p>            }
-            @if (ViewBag.RegisterTypeID == 11)
-            {
-                <p>Reported by</p>
+                <th>
+                    <p>  Postage Drawn</p>            
+                </th>            
+           
+                <th>
+                    <p>   Postage Extended</p>            
+                </th>            
             }
 
-        </th>
         <th>
-            @if (ViewBag.RegisterTypeID == 3)
-            {
-                <p>   Postage Extended</p>            }
-            @if (ViewBag.RegisterTypeID == 11)
-            {
-                <p></p>
-            }
-
-        </th>
-        <th>
-          Remark
+          Remarks
         </th>
   
         <th></th>
     </tr>
-    <tr>
-        @for (int c = 1; c < 10; c++)
-            {
-            <th>@c</th>
-        }
-        <th></th>
-    </tr>
+    
     @{ var i = 1;}
 @foreach (var item in Model) {
     <tr>
@@ -179,20 +149,21 @@
             @Html.DisplayFor(modelItem => item.ToWhom)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FileReferenceNo)
-        </td>
-        <td>
+            @Html.DisplayFor(modelItem => item.FileReferenceNo) &nbsp;
             @Html.DisplayFor(modelItem => item.FileReferenceDate)
-        </td>
+        </td>        
         <td>
             @Html.DisplayFor(modelItem => item.SubjectMatter)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostageDrawn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostageExtended)
-        </td>
+        @if (ViewBag.RegisterTypeID == 3)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.PostageDrawn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostageExtended)
+            </td>
+        }
         <td>
             @Html.DisplayFor(modelItem => item.Remark)
         </td>

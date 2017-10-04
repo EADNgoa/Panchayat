@@ -119,6 +119,15 @@ namespace Panchayat.Controllers
             return RedirectToAction("Index");
         }
 
+        
+        public ActionResult AutoCompleteInvItems(string term)
+        {
+            var filteredItems = db.InvItems.Where(c => c.Item.Contains(term)).Select(c => new { id = c.ItemID, value = c.Item });
+
+            return Json(filteredItems, JsonRequestBehavior.AllowGet);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

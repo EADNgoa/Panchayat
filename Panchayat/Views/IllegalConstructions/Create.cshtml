@@ -29,7 +29,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-                        <label class="control-label col-md-2">Date Of Complain </label>
+                        <label class="control-label col-md-2">Date Of Complaint </label>
 
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DateOfComp, new { htmlAttributes = new { @class = "form-control",@type="date" } })
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Name And Address Of Complain:</label>
+            <label class="control-label col-md-2">Name And Address Of Complaint</label>
 
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NameOfPr, new { htmlAttributes = new { @class = "form-control" } })
@@ -47,7 +47,14 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Name And Address of Person Doing Complain:</label>
+            @if (ViewBag.RegisterTypeID == 4)
+            {
+            <label class="control-label col-md-2">Name And Address of Person Doing illegal Construction</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Name And Address of Person Doing Offence</label>
+            }
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AddressOfPr, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AddressOfPr, "", new { @class = "text-danger" })
@@ -58,15 +65,15 @@
             <label class="control-label col-md-2">
                 @if (ViewBag.RegisterTypeID == 6)
                 {
-                 <label>$$$$$</label>
+                 <label>Nature of Complaint</label>
                 }
                 @if (ViewBag.RegisterTypeID == 4)
                 {
-                    <label> Name Of Illegal Construction</label>
+                    <label> Nature of Construction</label>
                 }
                 @if (ViewBag.RegisterTypeID == 7)
                 {
-                    <label>Sections</label>
+                    <label>Nature of Matter</label>
                 }
             </label>
             <div class="col-md-10">
@@ -79,15 +86,15 @@
             <label class="control-label col-md-2">
                 @if (ViewBag.RegisterTypeID == 6)
                 {
-                    <label>$$$$$</label>
+                    <label>Occasion</label>
                 }
                 @if (ViewBag.RegisterTypeID == 4)
                 {
-                    <label> Occasion Of Illegal Construction</label>
+                    <label> Occasion Of Construction</label>
                 }
                 @if (ViewBag.RegisterTypeID == 7)
                 {
-                    <label>Court matter</label>
+                    <label>Occasion of Matter</label>
                 }
             </label>
             <div class="col-md-10">
@@ -97,7 +104,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Action Taken:</label>
+            <label class="control-label col-md-2">Action Taken</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ActionTaken, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ActionTaken, "", new { @class = "text-danger" })
@@ -123,7 +130,7 @@
 
 <div>
     
-        @Html.ActionLink("Back to List", "Index",new {cm=(int)ViewBag.RegisterTypeID })
+        @Html.ActionLink("Back to List", "Index",new {rt=(int)ViewBag.RegisterTypeID })
      
     
 </div>

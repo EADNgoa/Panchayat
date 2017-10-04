@@ -15,7 +15,7 @@
         }
         @if (ViewBag.RegisterTypeID == 4)
         {
-            <p>Illegal Construction</p>
+            <p>Register of the Complaint of Illegal Construction</p>
         }
         @if (ViewBag.RegisterTypeID == 7)
         {
@@ -75,24 +75,31 @@
            Date Of The Reciept Of the Complaint
         </th>
         <th>
-           Name And Address Of Complain
+           Name And Address Of Complaint
         </th>
         <th>
-           Name And Adress Of Person Doing Complain
+            @if (ViewBag.RegisterTypeID == 4)
+            {
+                <p>Name And Adress Of Person Doing Illegal Construction</p>
+            }
+            else
+            {
+                <p>Name And Adress Of Offender</p>
+            }
         </th>
         <th>
            
                 @if(ViewBag.RegisterTypeID == 6)
                 {
-                    <p>Name of Complain</p>
+                    <p>Nature of Complaint</p>
                 }
                 @if (ViewBag.RegisterTypeID == 4)
                 {
-                   <p>Name Of Constrution</p>
+                   <p>Nature Of Constrution</p>
                 }
                @if (ViewBag.RegisterTypeID == 7)
                 {
-                    <p>Name Of Court</p>
+                    <p>Nature of Matter</p>
                 }
 
 
@@ -109,7 +116,7 @@
             }
             @if (ViewBag.RegisterTypeID == 7)
             {
-                <p>Court</p>
+                <p>Occasion of Matter</p>
             }
 
         </th>
@@ -117,7 +124,7 @@
            Action Taken
         </th>
         <th>
-            Remark
+            Remarks
         </th>
     
         <th></th>

@@ -69,8 +69,11 @@ namespace Panchayat.Controllers
            
             if (ModelState.IsValid)
             {
-           
-                inOutRegsRecpt.TDate = DateTime.Now;
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        inOutRegsRecpt.TDate = DateTime.Now;
                 db.SaveChanges();
                 int lid = 0, sid = 0;
                 string UserID = User.Identity.GetUserName();
@@ -111,7 +114,8 @@ namespace Panchayat.Controllers
                 {
 
                     var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
-                    var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, ActualAmount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, For = null, PayDate = inOutRegsRecpt.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsRecpt.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid, Form6 = false };
+                            var ForWhat = db.InvItems.FirstOrDefault(i => i.ItemID == inOutRegsRecpt.ItemID).Item;
+                    var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, ActualAmount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, For = ForWhat, PayDate = inOutRegsRecpt.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsRecpt.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid, Form6 = false };
                     db.Vouchers.Add(item);
                     db.SaveChanges();
                     vid = item.VoucherID;
@@ -157,7 +161,15 @@ namespace Panchayat.Controllers
                    
                     db.SaveChanges();
                 }
-
+                 
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
                 return RedirectToAction("Index",new {rt= inOutRegsRecpt.RegisterTypeID });
             }
 
@@ -199,45 +211,54 @@ namespace Panchayat.Controllers
 
             if (ModelState.IsValid)
             {
-                int id = (int)inOutRegsRecpt.RVno;
-                var voucher = db.Vouchers.Find(id);
-                if(inOutRegsRecpt.RegisterTypeID==21)
+                using (var transaction = db.Database.BeginTransaction())
                 {
-                    db.Entry(inOutRegsRecpt).State = EntityState.Modified;
-                    voucher.Amount =  inOutRegsRecpt.Value;
-                    db.Entry(voucher).Property(a => a.Amount).IsModified = true;
-
-                    voucher.ActualAmount = inOutRegsRecpt.Value;
-                    db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
-                    db.SaveChanges();
-            
-                }
-                else
-                {
-                    voucher.Amount = inOutRegsRecpt.Qty * inOutRegsRecpt.Value;
-                    db.Entry(voucher).Property(a => a.Amount).IsModified = true;
-
-                    voucher.ActualAmount = inOutRegsRecpt.Qty * inOutRegsRecpt.Value;
-                    db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
-
-                    var item = db.Inventories.Where(x => x.ItemID == inOutRegsRecpt.ItemID).FirstOrDefault();
-                    if (item != null)
+                    try
                     {
+                        int id = (int)inOutRegsRecpt.RVno;
+                        var voucher = db.Vouchers.Find(id);
+                        if(inOutRegsRecpt.RegisterTypeID==21)
+                        {
+                            db.Entry(inOutRegsRecpt).State = EntityState.Modified;
+                            voucher.Amount =  inOutRegsRecpt.Value;
+                            db.Entry(voucher).Property(a => a.Amount).IsModified = true;
+
+                            voucher.ActualAmount = inOutRegsRecpt.Value;
+                            db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
+                            db.SaveChanges();
+            
+                        }
+                        else
+                        {
+                            //Let the user manually create a Correction if required
+                            //voucher.Amount = inOutRegsRecpt.Qty * inOutRegsRecpt.Value;
+
+
+                            //db.Entry(voucher).Property(a => a.Amount).IsModified = true;
+
+                            //voucher.ActualAmount = inOutRegsRecpt.Qty * inOutRegsRecpt.Value;
+                            //db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
+
+                            var item = db.Inventories.Where(x => x.ItemID == inOutRegsRecpt.ItemID).FirstOrDefault();
+                            if (item != null)
+                            {
+                                item.Qty = item.Qty - (int)OldQty;
+                                item.Qty = item.Qty + (int)inOutRegsRecpt.Qty;
+
+                            }
+                        }
+                                                                
                         db.Entry(inOutRegsRecpt).State = EntityState.Modified;
-                        item.Qty = item.Qty - (int)OldQty;
-                        item.Qty = item.Qty + (int)inOutRegsRecpt.Qty;
-
-                        db.Entry(item).Property(a => a.Qty).IsModified = true;
-                        inOutRegsRecpt.Qty = (int)inOutRegsRecpt.Value;
                         db.SaveChanges();
+                
+                        transaction.Commit();
                     }
-                }
-              
-
-
-
-
-              
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+        }
 
                 return RedirectToAction("Index", new { rt = inOutRegsRecpt.RegisterTypeID });
             }

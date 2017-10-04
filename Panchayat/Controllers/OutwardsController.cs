@@ -86,7 +86,7 @@ namespace Panchayat.Controllers
             {
                 db.Outwards.Add(outward);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rt = outward.RegisterTypeID });
             }
 
             return View(outward);
@@ -120,7 +120,7 @@ namespace Panchayat.Controllers
             {
                 db.Entry(outward).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rt = outward.RegisterTypeID});
             }
             ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", outward.RegisterTypeID);
             return View(outward);
