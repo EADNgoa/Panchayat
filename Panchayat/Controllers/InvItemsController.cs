@@ -132,8 +132,9 @@ namespace Panchayat.Controllers
 
         public ActionResult _CurrInv(int id)
         {
-            var ci = db.Inventories.FirstOrDefault(i => i.ItemID == id).Qty;
-            return PartialView("_CurrInv", "The current inventory quantity is: " + ci.ToString());
+            var ci = db.Inventories.FirstOrDefault(i => i.ItemID == id);
+            string Quant = ci?.Qty.ToString() ?? "nil";
+            return PartialView("_CurrInv", "The current inventory quantity is: " + Quant);
         }
 
         protected override void Dispose(bool disposing)

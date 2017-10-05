@@ -15,7 +15,8 @@
     @Html.HiddenFor(model => model.TDate)
     @Html.HiddenFor(model => model.Balance)
     @Html.HiddenFor(model => model.RVno)
-    @Html.HiddenFor(model => model.IOissueID)    
+    @Html.HiddenFor(model => model.IOissueID)
+    @Html.HiddenFor(model => model.ItemID)
     @Html.Hidden("OldQty", (int)ViewBag.OldQty);    
     
     <div class="form-horizontal">
@@ -105,7 +106,14 @@
                 </div>
             }
         <div class="form-group">
-            <label class="control-label col-md-2">Issued To</label>
+            @if (ViewBag.RegisterTypeID == 20)
+            {
+                <label class="control-label col-md-2">Replaced on Pole No.</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Issued To</label>
+            }
             <div class="col-md-10">
                 @Html.EditorFor(model => model.IssuedTo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.IssuedTo, "", new { @class = "text-danger" })
@@ -128,13 +136,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RVno, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.RVno, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RVno, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

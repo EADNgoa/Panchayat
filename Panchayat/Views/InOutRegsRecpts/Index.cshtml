@@ -62,6 +62,7 @@
         <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
     </span>
 </p>
+@*************************************Form 9: Conditional Grants************************************@
 @if (ViewBag.RegisterTypeID == 21)
 {
     <table class="table section-to-print">
@@ -173,16 +174,65 @@
 
     </table>
 
-            }
-            else
-            {
+    }
+
+    @*************************************Street Light Articles************************************@
+    else if(ViewBag.RegisterTypeID == 20) 
+    {
+        <table class="table section-to-print">
+        <tr>
+            <th>
+                Date of Purchase
+            </th>
+            <th>Article Name</th>
+            <th>
+                V. No.
+            </th>
+            <th>
+                No. Of Articles Purchased
+            </th>
+            <th>Price per unit</th>
+            <th>
+                Amount Paid
+            </th>
+            
+            <th class="section-to-Not-print"></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>        
+                <td>                    
+                    @Html.DisplayFor(modelItem => item.TDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvItem.Item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RVno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>@(item.Qty*item.Value)</td>
+                <td class="section-to-Not-print">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IORecptID }) 
+                </td>
+            </tr>            
+        }
+
+    </table>
+    } @************************************Other Inventory Registers************************************@
+    else
+    {
     <table class="table section-to-print">
         <tr>
             <th>
                 Date
             </th>
             <th>
-
                 Particular and From Whom Recieved
             </th>
             <th>
@@ -202,7 +252,7 @@
         </tr>
 
         @foreach (var item in Model)
-        {
+                                    {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.TDate)
@@ -225,13 +275,14 @@
 
                 <td>
                     @{ int a = (int)item.Qty, b = (int)item.Value, c = 0;
-                    c = a * b;
-                }
-                @c
+                                            c = a * b;
+                                        }
+                                        @c
 
 
-            </td>
-            <td class="section-to-Not-print">
+                                    </td>
+                        
+                                    <td class="section-to-Not-print">
                 @Html.ActionLink("Edit", "Edit", new { id = item.IORecptID }) 
             </td>
         </tr>
