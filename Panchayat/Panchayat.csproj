@@ -644,19 +644,17 @@
     <Content Include="Views\PropertyBookings\Index.cshtml" />
     <Content Include="Views\Reports\Professional Tax.cshtml" />
     <Content Include="Views\Reports\Sign Board Tax.cshtml" />
-
     <Content Include="Views\Buildings\Create.cshtml" />
     <Content Include="Views\Buildings\Delete.cshtml" />
     <Content Include="Views\Buildings\Details.cshtml" />
     <Content Include="Views\Buildings\Edit.cshtml" />
     <Content Include="Views\Buildings\Index.cshtml" />
-
     <Content Include="Views\InvItems\Create.cshtml" />
     <Content Include="Views\InvItems\Delete.cshtml" />
     <Content Include="Views\InvItems\Details.cshtml" />
     <Content Include="Views\InvItems\Edit.cshtml" />
     <Content Include="Views\InvItems\Index.cshtml" />
-
+    <Content Include="Views\InvItems\_CurrInv.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
