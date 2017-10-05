@@ -63,7 +63,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BuildingID,WardNo,House_No,OwnerName,NameOfConstructioin,DateOfAppl,NoOfRes,DateOfPermision,EstimatedCost,AmountPaid,DateOfCompletion,DateOfOcccp,DateOfAsses,HouseTax,Remarks")] Building building)
+        public ActionResult Create([Bind(Include = "BuildingID,WardNo,House_No,OwnerName,NameOfConstructioin,DateOfAppl,NoOfRes,DateOfRes,DateOfPermision,EstimatedCost,AmountPaid,DateOfCompletion,DateOfOcccp,DateOfAsses,HouseTax,Remarks")] Building building)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BuildingID,WardNo,House_No,OwnerName,NameOfConstructioin,DateOfAppl,NoOfRes,DateOfPermision,EstimatedCost,AmountPaid,DateOfCompletion,DateOfOcccp,DateOfAsses,HouseTax,Remarks")] Building building)
+        public ActionResult Edit([Bind(Include = "BuildingID,WardNo,House_No,OwnerName,NameOfConstructioin,DateOfAppl,NoOfRes,DateOfRes,DateOfPermision,EstimatedCost,AmountPaid,DateOfCompletion,DateOfOcccp,DateOfAsses,HouseTax,Remarks")] Building building)
         {
             if (ModelState.IsValid)
             {

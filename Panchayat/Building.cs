@@ -21,6 +21,7 @@ namespace Panchayat
         public string NameOfConstructioin { get; set; }
         public Nullable<System.DateTime> DateOfAppl { get; set; }
         public Nullable<int> NoOfRes { get; set; }
+        public Nullable<System.DateTime> DateOfRes { get; set; }
         public Nullable<System.DateTime> DateOfPermision { get; set; }
         public Nullable<decimal> EstimatedCost { get; set; }
         public Nullable<int> AmountPaid { get; set; }
