@@ -34,7 +34,7 @@ namespace Panchayat.Controllers
             }
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
-            return View(inOutRegsIssue.ToList().ToPagedList(pageNumber, pageSize));
+            return View(inOutRegsIssue.OrderByDescending(a =>a.TDate).ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: InOutRegsIssues/Details/5
@@ -73,7 +73,7 @@ namespace Panchayat.Controllers
             if (ModelState.IsValid)
             {
                 inOutRegsIssue.TDate = DateTime.Now;
-                inOutRegsIssue.Qty = (int)inOutRegsIssue.Value;
+                //inOutRegsIssue.Qty = (int)inOutRegsIssue.Value;
            
                 db.InOutRegsIssues.Add(inOutRegsIssue);
 
@@ -117,17 +117,17 @@ namespace Panchayat.Controllers
                 }
                 else
                 {
-                    var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
-                    var item1 = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsIssue.Value * inOutRegsIssue.Qty, ActualAmount = inOutRegsIssue.Value * inOutRegsIssue.Qty, For = null, PayDate = inOutRegsIssue.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsIssue.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid, Form6 = false };
+                    //var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
+                    //var item1 = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsIssue.Value * inOutRegsIssue.Qty, ActualAmount = inOutRegsIssue.Value * inOutRegsIssue.Qty, For = null, PayDate = inOutRegsIssue.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsIssue.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid, Form6 = false };
 
-                    db.Vouchers.Add(item1);
+                    //db.Vouchers.Add(item1);
                     db.SaveChanges();
-                    vid = item1.VoucherID;
+                    //vid = item1.VoucherID;
                 }
-                inOutRegsIssue.RVno =vid;
+                //inOutRegsIssue.RVno =vid;
              
              
-
+                //Update the Inventory table Qtys
                 var item = db.Inventories.Where(x => x.ItemID == inOutRegsIssue.ItemID).FirstOrDefault();
                 if (item != null)
                 {
@@ -207,27 +207,27 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
-                int id = (int)inOutRegsIssue.RVno;
-                var voucher = db.Vouchers.Find(id);
+                //int id = (int)inOutRegsIssue.RVno;
+                //var voucher = db.Vouchers.Find(id);
                 if (inOutRegsIssue.RegisterTypeID ==21)
                 {
                     db.Entry(inOutRegsIssue).State = EntityState.Modified;
                   
-                    voucher.Amount =  inOutRegsIssue.Value;
-                    db.Entry(voucher).Property(a => a.Amount).IsModified = true;
+                    //voucher.Amount =  inOutRegsIssue.Value;
+                    //db.Entry(voucher).Property(a => a.Amount).IsModified = true;
 
-                    voucher.ActualAmount =  inOutRegsIssue.Value;
-                    db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
+                    //voucher.ActualAmount =  inOutRegsIssue.Value;
+                    //db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
                     db.SaveChanges();
                 }
                 else
                 {
 
-                    voucher.Amount = inOutRegsIssue.Qty * inOutRegsIssue.Value;
-                    db.Entry(voucher).Property(a => a.Amount).IsModified = true;
+                    //voucher.Amount = inOutRegsIssue.Qty * inOutRegsIssue.Value;
+                    //db.Entry(voucher).Property(a => a.Amount).IsModified = true;
 
-                    voucher.ActualAmount = inOutRegsIssue.Qty * inOutRegsIssue.Value;
-                    db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
+                    //voucher.ActualAmount = inOutRegsIssue.Qty * inOutRegsIssue.Value;
+                    //db.Entry(voucher).Property(a => a.ActualAmount).IsModified = true;
 
                     var item = db.Inventories.Where(x => x.ItemID == inOutRegsIssue.ItemID).FirstOrDefault();
                     if (item != null)

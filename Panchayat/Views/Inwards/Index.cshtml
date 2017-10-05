@@ -97,7 +97,7 @@
         }
         @if (ViewBag.RegisterTypeID == 10)
         {
-            <p>Date Of Birth</p>
+            <p>Date Of Registration</p>
         }
         </th>
         <th>
@@ -111,7 +111,7 @@
         }
         @if (ViewBag.RegisterTypeID == 10)
         {
-            <p>Place Of Birth</p>
+            <p>Address Of Birth</p>
         }
         </th>
         <th>
@@ -125,7 +125,7 @@
         }
         @if (ViewBag.RegisterTypeID == 10)
         {
-            <p>No. of babies Born</p>
+            <p>Father's name</p>
         }
         </th>
         <th>
@@ -159,33 +159,33 @@
         <th>
             @if (ViewBag.RegisterTypeID == 2)
             {
-                <p>subject Matter</p>
+                <p>Subject Matter</p>
             }
             @if (ViewBag.RegisterTypeID == 9)
             {
-                <p>gdr</p>
+                <p>Subject Matter</p>
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <p>br</p>
+                <p>Name of Baby</p>
             }
         </th>
         <th>
             @if (ViewBag.RegisterTypeID == 2)
             {
-                <p>Action Taken</p>
+                <p>Action Taken on</p>
             }
             @if (ViewBag.RegisterTypeID == 9)
             {
-                <p>Action Taken</p>
+                <p>Action Taken on</p>
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <p>Acction Taken</p>
+                <p>Fathers Birthday</p>
             }
         </th>
         <th>
-          Remark
+          Remarks
         </th>
      
         <th></th>
@@ -240,18 +240,6 @@
 
 </table>
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    @if (ViewBag.RegisterTypeID == 2)
-    {
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 2 }))
-    }
-    @if (ViewBag.RegisterTypeID == 9)
-    {
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 9 }))
-    }
-    @if (ViewBag.RegisterTypeID == 10)
-    {
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 10 }))
-    }
+    
+        @Html.PagedListPager(Model, page => Url.Action("Index",new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = ViewBag.RegisterTypeID }))
+    

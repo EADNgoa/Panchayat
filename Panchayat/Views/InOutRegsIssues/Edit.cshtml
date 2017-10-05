@@ -10,16 +10,14 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.RegisterTypeID );
-    @Html.HiddenFor(model => model.TDate);
-    @Html.HiddenFor(model => model.Balance);
-    @Html.HiddenFor(model => model.RVno);
-
-
-    @Html.Hidden("RegisterTypeID", (int)ViewBag.RegisterTypeID);
-
-    @Html.Hidden("OldQty", (int)ViewBag.OldQty);
-
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.RegisterTypeID )
+    @Html.HiddenFor(model => model.TDate)
+    @Html.HiddenFor(model => model.Balance)
+    @Html.HiddenFor(model => model.RVno)
+    @Html.HiddenFor(model => model.IOissueID)    
+    @Html.Hidden("OldQty", (int)ViewBag.OldQty);    
+    
     <div class="form-horizontal">
         @if (ViewBag.RegisterTypeID == 17)
         {
@@ -42,19 +40,12 @@
             <h4>Grants</h4>
         }
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IOissueID)
-        @Html.Hidden("RegisterTypeID", (int)ViewBag.RegisterTypeID);
-        @Html.Hidden("OldQty", (int)ViewBag.OldQty);
-        @Html.HiddenFor(x => x.TDate);
 
-        @Html.HiddenFor(model => model.RVno);
 
    
 
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Date</label>
+        <div class="form-group">            
             @if (ViewBag.RegisterTypeID == 21)
             {
                 <label class="control-label col-md-2">Date</label>
@@ -78,7 +69,7 @@
             {
                         <label class="control-label col-md-2">Item</label>
                         <div class="col-md-10">
-                            @Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DisplayFor(model => model.InvItem.Item, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
                         </div>
             }
@@ -89,7 +80,7 @@
             {
                 <label class="control-label col-md-2">Period Within Which To Be Spent</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control", @type = "date", min = 0 } })
                     @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
                 </div>
             }
@@ -97,29 +88,22 @@
             {
                 <label class="control-label col-md-2">Quantity</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control", min = 0 } })
                     @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
                 </div>
             }
         </div>
 
-        <div class="form-group">
-
             @if (ViewBag.RegisterTypeID == 21)
             {
-                <label class="control-label col-md-2">Amount</label>
+                <div class="form-group">
+                        <label class="control-label col-md-2">Amount</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             }
-            else
-            {
-                <label class="control-label col-md-2">Value</label>
-
-            }   
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">Issued To</label>
             <div class="col-md-10">
@@ -161,7 +145,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { rt = Model.RegisterTypeID})
 </div>
 
 @section Scripts {

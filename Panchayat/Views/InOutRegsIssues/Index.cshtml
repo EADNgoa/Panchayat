@@ -8,18 +8,18 @@
 <center class="section-to-print">
     @if (ViewBag.RegisterTypeID == 17)
     {
-        <h4>Register Of Stock  Of Consumable Store And Stationary</h4>}
+        <h2>Register Of Stock  Of Consumable Store And Stationary: Issues</h2>}
     @if (ViewBag.RegisterTypeID == 18)
     {
-        <h4>Stamp</h4>
+        <h2>Stamp: Issues</h2>
     }
     @if (ViewBag.RegisterTypeID == 19)
     {
-        <h4>DeadStock</h4>
+        <h2>Dead Stock: Issues</h2>
     }
     @if (ViewBag.RegisterTypeID == 20)
     {
-        <h4>Register Street Light Articles</h4>
+        <h2>Register Street Light Articles: Issues</h2>
     }
 </center>
 <br class="section-to-Not-print" />
@@ -185,10 +185,11 @@
                                             @Html.DisplayFor(modelItem => item.Qty)
                                         </td>
                                         <td>
-                                            @{ int a = (int)item.Qty, b = (int)item.Value, c = 0;
+                                            @*@{ int a = (int)item.Qty, b = (int)item.Value, c = 0;
                                                 c = a * b;
                                             }
-                                            @c
+                                            @c*@
+                                            @Html.DisplayFor(modelItem => item.Qty)
                                         </td>
 
                                         <td>
@@ -199,9 +200,7 @@
 
 
                                         <td class="section-to-Not-print">
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.IOissueID }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.IOissueID }) |
-
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.IOissueID }) 
                                         </td>
                                     </tr>
                                                 }
@@ -209,6 +208,7 @@
                             </table>
                                                 }
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
   
         @Html.PagedListPager(Model, page => Url.Action("Index",
         new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = ViewBag.RegisterTypeID }))

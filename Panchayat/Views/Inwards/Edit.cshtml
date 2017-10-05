@@ -40,7 +40,7 @@
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <label class="control-label col-md-2">Date Of Birth:</label>
+                <label class="control-label col-md-2">Date Of Registration:</label>
             }
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DateOfReciept, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
@@ -59,7 +59,7 @@
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <label class="control-label col-md-2">Place Of Birth:</label>
+                <label class="control-label col-md-2">Address Of Birth:</label>
             }
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FromWhereRec, new { htmlAttributes = new { @class = "form-control" } })
@@ -78,7 +78,7 @@
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <label class="control-label col-md-2">No Of Letter:</label>
+                <label class="control-label col-md-2">Father's name:</label>
             }
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NoOfLett, new { htmlAttributes = new { @class = "form-control" } })
@@ -97,7 +97,7 @@
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <label class="control-label col-md-2">Date Of Letter:</label>
+                <label class="control-label col-md-2">Date Of Birth:</label>
             }
 
             <div class="col-md-10">
@@ -137,7 +137,7 @@
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <label class="control-label col-md-2">Subject:</label>
+                <label class="control-label col-md-2">Name of Baby:</label>
             }
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SubjectMatter, new { htmlAttributes = new { @class = "form-control" } })
@@ -148,15 +148,15 @@
         <div class="form-group">
             @if (ViewBag.RegisterTypeID == 2)
             {
-                <label class="control-label col-md-2">Action taken:</label>
+                <label class="control-label col-md-2">Action taken on:</label>
             }
             @if (ViewBag.RegisterTypeID == 9)
             {
-                <label class="control-label col-md-2">Action taken:</label>
+                <label class="control-label col-md-2">Action taken on:</label>
             }
             @if (ViewBag.RegisterTypeID == 10)
             {
-                <label class="control-label col-md-2">Action taken:</label>
+                <label class="control-label col-md-2">Father's birthday:</label>
             }
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ActionTaken, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
@@ -165,9 +165,9 @@
         </div>
 
         <div class="form-group">
-        <label  class="control-label col-md-2">Remark</label>   
+        <label  class="control-label col-md-2">Remarks</label>   
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Remark, "Remarks:", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -180,7 +180,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { rt = ViewBag.RegisterTypeID })
 </div>
 
 @section Scripts {
