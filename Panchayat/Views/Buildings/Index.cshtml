@@ -48,6 +48,7 @@
 </p>
 <table class="table section-to-print">
     <tr>
+        <th>Sr No</th>
         <th>Ward No
         </th>
         <th>
@@ -88,10 +89,23 @@
         <th>
 Remarks        </th>
         <th class="section-to-Not-print"></th>
+   
+    </tr>
+    <tr>
+        @for (var c = 1; c < 16; c++)
+        {
+            <th>
+                @c
+            </th>
+
+        }
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+            @{ int i = 1;}
+            @foreach (var item in Model)
+            {
+<tr>
+        <td>@i</td>
         <td>
             @Html.DisplayFor(modelItem => item.WardNo)
         </td>
@@ -108,7 +122,7 @@ Remarks        </th>
             @Html.DisplayFor(modelItem => item.DateOfAppl)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NoOfRes)
+            @Html.DisplayFor(modelItem => item.NoOfRes),@Html.DisplayFor(modelItem => item.DateOfRes)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateOfPermision)
@@ -135,10 +149,11 @@ Remarks        </th>
             @Html.DisplayFor(modelItem => item.Remarks)
         </td>
         <td class="section-to-Not-print">
-            @Html.ActionLink("Edit", "Edit", new { id=item.BuildingID }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.BuildingID }) 
          
         </td>
     </tr>
+    i++;
 }
 
 </table>

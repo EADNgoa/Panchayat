@@ -37,6 +37,7 @@
           <Property Name="NameOfConstructioin" Type="varchar" MaxLength="250" />
           <Property Name="DateOfAppl" Type="date" />
           <Property Name="NoOfRes" Type="int" />
+          <Property Name="DateOfRes" Type="date" />
           <Property Name="DateOfPermision" Type="date" />
           <Property Name="EstimatedCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="AmountPaid" Type="int" />
@@ -2481,6 +2482,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="NameOfConstructioin" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="DateOfAppl" Type="DateTime" Precision="0" />
           <Property Name="NoOfRes" Type="Int32" />
+          <Property Name="DateOfRes" Type="DateTime" Precision="0" />
           <Property Name="DateOfPermision" Type="DateTime" Precision="0" />
           <Property Name="EstimatedCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="AmountPaid" Type="Int32" />
@@ -2935,6 +2937,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
                 <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
                 <ScalarProperty Name="DateOfPermision" ColumnName="DateOfPermision" />
+                <ScalarProperty Name="DateOfRes" ColumnName="DateOfRes" />
                 <ScalarProperty Name="NoOfRes" ColumnName="NoOfRes" />
                 <ScalarProperty Name="DateOfAppl" ColumnName="DateOfAppl" />
                 <ScalarProperty Name="NameOfConstructioin" ColumnName="NameOfConstructioin" />
