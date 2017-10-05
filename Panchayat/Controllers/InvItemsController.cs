@@ -130,6 +130,11 @@ namespace Panchayat.Controllers
             return Json(h, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult _CurrInv(int id)
+        {
+            var ci = db.Inventories.FirstOrDefault(i => i.ItemID == id).Qty;
+            return PartialView("_CurrInv", "The current inventory quantity is: " + ci.ToString());
+        }
 
         protected override void Dispose(bool disposing)
         {

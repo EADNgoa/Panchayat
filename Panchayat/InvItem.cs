@@ -27,9 +27,9 @@ namespace Panchayat
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InOutRegsRecpt> InOutRegsRecpts { get; set; }
+        public virtual Inventory Inventory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InOutRegsIssue> InOutRegsIssues { get; set; }
         public virtual RegisterType RegisterType { get; set; }
-        public virtual Inventory Inventory { get; set; }
     }
 }
