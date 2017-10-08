@@ -1,0 +1,81 @@
+﻿@model IEnumerable<RVReport>
+
+
+
+
+
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+<center>
+    <h3 class="section-to-print">Issue Of Birth Or  Death Certificate</h3>
+</center>
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th>
+                Sr No
+            </th>
+            <th>Inward No</th>
+            <th>
+                Date
+            </th>
+            <th>Name Of Applicant With Address</th>
+            <th>
+                Reg. No od Death/Birth
+            </th>
+            <th>
+                Date of Issue
+            </th>
+
+            <th>
+                Payment
+            </th>
+            <th>
+                Remarks
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{ var i = 1; }
+        @foreach (RVReport item in Model)
+        {
+
+            <tr>
+                <td>@i</td>
+                <td>@Html.DisplayFor(modelItem => item.RVid)</td>
+                <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Applicant"]),@Html.DisplayFor(modelItem => item.DetailData["Address"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Reg No. of Birth/Death"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Date Of Issue"])</td>
+                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Remark"])</td>
+
+
+
+
+
+
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+

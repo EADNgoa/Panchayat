@@ -413,9 +413,11 @@ namespace Panchayat.Controllers
                 var sl = db.SubLedgers.Find(SubLedgerID);
                 string RptName = sl.Ledger;
                 IEnumerable<RVReport> res = (sl.Ledger1.IsIncome) ?
-                    db.Form4.Where(f => f.SubLedgerID == SubLedgerID && ((DateTime)f.PayDate).Year == RptYear).Select(f => new RVReport { Amount = (decimal)f.Amount, RVid = f.RecieptNo, Tdate = (DateTime)f.PayDate }).ToList()
+                    db.Form4.Where(f => f.SubLedgerID == SubLedgerID && ((DateTime)f.PayDate).Year == RptYear).Select(f => new RVReport { Amount = (decimal)f.Amount, RVid = f.RecieptNo, Tdate = (DateTime)f.PayDate, PayeeName=f.RecvdFrom ?? f.Citizen.Name  }).ToList()
                     : db.Vouchers.Where(f => f.SubLedgerID == SubLedgerID && ((DateTime)f.PayDate).Year == RptYear).Select(f => new RVReport { Amount = (decimal)f.Amount, RVid = f.VoucherID, Tdate = (DateTime)f.PayDate }).ToList();
 
+
+                
                 //Fetch Detail Data
                 foreach (var r in res)
                 {

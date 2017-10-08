@@ -1,0 +1,89 @@
+﻿@model IEnumerable<RVReport>
+
+
+
+
+
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+<center>
+    <h3 class="section-to-print">Cases Under Right To Information</h3>
+</center>
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th>
+                Sr No
+            </th>
+            <th>Date Of Reciept Of Application</th>
+            <th>
+                Applicant Fees
+            </th>
+            <th>Name and Address Of Partt</th>
+            <th>
+                Nature Of Information Sought
+            </th>
+            <th>
+                Date Of Furnishing Informaation
+            </th>
+
+            <th>
+                Challan No
+            </th>
+            <th>
+Amount
+            </th>
+            <th>
+                Remarks
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{ var i = 1; }
+        @foreach (RVReport item in Model)
+        {
+
+            <tr>
+                <td>@i</td>
+                
+                <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Applicant Fees"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Name And Address Of Party"])</td>
+                
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Nature Of Information Sought"])</td>
+
+
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Date Of Information"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Challan No/Date"])</td>
+                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+              <td>@Html.DisplayFor(modelItem => item.DetailData["Remark"])</td>
+
+
+
+
+
+
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+

@@ -31,8 +31,8 @@
             <PropertyRef Name="BuildingID" />
           </Key>
           <Property Name="BuildingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="WardNo" Type="int" />
-          <Property Name="House No" Type="int" />
+          <Property Name="WardNo" Type="varchar" MaxLength="50" />
+          <Property Name="House No" Type="varchar" MaxLength="10" />
           <Property Name="OwnerName" Type="varchar" MaxLength="100" />
           <Property Name="NameOfConstructioin" Type="varchar" MaxLength="250" />
           <Property Name="DateOfAppl" Type="date" />
@@ -1746,11 +1746,11 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="InOutRegsRecpt" EntitySet="InOutRegsRecpts" />
             <End Role="InOutRegsIssue" EntitySet="InOutRegsIssues" />
           </AssociationSet>
-          <EntitySet Name="Buildings" EntityType="PanchayatModel.Building" />
           <AssociationSet Name="FK_InvItems_ToRegisterTypes" Association="PanchayatModel.FK_InvItems_ToRegisterTypes">
             <End Role="RegisterType" EntitySet="RegisterTypes" />
             <End Role="InvItem" EntitySet="InvItems" />
           </AssociationSet>
+          <EntitySet Name="Buildings" EntityType="PanchayatModel.Building" />
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -2495,13 +2495,25 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_InvItems_ToRegisterTypes">
+          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="1" />
+          <End Type="PanchayatModel.InvItem" Role="InvItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterType">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="InvItem">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Building">
           <Key>
             <PropertyRef Name="BuildingID" />
           </Key>
           <Property Name="BuildingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WardNo" Type="Int32" />
-          <Property Name="House_No" Type="Int32" />
+          <Property Name="WardNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="House_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="OwnerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="NameOfConstructioin" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="DateOfAppl" Type="DateTime" Precision="0" />
@@ -2516,18 +2528,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="HouseTax" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_InvItems_ToRegisterTypes">
-          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="1" />
-          <End Type="PanchayatModel.InvItem" Role="InvItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegisterType">
-              <PropertyRef Name="RegisterTypeID" />
-            </Principal>
-            <Dependent Role="InvItem">
-              <PropertyRef Name="RegisterTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

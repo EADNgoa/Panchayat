@@ -106,6 +106,11 @@ namespace Panchayat
     {
     }
 
+    [MetadataType(typeof(NocertMetadata))]
+    public partial class Noc
+    {
+    }
+
     public class Form10rpt
     {
         public string Ledger { get; set; }
@@ -192,8 +197,7 @@ namespace Panchayat
         public decimal Amount { get; set; }
         public DateTime Tdate { get; set; } //Transaction date
         public Dictionary<string, string> DetailData { get; set; }
-
-
+        public string PayeeName { get; set; }
     }
 
     enum SubLedgerNamer : byte

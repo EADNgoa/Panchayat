@@ -16,16 +16,16 @@ namespace Panchayat.Controllers
         private PanchayatEntities db = new PanchayatEntities();
 
         // GET: Buildings
-        public ActionResult Index(int? page,int? wn,int? hn,DateTime? doa)
+        public ActionResult Index(int? page,string wn,string hn,DateTime? doa)
         {
             var builds = db.Buildings.Where(b => b.BuildingID > 0);
             if(wn!=null)
             {
-                builds = builds.Where(b => b.WardNo == wn);
+                builds = builds.Where(b => b.WardNo.Contains(wn));
             }
             if (hn != null)
             {
-                builds = builds.Where(b => b.House_No == hn);
+                builds = builds.Where(b => b.House_No.Contains(hn));
             }
             if (doa != null)
             {

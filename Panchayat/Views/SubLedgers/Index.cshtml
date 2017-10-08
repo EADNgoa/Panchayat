@@ -13,9 +13,9 @@
 @using (Html.BeginForm("Index", "SubLedgers", FormMethod.Get))
 {
     <p>
+        &nbsp; Find by SubLedger: @Html.TextBox("subSearchString", ViewBag.CurrentFilter as string)
         Find by Ledger: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        &nbsp; :Find by SubLedger: @Html.TextBox("subSearchString", ViewBag.CurrentFilter as string)
-        &nbsp; :Ledger Type: @Html.DropDownList("SubType","--All Ledger types--")
+        &nbsp; Ledger Type: @Html.DropDownList("SubType","--All Ledger types--")
         <input type="submit" value="Search" />
     </p>
 }

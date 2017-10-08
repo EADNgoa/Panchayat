@@ -1,0 +1,83 @@
+﻿@model IEnumerable<RVReport>
+
+
+
+
+
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+<center>
+    <h3 class="section-to-print">Divergence Certificate</h3>
+</center>
+<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+<table class="table section-to-print">
+    <thead>
+        <tr>
+            <th>
+                Sr No
+            </th>
+            <th>Invoice No</th>
+            <th>
+                Date
+            </th>
+            <th>Name Of Applicant</th>
+            <th>
+                Address
+            </th>
+            <th>
+                Amount
+            </th>
+
+            <th>
+                Purpose
+            </th>
+            <th>
+                Remarks
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{ var i = 1; }
+        @foreach (RVReport item in Model)
+        {
+
+            <tr>
+                <td>@i</td>
+                <td>@Html.DisplayFor(modelItem => item.RVid)</td>
+                <td>@Html.DisplayFor(modelItem => item.Tdate)</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Applicant"])</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Address"])</td>
+                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Purpose"])</td>
+
+
+                <td>@Html.DisplayFor(modelItem => item.DetailData["Remark"])</td>
+
+
+
+
+
+
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+

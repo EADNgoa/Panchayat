@@ -54,20 +54,18 @@
         <div class="row section-to-Not-print">
             <div>
                 <table>
-                    <tr>
+                    <tr style="text-align:center">
                         <td></td>
-                        <td> Date Of Reciept:</td>
+                        <td>&nbsp; Date Of Reciept:</td>
                         <td> @Html.TextBox("dor", ViewBag.CurrentFilter as string, htmlAttributes: new { type = "date", @class = "form-control" })</td>
 
+                        <td>&nbsp; Date Of VP Meeting:</td>
+                        <td> @Html.TextBox("dov", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
 
-                        <td> Date Of Issue:</td>
+
+                        <td>&nbsp; Date Of Issue:</td>
                         <td> @Html.TextBox("doi", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
-                        <td> Issue Or Reject:</td>
-                        <td> @Html.TextBox("ior", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
-                        <td> Date Of Vp Register:</td>
-
-                        <td> @Html.TextBox("dov", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
-
+                                                
                         <td class="col-lg-1"></td>
                         <td><input type="submit" value="Search" class="btn btn-default" /></td>
                     </tr>
@@ -188,27 +186,9 @@
 
             }           </th>
         <th>
-            @if (ViewBag.RegisterTypeID == 12)
-            {
-                <p>Date Of V.P Register In Which Aplication Was Discussed :</p>
-            }
-            @if (ViewBag.RegisterTypeID == 13)
-            {
-                <p>Date Of V.P Register In Which Aplication Was Discussed :</p>
-            }
-            @if (ViewBag.RegisterTypeID == 14)
-            {
-                <p>Date Of V.P Register In Which Aplication Was Discussed :</p>
-
-            }
-            @if (ViewBag.RegisterTypeID == 15)
-            {
-                <p>Date Of V.P Register In Which Aplication Was Discussed :</p>
-            }
-            @if (ViewBag.RegisterTypeID == 16)
-            {
-                <p>Date Of V.P Register In Which Aplication Was Discussed :</p>
-            }
+           
+                <p>Date Of V.P meeting In Which Aplication Was Discussed :</p>
+           
          </th>
         <th>
             @if (ViewBag.RegisterTypeID == 12)
@@ -286,34 +266,11 @@
 
             } 
         </th>
-        <th>
-            @if (ViewBag.RegisterTypeID == 12)
-            {
-                <p>Whether Decide To Reject Or Issue:</p>
-            }
-            @if (ViewBag.RegisterTypeID == 13)
-            {
-                <p>Whether Decide To Reject Or Issue:</p>
-
-            }
-            @if (ViewBag.RegisterTypeID == 14)
-            {
-                <p>Whether Decide To Reject Or Issue:</p>
-
-            }
-            @if (ViewBag.RegisterTypeID == 15)
-            {
-                <p>Whether Decide To Reject Or Issue:</p>
-
-            }
-            @if (ViewBag.RegisterTypeID == 16)
-            {
-                <p>Whether Decide To Reject Or Issue:</p>
-
-            } 
+        <th>           
+                <p>Date of Issue/ Communication to party:</p>           
         </th>
         <th>
-           Remark
+           Remarks
         </th>
         
         <th></th>
@@ -337,7 +294,7 @@
             @Html.DisplayFor(modelItem => item.NoOfResolution)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IssueOrReject)
+            @((item.IssueOrReject?? false) ? "Issue" :"Reject")
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.RejectedReason)
@@ -350,35 +307,12 @@
         </td>
       
         <td class="section-to-Not-print">
-            @Html.ActionLink("Edit", "Edit", new { id=item.NocID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.NocID }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.NocID }) 
         </td>
     </tr>
 }
 
 </table>
-@if (ViewBag.RegisterTypeID == 12)
-{
+
     @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 12 }))
-}
-@if (ViewBag.RegisterTypeID == 13)
-{
-    @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 13 }))
-}
-@if (ViewBag.RegisterTypeID == 14)
-{
-    @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 14 }))
-}
-@if (ViewBag.RegisterTypeID == 15)
-{
-    @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 15 }))
-}
-@if (ViewBag.RegisterTypeID == 16)
-{
-    @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = 16 }))
-}
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = (int)ViewBag.RegisterTypeID }))

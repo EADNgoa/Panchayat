@@ -15,8 +15,8 @@ namespace Panchayat
     public partial class Building
     {
         public int BuildingID { get; set; }
-        public Nullable<int> WardNo { get; set; }
-        public Nullable<int> House_No { get; set; }
+        public string WardNo { get; set; }
+        public string House_No { get; set; }
         public string OwnerName { get; set; }
         public string NameOfConstructioin { get; set; }
         public Nullable<System.DateTime> DateOfAppl { get; set; }

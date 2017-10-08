@@ -78,12 +78,29 @@ namespace Panchayat
         [Required]
         [StringLength(250)]
         public String ResAddress;
-
-
-
+                
     }
 
-    public class CitizenLedgerDetailsMetatdata
+    public class NocertMetadata
+    {
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date Of Receipt")]
+        public DateTime DateOfReciept;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date Of VP Reg.")]
+        public DateTime DateOfVp;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date Of Communication")]
+        public DateTime DateOfComm;
+    }
+
+
+        public class CitizenLedgerDetailsMetatdata
     {
         [Display(Name = "Citizen Ledger Details ID")]
         [Required]
@@ -426,10 +443,10 @@ namespace Panchayat
     public class BuildingMetadata
     {
         [Required]
-        public int WardNo;
+        public string WardNo;
 
         [Required]
-        public int House_No;
+        public string House_No;
 
         [StringLength(100)]
         [Required]
@@ -446,6 +463,10 @@ namespace Panchayat
 
         [Required]
         public int NoOfRes;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]        
+        public DateTime DateOfRes;
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]

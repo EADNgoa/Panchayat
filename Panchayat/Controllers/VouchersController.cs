@@ -148,6 +148,7 @@ namespace Panchayat.Controllers
         public ActionResult EditRVLedgDetsPartial(int id)
         {
             var CLedgDets = db.RVdetails.Where(rv => rv.VoucherID== id).ToList();
+           
             return PartialView("_EditRVLedgDetsPartial", CLedgDets);
 
         }

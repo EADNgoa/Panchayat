@@ -28,18 +28,36 @@
 <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
 <table class="table section-to-print">
     <thead>
-        <tr>
-            <th>
+        <tr style="border: solid thin">
+            <th rowspan="2">
                 Sr No
             </th>
-            <th>Name Of contractor</th>
-            <th>
+            <th rowspan="2">
+                Name Of Contractor
+            </th>
+            <th rowspan="2">
                 Name Of Work
             </th>
-            <th>Valuation Certificate No.Reciept No. Date</th>
-            <th>
-                Amount Of Tax
+            <th rowspan="2">
+                Valuation Certificate No.Reciept No. Date
             </th>
+            <th rowspan="2">
+                Amount Of Sales Tax/Vat Tax
+            </th>
+            <th colspan="3" style="border: solid thin">
+                Details of tax credited to bank
+            </th>
+
+            <th rowspan="2">
+                Challan No
+            </th>
+            <th rowspan="2">
+                Remarks
+            </th>
+
+        </tr>
+        <tr style="border: solid thin">
+
             <th>
                 Details Of Name Of Bank
             </th>
@@ -49,13 +67,7 @@
             <th>
                 Amount
             </th>
-            <th>
-                Challan No
-            </th>
-        
-            <th>
-                Remark
-            </th>
+
         </tr>
     </thead>
     <tbody>
@@ -65,7 +77,7 @@
 
             <tr>
                 <td>@i</td>
-                <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Contractor"])</td>
+                <td>@Html.DisplayFor(modelItem => item.PayeeName )</td>
                 <td>@Html.DisplayFor(modelItem => item.DetailData["Name Of Work"])</td>
                 <td>@Html.DisplayFor(modelItem => item.RVid),@Html.DisplayFor(modelItem => item.Tdate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>

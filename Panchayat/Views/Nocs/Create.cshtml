@@ -77,22 +77,22 @@
             }
             @if (ViewBag.RegisterTypeID == 13)
             {
-                <label class="control-label col-md-3">Name And Address Of Applicant::</label>
+                <label class="control-label col-md-3">Name And Address Of Applicant:</label>
 
             }
             @if (ViewBag.RegisterTypeID == 14)
             {
-                <label class="control-label col-md-3">Name And Address Of Applicant::</label>
+                <label class="control-label col-md-3">Name And Address Of Applicant:</label>
 
             }
             @if (ViewBag.RegisterTypeID == 15)
             {
-                <label class="control-label col-md-3">Name And Address Of Applicant::</label>
+                <label class="control-label col-md-3">Name And Address Of Applicant:</label>
 
             }
             @if (ViewBag.RegisterTypeID == 16)
             {
-                <label class="control-label col-md-3">Name And Address Of Applicant::</label>
+                <label class="control-label col-md-3">Name And Address Of Applicant:</label>
 
             }
           
@@ -110,22 +110,22 @@
             }
             @if (ViewBag.RegisterTypeID == 13)
             {
-                <label class="control-label col-md-3">Nature Of N.O.C.S/Certificate Applied For::</label>
+                <label class="control-label col-md-3">Nature Of N.O.C.S/Certificate Applied For:</label>
 
             }
             @if (ViewBag.RegisterTypeID == 14)
             {
-                <label class="control-label col-md-3"> Nature Of N.O.C.S/Certificate Applied For::</label>
+                <label class="control-label col-md-3"> Nature Of N.O.C.S/Certificate Applied For:</label>
 
             }
             @if (ViewBag.RegisterTypeID == 15)
             {
-                <label class="control-label col-md-3">Nature Of N.O.C.S/Certificate Applied For::</label>
+                <label class="control-label col-md-3">Nature Of N.O.C.S/Certificate Applied For:</label>
 
             }
             @if (ViewBag.RegisterTypeID == 16)
             {
-                <label class="control-label col-md-3">Nature Of N.O.C.S/Certificate Applied For::</label>
+                <label class="control-label col-md-3">Nature Of N.O.C.S/Certificate Applied For:</label>
 
             }
           
@@ -136,30 +136,9 @@
         </div>
 
         <div class="form-group">
-            @if (ViewBag.RegisterTypeID == 12)
-            {
-                <label class="control-label col-md-3">Date Of V.P Register In Which Aplication Was Discussed :</label>
-            }
-            @if (ViewBag.RegisterTypeID == 13)
-            {
-                <label class="control-label col-md-3">Date Of V.P Register In Which Aplication Was Discussed :</label>
-
-            }
-            @if (ViewBag.RegisterTypeID == 14)
-            {
-                <label class="control-label col-md-3"> Date Of V.P Register In Which Aplication Was Discussed :</label>
-
-            }
-            @if (ViewBag.RegisterTypeID == 15)
-            {
-                <label class="control-label col-md-3">Date Of V.P Register In Which Aplication Was Discussed :</label>
-
-            }
-            @if (ViewBag.RegisterTypeID == 16)
-            {
-                <label class="control-label col-md-3">Date Of V.P Register In Which Aplication Was Discussed :</label>
-
-            }
+           
+                <label class="control-label col-md-3">Date Of V.P meeting in which aplication was discussed :</label>
+            
            
             <div class="col-md-9">
                 @Html.EditorFor(model => model.DateOfVp, new { htmlAttributes = new { @class = "form-control", @Type = "date" } })
@@ -230,7 +209,7 @@
 
             <div class="col-md-9">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.IssueOrReject)
+                    @Html.DropDownListFor(m => m.IssueOrReject, new List<SelectListItem> { new SelectListItem { Text = "Issue", Value = "true" }, new SelectListItem { Text = "Reject", Value = "false" } }, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.IssueOrReject, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -301,7 +280,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                <input type="text" class="form-control" />
+                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -317,7 +296,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { rt = (int)ViewBag.RegisterTypeID })
 </div>
 
 @section Scripts {
