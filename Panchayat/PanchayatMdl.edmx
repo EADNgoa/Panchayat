@@ -220,6 +220,7 @@
           <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="varchar" MaxLength="350" />
           <Property Name="RVno" Type="int" />
+          <Property Name="RefundReason" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="InOutRegsRecpt">
           <Key>
@@ -232,6 +233,14 @@
           <Property Name="Qty" Type="int" />
           <Property Name="Value" Type="decimal" Precision="18" Scale="2" />
           <Property Name="RVno" Type="int" />
+          <Property Name="PropertyParticulars" Type="varchar" MaxLength="250" />
+          <Property Name="SituatedWhere" Type="varchar" MaxLength="250" />
+          <Property Name="DepositPurpose" Type="varchar" MaxLength="250" />
+          <Property Name="ValuationDetails" Type="varchar" MaxLength="50" />
+          <Property Name="SanctionDateNo" Type="varchar" MaxLength="50" />
+          <Property Name="SanctionByWhom" Type="varchar" MaxLength="50" />
+          <Property Name="PeriodToSpendYrs" Type="tinyint" />
+          <Property Name="TreasureVoucherDetails" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -414,7 +423,6 @@
           <Property Name="Meeting" Type="varchar" MaxLength="50" />
           <Property Name="LedgerID" Type="int" />
           <Property Name="SubLedgerID" Type="int" />
-          <Property Name="Form6" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1359,8 +1367,8 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <NavigationProperty Name="SubLedgerType" Relationship="Self.FK_SubLedgers_SubLedgerType" FromRole="SubLedgers" ToRole="SubLedgerType" />
           <Property Name="HasDemand" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DemandDetails" Relationship="PanchayatModel.FK_DemandDetails_SubLedgerID" FromRole="SubLedger" ToRole="DemandDetail" />
-          <NavigationProperty Name="Vouchers" Relationship="PanchayatModel.FK_Voucher_SubLedger" FromRole="SubLedger" ToRole="Voucher" />
           <NavigationProperty Name="Budgets" Relationship="PanchayatModel.FK_Budget_ToSubledger" FromRole="SubLedger" ToRole="Budget" />
+          <NavigationProperty Name="Vouchers" Relationship="PanchayatModel.FK_Voucher_SubLedger" FromRole="SubLedger" ToRole="Voucher" />
         </EntityType>
         <EntityType Name="SubLedgerType">
           <Key>
@@ -1675,23 +1683,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="Inward" EntitySet="Inwards" />
           </AssociationSet>
           <EntitySet Name="InvItems" EntityType="PanchayatModel.InvItem" />
-          <EntitySet Name="Vouchers" EntityType="PanchayatModel.Voucher" />
-          <AssociationSet Name="FK_Corrections_Voucher" Association="PanchayatModel.FK_Corrections_Voucher">
-            <End Role="Voucher" EntitySet="Vouchers" />
-            <End Role="Correction" EntitySet="Corrections" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Voucher_Ledger" Association="PanchayatModel.FK_Voucher_Ledger">
-            <End Role="Ledger" EntitySet="Ledgers" />
-            <End Role="Voucher" EntitySet="Vouchers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RVdetails_ToVoucher" Association="PanchayatModel.FK_RVdetails_ToVoucher">
-            <End Role="Voucher" EntitySet="Vouchers" />
-            <End Role="RVdetail" EntitySet="RVdetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Voucher_SubLedger" Association="PanchayatModel.FK_Voucher_SubLedger">
-            <End Role="SubLedger" EntitySet="SubLedgers" />
-            <End Role="Voucher" EntitySet="Vouchers" />
-          </AssociationSet>
           <EntitySet Name="Budgets" EntityType="PanchayatModel.Budget" />
           <AssociationSet Name="FK_Budget_ToSubledger" Association="PanchayatModel.FK_Budget_ToSubledger">
             <End Role="SubLedger" EntitySet="SubLedgers" />
@@ -1713,10 +1704,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           </AssociationSet>
           <AssociationSet Name="FK_PropertyBooking_ToProperty" Association="PanchayatModel.FK_PropertyBooking_ToProperty">
             <End Role="Property" EntitySet="Properties" />
-            <End Role="PropertyBooking" EntitySet="PropertyBookings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PropertyBooking_ToVoucher" Association="PanchayatModel.FK_PropertyBooking_ToVoucher">
-            <End Role="Voucher" EntitySet="Vouchers" />
             <End Role="PropertyBooking" EntitySet="PropertyBookings" />
           </AssociationSet>
           <EntitySet Name="InOutRegsRecpts" EntityType="PanchayatModel.InOutRegsRecpt" />
@@ -1751,6 +1738,27 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="InvItem" EntitySet="InvItems" />
           </AssociationSet>
           <EntitySet Name="Buildings" EntityType="PanchayatModel.Building" />
+          <EntitySet Name="Vouchers" EntityType="PanchayatModel.Voucher" />
+          <AssociationSet Name="FK_Corrections_Voucher" Association="PanchayatModel.FK_Corrections_Voucher">
+            <End Role="Voucher" EntitySet="Vouchers" />
+            <End Role="Correction" EntitySet="Corrections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Ledger" Association="PanchayatModel.FK_Voucher_Ledger">
+            <End Role="Ledger" EntitySet="Ledgers" />
+            <End Role="Voucher" EntitySet="Vouchers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyBooking_ToVoucher" Association="PanchayatModel.FK_PropertyBooking_ToVoucher">
+            <End Role="Voucher" EntitySet="Vouchers" />
+            <End Role="PropertyBooking" EntitySet="PropertyBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RVdetails_ToVoucher" Association="PanchayatModel.FK_RVdetails_ToVoucher">
+            <End Role="Voucher" EntitySet="Vouchers" />
+            <End Role="RVdetail" EntitySet="RVdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_SubLedger" Association="PanchayatModel.FK_Voucher_SubLedger">
+            <End Role="SubLedger" EntitySet="SubLedgers" />
+            <End Role="Voucher" EntitySet="Vouchers" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -2189,78 +2197,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="RegisterTypeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_InvItems_ToRegisterTypes" FromRole="InvItem" ToRole="RegisterType" />
         </EntityType>
-        <EntityType Name="Voucher">
-          <Key>
-            <PropertyRef Name="VoucherID" />
-          </Key>
-          <Property Name="VoucherID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PassedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="of" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ActualAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="For" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PayDate" Type="DateTime" Precision="0" />
-          <Property Name="CBfolio" Type="Int32" />
-          <Property Name="ResNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="HeldOn" Type="DateTime" Precision="0" />
-          <Property Name="Meeting" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LedgerID" Type="Int32" />
-          <Property Name="SubLedgerID" Type="Int32" />
-          <Property Name="Form6" Type="Boolean" />
-          <NavigationProperty Name="Corrections" Relationship="PanchayatModel.FK_Corrections_Voucher" FromRole="Voucher" ToRole="Correction" />
-          <NavigationProperty Name="Ledger" Relationship="PanchayatModel.FK_Voucher_Ledger" FromRole="Voucher" ToRole="Ledger" />
-          <NavigationProperty Name="RVdetails" Relationship="PanchayatModel.FK_RVdetails_ToVoucher" FromRole="Voucher" ToRole="RVdetail" />
-          <NavigationProperty Name="SubLedger" Relationship="PanchayatModel.FK_Voucher_SubLedger" FromRole="Voucher" ToRole="SubLedger" />
-          <NavigationProperty Name="PropertyBookings" Relationship="PanchayatModel.FK_PropertyBooking_ToVoucher" FromRole="Voucher" ToRole="PropertyBooking" />
-        </EntityType>
-        <Association Name="FK_Corrections_Voucher">
-          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="0..1" />
-          <End Type="PanchayatModel.Correction" Role="Correction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Voucher">
-              <PropertyRef Name="VoucherID" />
-            </Principal>
-            <Dependent Role="Correction">
-              <PropertyRef Name="VoucherID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Voucher_Ledger">
-          <End Type="PanchayatModel.Ledger" Role="Ledger" Multiplicity="0..1" />
-          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ledger">
-              <PropertyRef Name="LedgerID" />
-            </Principal>
-            <Dependent Role="Voucher">
-              <PropertyRef Name="LedgerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RVdetails_ToVoucher">
-          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="0..1" />
-          <End Type="PanchayatModel.RVdetail" Role="RVdetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Voucher">
-              <PropertyRef Name="VoucherID" />
-            </Principal>
-            <Dependent Role="RVdetail">
-              <PropertyRef Name="VoucherID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Voucher_SubLedger">
-          <End Type="PanchayatModel.SubLedger" Role="SubLedger" Multiplicity="0..1" />
-          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SubLedger">
-              <PropertyRef Name="SubLedgerID" />
-            </Principal>
-            <Dependent Role="Voucher">
-              <PropertyRef Name="SubLedgerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Budget">
           <Key>
             <PropertyRef Name="BudgetID" />
@@ -2369,18 +2305,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PropertyBooking_ToVoucher">
-          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="0..1" />
-          <End Type="PanchayatModel.PropertyBooking" Role="PropertyBooking" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Voucher">
-              <PropertyRef Name="VoucherID" />
-            </Principal>
-            <Dependent Role="PropertyBooking">
-              <PropertyRef Name="RefundSDVoucherNo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="InOutRegsRecpt">
           <Key>
             <PropertyRef Name="IORecptID" />
@@ -2395,6 +2319,14 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <NavigationProperty Name="InvItem" Relationship="PanchayatModel.FK_InOutRegsRecpt_ToInvItems" FromRole="InOutRegsRecpt" ToRole="InvItem" />
           <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_InOutRegsRecpt_ToRegType" FromRole="InOutRegsRecpt" ToRole="RegisterType" />
           <NavigationProperty Name="InOutRegsIssues" Relationship="PanchayatModel.FK_InOutRegsIssue_ToIORecptID" FromRole="InOutRegsRecpt" ToRole="InOutRegsIssue" />
+          <Property Name="PropertyParticulars" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SituatedWhere" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DepositPurpose" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ValuationDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SanctionDateNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SanctionByWhom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PeriodToSpendYrs" Type="Byte" />
+          <Property Name="TreasureVoucherDetails" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_InOutRegsRecpt_ToInvItems">
           <End Type="PanchayatModel.InvItem" Role="InvItem" Multiplicity="0..1" />
@@ -2458,6 +2390,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <NavigationProperty Name="InvItem" Relationship="PanchayatModel.FK_InOutRegsIssu_ToInvItems" FromRole="InOutRegsIssue" ToRole="InvItem" />
           <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_InOutRegsIssu_ToRegType" FromRole="InOutRegsIssue" ToRole="RegisterType" />
           <NavigationProperty Name="InOutRegsRecpt" Relationship="PanchayatModel.FK_InOutRegsIssue_ToIORecptID" FromRole="InOutRegsIssue" ToRole="InOutRegsRecpt" />
+          <Property Name="RefundReason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_InOutRegsIssu_ToInvItems">
           <End Type="PanchayatModel.InvItem" Role="InvItem" Multiplicity="0..1" />
@@ -2528,6 +2461,89 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="HouseTax" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Voucher">
+          <Key>
+            <PropertyRef Name="VoucherID" />
+          </Key>
+          <Property Name="VoucherID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PassedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="of" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ActualAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="For" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PayDate" Type="DateTime" Precision="0" />
+          <Property Name="CBfolio" Type="Int32" />
+          <Property Name="ResNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HeldOn" Type="DateTime" Precision="0" />
+          <Property Name="Meeting" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LedgerID" Type="Int32" />
+          <Property Name="SubLedgerID" Type="Int32" />
+          <NavigationProperty Name="Corrections" Relationship="PanchayatModel.FK_Corrections_Voucher" FromRole="Voucher" ToRole="Correction" />
+          <NavigationProperty Name="Ledger" Relationship="PanchayatModel.FK_Voucher_Ledger" FromRole="Voucher" ToRole="Ledger" />
+          <NavigationProperty Name="PropertyBookings" Relationship="PanchayatModel.FK_PropertyBooking_ToVoucher" FromRole="Voucher" ToRole="PropertyBooking" />
+          <NavigationProperty Name="RVdetails" Relationship="PanchayatModel.FK_RVdetails_ToVoucher" FromRole="Voucher" ToRole="RVdetail" />
+          <NavigationProperty Name="SubLedger" Relationship="PanchayatModel.FK_Voucher_SubLedger" FromRole="Voucher" ToRole="SubLedger" />
+        </EntityType>
+        <Association Name="FK_Corrections_Voucher">
+          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Correction" Role="Correction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voucher">
+              <PropertyRef Name="VoucherID" />
+            </Principal>
+            <Dependent Role="Correction">
+              <PropertyRef Name="VoucherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Ledger">
+          <End Type="PanchayatModel.Ledger" Role="Ledger" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledger">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyBooking_ToVoucher">
+          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="0..1" />
+          <End Type="PanchayatModel.PropertyBooking" Role="PropertyBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voucher">
+              <PropertyRef Name="VoucherID" />
+            </Principal>
+            <Dependent Role="PropertyBooking">
+              <PropertyRef Name="RefundSDVoucherNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RVdetails_ToVoucher">
+          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="0..1" />
+          <End Type="PanchayatModel.RVdetail" Role="RVdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voucher">
+              <PropertyRef Name="VoucherID" />
+            </Principal>
+            <Dependent Role="RVdetail">
+              <PropertyRef Name="VoucherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_SubLedger">
+          <End Type="PanchayatModel.SubLedger" Role="SubLedger" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Voucher" Role="Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubLedger">
+              <PropertyRef Name="SubLedgerID" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2861,26 +2877,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Vouchers">
-            <EntityTypeMapping TypeName="PanchayatModel.Voucher">
-              <MappingFragment StoreEntitySet="Voucher">
-                <ScalarProperty Name="Form6" ColumnName="Form6" />
-                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
-                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
-                <ScalarProperty Name="Meeting" ColumnName="Meeting" />
-                <ScalarProperty Name="HeldOn" ColumnName="HeldOn" />
-                <ScalarProperty Name="ResNo" ColumnName="ResNo" />
-                <ScalarProperty Name="CBfolio" ColumnName="CBfolio" />
-                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
-                <ScalarProperty Name="For" ColumnName="For" />
-                <ScalarProperty Name="ActualAmount" ColumnName="ActualAmount" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="of" ColumnName="of" />
-                <ScalarProperty Name="PassedBy" ColumnName="PassedBy" />
-                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Budgets">
             <EntityTypeMapping TypeName="PanchayatModel.Budget">
               <MappingFragment StoreEntitySet="Budget">
@@ -2928,6 +2924,14 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <EntitySetMapping Name="InOutRegsRecpts">
             <EntityTypeMapping TypeName="PanchayatModel.InOutRegsRecpt">
               <MappingFragment StoreEntitySet="InOutRegsRecpt">
+                <ScalarProperty Name="TreasureVoucherDetails" ColumnName="TreasureVoucherDetails" />
+                <ScalarProperty Name="PeriodToSpendYrs" ColumnName="PeriodToSpendYrs" />
+                <ScalarProperty Name="SanctionByWhom" ColumnName="SanctionByWhom" />
+                <ScalarProperty Name="SanctionDateNo" ColumnName="SanctionDateNo" />
+                <ScalarProperty Name="ValuationDetails" ColumnName="ValuationDetails" />
+                <ScalarProperty Name="DepositPurpose" ColumnName="DepositPurpose" />
+                <ScalarProperty Name="SituatedWhere" ColumnName="SituatedWhere" />
+                <ScalarProperty Name="PropertyParticulars" ColumnName="PropertyParticulars" />
                 <ScalarProperty Name="RVno" ColumnName="RVno" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
@@ -2949,6 +2953,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <EntitySetMapping Name="InOutRegsIssues">
             <EntityTypeMapping TypeName="PanchayatModel.InOutRegsIssue">
               <MappingFragment StoreEntitySet="InOutRegsIssue">
+                <ScalarProperty Name="RefundReason" ColumnName="RefundReason" />
                 <ScalarProperty Name="RVno" ColumnName="RVno" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
@@ -2982,6 +2987,25 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="House_No" ColumnName="House No" />
                 <ScalarProperty Name="WardNo" ColumnName="WardNo" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vouchers">
+            <EntityTypeMapping TypeName="PanchayatModel.Voucher">
+              <MappingFragment StoreEntitySet="Voucher">
+                <ScalarProperty Name="SubLedgerID" ColumnName="SubLedgerID" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="Meeting" ColumnName="Meeting" />
+                <ScalarProperty Name="HeldOn" ColumnName="HeldOn" />
+                <ScalarProperty Name="ResNo" ColumnName="ResNo" />
+                <ScalarProperty Name="CBfolio" ColumnName="CBfolio" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="For" ColumnName="For" />
+                <ScalarProperty Name="ActualAmount" ColumnName="ActualAmount" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="of" ColumnName="of" />
+                <ScalarProperty Name="PassedBy" ColumnName="PassedBy" />
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

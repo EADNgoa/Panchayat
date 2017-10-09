@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Panchayat.InOutRegsRecpt>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RVno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PropertyParticulars)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SituatedWhere)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepositPurpose)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValuationDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanctionDateNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanctionByWhom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PeriodToSpendYrs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TreasureVoucherDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvItem.Item)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegisterType.RegisterType1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RVno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PropertyParticulars)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SituatedWhere)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepositPurpose)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValuationDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SanctionDateNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SanctionByWhom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PeriodToSpendYrs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TreasureVoucherDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvItem.Item)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisterType.RegisterType1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IORecptID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IORecptID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IORecptID })
+        </td>
+    </tr>
+}
+
+</table>

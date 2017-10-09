@@ -27,7 +27,6 @@ namespace Panchayat.Controllers
             }
             if (dr != null)
             {
-
                 inOutRegsRecpts = inOutRegsRecpts.Where(x => x.TDate == dr);
             }
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
@@ -105,7 +104,7 @@ namespace Panchayat.Controllers
                     lid = 8;
                     sid = 139;
                     var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
-                    var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value, ActualAmount = inOutRegsRecpt.Value, For = null, PayDate = inOutRegsRecpt.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsRecpt.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid, Form6 = false };
+                    var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value, ActualAmount = inOutRegsRecpt.Value, For = null, PayDate = inOutRegsRecpt.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsRecpt.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid};
                     db.Vouchers.Add(item);
                     db.SaveChanges();
                     vid = item.VoucherID;
@@ -115,7 +114,7 @@ namespace Panchayat.Controllers
 
                     var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
                             var ForWhat = db.InvItems.FirstOrDefault(i => i.ItemID == inOutRegsRecpt.ItemID).Item;
-                    var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, ActualAmount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, For = ForWhat, PayDate = inOutRegsRecpt.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsRecpt.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid, Form6 = false };
+                    var item = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, ActualAmount = inOutRegsRecpt.Value * inOutRegsRecpt.Qty, For = ForWhat, PayDate = inOutRegsRecpt.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsRecpt.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid};
                     db.Vouchers.Add(item);
                     db.SaveChanges();
                     vid = item.VoucherID;

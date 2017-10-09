@@ -17,7 +17,7 @@ namespace Panchayat.Controllers
         // GET: Demands/Create
         public ActionResult Create(int? id)
         {
-            ViewBag.YearBox = MyExtensions.MakeYrRq(1, 1, DateTime.Today.Year);
+           // ViewBag.YearBox = MyExtensions.MakeYrRq(1, 1, DateTime.Today.Year);
 
             //Depending on where this is called from, set the Citizen
             int CitID = id ?? 0;

@@ -23,13 +23,11 @@ namespace Panchayat.Controllers
             ViewBag.RegisterTypeID = rt;
             ViewBag.IORcpt = IORecieptID ?? 0;
             if (rt != null)
-            {
-               
+            {               
                 inOutRegsIssue = inOutRegsIssue.Where(x => x.RegisterTypeID == rt);
             }
             if (di != null)
             {
-
                 inOutRegsIssue = inOutRegsIssue.Where(x => x.TDate == di);
             }
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
@@ -109,7 +107,7 @@ namespace Panchayat.Controllers
                     lid = 1;
                     sid = 3;
                     var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
-                    var item1 = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsIssue.Value, ActualAmount = inOutRegsIssue.Value, For = null, PayDate = inOutRegsIssue.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsIssue.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid, Form6 = false };
+                    var item1 = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsIssue.Value, ActualAmount = inOutRegsIssue.Value, For = null, PayDate = inOutRegsIssue.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsIssue.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid};
 
                     db.Vouchers.Add(item1);
                     db.SaveChanges();
@@ -118,7 +116,7 @@ namespace Panchayat.Controllers
                 else
                 {
                     //var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
-                    //var item1 = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsIssue.Value * inOutRegsIssue.Qty, ActualAmount = inOutRegsIssue.Value * inOutRegsIssue.Qty, For = null, PayDate = inOutRegsIssue.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsIssue.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid, Form6 = false };
+                    //var item1 = new Voucher { PassedBy = UserID, of = pn, Amount = inOutRegsIssue.Value * inOutRegsIssue.Qty, ActualAmount = inOutRegsIssue.Value * inOutRegsIssue.Qty, For = null, PayDate = inOutRegsIssue.TDate, CBfolio = null, ResNo = null, HeldOn = inOutRegsIssue.TDate, Meeting = "N/A", LedgerID = lid, SubLedgerID = sid};
 
                     //db.Vouchers.Add(item1);
                     db.SaveChanges();

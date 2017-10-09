@@ -239,6 +239,7 @@
     <Compile Include="Controllers\LedgerDetailsController.cs" />
     <Compile Include="Controllers\LedgersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SD9EMD6Controller.cs" />
     <Compile Include="Controllers\SubLedgersController.cs" />
     <Compile Include="Controllers\SubLedgerTypesController.cs" />
     <Compile Include="Controllers\VouchersController.cs" />
@@ -655,6 +656,14 @@
     <Content Include="Views\InvItems\Edit.cshtml" />
     <Content Include="Views\InvItems\Index.cshtml" />
     <Content Include="Views\InvItems\_CurrInv.cshtml" />
+    <Content Include="Views\SD9EMD6\CreateAquisition6.cshtml" />
+    <Content Include="Views\SD9EMD6\Edit.cshtml" />
+    <Content Include="Views\SD9EMD6\Index.cshtml" />
+    <Content Include="Views\SD9EMD6\Create - Copy.cshtml" />
+    <Content Include="Views\SD9EMD6\EditAquisition6.cshtml" />
+    <Content Include="Views\SD9EMD6\Index - Copy.cshtml" />
+    <Content Include="Views\SD9EMD6\CreateDisposal6.cshtml" />
+    <Content Include="Views\SD9EMD6\EditDisposal6.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

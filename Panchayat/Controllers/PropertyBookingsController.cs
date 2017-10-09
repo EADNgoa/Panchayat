@@ -159,7 +159,7 @@ namespace Panchayat.Controllers
                                 var pn = db.Configs.Select(x => x.VP).FirstOrDefault();
 
 
-                                var RefundSD = new Voucher { PassedBy = UserID, of = pn, Amount = propertyBooking.SecurityDepositAmt, ActualAmount = propertyBooking.SecurityDepositAmt, For = "Security Deposit refund of property booking", PayDate = propertyBooking.TDate, CBfolio = null, ResNo = null, HeldOn = propertyBooking.HDate, Meeting = "N/A", LedgerID = 7, SubLedgerID = 3, Form6 = false };
+                                var RefundSD = new Voucher { PassedBy = UserID, of = pn, Amount = propertyBooking.SecurityDepositAmt, ActualAmount = propertyBooking.SecurityDepositAmt, For = "Security Deposit refund of property booking", PayDate = propertyBooking.TDate, CBfolio = null, ResNo = null, HeldOn = propertyBooking.HDate, Meeting = "N/A", LedgerID = 7, SubLedgerID = 3};
                                 db.Vouchers.Add(RefundSD);
                                 db.SaveChanges();
                                 propertyBooking.RefundSDVoucherNo = RefundSD.VoucherID;
