@@ -8,11 +8,11 @@
 <div class="alert alert-danger">
     @if ((bool)ViewBag.isRVtoday)
     {
-        @: <strong>Note!</strong> Please remember to Correct the corresponding receipt <a target="_blank" href="/Form4/Edit/@Model.RVno">here</a>
+        @: <strong>Note!</strong> Please remember to Correct the corresponding voucher <a target="_blank" href="/Vouchers/Edit/@Model.RVno">here</a>
     }
     else
     {
-        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?RecieptNo=@Model.RVno">here</a>
+        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?VoucherID=@Model.RVno">here</a>
     }
 </div>
 

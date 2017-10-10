@@ -1,0 +1,146 @@
+﻿@model PagedList.IPagedList<Panchayat.rpt1to1io>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Form 6";
+}
+
+
+
+<style type="text/css">
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    .table > thead > tr > th {
+        vertical-align: top;
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+</style>
+<center>
+    <h2 class="section-to-print"><b>SECURITY DEPOSIT REGISTER</b></h2>
+    
+@using (Html.BeginForm("Index", "SD9EMD6", FormMethod.Get))
+{
+    @Html.Hidden("rt", (int)ViewBag.RegisterTypeID)
+    <div class="row section-to-Not-print">
+        <div>
+            <table>
+                <tr style="text-align:center">
+                    <td></td>
+                    <td>&nbsp; Year:</td>
+                    <td>@Html.DropDownList("yr", (IEnumerable<SelectListItem>)ViewBag.YearBox, htmlAttributes: new { @class = "form-control input-sm" })</td>
+
+                    <td>&nbsp; Name of work:</td>
+                    <td> @Html.TextBox("PropName", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+
+                    <td class="col-lg-1"></td>
+                    <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+}
+</center>
+<p class="section-to-Not-print">&nbsp;</p>
+<p class="section-to-Not-print">
+    <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+    @Html.ActionLink("New Deposit", "CreateAquisition", new { rt=(int) ViewBag.RegisterTypeID })
+    
+</p>
+<table class="table section-to-print">
+    <thead>
+        <tr  style="border: solid thin">
+           <td colspan="6" style="border: solid thin; text-align: center">Particulars of S.D. Collected</td> 
+           <td colspan="5" style="border: solid thin; text-align: center">Particulars of S.D. Refunded</td> 
+        </tr>        
+        <tr style="border: solid thin">
+            <th>
+                Sr No
+            </th>
+            <th>Name Of contractor</th>
+            <th>
+                Purpose Of Deposit or Name Of Work
+            </th>
+            <th>Valuation Certificate No.Receipt No. Date</th>
+            <th>
+                Amount
+            </th>
+            <th>&nbsp;</th>
+            <th>
+                Voucher No. & Date
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Reason For Refund SD
+            </th>
+            <th>
+                Remarks
+            </th>
+        </tr>
+        <tr>           
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>&nbsp;</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>            
+            <th>&nbsp;</th>   
+        </tr>
+    </thead>
+    <tbody>        
+        @foreach (rpt1to1io item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.IORecptID)</td>
+                <td>@Html.DisplayFor(modelItem => item.PropertyParticulars)</td>
+                <td>@Html.DisplayFor(modelItem => item.DepositPurpose)</td>
+                <td>@Html.DisplayFor(modelItem => item.ValuationDetails)</td>
+                <td>@Html.DisplayFor(modelItem => item.Value)</td>
+                <td>
+                    <div class="section-to-Not-print">
+                        @Html.ActionLink("Edit", "EditAquisition", new { id = item.IORecptID })
+                        @Html.ActionLink("Rfnd.", "CreateDisposal", new { rt = (int)ViewBag.RegisterTypeID, IORecptID = item.IORecptID })
+                    </div>
+                </td>
+                @if (item.IssuesDets != null)
+                {
+                    foreach (rpt1To1ioIssue iDet in item.IssuesDets)
+                    {
+                        <td>@Html.DisplayFor(i => iDet.RVno), @Html.DisplayFor(i => iDet.TDate)</td>
+                        <td>@Html.DisplayFor(i => iDet.Value)</td>
+                        <td>@Html.DisplayFor(i => iDet.RefundReason)</td>
+                        <td>@Html.DisplayFor(i => iDet.Remarks)</td>                        
+                        <td><div class="section-to-Not-print">@Html.ActionLink("Edit", "EditDisposal", new { id = iDet.IOissueID }) </div> </td>
+                    }
+                }
+            </tr>
+            
+        }
+    </tbody>
+</table>
+
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, rt = ViewBag.RegisterTypeID }))
