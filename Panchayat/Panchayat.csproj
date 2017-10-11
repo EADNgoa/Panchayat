@@ -243,6 +243,7 @@
     <Compile Include="Controllers\SubLedgersController.cs" />
     <Compile Include="Controllers\SubLedgerTypesController.cs" />
     <Compile Include="Controllers\VouchersController.cs" />
+    <Compile Include="Controllers\VPRentsController.cs" />
     <Compile Include="Correction.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -357,6 +358,12 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Voucher.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VPRent.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VPRentDetail.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -676,6 +683,12 @@
     <Content Include="Views\SD9EMD6\EditAquisitionEMD.cshtml" />
     <Content Include="Views\SD9EMD6\CreateDisposalEMD.cshtml" />
     <Content Include="Views\SD9EMD6\CreateAquisitionEMD.cshtml" />
+    <Content Include="Views\VPRents\Create.cshtml" />
+    <Content Include="Views\VPRents\Edit.cshtml" />
+    <Content Include="Views\VPRents\Index.cshtml" />
+    <Content Include="Views\VPRents\Details.cshtml" />
+    <Content Include="Views\VPRents\EditDet.cshtml" />
+    <Content Include="Views\VPRents\IndexDet.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

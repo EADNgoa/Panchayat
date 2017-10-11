@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Panchayat.VPRentDetail>
+
+@{
+    ViewBag.Title = "RENT REGISTER";
+}
+
+<center>
+    <h2 class="section-to-print"><b>RENT REGISTER</b></h2>
+</center>
+<p class="section-to-Not-print">
+    <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+</p>
+    <table class="table section-to-print">
+        <tr style="border: solid thin">
+            <th rowspan="2">Sr. No.</th>
+            <th rowspan="2">Name of Rent Payer</th>
+            <th rowspan="2">Month</th>
+            <th rowspan="2">
+                @Html.DisplayNameFor(model => model.Arrears)
+            </th>
+            <th rowspan="2">
+                @Html.DisplayNameFor(model => model.Current)
+            </th>
+            <th colspan="2" style="text-align: center; border: solid thin ">Recovery</th>
+            <th colspan="3" style="text-align: center; border: solid thin">Balance</th>
+            
+        </tr>
+        <tr style="border: solid thin">
+            <th>
+                Amount
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Arrears
+            </th>
+            <th>
+                Current
+            </th>
+            <th>
+                Total
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VPRentID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VPRent.RentPayerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Month)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arrears)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Current)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecoveryAmt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecoveryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BalanceArrears)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BalanceCurrent)
+                </td>
+                <td>
+                    @(item.Arrears + item.Current - item.RecoveryAmt)
+                </td>
+            </tr>
+        }
+
+    </table>
