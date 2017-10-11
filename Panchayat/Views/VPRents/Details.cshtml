@@ -1,0 +1,191 @@
+﻿@model Panchayat.VPRentDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div class="MastDet">
+    <div>
+        <h4>VPRent</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Year
+            </dt>
+
+            <dd>
+                @(((VPRent) ViewBag.VPRent).RentYear)
+            </dd>
+
+            <dt>
+                Payer Name
+            </dt>
+
+            <dd>
+                @ViewBag.VPRent.RentPayerName
+            </dd>
+
+            <dt>
+                Property Name
+            </dt>
+
+            <dd>
+                @ViewBag.VPRent.RentedPropertyName
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = ((int)ViewBag.VPRent.VPRentID) }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+</div>
+
+<hr />
+
+
+
+@using(Html.BeginForm("CreateDet","VPRents",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("VPRentID", (int)ViewBag.VPRent.VPRentID)    
+
+    <div class="form-horizontal">
+        <h4>Rent Details</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Month", (IEnumerable<SelectListItem>)ViewBag.MonthBox, htmlAttributes: new { @class = "form-control" })
+                
+                @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Arrears, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Arrears, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Arrears, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Current, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Current, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Current, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RecoveryAmt, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RecoveryAmt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RecoveryAmt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RecoveryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RecoveryDate, new { htmlAttributes = new { @class = "form-control", type="date" } })
+                @Html.ValidationMessageFor(model => model.RecoveryDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BalanceArrears, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BalanceArrears, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BalanceArrears, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BalanceCurrent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BalanceCurrent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BalanceCurrent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create Detail" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+<div class="MastDet">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Month)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrears)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Current)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecoveryAmt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecoveryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BalanceArrears)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BalanceCurrent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VPRent.RentPayerName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in (IEnumerable<VPRentDetail>)ViewBag.rd)
+        {
+            <tr>
+                <td>
+                    @MyExtensions.MonthFromInt(item.Month)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arrears)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Current)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecoveryAmt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecoveryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BalanceArrears)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BalanceCurrent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VPRent.RentPayerName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditDet", new { VPRentID = item.VPRentID, dMonth = item.Month },new { target ="_blank"})
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

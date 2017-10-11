@@ -424,6 +424,29 @@
           <Property Name="LedgerID" Type="int" />
           <Property Name="SubLedgerID" Type="int" />
         </EntityType>
+        <EntityType Name="VPRent">
+          <Key>
+            <PropertyRef Name="VPRentID" />
+          </Key>
+          <Property Name="VPRentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RentYear" Type="int" Nullable="false" />
+          <Property Name="RentPayerName" Type="varchar" MaxLength="100" />
+          <Property Name="RentedPropertyName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="VPRentDetails">
+          <Key>
+            <PropertyRef Name="VPRentID" />
+            <PropertyRef Name="Month" />
+          </Key>
+          <Property Name="VPRentID" Type="int" Nullable="false" />
+          <Property Name="Month" Type="int" Nullable="false" />
+          <Property Name="Arrears" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="Current" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="RecoveryAmt" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="RecoveryDate" Type="date" Nullable="false" />
+          <Property Name="BalanceArrears" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="BalanceCurrent" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PeriodSLs">
@@ -998,6 +1021,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VPRentDetails_ToVPRent">
+          <End Role="VPRent" Type="Self.VPRent" Multiplicity="1" />
+          <End Role="VPRentDetails" Type="Self.VPRentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VPRent">
+              <PropertyRef Name="VPRentID" />
+            </Principal>
+            <Dependent Role="VPRentDetails">
+              <PropertyRef Name="VPRentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PanchayatModelStoreContainer">
           <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Budget" EntityType="Self.Budget" Schema="dbo" store:Type="Tables" />
@@ -1034,6 +1069,8 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <EntitySet Name="SubLedgers" EntityType="Self.SubLedgers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubLedgerType" EntityType="Self.SubLedgerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voucher" EntityType="Self.Voucher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VPRent" EntityType="Self.VPRent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VPRentDetails" EntityType="Self.VPRentDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PeriodSLs" EntityType="Self.PeriodSLs" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PeriodSLs].[PeriodID] AS [PeriodID], 
@@ -1227,6 +1264,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_Voucher_SubLedger" Association="Self.FK_Voucher_SubLedger">
             <End Role="SubLedgers" EntitySet="SubLedgers" />
             <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VPRentDetails_ToVPRent" Association="Self.FK_VPRentDetails_ToVPRent">
+            <End Role="VPRent" EntitySet="VPRent" />
+            <End Role="VPRentDetails" EntitySet="VPRentDetails" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1758,6 +1799,12 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_Voucher_SubLedger" Association="PanchayatModel.FK_Voucher_SubLedger">
             <End Role="SubLedger" EntitySet="SubLedgers" />
             <End Role="Voucher" EntitySet="Vouchers" />
+          </AssociationSet>
+          <EntitySet Name="VPRents" EntityType="PanchayatModel.VPRent" />
+          <EntitySet Name="VPRentDetails" EntityType="PanchayatModel.VPRentDetail" />
+          <AssociationSet Name="FK_VPRentDetails_ToVPRent" Association="PanchayatModel.FK_VPRentDetails_ToVPRent">
+            <End Role="VPRent" EntitySet="VPRents" />
+            <End Role="VPRentDetail" EntitySet="VPRentDetails" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="RVdetail">
@@ -2544,6 +2591,43 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VPRent">
+          <Key>
+            <PropertyRef Name="VPRentID" />
+          </Key>
+          <Property Name="VPRentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RentYear" Type="Int32" Nullable="false" />
+          <Property Name="RentPayerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RentedPropertyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="VPRentDetails" Relationship="PanchayatModel.FK_VPRentDetails_ToVPRent" FromRole="VPRent" ToRole="VPRentDetail" />
+        </EntityType>
+        <EntityType Name="VPRentDetail">
+          <Key>
+            <PropertyRef Name="VPRentID" />
+            <PropertyRef Name="Month" />
+          </Key>
+          <Property Name="VPRentID" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="Int32" Nullable="false" />
+          <Property Name="Arrears" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="Current" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="RecoveryAmt" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="RecoveryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BalanceArrears" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="BalanceCurrent" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <NavigationProperty Name="VPRent" Relationship="PanchayatModel.FK_VPRentDetails_ToVPRent" FromRole="VPRentDetail" ToRole="VPRent" />
+        </EntityType>
+        <Association Name="FK_VPRentDetails_ToVPRent">
+          <End Type="PanchayatModel.VPRent" Role="VPRent" Multiplicity="1" />
+          <End Type="PanchayatModel.VPRentDetail" Role="VPRentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VPRent">
+              <PropertyRef Name="VPRentID" />
+            </Principal>
+            <Dependent Role="VPRentDetail">
+              <PropertyRef Name="VPRentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3006,6 +3090,30 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="of" ColumnName="of" />
                 <ScalarProperty Name="PassedBy" ColumnName="PassedBy" />
                 <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VPRents">
+            <EntityTypeMapping TypeName="PanchayatModel.VPRent">
+              <MappingFragment StoreEntitySet="VPRent">
+                <ScalarProperty Name="RentedPropertyName" ColumnName="RentedPropertyName" />
+                <ScalarProperty Name="RentPayerName" ColumnName="RentPayerName" />
+                <ScalarProperty Name="RentYear" ColumnName="RentYear" />
+                <ScalarProperty Name="VPRentID" ColumnName="VPRentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VPRentDetails">
+            <EntityTypeMapping TypeName="PanchayatModel.VPRentDetail">
+              <MappingFragment StoreEntitySet="VPRentDetails">
+                <ScalarProperty Name="BalanceCurrent" ColumnName="BalanceCurrent" />
+                <ScalarProperty Name="BalanceArrears" ColumnName="BalanceArrears" />
+                <ScalarProperty Name="RecoveryDate" ColumnName="RecoveryDate" />
+                <ScalarProperty Name="RecoveryAmt" ColumnName="RecoveryAmt" />
+                <ScalarProperty Name="Current" ColumnName="Current" />
+                <ScalarProperty Name="Arrears" ColumnName="Arrears" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="VPRentID" ColumnName="VPRentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
