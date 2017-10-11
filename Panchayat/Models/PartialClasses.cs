@@ -13,7 +13,7 @@ namespace Panchayat
 
     [MetadataType(typeof(ConfigMetadata))]
     public partial class Config
-    {        
+    {
     }
 
     [MetadataType(typeof(CitizenMetatdata))]
@@ -128,7 +128,7 @@ namespace Panchayat
         public Nullable<int> CitizenID { get; set; }
         public Nullable<int> PeriodID { get; set; }
         public string HouseNo { get; set; }
-        public Nullable<int> SubLedgerID { get; set; }        
+        public Nullable<int> SubLedgerID { get; set; }
         public Nullable<decimal> Amt { get; set; }
         public Nullable<DateTime> StopDate { get; set; }
         public string Remarks { get; set; }
@@ -139,7 +139,7 @@ namespace Panchayat
         public int DemandID { get; set; }
         public int DDID { get; set; }
         public int DemandPeriodID { get; set; }
-        public string HouseNo { get; set; }        
+        public string HouseNo { get; set; }
         public Nullable<decimal> Amt { get; set; }
         public Nullable<int> StopDate { get; set; }
         public string Remarks { get; set; }
@@ -168,7 +168,7 @@ namespace Panchayat
         public int SLid { get; set; }
         public int DDID { get; set; }
         public string SLname { get; set; }
-        public decimal DmdAmt { get; set; } = 0;       
+        public decimal DmdAmt { get; set; } = 0;
         public Dictionary<int, TaxActuals> TaxActuals { get; set; }
     }
 
@@ -178,8 +178,8 @@ namespace Panchayat
         public int DDID { get; set; }
 
         public decimal Arrears { get; set; } = 0;
-        public int ReceiptNo { get; set; } 
-        public Nullable<DateTime> PayDate { get; set; } 
+        public int ReceiptNo { get; set; }
+        public Nullable<DateTime> PayDate { get; set; }
         public decimal PaidAmt { get; set; } = 0;
     }
 
@@ -198,6 +198,39 @@ namespace Panchayat
         public DateTime Tdate { get; set; } //Transaction date
         public Dictionary<string, string> DetailData { get; set; }
         public string PayeeName { get; set; }
+    }
+
+    public class rpt1to1io
+    {
+        public int IORecptID { get; set; }
+        public int RegisterTypeID { get; set; }
+        public DateTime TDate { get; set; }
+        public int ItemID { get; set; }        
+        public decimal Value { get; set; }
+        public int RVno { get; set; }
+        public string PropertyParticulars { get; set; }
+        public string SituatedWhere { get; set; }
+        public string DepositPurpose { get; set; }
+        public string ValuationDetails { get; set; }
+        public string SanctionDateNo { get; set; }
+        public string SanctionByWhom { get; set; }
+        public byte PeriodToSpendYrs { get; set; }
+        public string TreasureVoucherDetails { get; set; }
+        
+        public List<rpt1To1ioIssue> IssuesDets { get; set; }
+}
+
+    public class rpt1To1ioIssue
+    {
+        public int IOissueID { get; set; }
+        public int IORecptID { get; set; }
+        public DateTime TDate { get; set; }
+        public Decimal Value { get; set; }
+        public string IssuedTo { get; set; }
+        public decimal Balance { get; set; }
+        public string Remarks { get; set; }
+        public int RVno { get; set; }
+        public string RefundReason { get; set; }
     }
 
     enum SubLedgerNamer : byte

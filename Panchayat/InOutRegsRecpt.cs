@@ -27,6 +27,14 @@ namespace Panchayat
         public Nullable<int> Qty { get; set; }
         public Nullable<decimal> Value { get; set; }
         public Nullable<int> RVno { get; set; }
+        public string PropertyParticulars { get; set; }
+        public string SituatedWhere { get; set; }
+        public string DepositPurpose { get; set; }
+        public string ValuationDetails { get; set; }
+        public string SanctionDateNo { get; set; }
+        public string SanctionByWhom { get; set; }
+        public Nullable<byte> PeriodToSpendYrs { get; set; }
+        public string TreasureVoucherDetails { get; set; }
     
         public virtual InvItem InvItem { get; set; }
         public virtual RegisterType RegisterType { get; set; }

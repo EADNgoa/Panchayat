@@ -56,7 +56,7 @@
                 <table>
                     <tr style="text-align:center">
                         <td></td>
-                        <td>&nbsp; Date Of Reciept:</td>
+                        <td>&nbsp; Date Of Receipt:</td>
                         <td> @Html.TextBox("dor", ViewBag.CurrentFilter as string, htmlAttributes: new { type = "date", @class = "form-control" })</td>
 
                         <td>&nbsp; Date Of VP Meeting:</td>
@@ -69,11 +69,7 @@
                         <td class="col-lg-1"></td>
                         <td><input type="submit" value="Search" class="btn btn-default" /></td>
                     </tr>
-                </table>
-
-
-
-
+                </table>                                
             </div>
         </div>
     }
@@ -109,29 +105,8 @@
 <table class="table section-to-print">
     <tr>
         <th>
-            @if (ViewBag.RegisterTypeID == 12)
-            {
-              <p>Date Of Reciept Of Aplication:</p>
-            }
-            @if (ViewBag.RegisterTypeID == 13)
-            {
-                <p>Date Of Reciept Of Aplication::</p>
-
-            }
-            @if (ViewBag.RegisterTypeID == 14)
-            {
-                <p>Date Of Reciept Of Aplication::</p>
-
-            }
-            @if (ViewBag.RegisterTypeID == 15)
-            {
-                <p>Date Of Reciept Of Aplication:</p>
-
-            }
-            @if (ViewBag.RegisterTypeID == 16)
-            {
-                <p>Date Of Reciept Of Aplication:</p>
-
+            
+              <p>Date Of Receipt Of Aplication:</p>
             }
           
         </th>

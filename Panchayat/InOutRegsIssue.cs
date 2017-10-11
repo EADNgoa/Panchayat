@@ -25,6 +25,7 @@ namespace Panchayat
         public Nullable<decimal> Balance { get; set; }
         public string Remarks { get; set; }
         public Nullable<int> RVno { get; set; }
+        public string RefundReason { get; set; }
     
         public virtual InvItem InvItem { get; set; }
         public virtual RegisterType RegisterType { get; set; }

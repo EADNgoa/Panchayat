@@ -66,11 +66,6 @@
         <EntityTypeShape EntityType="PanchayatModel.Inward" Width="1.5" PointX="13.625" PointY="12.375" />
         <AssociationConnector Association="PanchayatModel.FK_Inward_RegisterTypes" />
         <EntityTypeShape EntityType="PanchayatModel.InvItem" Width="1.5" PointX="0.75" PointY="23.75" />
-        <EntityTypeShape EntityType="PanchayatModel.Voucher" Width="1.5" PointX="8.875" PointY="12.25" />
-        <AssociationConnector Association="PanchayatModel.FK_Corrections_Voucher" />
-        <AssociationConnector Association="PanchayatModel.FK_Voucher_Ledger" />
-        <AssociationConnector Association="PanchayatModel.FK_RVdetails_ToVoucher" />
-        <AssociationConnector Association="PanchayatModel.FK_Voucher_SubLedger" />
         <EntityTypeShape EntityType="PanchayatModel.Budget" Width="1.5" PointX="8.875" PointY="25.5" />
         <AssociationConnector Association="PanchayatModel.FK_Budget_ToSubledger" />
         <EntityTypeShape EntityType="PanchayatModel.Property" Width="1.5" PointX="16.125" PointY="27" />
@@ -79,7 +74,6 @@
         <AssociationConnector Association="PanchayatModel.FK_PropertyBooking_ToFPReceipt" />
         <AssociationConnector Association="PanchayatModel.FK_PropertyBooking_ToLTReceipt" />
         <AssociationConnector Association="PanchayatModel.FK_PropertyBooking_ToProperty" />
-        <AssociationConnector Association="PanchayatModel.FK_PropertyBooking_ToVoucher" />
         <EntityTypeShape EntityType="PanchayatModel.InOutRegsRecpt" Width="1.5" PointX="16.625" PointY="13.375" />
         <AssociationConnector Association="PanchayatModel.FK_InOutRegsRecpt_ToInvItems" />
         <AssociationConnector Association="PanchayatModel.FK_InOutRegsRecpt_ToRegType" />
@@ -91,6 +85,12 @@
         <AssociationConnector Association="PanchayatModel.FK_InOutRegsIssue_ToIORecptID" />
         <AssociationConnector Association="PanchayatModel.FK_InvItems_ToRegisterTypes" />
         <EntityTypeShape EntityType="PanchayatModel.Building" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="PanchayatModel.Voucher" Width="1.5" PointX="8.875" PointY="12.25" />
+        <AssociationConnector Association="PanchayatModel.FK_Corrections_Voucher" />
+        <AssociationConnector Association="PanchayatModel.FK_Voucher_Ledger" />
+        <AssociationConnector Association="PanchayatModel.FK_PropertyBooking_ToVoucher" />
+        <AssociationConnector Association="PanchayatModel.FK_RVdetails_ToVoucher" />
+        <AssociationConnector Association="PanchayatModel.FK_Voucher_SubLedger" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

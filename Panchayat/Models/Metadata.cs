@@ -365,7 +365,6 @@ namespace Panchayat
         [Range(0.0, Double.MaxValue)]
         public decimal Balance;
 
-        [Required]
         [StringLength(350)]
         public string IssuedTo;
 

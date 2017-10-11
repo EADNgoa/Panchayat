@@ -239,6 +239,7 @@
     <Compile Include="Controllers\LedgerDetailsController.cs" />
     <Compile Include="Controllers\LedgersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SD9EMD6Controller.cs" />
     <Compile Include="Controllers\SubLedgersController.cs" />
     <Compile Include="Controllers\SubLedgerTypesController.cs" />
     <Compile Include="Controllers\VouchersController.cs" />
@@ -655,6 +656,26 @@
     <Content Include="Views\InvItems\Edit.cshtml" />
     <Content Include="Views\InvItems\Index.cshtml" />
     <Content Include="Views\InvItems\_CurrInv.cshtml" />
+    <Content Include="Views\SD9EMD6\CreateAquisition6.cshtml" />
+    <Content Include="Views\SD9EMD6\Index6.cshtml" />
+    <Content Include="Views\SD9EMD6\EditAquisition6.cshtml" />
+    <Content Include="Views\SD9EMD6\CreateDisposal6.cshtml" />
+    <Content Include="Views\SD9EMD6\EditDisposal6.cshtml" />
+    <Content Include="Views\SD9EMD6\EditDisposal9.cshtml" />
+    <Content Include="Views\SD9EMD6\EditAquisition9.cshtml" />
+    <Content Include="Views\SD9EMD6\CreateDisposal9.cshtml" />
+    <Content Include="Views\SD9EMD6\CreateAquisition9.cshtml" />
+    <Content Include="Views\SD9EMD6\Index9.cshtml" />
+    <Content Include="Views\SD9EMD6\IndexSD.cshtml" />
+    <Content Include="Views\SD9EMD6\EditDisposalSD.cshtml" />
+    <Content Include="Views\SD9EMD6\CreateDisposalSD.cshtml" />
+    <Content Include="Views\SD9EMD6\CreateAquisitionSD.cshtml" />
+    <Content Include="Views\SD9EMD6\EditAquisitionSD.cshtml" />
+    <Content Include="Views\SD9EMD6\IndexEMD.cshtml" />
+    <Content Include="Views\SD9EMD6\EditDisposalEMD.cshtml" />
+    <Content Include="Views\SD9EMD6\EditAquisitionEMD.cshtml" />
+    <Content Include="Views\SD9EMD6\CreateDisposalEMD.cshtml" />
+    <Content Include="Views\SD9EMD6\CreateAquisitionEMD.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
