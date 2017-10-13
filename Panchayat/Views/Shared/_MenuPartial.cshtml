@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
             </button>
             
-            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @*@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -27,7 +27,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Masters<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="~/Configs/Edit/1">Configuration</a></li> 
-                        <li><a href="~/RentProperties/Index">Add Property</a></li>
+                        <li><a href="~/RentProperties/Index">VP Properties</a></li>
                         <li><a href="~/InvItems/Index">Inventory Items</a></li>
                         <li><a href="~/Periods">Periods</a></li>
                         <li><a href="~/Citizens">Citizen</a></li>
@@ -42,48 +42,69 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Transactions<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="~/Form4">receipt</a></li>
+                        <li><a href="~/Form4">Receipt</a></li>
                         <li><a href="~/Vouchers">Voucher</a></li>                        
+                        <li><a href="~/Demands/Create">Add Demand</a></li>
+                        <li>&nbsp;</li>
+
                         <li><a href="~/PropertyBookings">Hall Booking</a></li>
-                        <li><a href="~/InOutRegsRecpts/Index/?rt=21">Grants</a></li>
+                        <li><a href="~/Works/">Works</a></li>
+                        <li><a href="~/VPRents/Index/">Rent Register</a></li>
+                        <li><a href="~/Buildings/Index">Building Permisions</a></li>
+
+                    </ul>
+                </li>                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Procure<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="~/InOutRegsRecpts/Index/?rt=17">Stationary</a></li>
+                        <li><a href="~/InOutRegsRecpts/Index/?rt=19">DeadStock</a></li>
+                        <li><a href="~/InOutRegsRecpts/Index/?rt=20">Street Light Articles</a></li>
+                        <li><a href="~/InOutRegsRecpts/Index/?rt=18">Stamp</a></li>                        
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Issue<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="~/InOutRegsIssues/Index/?rt=17">Stationary</a></li>
+                        <li><a href="~/InOutRegsIssues/Index/?rt=19">DeadStock</a></li>
+                        <li><a href="~/InOutRegsIssues/Index/?rt=20">Street Light Articles</a></li>
+                        <li><a href="~/InOutRegsIssues/Index/?rt=18">Stamp</a></li>                        
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Registers<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="~/Audits">Audits</a></li>
-                        <li><a href="~/Buildings/Index">Building Permisions</a></li>
-
+                        <li>&nbsp;</li>
+                        
                         <li><a href="~/Meetings/Index/?rt=1">Meetings</a></li>
                         <li><a href="~/Meetings/Index/?rt=8">Gram Sabha</a></li>
-
+                        <li>&nbsp;</li>
 
                         <li><a href="~/IllegalConstructions/Index/?rt=4">Illegal Constructions</a></li>
+                        <li><a href="~/IllegalConstructions/Index/?rt=6">Public Grievance</a></li>
+                        <li><a href="~/IllegalConstructions/Index/?rt=7">Court Matters</a></li>
+                        <li>&nbsp;</li>
+
                         <li><a href="~/Inwards/Index/?rt=2">Inward</a></li>
                         <li><a href="~/Inwards/Index/?rt=9">Govt Dept Reference</a></li>
                         <li><a href="~/Inwards/Index/?rt=10">Register Of Birth</a></li>
-                        <li><a href="~/Outwards/Index/?rt=3">Outward</a></li>
                         <li><a href="~/Outwards/Index/?rt=11">Register Of Death</a></li>
+                        <li><a href="~/Outwards/Index/?rt=3">Outward</a></li>
+                        <li>&nbsp;</li>
 
-                        <li><a href="~/IllegalConstructions/Index/?rt=6">Public Grievance</a></li>
-                        <li><a href="~/IllegalConstructions/Index/?rt=7">Court Matters</a></li>
                         <li><a href="~/Nocs/Index/?rt=12">Certificate Issued</a></li>
                         <li><a href="~/Nocs/Index/?rt=13">NOC Electric Connection</a></li>
                         <li><a href="~/Nocs/Index/?rt=14">NOC Water</a></li>
                         <li><a href="~/Nocs/Index/?rt=15">NOC Trade</a></li>
                         <li><a href="~/Nocs/Index/?rt=16">NOC Bar</a></li>
+                        <li>&nbsp;</li>
+
                         <li><a href="~/SD9EMD6/Index/?rt=22">Form 6</a></li>
                         <li><a href="~/SD9EMD6/Index/?rt=21">Form 9</a></li>
                         <li><a href="~/SD9EMD6/Index/?rt=23">Security Deposit</a></li>
                         <li><a href="~/SD9EMD6/Index/?rt=24">E.M.D Deposit</a></li>
-                        <li><a href="~/VPRents/Index/">Rent Register</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Demands<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="~/Demands/Create">Add Demand</a></li>
-                        
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -95,44 +116,23 @@
                         <li><a href="~/Reports/Form7RptRq"> Form7</a></li>
                         <li><a href="~/Reports/Form8RptRq"> Form8</a></li>
                         <li><a href="~/Reports/Form10RptRq">Form10</a></li>   
-                        <li><a href="~/Reports/TaxRptRq/10">Professional Tax</a></li>
-                        <li><a href="~/Reports/TaxRptRq/11">Signboard Tax</a></li>
+                       <li>&nbsp;</li>
 
-                        <li><a href="~/Reports/RVRptRq/102">Balwadi Rent</a></li>
-                        <li><a href="~/Reports/RVRptRq/123">Sales Tax</a></li>
                         <li><a href="~/Reports/RVRptRq/27">Income Tax</a></li>
+                        <li><a href="~/Reports/RVRptRq/29">Sales Tax</a></li>
                         <li><a href="~/Reports/RVRptRq/28">Royalty Register</a></li>                        
-                        <li><a href="~/Reports/RVRptRq/134">RTI</a></li>
+                        <li><a href="~/Reports/RVRptRq/134">Right To Info.</a></li>
+                        <li><a href="~/Reports/RVRptRq/129">Misc Challans</a></li>
+                        <li><a href="~/Reports/RVRptRq/135">GST</a></li>                                                
                         <li><a href="~/Reports/RVRptRq/130">Income Certificate</a></li>
                         <li><a href="~/Reports/RVRptRq/132">Residence Certificate</a></li>
                         <li><a href="~/Reports/RVRptRq/131">Divergence Certificate</a></li>
                         <li><a href="~/Reports/RVRptRq/133">Birth/Death Certificate</a></li>
-                        <li><a href="~/Reports/RVRptRq/129">Misc Challans</a></li>
-                        <li><a href="~/Reports/RVRptRq/135">GST</a></li>                                                
                     
                         <li><a href="~/Reports/GenericRptRq">Generic Register</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Procure<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="~/InOutRegsRecpts/Index/?rt=17">Stationary</a></li>
-                        <li><a href="~/InOutRegsRecpts/Index/?rt=19">DeadStock</a></li>
-                        <li><a href="~/InOutRegsRecpts/Index/?rt=20">Street Light Articles</a></li>
-                        <li><a href="~/InOutRegsRecpts/Index/?rt=18">Stamp</a></li>
-                        <li><a href="~/InOutRegsRecpts/Index/?rt=21">Grants: Frm 9</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Issue<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="~/InOutRegsIssues/Index/?rt=17">Stationary</a></li>
-                        <li><a href="~/InOutRegsIssues/Index/?rt=19">DeadStock</a></li>
-                        <li><a href="~/InOutRegsIssues/Index/?rt=20">Street Light Articles</a></li>
-                        <li><a href="~/InOutRegsIssues/Index/?rt=18">Stamp</a></li>
-                        <li><a href="~/InOutRegsIssues/Index/?rt=21">Grants: Frm 9</a></li>
-                    </ul>
-                </li>
+               
 
                     </ul>
             @Html.Partial("_LoginPartial")

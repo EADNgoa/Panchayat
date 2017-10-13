@@ -23,6 +23,10 @@ namespace Panchayat
             this.PropertyBookings = new HashSet<PropertyBooking>();
             this.PropertyBookings1 = new HashSet<PropertyBooking>();
             this.PropertyBookings2 = new HashSet<PropertyBooking>();
+            this.VPRentDetails = new HashSet<VPRentDetail>();
+            this.Works = new HashSet<Work>();
+            this.Works1 = new HashSet<Work>();
+            this.Buildings = new HashSet<Building>();
         }
     
         public int RecieptNo { get; set; }
@@ -49,5 +53,13 @@ namespace Panchayat
         public virtual ICollection<PropertyBooking> PropertyBookings1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PropertyBooking> PropertyBookings2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VPRentDetail> VPRentDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Work> Works { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Work> Works1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Building> Buildings { get; set; }
     }
 }

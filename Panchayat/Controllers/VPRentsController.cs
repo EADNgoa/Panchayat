@@ -34,9 +34,12 @@ namespace Panchayat.Controllers
             return View("Index", vpRents.OrderBy(r => r.RentPayerName).ToList().ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult IndexDet(int yr)
+        public ActionResult IndexDet(int yr, int? RentID)
         {
-            return View(db.VPRentDetails.ToList());
+            if (RentID.HasValue)
+                return View(db.VPRentDetails.Where(r => r.VPRent.RentYear == yr && r.VPRentID==RentID).ToList());
+
+            return View(db.VPRentDetails.Where(r=>r.VPRent.RentYear==yr).ToList());
         }
 
         // GET: VPRents/Details/5
@@ -89,10 +92,28 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.VPRentDetails.Add(vPRentDetail);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var payerName = db.VPRents.Find(vPRentDetail.VPRentID).RentPayerName;
+                        var item = new Form4 { Amount = vPRentDetail.RecoveryAmt, LedgerID = 7, PayDate = DateTime.Today, RecvdFrom = "Property Rent: "+ payerName, SubLedgerID = 30 }; //Shop rent
+                        db.Form4.Add(item);
+
+                        db.VPRentDetails.Add(vPRentDetail);
+                        db.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                    return RedirectToAction("Index");
+                }
             }
+
+            //if not valid model
             VPRent vPRent = db.VPRents.Find(vPRentDetail.VPRentID);
             if (vPRent == null)
             {
@@ -148,12 +169,13 @@ namespace Panchayat.Controllers
                 return HttpNotFound();
             }
             ViewBag.MonthBox = MyExtensions.MonthList();
+            ViewBag.isRVtoday = db.Form4.Find(vPRentDet.ReceiptNo).PayDate == DateTime.Today;
             return View("EditDet",vPRentDet);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditDet([Bind(Include = "VPRentID,Month,Arrears,Current,RecoveryAmt,RecoveryDate,BalanceArrears,BalanceCurrent")] VPRentDetail vPRentDetail)
+        public ActionResult EditDet([Bind(Include = "VPRentID,Month,Arrears,Current,RecoveryAmt,RecoveryDate,BalanceArrears,BalanceCurrent,ReceiptNo")] VPRentDetail vPRentDetail)
         {
             if (ModelState.IsValid)
             {

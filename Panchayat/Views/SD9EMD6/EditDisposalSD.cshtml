@@ -23,6 +23,10 @@
     @Html.HiddenFor(model => model.IORecptID)
     @Html.HiddenFor(model => model.RVno)
     @Html.HiddenFor(model => model.RegisterTypeID)
+    if (ViewBag.wrk != null)
+    {
+        @Html.Hidden("wrk", (int)ViewBag.wrk);
+    }
     <div class="form-horizontal">
 
         <hr />

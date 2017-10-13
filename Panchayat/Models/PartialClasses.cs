@@ -26,6 +26,11 @@ namespace Panchayat
     {
     }
 
+    [MetadataType(typeof(WorkMetadata))]
+    public partial class Work
+    {
+    }
+
     [MetadataType(typeof(LedgersMetatdata))]
     public partial class Ledgers
     {

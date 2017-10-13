@@ -11,6 +11,12 @@
 {
     @Html.AntiForgeryToken()
     @Html.Hidden("RegisterTypeID",(int) ViewBag.RegisterTypeID);
+
+    if (ViewBag.wrk != null)
+    {
+        @Html.Hidden("wrk", (int)ViewBag.wrk);
+    }
+
     <div class="form-horizontal">
         
         <hr />
