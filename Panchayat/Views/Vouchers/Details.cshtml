@@ -117,6 +117,25 @@
 </div>
 
 <br />
+<div class="section-to-print">
+    @if (Model.Corrections.Count > 0)
+    {
+        <hr />
+            <h3>CORRECTONS</h3>
+            <table>
+                <tr><td>Date</td><td>Remark</td><td>Amount</td></tr>
+                @foreach (var item in Model.Corrections)
+                {
+                    <tr>
+                        <td>@item.CorrectionDate</td>
+                        <td>@item.Remark</td>
+                        <td>@item.Amount</td>
+                    </tr>
+                }
+            </table>
+    }
+</div>
+
 <p>
 <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
     @if (Model.PayDate == DateTime.Today)

@@ -91,7 +91,7 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
-                correction.CorrectionDate = DateTime.Today;
+                correction.CorrectionDate = DateTime.Today;                
                 db.Corrections.Add(correction);
                 db.SaveChanges();
                 return RedirectToAction("Index", new { ReceiptID = correction.RecieptID, VoucherID = correction.VoucherID });

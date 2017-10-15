@@ -60,6 +60,8 @@
                 }
                 else
                 {
+                    @: Original value: Rs.  @Model.InOutRegsRecpt.Value
+                    <a target="_blank" href="/Form4/Details/@Model.InOutRegsRecpt.RVno">Print Receipt</a>
                     @Html.ActionLink("Edit EMD", "EditAquisition", "SD9EMD6", new { id = Model.EMDIOrecptID, wrk = Model.WorksID }, null)
                 }
                 @Html.ValidationMessageFor(model => model.EMDIOrecptID, "", new { @class = "text-danger" })
@@ -75,6 +77,8 @@
                 }
                 else
                 {
+                    @: Original value: Rs.  @Model.InOutRegsRecpt1.Value
+                    <a target="_blank" href="/Form4/Details/@Model.InOutRegsRecpt1.RVno">Print Receipt</a>
                     @Html.ActionLink("Edit Security Deposit", "EditAquisition", "SD9EMD6", new { id = Model.SDIOrecptID, wrk = Model.WorksID }, null)
                 }
                 @Html.ValidationMessageFor(model => model.SDIOrecptID, "", new { @class = "text-danger" })
@@ -90,6 +94,8 @@
                 }
                 else
                 {
+                    @: Original value: Rs.  @Model.Form4.Amount
+                    <a target="_blank" href="/Form4/Details/@Model.ITrecptNo">Print Receipt</a>                        
                     if (Model.Form4.PayDate == DateTime.Today)
                     {
                         <a target="_blank" href="/Form4/Edit/@Model.ITrecptNo">Edit</a>
@@ -97,7 +103,7 @@
                     else
                     {
                         <a target="_blank" href="/Corrections/Create?ReceiptID=@Model.ITrecptNo">Create Correction Entry</a>
-                    }                    
+                    }
                 }
                 @Html.ValidationMessageFor(model => model.ITrecptNo, "", new { @class = "text-danger" })
             </div>
@@ -112,9 +118,11 @@
                 }
                 else
                 {
+                    @: Original value: Rs.  @Model.Form41.Amount
+                    <a target="_blank" href="/Form4/Details/@Model.RoyaltyDeposit">Print Receipt</a>                         
                     if (Model.Form41.PayDate == DateTime.Today)
                     {
-                        <a target="_blank" href="/Form4/Edit/@Model.RoyaltyDeposit">Edit</a>
+                        <a target="_blank" href="/Form4/Details/@Model.RoyaltyDeposit">Edit</a>
                     }
                     else
                     {
@@ -173,17 +181,27 @@
             </div>
         </div>
 
+        @{ decimal r = 0;}
         <div class="form-group">
-            SD Refund
+            @Html.Label("EMD Refund", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @ViewBag.SDrefund                
+                @ViewBag.EMDrefund 
+                @if(decimal.TryParse(ViewBag.EMDrefund,out r))
+                {
+                    <br />
+                    @: You can print out the Voucher <a target="_blank" href="/Vouchers/Details/@Model.InOutRegsRecpt.InOutRegsIssues.FirstOrDefault().RVno">here</a>
+                }
             </div>
         </div>
-
         <div class="form-group">
-            EMD Refund
+            @Html.Label("SD Refund", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @ViewBag.EMDrefund                
+                @ViewBag.SDrefund          
+                @if (decimal.TryParse(ViewBag.SDrefund, out r))
+                {
+                    <br />
+                    @: You can print out the Voucher <a target="_blank" href="/Vouchers/Details/@Model.InOutRegsRecpt1.InOutRegsIssues.FirstOrDefault().RVno">here</a>
+                }
             </div>
         </div>
 

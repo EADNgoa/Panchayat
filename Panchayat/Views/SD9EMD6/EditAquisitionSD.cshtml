@@ -13,7 +13,8 @@
     }
     else
     {
-        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?RecieptNo=@Model.RVno">here</a>
+        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?RecieptNo=@Model.RVno">here</a><br />
+        @: You can print out the original Receipt <a target="_blank" href="/Form4/Details/@Model.RVno">here</a>
     }
 </div>
 @using (Html.BeginForm())

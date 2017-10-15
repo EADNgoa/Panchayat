@@ -30,7 +30,7 @@ namespace Panchayat.Controllers
 
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
-            return View("Index", wrks.OrderByDescending(r => r.ContractorName).ToList().ToPagedList(pageNumber, pageSize));
+            return View("Index", wrks.OrderBy(r => r.ContractorName).ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Works/Details/5
@@ -93,8 +93,8 @@ namespace Panchayat.Controllers
                 db.SaveChanges();
             }
 
-            ViewBag.EMDrefund = (work.EMDIOrecptID !=null)? db.InOutRegsRecpts.Find(work.EMDIOrecptID).InOutRegsIssues.FirstOrDefault()?.Value.ToString():"";
-            ViewBag.SDrefund = (work.SDIOrecptID != null) ? db.InOutRegsRecpts.Find(work.SDIOrecptID).InOutRegsIssues.FirstOrDefault()?.Value.ToString():"";
+            ViewBag.EMDrefund = (work.EMDIOrecptID !=null)? db.InOutRegsRecpts.Find(work.EMDIOrecptID).InOutRegsIssues.FirstOrDefault()?.Value.ToString():" Pending";
+            ViewBag.SDrefund = (work.SDIOrecptID != null) ? db.InOutRegsRecpts.Find(work.SDIOrecptID).InOutRegsIssues.FirstOrDefault()?.Value.ToString():" Pending";
             return View(work);
         }
 
