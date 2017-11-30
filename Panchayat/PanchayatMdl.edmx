@@ -36,16 +36,17 @@
           <Property Name="OwnerName" Type="varchar" MaxLength="100" />
           <Property Name="NameOfConstructioin" Type="varchar" MaxLength="250" />
           <Property Name="DateOfAppl" Type="date" />
-          <Property Name="NoOfRes" Type="int" />
+          <Property Name="NoOfRes" Type="varchar" MaxLength="50" />
           <Property Name="DateOfRes" Type="date" />
           <Property Name="DateOfPermision" Type="date" />
           <Property Name="EstimatedCost" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="AmountPaid" Type="int" />
+          <Property Name="AmountPaid" Type="decimal" Precision="15" Scale="2" />
           <Property Name="DateOfCompletion" Type="date" />
           <Property Name="DateOfOcccp" Type="date" />
           <Property Name="DateOfAsses" Type="date" />
-          <Property Name="HouseTax" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="HouseTax" Type="decimal" Precision="15" Scale="2" />
           <Property Name="Remarks" Type="varchar" MaxLength="250" />
+          <Property Name="ReceiptNo" Type="int" />
         </EntityType>
         <EntityType Name="CBRunning">
           <Key>
@@ -203,6 +204,8 @@
           <Property Name="OccasOfCons" Type="varchar" MaxLength="50" />
           <Property Name="ActionTaken" Type="varchar" MaxLength="350" />
           <Property Name="Remarks" Type="varchar" MaxLength="350" />
+          <Property Name="WEBstatusID" Type="int" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="RegisterTypeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="InOutRegsIssue">
@@ -446,9 +449,17 @@
           <Property Name="RecoveryDate" Type="date" Nullable="false" />
           <Property Name="BalanceArrears" Type="decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="BalanceCurrent" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="ReceiptNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WEBstatus">
+          <Key>
+            <PropertyRef Name="WebStatusID" />
+          </Key>
+          <Property Name="WebStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PeriodSLs">
           <Key>
             <PropertyRef Name="PeriodID" />
@@ -466,6 +477,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Principal>
             <Dependent Role="Budget">
               <PropertyRef Name="SubLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Building_ToForm4">
+          <End Role="Form4" Type="Self.Form4" Multiplicity="0..1" />
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="ReceiptNo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -730,6 +753,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Principal>
             <Dependent Role="IllegalConstruction">
               <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IllegalConstruction_WEBstatus">
+          <End Role="WEBstatus" Type="Self.WEBstatus" Multiplicity="0..1" />
+          <End Role="IllegalConstruction" Type="Self.IllegalConstruction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WEBstatus">
+              <PropertyRef Name="WebStatusID" />
+            </Principal>
+            <Dependent Role="IllegalConstruction">
+              <PropertyRef Name="WEBstatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1021,6 +1056,18 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VPRentDetails_ToForm4">
+          <End Role="Form4" Type="Self.Form4" Multiplicity="1" />
+          <End Role="VPRentDetails" Type="Self.VPRentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="VPRentDetails">
+              <PropertyRef Name="ReceiptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_VPRentDetails_ToVPRent">
           <End Role="VPRent" Type="Self.VPRent" Multiplicity="1" />
           <End Role="VPRentDetails" Type="Self.VPRentDetails" Multiplicity="*" />
@@ -1071,6 +1118,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <EntitySet Name="Voucher" EntityType="Self.Voucher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VPRent" EntityType="Self.VPRent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VPRentDetails" EntityType="Self.VPRentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WEBstatus" EntityType="Self.WEBstatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PeriodSLs" EntityType="Self.PeriodSLs" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PeriodSLs].[PeriodID] AS [PeriodID], 
@@ -1080,6 +1128,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_Budget_ToSubledger" Association="Self.FK_Budget_ToSubledger">
             <End Role="SubLedgers" EntitySet="SubLedgers" />
             <End Role="Budget" EntitySet="Budget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Building_ToForm4" Association="Self.FK_Building_ToForm4">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="Building" EntitySet="Building" />
           </AssociationSet>
           <AssociationSet Name="FK_Corrections_Reciept" Association="Self.FK_Corrections_Reciept">
             <End Role="Form4" EntitySet="Form4" />
@@ -1167,6 +1219,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           </AssociationSet>
           <AssociationSet Name="FK_IllegalConstruction_RegisterTypes" Association="Self.FK_IllegalConstruction_RegisterTypes">
             <End Role="RegisterTypes" EntitySet="RegisterTypes" />
+            <End Role="IllegalConstruction" EntitySet="IllegalConstruction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IllegalConstruction_WEBstatus" Association="Self.FK_IllegalConstruction_WEBstatus">
+            <End Role="WEBstatus" EntitySet="WEBstatus" />
             <End Role="IllegalConstruction" EntitySet="IllegalConstruction" />
           </AssociationSet>
           <AssociationSet Name="FK_InOutRegsIssu_ToInvItems" Association="Self.FK_InOutRegsIssu_ToInvItems">
@@ -1264,6 +1320,10 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_Voucher_SubLedger" Association="Self.FK_Voucher_SubLedger">
             <End Role="SubLedgers" EntitySet="SubLedgers" />
             <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VPRentDetails_ToForm4" Association="Self.FK_VPRentDetails_ToForm4">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="VPRentDetails" EntitySet="VPRentDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_VPRentDetails_ToVPRent" Association="Self.FK_VPRentDetails_ToVPRent">
             <End Role="VPRent" EntitySet="VPRent" />
@@ -1365,6 +1425,8 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <NavigationProperty Name="PropertyBookings" Relationship="PanchayatModel.FK_PropertyBooking_ToAdvReceipt" FromRole="Form4" ToRole="PropertyBooking" />
           <NavigationProperty Name="PropertyBookings1" Relationship="PanchayatModel.FK_PropertyBooking_ToFPReceipt" FromRole="Form4" ToRole="PropertyBooking" />
           <NavigationProperty Name="PropertyBookings2" Relationship="PanchayatModel.FK_PropertyBooking_ToLTReceipt" FromRole="Form4" ToRole="PropertyBooking" />
+          <NavigationProperty Name="VPRentDetails" Relationship="PanchayatModel.FK_VPRentDetails_ToForm4" FromRole="Form4" ToRole="VPRentDetail" />
+          <NavigationProperty Name="Buildings" Relationship="PanchayatModel.FK_Building_ToForm4" FromRole="Form4" ToRole="Building" />
           </EntityType>
         <EntityType Name="LedgerDetail">
           <Key>
@@ -1703,11 +1765,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="RegisterType" EntitySet="RegisterTypes" />
             <End Role="Meeting" EntitySet="Meetings" />
           </AssociationSet>
-          <EntitySet Name="IllegalConstructions" EntityType="PanchayatModel.IllegalConstruction" />
-          <AssociationSet Name="FK_IllegalConstruction_RegisterTypes" Association="PanchayatModel.FK_IllegalConstruction_RegisterTypes">
-            <End Role="RegisterType" EntitySet="RegisterTypes" />
-            <End Role="IllegalConstruction" EntitySet="IllegalConstructions" />
-          </AssociationSet>
           <EntitySet Name="Outwards" EntityType="PanchayatModel.Outward" />
           <AssociationSet Name="FK_Outward_ToTable" Association="PanchayatModel.FK_Outward_ToTable">
             <End Role="RegisterType" EntitySet="RegisterTypes" />
@@ -1778,7 +1835,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             <End Role="RegisterType" EntitySet="RegisterTypes" />
             <End Role="InvItem" EntitySet="InvItems" />
           </AssociationSet>
-          <EntitySet Name="Buildings" EntityType="PanchayatModel.Building" />
           <EntitySet Name="Vouchers" EntityType="PanchayatModel.Voucher" />
           <AssociationSet Name="FK_Corrections_Voucher" Association="PanchayatModel.FK_Corrections_Voucher">
             <End Role="Voucher" EntitySet="Vouchers" />
@@ -1805,6 +1861,25 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <AssociationSet Name="FK_VPRentDetails_ToVPRent" Association="PanchayatModel.FK_VPRentDetails_ToVPRent">
             <End Role="VPRent" EntitySet="VPRents" />
             <End Role="VPRentDetail" EntitySet="VPRentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VPRentDetails_ToForm4" Association="PanchayatModel.FK_VPRentDetails_ToForm4">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="VPRentDetail" EntitySet="VPRentDetails" />
+          </AssociationSet>
+          <EntitySet Name="WEBstatus" EntityType="PanchayatModel.WEBstatu" />
+          <EntitySet Name="Buildings" EntityType="PanchayatModel.Building" />
+          <AssociationSet Name="FK_Building_ToForm4" Association="PanchayatModel.FK_Building_ToForm4">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="Building" EntitySet="Buildings" />
+          </AssociationSet>
+          <EntitySet Name="IllegalConstructions" EntityType="PanchayatModel.IllegalConstruction" />
+          <AssociationSet Name="FK_IllegalConstruction_RegisterTypes" Association="PanchayatModel.FK_IllegalConstruction_RegisterTypes">
+            <End Role="RegisterType" EntitySet="RegisterTypes" />
+            <End Role="IllegalConstruction" EntitySet="IllegalConstructions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IllegalConstruction_WEBstatus" Association="PanchayatModel.FK_IllegalConstruction_WEBstatus">
+            <End Role="WEBstatu" EntitySet="WEBstatus" />
+            <End Role="IllegalConstruction" EntitySet="IllegalConstructions" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="RVdetail">
@@ -2084,13 +2159,13 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="RegisterTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RegisterType1" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Meetings" Relationship="PanchayatModel.FK_Meeting_RegisterType" FromRole="RegisterType" ToRole="Meeting" />
-          <NavigationProperty Name="IllegalConstructions" Relationship="PanchayatModel.FK_IllegalConstruction_RegisterTypes" FromRole="RegisterType" ToRole="IllegalConstruction" />
           <NavigationProperty Name="Outwards" Relationship="PanchayatModel.FK_Outward_ToTable" FromRole="RegisterType" ToRole="Outward" />
           <NavigationProperty Name="Nocs" Relationship="PanchayatModel.FK_Noc_RegisterType" FromRole="RegisterType" ToRole="Noc" />
           <NavigationProperty Name="Inwards" Relationship="PanchayatModel.FK_Inward_RegisterTypes" FromRole="RegisterType" ToRole="Inward" />
           <NavigationProperty Name="InOutRegsRecpts" Relationship="PanchayatModel.FK_InOutRegsRecpt_ToRegType" FromRole="RegisterType" ToRole="InOutRegsRecpt" />
           <NavigationProperty Name="InOutRegsIssues" Relationship="PanchayatModel.FK_InOutRegsIssu_ToRegType" FromRole="RegisterType" ToRole="InOutRegsIssue" />
           <NavigationProperty Name="InvItems" Relationship="PanchayatModel.FK_InvItems_ToRegisterTypes" FromRole="RegisterType" ToRole="InvItem" />
+          <NavigationProperty Name="IllegalConstructions" Relationship="PanchayatModel.FK_IllegalConstruction_RegisterTypes" FromRole="RegisterType" ToRole="IllegalConstruction" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -2116,33 +2191,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
               <PropertyRef Name="RegisterTypeID" />
             </Principal>
             <Dependent Role="Meeting">
-              <PropertyRef Name="RegisterTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="IllegalConstruction">
-          <Key>
-            <PropertyRef Name="IllegalConID" />
-          </Key>
-          <Property Name="IllegalConID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateOfComp" Type="DateTime" Precision="0" />
-          <Property Name="NameOfPr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="AddressOfPr" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="NatOfCon" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="OccasOfCons" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ActionTaken" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-          <Property Name="RegisterTypeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_IllegalConstruction_RegisterTypes" FromRole="IllegalConstruction" ToRole="RegisterType" />
-        </EntityType>
-        <Association Name="FK_IllegalConstruction_RegisterTypes">
-          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="1" />
-          <End Type="PanchayatModel.IllegalConstruction" Role="IllegalConstruction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegisterType">
-              <PropertyRef Name="RegisterTypeID" />
-            </Principal>
-            <Dependent Role="IllegalConstruction">
               <PropertyRef Name="RegisterTypeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2487,27 +2535,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Building">
-          <Key>
-            <PropertyRef Name="BuildingID" />
-          </Key>
-          <Property Name="BuildingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WardNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="House_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="OwnerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="NameOfConstructioin" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="DateOfAppl" Type="DateTime" Precision="0" />
-          <Property Name="NoOfRes" Type="Int32" />
-          <Property Name="DateOfRes" Type="DateTime" Precision="0" />
-          <Property Name="DateOfPermision" Type="DateTime" Precision="0" />
-          <Property Name="EstimatedCost" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="AmountPaid" Type="Int32" />
-          <Property Name="DateOfCompletion" Type="DateTime" Precision="0" />
-          <Property Name="DateOfOcccp" Type="DateTime" Precision="0" />
-          <Property Name="DateOfAsses" Type="DateTime" Precision="0" />
-          <Property Name="HouseTax" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Voucher">
           <Key>
             <PropertyRef Name="VoucherID" />
@@ -2615,6 +2642,8 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <Property Name="BalanceArrears" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
           <Property Name="BalanceCurrent" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
           <NavigationProperty Name="VPRent" Relationship="PanchayatModel.FK_VPRentDetails_ToVPRent" FromRole="VPRentDetail" ToRole="VPRent" />
+          <Property Name="ReceiptNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Form4" Relationship="PanchayatModel.FK_VPRentDetails_ToForm4" FromRole="VPRentDetail" ToRole="Form4" />
         </EntityType>
         <Association Name="FK_VPRentDetails_ToVPRent">
           <End Type="PanchayatModel.VPRent" Role="VPRent" Multiplicity="1" />
@@ -2625,6 +2654,103 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
             </Principal>
             <Dependent Role="VPRentDetail">
               <PropertyRef Name="VPRentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VPRentDetails_ToForm4">
+          <End Type="PanchayatModel.Form4" Role="Form4" Multiplicity="1" />
+          <End Type="PanchayatModel.VPRentDetail" Role="VPRentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="VPRentDetail">
+              <PropertyRef Name="ReceiptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WEBstatu">
+          <Key>
+            <PropertyRef Name="WebStatusID" />
+          </Key>
+          <Property Name="WebStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IllegalConstructions" Relationship="PanchayatModel.FK_IllegalConstruction_WEBstatus" FromRole="WEBstatu" ToRole="IllegalConstruction" />
+        </EntityType>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="BuildingID" />
+          </Key>
+          <Property Name="BuildingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WardNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="House_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="OwnerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NameOfConstructioin" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfAppl" Type="DateTime" Precision="0" />
+          <Property Name="NoOfRes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfRes" Type="DateTime" Precision="0" />
+          <Property Name="DateOfPermision" Type="DateTime" Precision="0" />
+          <Property Name="EstimatedCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AmountPaid" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="DateOfCompletion" Type="DateTime" Precision="0" />
+          <Property Name="DateOfOcccp" Type="DateTime" Precision="0" />
+          <Property Name="DateOfAsses" Type="DateTime" Precision="0" />
+          <Property Name="HouseTax" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiptNo" Type="Int32" />
+          <NavigationProperty Name="Form4" Relationship="PanchayatModel.FK_Building_ToForm4" FromRole="Building" ToRole="Form4" />
+        </EntityType>
+        <Association Name="FK_Building_ToForm4">
+          <End Type="PanchayatModel.Form4" Role="Form4" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Building" Role="Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="ReceiptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="IllegalConstruction">
+          <Key>
+            <PropertyRef Name="IllegalConID" />
+          </Key>
+          <Property Name="IllegalConID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfComp" Type="DateTime" Precision="0" />
+          <Property Name="NameOfPr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AddressOfPr" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NatOfCon" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="OccasOfCons" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionTaken" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="WEBstatusID" Type="Int32" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_IllegalConstruction_RegisterTypes" FromRole="IllegalConstruction" ToRole="RegisterType" />
+          <NavigationProperty Name="WEBstatu" Relationship="PanchayatModel.FK_IllegalConstruction_WEBstatus" FromRole="IllegalConstruction" ToRole="WEBstatu" />
+        </EntityType>
+        <Association Name="FK_IllegalConstruction_RegisterTypes">
+          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="1" />
+          <End Type="PanchayatModel.IllegalConstruction" Role="IllegalConstruction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterType">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="IllegalConstruction">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IllegalConstruction_WEBstatus">
+          <End Type="PanchayatModel.WEBstatu" Role="WEBstatu" Multiplicity="0..1" />
+          <End Type="PanchayatModel.IllegalConstruction" Role="IllegalConstruction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WEBstatu">
+              <PropertyRef Name="WebStatusID" />
+            </Principal>
+            <Dependent Role="IllegalConstruction">
+              <PropertyRef Name="WEBstatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2888,21 +3014,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="IllegalConstructions">
-            <EntityTypeMapping TypeName="PanchayatModel.IllegalConstruction">
-              <MappingFragment StoreEntitySet="IllegalConstruction">
-                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="ActionTaken" ColumnName="ActionTaken" />
-                <ScalarProperty Name="OccasOfCons" ColumnName="OccasOfCons" />
-                <ScalarProperty Name="NatOfCon" ColumnName="NatOfCon" />
-                <ScalarProperty Name="AddressOfPr" ColumnName="AddressOfPr" />
-                <ScalarProperty Name="NameOfPr" ColumnName="NameOfPr" />
-                <ScalarProperty Name="DateOfComp" ColumnName="DateOfComp" />
-                <ScalarProperty Name="IllegalConID" ColumnName="IllegalConID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Outwards">
             <EntityTypeMapping TypeName="PanchayatModel.Outward">
               <MappingFragment StoreEntitySet="Outward">
@@ -3052,28 +3163,6 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Buildings">
-            <EntityTypeMapping TypeName="PanchayatModel.Building">
-              <MappingFragment StoreEntitySet="Building">
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="HouseTax" ColumnName="HouseTax" />
-                <ScalarProperty Name="DateOfAsses" ColumnName="DateOfAsses" />
-                <ScalarProperty Name="DateOfOcccp" ColumnName="DateOfOcccp" />
-                <ScalarProperty Name="DateOfCompletion" ColumnName="DateOfCompletion" />
-                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
-                <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
-                <ScalarProperty Name="DateOfPermision" ColumnName="DateOfPermision" />
-                <ScalarProperty Name="DateOfRes" ColumnName="DateOfRes" />
-                <ScalarProperty Name="NoOfRes" ColumnName="NoOfRes" />
-                <ScalarProperty Name="DateOfAppl" ColumnName="DateOfAppl" />
-                <ScalarProperty Name="NameOfConstructioin" ColumnName="NameOfConstructioin" />
-                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
-                <ScalarProperty Name="House_No" ColumnName="House No" />
-                <ScalarProperty Name="WardNo" ColumnName="WardNo" />
-                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Vouchers">
             <EntityTypeMapping TypeName="PanchayatModel.Voucher">
               <MappingFragment StoreEntitySet="Voucher">
@@ -3106,6 +3195,7 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
           <EntitySetMapping Name="VPRentDetails">
             <EntityTypeMapping TypeName="PanchayatModel.VPRentDetail">
               <MappingFragment StoreEntitySet="VPRentDetails">
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
                 <ScalarProperty Name="BalanceCurrent" ColumnName="BalanceCurrent" />
                 <ScalarProperty Name="BalanceArrears" ColumnName="BalanceArrears" />
                 <ScalarProperty Name="RecoveryDate" ColumnName="RecoveryDate" />
@@ -3114,6 +3204,54 @@ warning 6002: The table/view 'Panchayat.dbo.PeriodSLs' does not have a primary k
                 <ScalarProperty Name="Arrears" ColumnName="Arrears" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="VPRentID" ColumnName="VPRentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WEBstatus">
+            <EntityTypeMapping TypeName="PanchayatModel.WEBstatu">
+              <MappingFragment StoreEntitySet="WEBstatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="WebStatusID" ColumnName="WebStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="PanchayatModel.Building">
+              <MappingFragment StoreEntitySet="Building">
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="HouseTax" ColumnName="HouseTax" />
+                <ScalarProperty Name="DateOfAsses" ColumnName="DateOfAsses" />
+                <ScalarProperty Name="DateOfOcccp" ColumnName="DateOfOcccp" />
+                <ScalarProperty Name="DateOfCompletion" ColumnName="DateOfCompletion" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
+                <ScalarProperty Name="DateOfPermision" ColumnName="DateOfPermision" />
+                <ScalarProperty Name="DateOfRes" ColumnName="DateOfRes" />
+                <ScalarProperty Name="NoOfRes" ColumnName="NoOfRes" />
+                <ScalarProperty Name="DateOfAppl" ColumnName="DateOfAppl" />
+                <ScalarProperty Name="NameOfConstructioin" ColumnName="NameOfConstructioin" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="House_No" ColumnName="House No" />
+                <ScalarProperty Name="WardNo" ColumnName="WardNo" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IllegalConstructions">
+            <EntityTypeMapping TypeName="PanchayatModel.IllegalConstruction">
+              <MappingFragment StoreEntitySet="IllegalConstruction">
+                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="WEBstatusID" ColumnName="WEBstatusID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ActionTaken" ColumnName="ActionTaken" />
+                <ScalarProperty Name="OccasOfCons" ColumnName="OccasOfCons" />
+                <ScalarProperty Name="NatOfCon" ColumnName="NatOfCon" />
+                <ScalarProperty Name="AddressOfPr" ColumnName="AddressOfPr" />
+                <ScalarProperty Name="NameOfPr" ColumnName="NameOfPr" />
+                <ScalarProperty Name="DateOfComp" ColumnName="DateOfComp" />
+                <ScalarProperty Name="IllegalConID" ColumnName="IllegalConID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

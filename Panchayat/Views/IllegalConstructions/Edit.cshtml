@@ -1,20 +1,18 @@
 ﻿@model Panchayat.IllegalConstruction
-
 @{
     ViewBag.Title = "Edit";
 }
-
 <h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Hidden("RegisterTypeID", (int)ViewBag.RegisterTypeID);
+  
     <div class="form-horizontal">
         @if (ViewBag.RegisterTypeID == 6)
         {
-            <<h4>p> Public Grievance</h4>
+            <h4>p> Public Grievance</h4>
         }
         @if (ViewBag.RegisterTypeID == 4)
         {
@@ -27,7 +25,6 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IllegalConID)
-
         <div class="form-group">
             <label class="control-label col-md-2">Date Of Complaint:</label>
             <div class="col-md-10">
@@ -35,7 +32,6 @@
                 @Html.ValidationMessageFor(model => model.DateOfComp, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">Name And Address Of The Complaint:</label>
             <div class="col-md-10">
@@ -43,7 +39,6 @@
                 @Html.ValidationMessageFor(model => model.NameOfPr, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">Name And Address Of Person Doing offence:</label>
             <div class="col-md-10">
@@ -51,7 +46,6 @@
                 @Html.ValidationMessageFor(model => model.AddressOfPr, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">
                 @if (ViewBag.RegisterTypeID == 6)
@@ -72,7 +66,6 @@
                 @Html.ValidationMessageFor(model => model.NatOfCon, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">
                 @if (ViewBag.RegisterTypeID == 6)
@@ -87,13 +80,12 @@
                 {
                     <label>Occasion of matter</label>
                 }
-                </label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.OccasOfCons, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.OccasOfCons, "", new { @class = "text-danger" })
-                </div>
-</div>
-
+            </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OccasOfCons, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OccasOfCons, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             <label class="control-label col-md-2">Action Taken:</label>
             <div class="col-md-10">
@@ -101,7 +93,6 @@
                 @Html.ValidationMessageFor(model => model.ActionTaken, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -109,8 +100,17 @@
                 @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
             </div>
         </div>
-
-      
+        @if (ViewBag.RegisterTypeID == 4 || ViewBag.RegisterTypeID == 6)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.WEBstatusID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.WEBstatusID, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.WEBstatusID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+  
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -119,11 +119,9 @@
         </div>
     </div>
 }
-
 <div>
-        @Html.ActionLink("Back to List", "Index", new { rt = (int)ViewBag.RegisterTypeID })
+    @Html.ActionLink("Back to List", "Index", new { rt = (int)ViewBag.RegisterTypeID })
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -22,7 +22,9 @@ namespace Panchayat
         public System.DateTime RecoveryDate { get; set; }
         public decimal BalanceArrears { get; set; }
         public decimal BalanceCurrent { get; set; }
+        public int ReceiptNo { get; set; }
     
         public virtual VPRent VPRent { get; set; }
+        public virtual Form4 Form4 { get; set; }
     }
 }

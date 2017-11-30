@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -364,6 +365,9 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="VPRentDetail.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WEBstatu.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
   </ItemGroup>

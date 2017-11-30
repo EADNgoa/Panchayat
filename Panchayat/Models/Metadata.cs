@@ -221,7 +221,8 @@ namespace Panchayat
         [StringLength(50)]
         public string OccasOfCons;
 
-        [Required]
+        [StringLength(128)]
+        public string UserID;
         [StringLength(350)]
         public string ActionTaken;
 
@@ -461,7 +462,9 @@ namespace Panchayat
         public DateTime DateOfAppl;
 
         [Required]
-        public int NoOfRes;
+        [StringLength(50)]
+
+        public string NoOfRes;
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]        

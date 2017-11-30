@@ -48,7 +48,6 @@ namespace Panchayat
         public virtual DbSet<Audit> Audits { get; set; }
         public virtual DbSet<RegisterType> RegisterTypes { get; set; }
         public virtual DbSet<Meeting> Meetings { get; set; }
-        public virtual DbSet<IllegalConstruction> IllegalConstructions { get; set; }
         public virtual DbSet<Outward> Outwards { get; set; }
         public virtual DbSet<Noc> Nocs { get; set; }
         public virtual DbSet<Inward> Inwards { get; set; }
@@ -59,9 +58,11 @@ namespace Panchayat
         public virtual DbSet<InOutRegsRecpt> InOutRegsRecpts { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<InOutRegsIssue> InOutRegsIssues { get; set; }
-        public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
         public virtual DbSet<VPRent> VPRents { get; set; }
         public virtual DbSet<VPRentDetail> VPRentDetails { get; set; }
+        public virtual DbSet<WEBstatu> WEBstatus { get; set; }
+        public virtual DbSet<Building> Buildings { get; set; }
+        public virtual DbSet<IllegalConstruction> IllegalConstructions { get; set; }
     }
 }

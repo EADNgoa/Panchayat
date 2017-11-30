@@ -22,8 +22,11 @@ namespace Panchayat
         public string OccasOfCons { get; set; }
         public string ActionTaken { get; set; }
         public string Remarks { get; set; }
+        public Nullable<int> WEBstatusID { get; set; }
+        public string UserID { get; set; }
         public int RegisterTypeID { get; set; }
     
         public virtual RegisterType RegisterType { get; set; }
+        public virtual WEBstatu WEBstatu { get; set; }
     }
 }
