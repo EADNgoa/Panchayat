@@ -369,6 +369,8 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="WEBstatu.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="Work.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
