@@ -61,7 +61,9 @@
         </td>
         <td class="section-to-Not-print">
             @Html.ActionLink("Edit", "Edit", new { id=item.VPRentID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.VPRentID }) 
+            @Html.ActionLink("Details", "Details", new { id=item.VPRentID }) |
+            @Html.ActionLink("Register", "IndexDet", new { RentID = item.VPRentID , yr= (int)ViewBag.yr })
+            
         </td>
     </tr>
 }

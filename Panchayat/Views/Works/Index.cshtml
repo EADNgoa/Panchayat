@@ -1,0 +1,77 @@
+﻿@model PagedList.IPagedList<Panchayat.Work>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Works Register List</h2>
+<center>    
+    @using (Html.BeginForm("Index"))
+    {        
+        <div class="row section-to-Not-print">
+            <div>
+                <table>
+                    <tr style="text-align:center">
+                        <td></td>
+                        <td>&nbsp; Commencement Year:</td>
+                        <td>@Html.DropDownList("yr", (IEnumerable<SelectListItem>)ViewBag.YearBox, htmlAttributes: new { @class = "form-control input-sm" })</td>
+
+                        <td>&nbsp; Contractor name:</td>
+                        <td> @Html.TextBox("PropName", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+
+                        <td class="col-lg-1"></td>
+                        <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+</center>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().NameOfWork)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().TechSanctionNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ContractorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().EstimatedCost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfWork)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TechSanctionNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContractorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstimatedCost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorksID }) |
+            @Html.ActionLink("Register", "Details", new { id=item.WorksID })
+        </td>
+    </tr>
+}
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -13,11 +13,17 @@
     @Html.HiddenFor(model => model.CitizenID)
     @Html.HiddenFor(model => model.SubLedgerID)
     @Html.HiddenFor(model => model.HouseNo)
-
+    if (ViewBag.wrk !=null)
+    {
+        @Html.Hidden("wrk", (int)ViewBag.wrk)
+    }
     <div class="form-horizontal">
         <h4>Form4</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        @if (ViewBag.wrk == null)
+        {
         <div class="form-group">
             @Html.LabelFor(model => model.CitizenID, "Citizen", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -26,7 +32,8 @@
                 @Html.ValidationMessageFor(model => model.CitizenID, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        }
+        
         <div class="form-group">
             @Html.LabelFor(model => model.CitizenID, "Recieved From (for non-citizens only)", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -34,16 +41,23 @@
                 @Html.ValidationMessageFor(model => model.RecvdFrom, "", new { @class = "text-danger" })
             </div>
         </div>
+        
 
+        @if (Model?.SubLedgerID == null)        
+        {
         <div class="form-group">
             @Html.LabelFor(model => model.SubLedgerID, "SubLedger", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" id="SubLedger" name="SubLedger" style="color:black;" data-autocomplete-idholder="#SubLedgerID" data-autoledger-url="@Url.Action("AutoCompleteSubLedgs", new { IsIncome=true })" class="form-control" />
+                <input type="text" id="SubLedger" name="SubLedger" style="color:black;" data-autocomplete-idholder="#SubLedgerID" data-autoledger-url="@Url.Action("AutoCompleteSubLedgs", new { IsIncome = true })" class="form-control" />
               
                 @Html.ValidationMessageFor(model => model.SubLedgerID, "", new { @class = "text-danger" })
             </div>
         </div>
+        }
+  
 
+        @if (ViewBag.wrk == null)
+        {
         <div class="form-group">
             @Html.LabelFor(model => model.HouseNo, "House No", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -51,6 +65,7 @@
                 @Html.ValidationMessageFor(model => model.HouseNo, "", new { @class = "text-danger" })
             </div>
         </div>
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -153,7 +168,7 @@
                                       }
                                   });
                               },
-                              
+
                               minLenght: 3,
                               delay: 500,
                               select: function (event, ui) {
@@ -163,6 +178,19 @@
                       });
               });
 
+                //If we know what the SL is (e.g. IT or Royalty then show the detail fields)
+              $(document).ready(function () {
+                  if( $('#SubLedgerID').val()) {
+                      //Clear the contents of the placeholder Div
+                      $('#CLDdiv').html("");
+
+                      //Put our dynamic fields in the placeholder div
+                      $('#CLDdiv').load(
+                          '@Url.Action("CreateLedgDetsPartial")',
+                          { id: $('#SubLedgerID').val() }
+                      );
+                  }
+              });
 </script>
 
     

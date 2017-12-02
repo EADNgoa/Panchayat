@@ -23,7 +23,7 @@ namespace Panchayat.Controllers
             {
                 cor = db.Corrections.Where(c => c.RecieptID == (int)ReceiptID);
                 var FaultyRec = db.Form4.Find(ReceiptID);
-                ViewBag.Heading = String.Format("Receipt of {0} created on {1:dd-MMM-yyyy} against subledger: {2}", FaultyRec.Citizen.Name + FaultyRec.RecvdFrom, FaultyRec.PayDate, FaultyRec.Ledger.Ledger1 + " >> " + FaultyRec.SubLedger.Ledger);
+                ViewBag.Heading = String.Format("Receipt of {0} created on {1:dd-MMM-yyyy} against subledger: {2}", FaultyRec.Citizen?.Name + FaultyRec.RecvdFrom, FaultyRec.PayDate, FaultyRec.Ledger.Ledger1 + " >> " + FaultyRec.SubLedger.Ledger);
             }
 
             if (VoucherID.HasValue)
@@ -91,7 +91,7 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
-                correction.CorrectionDate = DateTime.Today;
+                correction.CorrectionDate = DateTime.Today;                
                 db.Corrections.Add(correction);
                 db.SaveChanges();
                 return RedirectToAction("Index", new { ReceiptID = correction.RecieptID, VoucherID = correction.VoucherID });

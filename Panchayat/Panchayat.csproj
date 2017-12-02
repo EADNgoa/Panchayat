@@ -250,6 +250,7 @@
     <Compile Include="Controllers\SubLedgerTypesController.cs" />
     <Compile Include="Controllers\VouchersController.cs" />
     <Compile Include="Controllers\VPRentsController.cs" />
+    <Compile Include="Controllers\WorksController.cs" />
     <Compile Include="Correction.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -376,6 +377,7 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="WEBstatu.cs">
+    <Compile Include="Work.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -674,9 +676,7 @@
     <Content Include="Views\Nocs\Details.cshtml" />
     <Content Include="Views\Nocs\Edit.cshtml" />
     <Content Include="Views\Nocs\Index.cshtml" />
-    <Content Include="Views\Reports\Payment of VAT Tax.cshtml" />
-    <Content Include="Views\Reports\Payment of Income Tax.cshtml" />
-    <Content Include="Views\Reports\Payment of Royalty.cshtml" />
+    <Content Include="Views\Reports\VAT.cshtml" />
     <Content Include="Views\Reports\Security Deposit.cshtml" />
     <Content Include="Views\Reports\E.M.D Deposit.cshtml" />
     <Content Include="Views\Reports\Income Certificate.cshtml" />
@@ -752,12 +752,22 @@
     <Content Include="Views\VPRents\Details.cshtml" />
     <Content Include="Views\VPRents\EditDet.cshtml" />
     <Content Include="Views\VPRents\IndexDet.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\MovementRegs\Create.cshtml" />
     <Content Include="Views\MovementRegs\Edit.cshtml" />
     <Content Include="Views\MovementRegs\Index.cshtml" />
     <Content Include="Views\CashInHandRegs\Create.cshtml" />
     <Content Include="Views\CashInHandRegs\Edit.cshtml" />
     <Content Include="Views\CashInHandRegs\Index.cshtml" />
+=======
+    <Content Include="Views\Works\Create.cshtml" />
+    <Content Include="Views\Works\Delete.cshtml" />
+    <Content Include="Views\Works\Details.cshtml" />
+    <Content Include="Views\Works\Edit.cshtml" />
+    <Content Include="Views\Works\Index.cshtml" />
+    <Content Include="Views\Reports\Income Tax.cshtml" />
+    <Content Include="Views\Reports\Royalty.cshtml" />
+>>>>>>> 6d75790f62efd2a85de8c005a44079fdeeea0d0e
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -93,24 +93,32 @@ namespace Panchayat.Controllers
 
      
         // GET: SD9EMD6/Create
-        public ActionResult CreateAquisition(int rt)
+        public ActionResult CreateAquisition(int rt, int? wrk)
         {
             ViewBag.RegisterTypeID = rt;
 
             if (rt == 21) return View("CreateAquisition9");
             if (rt==22) return View("CreateAquisition6");
-            if (rt == 23) return View("CreateAquisitionSD");
-            if (rt == 24) return View("CreateAquisitionEMD");
+            if (rt == 23) return View("CreateAquisitionSD", initiateForWrk(wrk));            
+            if (rt == 24) return View("CreateAquisitionEMD", initiateForWrk(wrk));
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
+            private InOutRegsRecpt initiateForWrk(int? w)
+            {
+                //Save the user from having to enter the Contractor and Project name again
+                if (w == null) return null;
+                ViewBag.wrk = w;
+                var workData = db.Works.Find(w.Value);
+                return new InOutRegsRecpt { PropertyParticulars = workData.ContractorName, DepositPurpose = workData.NameOfWork };
+            }
 
         // POST: SD9EMD6/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAquisition([Bind(Include = "IORecptID,RegisterTypeID,TDate,ItemID,Qty,Value,RVno,PropertyParticulars,SituatedWhere,DepositPurpose,ValuationDetails,SanctionDateNo,SanctionByWhom,PeriodToSpendYrs,TreasureVoucherDetails")] InOutRegsRecpt inOutRegsRecpt)
+        public ActionResult CreateAquisition([Bind(Include = "IORecptID,RegisterTypeID,TDate,ItemID,Qty,Value,RVno,PropertyParticulars,SituatedWhere,DepositPurpose,ValuationDetails,SanctionDateNo,SanctionByWhom,PeriodToSpendYrs,TreasureVoucherDetails")] InOutRegsRecpt inOutRegsRecpt, int? wrk)
         {
             if (ModelState.IsValid)
             {
@@ -151,17 +159,18 @@ namespace Panchayat.Controllers
                         throw ex;
                     }
                 }
+                if (wrk!=null) return RedirectToAction("Edit","Works", new { id = (int)wrk, IOrID = inOutRegsRecpt.IORecptID, rt=inOutRegsRecpt.RegisterTypeID });
+
                 return RedirectToAction("Index", new { rt=inOutRegsRecpt.RegisterTypeID});
             }
             
             return View(inOutRegsRecpt);
         }
 
-        public ActionResult CreateDisposal(int rt, int IORecptID)
-        {
-            
+        public ActionResult CreateDisposal(int rt, int IORecptID, int? wrk)
+        {            
             InOutRegsIssue model = new InOutRegsIssue { IORecptID = IORecptID, RegisterTypeID=rt  };
-
+            ViewBag.wrk = wrk;
             if (rt == 21) return View("CreateDisposal9", model);
             if (rt == 22) return View("CreateDisposal6",model);
             if (rt == 23) return View("CreateDisposalSD", model);
@@ -174,7 +183,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateDisposal([Bind(Include = "IOissueID,IORecptID,RegisterTypeID,TDate,Value,IssuedTo,Remarks,RefundReason")] InOutRegsIssue inOutRegsIssue)
+        public ActionResult CreateDisposal([Bind(Include = "IOissueID,IORecptID,RegisterTypeID,TDate,Value,IssuedTo,Remarks,RefundReason")] InOutRegsIssue inOutRegsIssue, int? wrk)
         {
             if (ModelState.IsValid)
             {
@@ -211,7 +220,7 @@ namespace Panchayat.Controllers
                             inOutRegsIssue.RVno = item.VoucherID;
                         }
 
-                        db.SaveChanges();
+                        db.SaveChanges(); //to save the receipt or voucher no
                         transaction.Commit();
                     }
                     catch (Exception ex)
@@ -220,14 +229,15 @@ namespace Panchayat.Controllers
                         throw ex;
                     }
                 }
-            return RedirectToAction("Index", new { rt = inOutRegsIssue.RegisterTypeID });
+                if (wrk != null) return RedirectToAction("Edit", "Works", new { id = (int)wrk, IOrID = inOutRegsIssue.IORecptID, rt = inOutRegsIssue.RegisterTypeID });
+                return RedirectToAction("Index", new { rt = inOutRegsIssue.RegisterTypeID });
             }
                         
             return View(inOutRegsIssue);
         }
 
         // GET: SD9EMD6/Edit/5
-        public ActionResult EditAquisition(int? id)
+        public ActionResult EditAquisition(int? id, int? wrk)
         {
             if (id == null)
             {
@@ -247,7 +257,7 @@ namespace Panchayat.Controllers
             if (inOutRegsRecpt.RegisterTypeID == 21 || inOutRegsRecpt.RegisterTypeID == 23|| inOutRegsRecpt.RegisterTypeID == 24)            
                 ViewBag.isRVtoday = db.Form4.Find(inOutRegsRecpt.RVno).PayDate == DateTime.Today;
 
-
+            ViewBag.wrk = wrk;
             if (inOutRegsRecpt.RegisterTypeID == 21) return View("EditAquisition9", inOutRegsRecpt);
             if (inOutRegsRecpt.RegisterTypeID == 23) return View("EditAquisitionSD", inOutRegsRecpt);
             if (inOutRegsRecpt.RegisterTypeID == 24) return View("EditAquisitionEMD", inOutRegsRecpt);
@@ -260,13 +270,13 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditAquisition([Bind(Include = "IORecptID,RegisterTypeID,TDate,ItemID,Qty,Value,RVno,PropertyParticulars,SituatedWhere,DepositPurpose,ValuationDetails,SanctionDateNo,SanctionByWhom,PeriodToSpendYrs,TreasureVoucherDetails")] InOutRegsRecpt inOutRegsRecpt)
+        public ActionResult EditAquisition([Bind(Include = "IORecptID,RegisterTypeID,TDate,ItemID,Qty,Value,RVno,PropertyParticulars,SituatedWhere,DepositPurpose,ValuationDetails,SanctionDateNo,SanctionByWhom,PeriodToSpendYrs,TreasureVoucherDetails")] InOutRegsRecpt inOutRegsRecpt, int? wrk)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(inOutRegsRecpt).State = EntityState.Modified;
                 db.SaveChanges();
-
+                if (wrk != null) return RedirectToAction("Edit", "Works", new { id = (int)wrk });
                 return RedirectToAction("Index", new { rt = inOutRegsRecpt.RegisterTypeID });
             }
             

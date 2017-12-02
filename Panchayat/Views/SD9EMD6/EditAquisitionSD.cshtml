@@ -13,13 +13,17 @@
     }
     else
     {
-        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?RecieptNo=@Model.RVno">here</a>
+        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?RecieptNo=@Model.RVno">here</a><br />
+        @: You can print out the original Receipt <a target="_blank" href="/Form4/Details/@Model.RVno">here</a>
     }
 </div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+    if (ViewBag.wrk != null)
+    {
+        @Html.Hidden("wrk", (int)ViewBag.wrk);
+    }
     <div class="form-horizontal">
         <h4>InOutRegsRecpt</h4>
         <hr />
@@ -74,6 +78,7 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index", new { rt = Model.RegisterTypeID })
+    @Html.ActionLink("Refund Deposit.", "CreateDisposal", new { rt = (int)Model.RegisterTypeID, IORecptID = Model.IORecptID, wrk = ViewBag.wrk })
 </div>
 
 @section Scripts {
