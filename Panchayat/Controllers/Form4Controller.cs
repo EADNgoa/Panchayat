@@ -64,10 +64,16 @@ namespace Panchayat.Controllers
         }
 
         // GET: Form4/Create
-        public ActionResult Create()
+        public ActionResult Create(int? wrk, int? sl)
         {
-            
-            return View();
+            ViewBag.wrk = wrk;
+            if (sl.HasValue)
+            {
+                var w = db.Works.Find(wrk.Value).ContractorName;
+                var model = new Form4 { SubLedgerID = sl , RecvdFrom=w};
+                return View(model);
+            }
+                return View();
         }
 
         // POST: Form4/Create
@@ -75,7 +81,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RecieptNo,CitizenID,Amount,SubLedgerID,RecvdFrom,HouseNo")] Form4 form4, FormCollection fm)
+        public ActionResult Create([Bind(Include = "RecieptNo,CitizenID,Amount,SubLedgerID,RecvdFrom,HouseNo")] Form4 form4, FormCollection fm, int? wrk)
         {
             if (ModelState.IsValid)
             {
@@ -122,6 +128,7 @@ namespace Panchayat.Controllers
                         throw ex;
                     }
                 }
+                if (wrk!=null) return RedirectToAction("Edit","Works",new { id=wrk.Value, IOrID=form4.RecieptNo, rt= form4.SubLedgerID});
                 return RedirectToAction("Index");
             }
 

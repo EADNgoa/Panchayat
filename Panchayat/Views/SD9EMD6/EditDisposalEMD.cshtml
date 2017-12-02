@@ -12,7 +12,8 @@
     }
     else
     {
-        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?VoucherID=@Model.RVno">here</a>
+        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?VoucherID=@Model.RVno">here</a><br />
+        @: You can print out the original Voucher <a target="_blank" href="/Vouchers/Details/@Model.RVno">here</a>
     }
 </div>
 
@@ -23,6 +24,11 @@
     @Html.HiddenFor(model => model.IORecptID)
     @Html.HiddenFor(model => model.RVno)
     @Html.HiddenFor(model => model.RegisterTypeID)
+
+    if (ViewBag.wrk != null)
+    {
+        @Html.Hidden("wrk", (int)ViewBag.wrk);
+    }
     <div class="form-horizontal">
 
         <hr />

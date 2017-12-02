@@ -20,15 +20,18 @@ namespace Panchayat
         public string OwnerName { get; set; }
         public string NameOfConstructioin { get; set; }
         public Nullable<System.DateTime> DateOfAppl { get; set; }
-        public Nullable<int> NoOfRes { get; set; }
+        public string NoOfRes { get; set; }
         public Nullable<System.DateTime> DateOfRes { get; set; }
         public Nullable<System.DateTime> DateOfPermision { get; set; }
         public Nullable<decimal> EstimatedCost { get; set; }
-        public Nullable<int> AmountPaid { get; set; }
+        public Nullable<decimal> AmountPaid { get; set; }
         public Nullable<System.DateTime> DateOfCompletion { get; set; }
         public Nullable<System.DateTime> DateOfOcccp { get; set; }
         public Nullable<System.DateTime> DateOfAsses { get; set; }
         public Nullable<decimal> HouseTax { get; set; }
         public string Remarks { get; set; }
+        public Nullable<int> ReceiptNo { get; set; }
+    
+        public virtual Form4 Form4 { get; set; }
     }
 }

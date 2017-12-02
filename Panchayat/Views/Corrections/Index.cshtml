@@ -21,10 +21,10 @@
             @Html.DisplayNameFor(model => model.Remark)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Form4.RecieptNo)
+            @Html.DisplayNameFor(model => model.RecieptID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Voucher.PassedBy)
+            @Html.DisplayNameFor(model => model.VoucherID)
         </th>
         <th></th>
     </tr>
@@ -41,15 +41,13 @@
             @Html.DisplayFor(modelItem => item.Remark)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Form4.RecieptNo)
+            @Html.DisplayFor(modelItem => item.RecieptID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Voucher.PassedBy)
+            @Html.DisplayFor(modelItem => item.VoucherID)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CorrectionID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CorrectionID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CorrectionID })
+        <td>            
+            @Html.ActionLink("Details", "Details", new { id=item.CorrectionID }) 
         </td>
     </tr>
 }

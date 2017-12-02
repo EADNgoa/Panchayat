@@ -67,8 +67,24 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Buildings.Add(building);
-                db.SaveChanges();
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        db.Buildings.Add(building);
+                        var item = new Form4 { Amount = building.AmountPaid, LedgerID = 4, PayDate = DateTime.Today, RecvdFrom = "Permission: " + building.NameOfConstructioin, SubLedgerID = 13 };
+                        db.Form4.Add(item);
+                        db.SaveChanges();
+                        building.ReceiptNo = item.RecieptNo;
+                        db.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
                 return RedirectToAction("Index");
             }
 
@@ -87,6 +103,7 @@ namespace Panchayat.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.isRVtoday = db.Form4.Find(building.ReceiptNo).PayDate == DateTime.Today;
             return View(building);
         }
 
@@ -95,12 +112,13 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BuildingID,WardNo,House_No,OwnerName,NameOfConstructioin,DateOfAppl,NoOfRes,DateOfRes,DateOfPermision,EstimatedCost,AmountPaid,DateOfCompletion,DateOfOcccp,DateOfAsses,HouseTax,Remarks")] Building building)
+        public ActionResult Edit([Bind(Include = "BuildingID,WardNo,House_No,OwnerName,NameOfConstructioin,DateOfAppl,NoOfRes,DateOfRes,DateOfPermision,EstimatedCost,AmountPaid,DateOfCompletion,DateOfOcccp,DateOfAsses,HouseTax,Remarks,ReceiptNo")] Building building)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(building).State = EntityState.Modified;
                 db.SaveChanges();
+                                
                 return RedirectToAction("Index");
             }
             return View(building);

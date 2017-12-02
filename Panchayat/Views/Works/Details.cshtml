@@ -1,0 +1,264 @@
+﻿@model Panchayat.Work
+
+@{
+    ViewBag.Title = "WORKS REGISTER";
+}
+
+<h2 class="section-to-print">WORKS REGISTER</h2>
+
+<div class="section-to-print">
+    <h4>Work No: @Model.WorksID</h4>
+    <hr />
+
+    <table class="section-to-print">
+        <tr>
+            <th width="30%">&nbsp;</th>
+            <th width="50%">&nbsp;</th>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.NameOfWork)
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.NameOfWork)
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.TechSanctionNo)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.TechSanctionNo)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.ContractorName)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.ContractorName)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.PercentageAccepted)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.PercentageAccepted)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            E.M.D. Deposit
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.InOutRegsRecpt.Value)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Security Deposit
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.InOutRegsRecpt1.Value)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Income Tax Deposit
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.Form4.Amount)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Royalty Deposit
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.Form41.Amount)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.TimeLimit)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.TimeLimit)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.ExtentionTime)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.ExtentionTime)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.EstimatedCost)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.EstimatedCost)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.TenderedCost)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.TenderedCost)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.FinalValue)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.FinalValue)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.NetPaymentToContractor)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.NetPaymentToContractor)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.CommenceDate)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.CommenceDate)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.CompletionDate)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.CompletionDate)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.GrantsRecieved)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.GrantsRecieved)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.GrantsUtilized)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.GrantsUtilized)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model => model.MBNo)
+
+            </td>
+            <td>
+            @Html.DisplayFor(model => model.MBNo)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Balance of S.D.
+
+            </td>
+            <td>
+            Rs. @Html.DisplayFor(model => model.InOutRegsRecpt1.InOutRegsIssues.FirstOrDefault().Value) paid vide V. No.
+            @Html.DisplayFor(model => model.InOutRegsRecpt1.InOutRegsIssues.FirstOrDefault().RVno) dated
+            @Html.DisplayFor(model => model.InOutRegsRecpt1.InOutRegsIssues.FirstOrDefault().TDate)            
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Balance of E.M.D.
+
+            </td>
+            <td>
+            Rs. @Html.DisplayFor(model => model.InOutRegsRecpt.InOutRegsIssues.FirstOrDefault().Value) paid vide V. No.
+            @Html.DisplayFor(model => model.InOutRegsRecpt.InOutRegsIssues.FirstOrDefault().RVno) dated
+            @Html.DisplayFor(model => model.InOutRegsRecpt.InOutRegsIssues.FirstOrDefault().TDate)            
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Royalty
+
+            </td>
+            <td>
+            Rs. @Html.DisplayFor(model => model.Form41.Amount) 
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Income Tax
+
+            </td>
+            <td>
+            Rs. @Html.DisplayFor(model => model.Form4.Amount)
+
+            </td>
+        </tr>
+    </table>
+
+</div>
+<p class="section-to-Not-print">
+    <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+    @Html.ActionLink("Back to List", "Index")
+</p>
