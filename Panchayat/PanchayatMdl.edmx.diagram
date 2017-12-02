@@ -98,6 +98,8 @@
         <EntityTypeShape EntityType="PanchayatModel.IllegalConstruction" Width="1.5" PointX="16.625" PointY="4.625" />
         <AssociationConnector Association="PanchayatModel.FK_IllegalConstruction_RegisterTypes" />
         <AssociationConnector Association="PanchayatModel.FK_IllegalConstruction_WEBstatus" />
+        <EntityTypeShape EntityType="PanchayatModel.CashInHandReg" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PanchayatModel.MovementReg" Width="1.5" PointX="2.75" PointY="3.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

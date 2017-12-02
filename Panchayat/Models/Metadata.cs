@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 
-namespace Panchayat
+namespace Panchayat 
 {
     public class Form4Metadata
     {
@@ -506,7 +506,26 @@ namespace Panchayat
 
     }
 
+public class MovementMetadata
+    {
+        [Required]
+        [StringLength(150)]
+        public string NameAndDes;
 
+        [Required]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
+        public DateTime TimeOfDeparture;
+
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}", ApplyFormatInEditMode = true)]
+        public DateTime TimeOfReturn;
+
+        [Required]
+        [StringLength(250)]
+        public string PlaceAndPurpose;
+
+    }
 
 
 }

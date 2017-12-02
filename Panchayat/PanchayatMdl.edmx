@@ -48,6 +48,18 @@
           <Property Name="Remarks" Type="varchar" MaxLength="250" />
           <Property Name="ReceiptNo" Type="int" />
         </EntityType>
+        <EntityType Name="CashInHandReg">
+          <Key>
+            <PropertyRef Name="CashInHandRegID" />
+          </Key>
+          <Property Name="CashInHandRegID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tdate" Type="datetime" />
+          <Property Name="NameAndDesg" Type="varchar" MaxLength="150" />
+          <Property Name="CashToDeclareStart" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DetailsOfCashExp" Type="varchar" MaxLength="250" />
+          <Property Name="CashToDeclareEnd" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="varchar" MaxLength="300" />
+        </EntityType>
         <EntityType Name="CBRunning">
           <Key>
             <PropertyRef Name="EntryDate" />
@@ -305,6 +317,16 @@
           <Property Name="Resolution" Type="varchar(max)" />
           <Property Name="Remark" Type="varchar" MaxLength="350" />
           <Property Name="RegisterTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MovementReg">
+          <Key>
+            <PropertyRef Name="MovementRegID" />
+          </Key>
+          <Property Name="MovementRegID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameAndDes" Type="varchar" MaxLength="150" />
+          <Property Name="TimeOfDeparture" Type="datetime" />
+          <Property Name="TimeOfReturn" Type="datetime" />
+          <Property Name="PlaceAndPurpose" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Noc">
           <Key>
@@ -1084,6 +1106,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Budget" EntityType="Self.Budget" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Building" EntityType="Self.Building" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CashInHandReg" EntityType="Self.CashInHandReg" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CBRunning" EntityType="Self.CBRunning" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Citizen" EntityType="Self.Citizen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
@@ -1106,6 +1129,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <EntitySet Name="LedgerDetails" EntityType="Self.LedgerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ledgers" EntityType="Self.Ledgers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Meeting" EntityType="Self.Meeting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovementReg" EntityType="Self.MovementReg" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Noc" EntityType="Self.Noc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Outward" EntityType="Self.Outward" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
@@ -1881,6 +1905,8 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <End Role="WEBstatu" EntitySet="WEBstatus" />
             <End Role="IllegalConstruction" EntitySet="IllegalConstructions" />
           </AssociationSet>
+          <EntitySet Name="CashInHandRegs" EntityType="PanchayatModel.CashInHandReg" />
+          <EntitySet Name="MovementRegs" EntityType="PanchayatModel.MovementReg" />
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -2754,6 +2780,28 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CashInHandReg">
+          <Key>
+            <PropertyRef Name="CashInHandRegID" />
+          </Key>
+          <Property Name="CashInHandRegID" Type="Int32" Nullable="false" />
+          <Property Name="Tdate" Type="DateTime" Precision="3" />
+          <Property Name="NameAndDesg" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CashToDeclareStart" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DetailsOfCashExp" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CashToDeclareEnd" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MovementReg">
+          <Key>
+            <PropertyRef Name="MovementRegID" />
+          </Key>
+          <Property Name="MovementRegID" Type="Int32" Nullable="false" />
+          <Property Name="NameAndDes" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TimeOfDeparture" Type="DateTime" Precision="3" />
+          <Property Name="TimeOfReturn" Type="DateTime" Precision="3" />
+          <Property Name="PlaceAndPurpose" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3252,6 +3300,30 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
                 <ScalarProperty Name="NameOfPr" ColumnName="NameOfPr" />
                 <ScalarProperty Name="DateOfComp" ColumnName="DateOfComp" />
                 <ScalarProperty Name="IllegalConID" ColumnName="IllegalConID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CashInHandRegs">
+            <EntityTypeMapping TypeName="PanchayatModel.CashInHandReg">
+              <MappingFragment StoreEntitySet="CashInHandReg">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CashToDeclareEnd" ColumnName="CashToDeclareEnd" />
+                <ScalarProperty Name="DetailsOfCashExp" ColumnName="DetailsOfCashExp" />
+                <ScalarProperty Name="CashToDeclareStart" ColumnName="CashToDeclareStart" />
+                <ScalarProperty Name="NameAndDesg" ColumnName="NameAndDesg" />
+                <ScalarProperty Name="Tdate" ColumnName="Tdate" />
+                <ScalarProperty Name="CashInHandRegID" ColumnName="CashInHandRegID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovementRegs">
+            <EntityTypeMapping TypeName="PanchayatModel.MovementReg">
+              <MappingFragment StoreEntitySet="MovementReg">
+                <ScalarProperty Name="PlaceAndPurpose" ColumnName="PlaceAndPurpose" />
+                <ScalarProperty Name="TimeOfReturn" ColumnName="TimeOfReturn" />
+                <ScalarProperty Name="TimeOfDeparture" ColumnName="TimeOfDeparture" />
+                <ScalarProperty Name="NameAndDes" ColumnName="NameAndDes" />
+                <ScalarProperty Name="MovementRegID" ColumnName="MovementRegID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

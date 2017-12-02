@@ -1,0 +1,107 @@
+﻿@model PagedList.IPagedList<Panchayat.MovementReg>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2 class="section-to-print">Movement Register</h2>
+
+
+    @using (Html.BeginForm("Index", "CashInHandRegs", FormMethod.Get))
+    {
+
+        <div class="row  section-to-Not-print"">
+            <div>
+                <table>
+                    <tr>
+
+                        <td align="right"> Date:</td>
+                        <td>@Html.TextBox("md", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+                        <td>&nbsp;<input type="submit" value="Search" class="btn-default" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+
+</center>
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <span class="pull-right">
+        <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+
+    </span>
+</p>
+
+<br />
+
+<table class="table section-to-print">
+    <tr>
+        <th>
+           Sr No
+        </th>
+        <th>
+           Date
+        <th>
+            Name And Designation
+        </th>
+        <th>
+           Time Of Departure
+        </th>
+        <th>
+            Time Of Return
+        </th>
+        <th>
+            Place And Purpose Of Visit
+        </th>
+        <th>
+            Signature Of Official
+        </th>
+        <th>
+            Signature
+        </th>
+        <th class="section-to-Not-print"></th>
+    </tr>
+@{ int i = 1; }
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @i
+        </td>
+        <td>
+            @(String.Format("{0:dd-MMM-yyyy}", item.TimeOfDeparture))
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameAndDes)
+        </td>
+        <td>
+            @(String.Format("{0: hh:mm tt}", item.TimeOfDeparture))
+        </td>
+        <td>
+            @(String.Format("{0: hh:mm tt}", item.TimeOfReturn))
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlaceAndPurpose)
+        </td>
+        <td>
+
+        </td>
+        <td>
+
+        </td>
+        <td class="section-to-Not-print">
+            @if (item.TimeOfDeparture.Value.ToString("dd-MMM-yyyy") == DateTime.Now.Date.ToString("dd-MMM-yyyy"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.MovementRegID })
+            }
+
+        </td>
+    </tr>
+        i++;
+    }
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, SubLedgerID = ViewBag.SubLedgerID }))

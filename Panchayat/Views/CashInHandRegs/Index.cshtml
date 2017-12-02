@@ -1,0 +1,120 @@
+﻿@model PagedList.IPagedList<Panchayat.CashInHandReg>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+
+    <h2 class="section-to-print">Cash In Hand Registers</h2>
+   
+        @using (Html.BeginForm("Index", "CashInHandRegs", FormMethod.Get))
+        {
+
+            <div class="row  section-to-Not-print"">
+                <div>
+                    <table>
+                        <tr>
+
+                            <td align="right"> Date:</td>
+                            <td>@Html.TextBox("md", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+                            <td>&nbsp;<input type="submit" value="Search" class="btn-default" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        }
+
+    </center>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<br />
+
+<table class="table section-to-print">
+    <tr>
+        <th>
+           Sr No
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+           Time
+        </th>
+        <th>
+           Name And Designation
+        </th>
+        <th>
+         Cash To Be Declared At Start Of Duty
+        </th>
+        <th>
+            Sign Of Authorised Office
+        </th>
+        <th>
+            Details Of Cash Expenses Or Reciepts During The Day
+        </th>
+        <th>
+            Sign Of Authorised Officer
+        </th>
+        <th>
+            Cash To Be Declared At The Close Of Duty Hours
+        </th>
+        <th>
+            Sign Of Authorised Officer
+        </th>
+        <th>
+            Remarks
+        </th>
+        <th class="section-to-Not-print"></th>
+    </tr>
+    @{int i = 1; }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @i
+        </td>
+        <td>
+            @(String.Format("{0:dd-MMM-yyyy}", item.Tdate))
+        </td>
+        <td>
+            @(String.Format("{0:hh:mm tt}", item.Tdate))
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameAndDesg)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CashToDeclareStart)
+        </td>
+        <td>
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DetailsOfCashExp)
+        </td>
+        <td>
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CashToDeclareEnd)
+        </td>
+        <td>
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+        <td class="section-to-Not-print">
+            @Html.ActionLink("Edit", "Edit", new { id=item.CashInHandRegID }) 
+        
+        </td>
+    </tr>
+}
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, SubLedgerID = ViewBag.SubLedgerID }))
