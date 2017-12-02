@@ -13,7 +13,9 @@
     }
     else
     {
-        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?VoucherID=@Model.RVno">here</a>
+        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?VoucherID=@Model.RVno">here</a><br />
+        @: You can print out the original Voucher <a target="_blank" href="/Vouchers/Details/@Model.RVno">here</a>
+
     }
 </div>
 @using (Html.BeginForm())

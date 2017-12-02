@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f6045e67b3384e138fe1a60d2b0f7bb4" Name="Diagram1" ZoomLevel="77">
-        <EntityTypeShape EntityType="PanchayatModel.Citizen" Width="1.5" PointX="4.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PanchayatModel.Citizen" Width="1.5" PointX="3.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Correction" Width="1.5" PointX="11.875" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Form1" Width="1.5" PointX="3.625" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Form2" Width="1.5" PointX="3.625" PointY="8.125" IsExpanded="true" />
@@ -33,7 +33,7 @@
         <EntityTypeShape EntityType="PanchayatModel.RVdetail" Width="1.5" PointX="11.125" PointY="14.875" />
         <AssociationConnector Association="PanchayatModel.FK_RVdetails_ToReceipt" />
         <AssociationConnector Association="PanchayatModel.FK_RVDetails_LederDetail" />
-        <EntityTypeShape EntityType="PanchayatModel.Period" Width="1.5" PointX="6.625" PointY="1.125" />
+        <EntityTypeShape EntityType="PanchayatModel.Period" Width="1.5" PointX="6.625" PointY="2.5" />
         <EntityTypeShape EntityType="PanchayatModel.Config" Width="1.5" PointX="24.375" PointY="4.375" />
         <EntityTypeShape EntityType="PanchayatModel.DemandDetail" Width="1.5" PointX="10.5" PointY="17.75" />
         <EntityTypeShape EntityType="PanchayatModel.DemandPeriod" Width="1.5" PointX="14.125" PointY="17.75" />
@@ -56,6 +56,9 @@
         <EntityTypeShape EntityType="PanchayatModel.RegisterType" Width="1.5" PointX="11.375" PointY="3.75" />
         <EntityTypeShape EntityType="PanchayatModel.Meeting" Width="1.5" PointX="13.625" PointY="3" />
         <AssociationConnector Association="PanchayatModel.FK_Meeting_RegisterType" />
+        <EntityTypeShape EntityType="PanchayatModel.IllegalConstruction" Width="1.5" PointX="15.5" PointY="2.625" />
+        <AssociationConnector Association="PanchayatModel.FK_IllegalConstruction_RegisterTypes" />
+
         <EntityTypeShape EntityType="PanchayatModel.Outward" Width="1.5" PointX="13.625" PointY="21.25" />
         <AssociationConnector Association="PanchayatModel.FK_Outward_ToTable" />
         <EntityTypeShape EntityType="PanchayatModel.Noc" Width="1.5" PointX="9.625" PointY="3.875" />
@@ -66,7 +69,7 @@
         <EntityTypeShape EntityType="PanchayatModel.InvItem" Width="1.5" PointX="17.75" PointY="18.625" />
         <EntityTypeShape EntityType="PanchayatModel.Budget" Width="1.5" PointX="6.625" PointY="21.625" />
         <AssociationConnector Association="PanchayatModel.FK_Budget_ToSubledger" />
-        <EntityTypeShape EntityType="PanchayatModel.Property" Width="1.5" PointX="16.125" PointY="27" />
+        <EntityTypeShape EntityType="PanchayatModel.Property" Width="1.5" PointX="17.875" PointY="21.375" />
         <EntityTypeShape EntityType="PanchayatModel.PropertyBooking" Width="1.5" PointX="16.125" PointY="21.125" />
         <AssociationConnector Association="PanchayatModel.FK_PropertyBooking_ToAdvReceipt" />
         <AssociationConnector Association="PanchayatModel.FK_PropertyBooking_ToFPReceipt" />
@@ -88,16 +91,26 @@
         <AssociationConnector Association="PanchayatModel.FK_PropertyBooking_ToVoucher" />
         <AssociationConnector Association="PanchayatModel.FK_RVdetails_ToVoucher" />
         <AssociationConnector Association="PanchayatModel.FK_Voucher_SubLedger" />
-        <EntityTypeShape EntityType="PanchayatModel.VPRent" Width="1.5" PointX="24" PointY="11.875" />
-        <EntityTypeShape EntityType="PanchayatModel.VPRentDetail" Width="1.5" PointX="26.25" PointY="11.5" />
+        <EntityTypeShape EntityType="PanchayatModel.VPRent" Width="1.5" PointX="20.625" PointY="16.25" />
+        <EntityTypeShape EntityType="PanchayatModel.VPRentDetail" Width="1.5" PointX="20.625" PointY="13" />
         <AssociationConnector Association="PanchayatModel.FK_VPRentDetails_ToVPRent" />
         <AssociationConnector Association="PanchayatModel.FK_VPRentDetails_ToForm4" />
+
         <EntityTypeShape EntityType="PanchayatModel.WEBstatu" Width="1.5" PointX="14.375" PointY="7.375" />
         <EntityTypeShape EntityType="PanchayatModel.Building" Width="1.5" PointX="8.875" PointY="0.75" />
         <AssociationConnector Association="PanchayatModel.FK_Building_ToForm4" />
         <EntityTypeShape EntityType="PanchayatModel.IllegalConstruction" Width="1.5" PointX="16.625" PointY="4.625" />
         <AssociationConnector Association="PanchayatModel.FK_IllegalConstruction_RegisterTypes" />
         <AssociationConnector Association="PanchayatModel.FK_IllegalConstruction_WEBstatus" />
+
+        <EntityTypeShape EntityType="PanchayatModel.Work" Width="1.5" PointX="18.875" PointY="6.25" />
+        <AssociationConnector Association="PanchayatModel.FK_Works_ToIOregRecptIT" />
+        <AssociationConnector Association="PanchayatModel.FK_Works_ToIOregRecptRD" />
+        <AssociationConnector Association="PanchayatModel.FK_Works_ToIOregRecptEMD" />
+        <AssociationConnector Association="PanchayatModel.FK_Works_ToIOregRecptSD" />
+        <EntityTypeShape EntityType="PanchayatModel.Building" Width="1.5" PointX="8.875" PointY="0.75" />
+        <AssociationConnector Association="PanchayatModel.FK_Building_ToForm4" />
+
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

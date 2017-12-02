@@ -4,13 +4,19 @@
     ViewBag.Title = "Create";
 }
 
-<h2>New Aquisition</h2>
+<h2>New Earnest Money Deposit</h2>
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     @Html.Hidden("RegisterTypeID",(int) ViewBag.RegisterTypeID);
+
+    if (ViewBag.wrk != null)
+    {
+        @Html.Hidden("wrk", (int)ViewBag.wrk);
+    }
+
     <div class="form-horizontal">
         
         <hr />

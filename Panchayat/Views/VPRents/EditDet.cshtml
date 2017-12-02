@@ -5,7 +5,16 @@
 }
 
 <h2>Edit</h2>
-
+<div class="alert alert-danger">
+    @if ((bool)ViewBag.isRVtoday)
+    {
+        @: <strong>Note!</strong> Please remember to Correct the corresponding receipt <a target="_blank" href="/Form4/Edit/@Model.ReceiptNo">here</a>
+    }
+    else
+    {
+        @: <strong>Note!</strong> Please remember to make a correction entry <a target="_blank" href="/Corrections/Create?RecieptNo=@Model.ReceiptNo">here</a>
+    }
+</div>
 
 @using (Html.BeginForm())
 {
@@ -17,6 +26,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.VPRentID)
         @Html.HiddenFor(model => model.Month)
+        @Html.HiddenFor(model => model.ReceiptNo)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label col-md-2" })

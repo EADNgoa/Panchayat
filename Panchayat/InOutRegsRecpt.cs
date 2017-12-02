@@ -18,6 +18,8 @@ namespace Panchayat
         public InOutRegsRecpt()
         {
             this.InOutRegsIssues = new HashSet<InOutRegsIssue>();
+            this.Works = new HashSet<Work>();
+            this.Works1 = new HashSet<Work>();
         }
     
         public int IORecptID { get; set; }
@@ -40,5 +42,9 @@ namespace Panchayat
         public virtual RegisterType RegisterType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InOutRegsIssue> InOutRegsIssues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Work> Works { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Work> Works1 { get; set; }
     }
 }

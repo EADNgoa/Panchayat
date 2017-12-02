@@ -53,6 +53,72 @@ namespace Panchayat
         public int RowsPerPage;
     }
 
+    public class WorkMetadata
+    {
+        [Display(Name = "Name Of Work")]
+        [Required]
+        [StringLength(300, MinimumLength = 3)]
+        public String NameOfWork;
+
+        [Display(Name = "Tech. Sanction No.")]
+        [Required]
+        [StringLength(300, MinimumLength = 3)]
+        public String TechSanctionNo;
+
+        [Display(Name = "Name of Contractor")]
+        [Required]
+        [StringLength(100, MinimumLength = 3)]
+        public String ContractorName;
+
+        [Display(Name = "Percentage Accepted")]        
+        [StringLength(50, MinimumLength = 3)]
+        public String PercentageAccepted;
+
+        [Display(Name = "Time Limit")]        
+        [StringLength(300, MinimumLength = 3)]
+        public String TimeLimit;
+
+        [Display(Name = "M. B. No.")]        
+        [StringLength(50, MinimumLength = 3)]
+        public String MBNo;
+
+        [Display(Name = "Estimated Cost")]
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public Decimal EstimatedCost;
+
+        [Display(Name = "Tendered Cost")]        
+        [Range(0.0, Double.MaxValue)]
+        public Decimal TenderedCost;
+
+        [Display(Name = "Final Value")]        
+        [Range(0.0, Double.MaxValue)]
+        public Decimal FinalValue;
+
+        [Display(Name = "Net Payment To Contractor")]        
+        [Range(0.0, Double.MaxValue)]
+        public Decimal NetPaymentToContractor;
+
+        [Display(Name = "Grants Recieved")]        
+        [Range(0.0, Double.MaxValue)]
+        public Decimal GrantsRecieved;
+
+        [Display(Name = "Grants Utilized")]        
+        [Range(0.0, Double.MaxValue)]
+        public Decimal GrantsUtilized;
+
+        [DataType(DataType.Date)]
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Commence Date")]
+        public DateTime CommenceDate;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Completion Date")]
+        public DateTime CompletionDate;
+    }
+
     public class CitizenMetatdata
     {
         [Display(Name = "Citizen ID")]

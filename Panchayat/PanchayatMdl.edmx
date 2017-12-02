@@ -451,6 +451,7 @@
           <Property Name="BalanceCurrent" Type="decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="ReceiptNo" Type="int" Nullable="false" />
         </EntityType>
+
         <EntityType Name="WEBstatus">
           <Key>
             <PropertyRef Name="WebStatusID" />
@@ -458,6 +459,31 @@
           <Property Name="WebStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Works">
+          <Key>
+            <PropertyRef Name="WorksID" />
+          </Key>
+          <Property Name="WorksID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameOfWork" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="TechSanctionNo" Type="varchar" MaxLength="300" />
+          <Property Name="ContractorName" Type="varchar" MaxLength="100" />
+          <Property Name="PercentageAccepted" Type="varchar" MaxLength="50" />
+          <Property Name="EMDIOrecptID" Type="int" />
+          <Property Name="SDIOrecptID" Type="int" />
+          <Property Name="ITrecptNo" Type="int" />
+          <Property Name="RoyaltyDeposit" Type="int" />
+          <Property Name="TimeLimit" Type="varchar" MaxLength="50" />
+          <Property Name="ExtentionTime" Type="varchar" MaxLength="50" />
+          <Property Name="EstimatedCost" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TenderedCost" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="FinalValue" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="NetPaymentToContractor" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CommenceDate" Type="date" />
+          <Property Name="CompletionDate" Type="date" />
+          <Property Name="GrantsRecieved" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="GrantsUtilized" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MBNo" Type="varchar" MaxLength="50" />
+          </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PeriodSLs">
@@ -1080,6 +1106,54 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Works_ToIOregRecptEMD">
+          <End Role="InOutRegsRecpt" Type="Self.InOutRegsRecpt" Multiplicity="0..1" />
+          <End Role="Works" Type="Self.Works" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InOutRegsRecpt">
+              <PropertyRef Name="IORecptID" />
+            </Principal>
+            <Dependent Role="Works">
+              <PropertyRef Name="EMDIOrecptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_ToIOregRecptIT">
+          <End Role="Form4" Type="Self.Form4" Multiplicity="0..1" />
+          <End Role="Works" Type="Self.Works" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="Works">
+              <PropertyRef Name="ITrecptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_ToIOregRecptRD">
+          <End Role="Form4" Type="Self.Form4" Multiplicity="0..1" />
+          <End Role="Works" Type="Self.Works" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="Works">
+              <PropertyRef Name="RoyaltyDeposit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_ToIOregRecptSD">
+          <End Role="InOutRegsRecpt" Type="Self.InOutRegsRecpt" Multiplicity="0..1" />
+          <End Role="Works" Type="Self.Works" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InOutRegsRecpt">
+              <PropertyRef Name="IORecptID" />
+            </Principal>
+            <Dependent Role="Works">
+              <PropertyRef Name="SDIOrecptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PanchayatModelStoreContainer">
           <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Budget" EntityType="Self.Budget" Schema="dbo" store:Type="Tables" />
@@ -1119,6 +1193,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <EntitySet Name="VPRent" EntityType="Self.VPRent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VPRentDetails" EntityType="Self.VPRentDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WEBstatus" EntityType="Self.WEBstatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Works" EntityType="Self.Works" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PeriodSLs" EntityType="Self.PeriodSLs" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PeriodSLs].[PeriodID] AS [PeriodID], 
@@ -1329,6 +1404,22 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <End Role="VPRent" EntitySet="VPRent" />
             <End Role="VPRentDetails" EntitySet="VPRentDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_Works_ToIOregRecptEMD" Association="Self.FK_Works_ToIOregRecptEMD">
+            <End Role="InOutRegsRecpt" EntitySet="InOutRegsRecpt" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_ToIOregRecptIT" Association="Self.FK_Works_ToIOregRecptIT">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_ToIOregRecptRD" Association="Self.FK_Works_ToIOregRecptRD">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_ToIOregRecptSD" Association="Self.FK_Works_ToIOregRecptSD">
+            <End Role="InOutRegsRecpt" EntitySet="InOutRegsRecpt" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1426,6 +1517,8 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <NavigationProperty Name="PropertyBookings1" Relationship="PanchayatModel.FK_PropertyBooking_ToFPReceipt" FromRole="Form4" ToRole="PropertyBooking" />
           <NavigationProperty Name="PropertyBookings2" Relationship="PanchayatModel.FK_PropertyBooking_ToLTReceipt" FromRole="Form4" ToRole="PropertyBooking" />
           <NavigationProperty Name="VPRentDetails" Relationship="PanchayatModel.FK_VPRentDetails_ToForm4" FromRole="Form4" ToRole="VPRentDetail" />
+          <NavigationProperty Name="Works" Relationship="PanchayatModel.FK_Works_ToIOregRecptIT" FromRole="Form4" ToRole="Work" />
+          <NavigationProperty Name="Works1" Relationship="PanchayatModel.FK_Works_ToIOregRecptRD" FromRole="Form4" ToRole="Work" />
           <NavigationProperty Name="Buildings" Relationship="PanchayatModel.FK_Building_ToForm4" FromRole="Form4" ToRole="Building" />
           </EntityType>
         <EntityType Name="LedgerDetail">
@@ -1867,6 +1960,24 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <End Role="VPRentDetail" EntitySet="VPRentDetails" />
           </AssociationSet>
           <EntitySet Name="WEBstatus" EntityType="PanchayatModel.WEBstatu" />
+          <EntitySet Name="Works" EntityType="PanchayatModel.Work" />
+          <AssociationSet Name="FK_Works_ToIOregRecptIT" Association="PanchayatModel.FK_Works_ToIOregRecptIT">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="Work" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_ToIOregRecptRD" Association="PanchayatModel.FK_Works_ToIOregRecptRD">
+            <End Role="Form4" EntitySet="Form4" />
+            <End Role="Work" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_ToIOregRecptEMD" Association="PanchayatModel.FK_Works_ToIOregRecptEMD">
+            <End Role="InOutRegsRecpt" EntitySet="InOutRegsRecpts" />
+            <End Role="Work" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_ToIOregRecptSD" Association="PanchayatModel.FK_Works_ToIOregRecptSD">
+            <End Role="InOutRegsRecpt" EntitySet="InOutRegsRecpts" />
+            <End Role="Work" EntitySet="Works" />
+          </AssociationSet>
+
           <EntitySet Name="Buildings" EntityType="PanchayatModel.Building" />
           <AssociationSet Name="FK_Building_ToForm4" Association="PanchayatModel.FK_Building_ToForm4">
             <End Role="Form4" EntitySet="Form4" />
@@ -1881,6 +1992,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <End Role="WEBstatu" EntitySet="WEBstatus" />
             <End Role="IllegalConstruction" EntitySet="IllegalConstructions" />
           </AssociationSet>
+
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -2422,7 +2534,9 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <Property Name="SanctionByWhom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PeriodToSpendYrs" Type="Byte" />
           <Property Name="TreasureVoucherDetails" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-        </EntityType>
+          <NavigationProperty Name="Works" Relationship="PanchayatModel.FK_Works_ToIOregRecptEMD" FromRole="InOutRegsRecpt" ToRole="Work" />
+          <NavigationProperty Name="Works1" Relationship="PanchayatModel.FK_Works_ToIOregRecptSD" FromRole="InOutRegsRecpt" ToRole="Work" />
+          </EntityType>
         <Association Name="FK_InOutRegsRecpt_ToInvItems">
           <End Type="PanchayatModel.InvItem" Role="InvItem" Multiplicity="0..1" />
           <End Type="PanchayatModel.InOutRegsRecpt" Role="InOutRegsRecpt" Multiplicity="*" />
@@ -2669,6 +2783,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
         <EntityType Name="WEBstatu">
           <Key>
             <PropertyRef Name="WebStatusID" />
@@ -2677,6 +2792,85 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="IllegalConstructions" Relationship="PanchayatModel.FK_IllegalConstruction_WEBstatus" FromRole="WEBstatu" ToRole="IllegalConstruction" />
         </EntityType>
+
+        <EntityType Name="Work">
+          <Key>
+            <PropertyRef Name="WorksID" />
+          </Key>
+          <Property Name="WorksID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameOfWork" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="TechSanctionNo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ContractorName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PercentageAccepted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMDIOrecptID" Type="Int32" />
+          <Property Name="SDIOrecptID" Type="Int32" />
+          <Property Name="ITrecptNo" Type="Int32" />
+          <Property Name="RoyaltyDeposit" Type="Int32" />
+          <Property Name="TimeLimit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExtentionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstimatedCost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TenderedCost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FinalValue" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NetPaymentToContractor" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CommenceDate" Type="DateTime" Precision="0" />
+          <Property Name="CompletionDate" Type="DateTime" Precision="0" />
+          <Property Name="GrantsRecieved" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="GrantsUtilized" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MBNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Form4" Relationship="PanchayatModel.FK_Works_ToIOregRecptIT" FromRole="Work" ToRole="Form4" />
+          <NavigationProperty Name="Form41" Relationship="PanchayatModel.FK_Works_ToIOregRecptRD" FromRole="Work" ToRole="Form4" />
+          <NavigationProperty Name="InOutRegsRecpt" Relationship="PanchayatModel.FK_Works_ToIOregRecptEMD" FromRole="Work" ToRole="InOutRegsRecpt" />
+          <NavigationProperty Name="InOutRegsRecpt1" Relationship="PanchayatModel.FK_Works_ToIOregRecptSD" FromRole="Work" ToRole="InOutRegsRecpt" />
+        </EntityType>
+        <Association Name="FK_Works_ToIOregRecptIT">
+          <End Type="PanchayatModel.Form4" Role="Form4" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Work" Role="Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="ITrecptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_ToIOregRecptRD">
+          <End Type="PanchayatModel.Form4" Role="Form4" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Work" Role="Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form4">
+              <PropertyRef Name="RecieptNo" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="RoyaltyDeposit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_ToIOregRecptEMD">
+          <End Type="PanchayatModel.InOutRegsRecpt" Role="InOutRegsRecpt" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Work" Role="Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InOutRegsRecpt">
+              <PropertyRef Name="IORecptID" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="EMDIOrecptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_ToIOregRecptSD">
+          <End Type="PanchayatModel.InOutRegsRecpt" Role="InOutRegsRecpt" Multiplicity="0..1" />
+          <End Type="PanchayatModel.Work" Role="Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InOutRegsRecpt">
+              <PropertyRef Name="IORecptID" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="SDIOrecptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+
         <EntityType Name="Building">
           <Key>
             <PropertyRef Name="BuildingID" />
@@ -2712,6 +2906,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
         <EntityType Name="IllegalConstruction">
           <Key>
             <PropertyRef Name="IllegalConID" />
@@ -3207,11 +3402,40 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="WEBstatus">
             <EntityTypeMapping TypeName="PanchayatModel.WEBstatu">
               <MappingFragment StoreEntitySet="WEBstatus">
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="WebStatusID" ColumnName="WebStatusID" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+
+          <EntitySetMapping Name="Works">
+            <EntityTypeMapping TypeName="PanchayatModel.Work">
+              <MappingFragment StoreEntitySet="Works">
+                <ScalarProperty Name="MBNo" ColumnName="MBNo" />
+                <ScalarProperty Name="GrantsUtilized" ColumnName="GrantsUtilized" />
+                <ScalarProperty Name="GrantsRecieved" ColumnName="GrantsRecieved" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+                <ScalarProperty Name="CommenceDate" ColumnName="CommenceDate" />
+                <ScalarProperty Name="NetPaymentToContractor" ColumnName="NetPaymentToContractor" />
+                <ScalarProperty Name="FinalValue" ColumnName="FinalValue" />
+                <ScalarProperty Name="TenderedCost" ColumnName="TenderedCost" />
+                <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
+                <ScalarProperty Name="ExtentionTime" ColumnName="ExtentionTime" />
+                <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
+                <ScalarProperty Name="RoyaltyDeposit" ColumnName="RoyaltyDeposit" />
+                <ScalarProperty Name="ITrecptNo" ColumnName="ITrecptNo" />
+                <ScalarProperty Name="SDIOrecptID" ColumnName="SDIOrecptID" />
+                <ScalarProperty Name="EMDIOrecptID" ColumnName="EMDIOrecptID" />
+                <ScalarProperty Name="PercentageAccepted" ColumnName="PercentageAccepted" />
+                <ScalarProperty Name="ContractorName" ColumnName="ContractorName" />
+                <ScalarProperty Name="TechSanctionNo" ColumnName="TechSanctionNo" />
+                <ScalarProperty Name="NameOfWork" ColumnName="NameOfWork" />
+                <ScalarProperty Name="WorksID" ColumnName="WorksID" />
+
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3238,6 +3462,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="IllegalConstructions">
             <EntityTypeMapping TypeName="PanchayatModel.IllegalConstruction">
               <MappingFragment StoreEntitySet="IllegalConstruction">
