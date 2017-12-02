@@ -33,16 +33,21 @@
                 <div>
                     <table>
                         <tr>
-                            <td></td>
+                        
                             <td> Date Of Complain:</td>
                             <td> @Html.TextBox("dc", ViewBag.CurrentFilter as string, new { type = "date", @class = "form-control" })</td>
+                           
+                            @if (ViewBag.RegisterTypeID == 4 || ViewBag.RegisterTypeID == 6)
+                            {
+                                <td>&nbsp; Status:</td>
+                                <td> @Html.DropDownList("WebStatusID", null, new { type = "date", @class = "form-control" })</td>
 
-                            <td class="col-lg-1"></td>
-                            <td><input type="submit" value="Search" class="btn btn-default" /></td>
+                            }
+                            <td>&nbsp;<input type="submit" value="Search" class="btn btn-default" /></td>
                         </tr>
                     </table>
 
-
+               
 
 
                 </div>
@@ -126,6 +131,7 @@
         <th>
             Remarks
         </th>
+    <th>Status</th>
     
         <th></th>
     </tr>
@@ -163,7 +169,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Remarks)
         </td>
-     
+        <td>
+            @Html.DisplayFor(modelItem => item.WEBstatu.Status)
+        </td>
+
         <td class="section-to-Not-print">           
                 @Html.ActionLink("Edit", "Edit", new { id = item.IllegalConID })                       
         </td>
