@@ -99,8 +99,6 @@
         <EntityTypeShape EntityType="PanchayatModel.WEBstatu" Width="1.5" PointX="14.375" PointY="7.375" />
         <EntityTypeShape EntityType="PanchayatModel.Building" Width="1.5" PointX="8.875" PointY="0.75" />
         <AssociationConnector Association="PanchayatModel.FK_Building_ToForm4" />
-        <EntityTypeShape EntityType="PanchayatModel.IllegalConstruction" Width="1.5" PointX="16.625" PointY="4.625" />
-        <AssociationConnector Association="PanchayatModel.FK_IllegalConstruction_RegisterTypes" />
         <AssociationConnector Association="PanchayatModel.FK_IllegalConstruction_WEBstatus" />
 <<<<<<< HEAD
         <EntityTypeShape EntityType="PanchayatModel.CashInHandReg" Width="1.5" PointX="0.75" PointY="0.75" />
@@ -112,10 +110,10 @@
         <AssociationConnector Association="PanchayatModel.FK_Works_ToIOregRecptRD" />
         <AssociationConnector Association="PanchayatModel.FK_Works_ToIOregRecptEMD" />
         <AssociationConnector Association="PanchayatModel.FK_Works_ToIOregRecptSD" />
-        <EntityTypeShape EntityType="PanchayatModel.Building" Width="1.5" PointX="8.875" PointY="0.75" />
-        <AssociationConnector Association="PanchayatModel.FK_Building_ToForm4" />
+        
+        
 
->>>>>>> 6d75790f62efd2a85de8c005a44079fdeeea0d0e
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 6d75790f62efd2a85de8c005a44079fdeeea0d0e
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

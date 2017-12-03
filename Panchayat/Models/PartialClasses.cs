@@ -120,6 +120,10 @@ namespace Panchayat
     public partial class MovementReg
     {
     }
+    [MetadataType(typeof(CashInHandMetadata))]
+    public partial class CashInHandReg
+    {
+    }
     public class Form10rpt
     {
         public string Ledger { get; set; }

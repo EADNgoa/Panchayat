@@ -62,12 +62,10 @@ namespace Panchayat
         public virtual DbSet<VPRent> VPRents { get; set; }
         public virtual DbSet<VPRentDetail> VPRentDetails { get; set; }
         public virtual DbSet<WEBstatu> WEBstatus { get; set; }
+        public virtual DbSet<Work> Works { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<IllegalConstruction> IllegalConstructions { get; set; }
         public virtual DbSet<CashInHandReg> CashInHandRegs { get; set; }
         public virtual DbSet<MovementReg> MovementRegs { get; set; }
-        public virtual DbSet<Work> Works { get; set; }
-        
-
     }
 }

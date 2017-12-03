@@ -546,7 +546,9 @@ namespace Panchayat
         public decimal EstimatedCost;
 
         [Required]
-        public int AmountPaid;
+        [Range(0.0, Double.MaxValue)]
+
+        public decimal AmountPaid;
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
@@ -590,6 +592,36 @@ public class MovementMetadata
         [Required]
         [StringLength(250)]
         public string PlaceAndPurpose;
+
+    }
+
+    public class CashInHandMetadata
+    {
+        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Tdate;
+
+        [Required]
+        [StringLength(250)]
+        public string NameAndDesg;
+
+
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal CashToDeclareStart;
+
+        [Required]
+        [StringLength(250)]
+        public string DetailsOfCashExp;
+
+    
+        [Range(0.0, Double.MaxValue)]
+        public decimal CashToDeclareEnd;
+
+        [Required]
+        [StringLength(300)]
+        public string Remarks;
 
     }
 

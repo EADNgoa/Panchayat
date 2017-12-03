@@ -43,6 +43,8 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CashInHandRegID,Tdate,NameAndDesg,CashToDeclareStart,DetailsOfCashExp,CashToDeclareEnd,Remarks")] CashInHandReg cashInHandReg)
         {
+          
+
             if (ModelState.IsValid)
             {
                 cashInHandReg.Tdate = DateTime.Now;
@@ -78,6 +80,7 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
+                cashInHandReg.Tdate = DateTime.Now;
                 db.Entry(cashInHandReg).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
