@@ -2016,12 +2016,9 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <End Role="WEBstatu" EntitySet="WEBstatus" />
             <End Role="IllegalConstruction" EntitySet="IllegalConstructions" />
           </AssociationSet>
-<<<<<<< HEAD
           <EntitySet Name="CashInHandRegs" EntityType="PanchayatModel.CashInHandReg" />
           <EntitySet Name="MovementRegs" EntityType="PanchayatModel.MovementReg" />
-=======
 
->>>>>>> 6d75790f62efd2a85de8c005a44079fdeeea0d0e
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>

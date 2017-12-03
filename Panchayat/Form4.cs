@@ -24,11 +24,8 @@ namespace Panchayat
             this.PropertyBookings1 = new HashSet<PropertyBooking>();
             this.PropertyBookings2 = new HashSet<PropertyBooking>();
             this.VPRentDetails = new HashSet<VPRentDetail>();
-<<<<<<< HEAD
-=======
             this.Works = new HashSet<Work>();
             this.Works1 = new HashSet<Work>();
->>>>>>> 6d75790f62efd2a85de8c005a44079fdeeea0d0e
             this.Buildings = new HashSet<Building>();
         }
     
@@ -59,13 +56,10 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VPRentDetail> VPRentDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-<<<<<<< HEAD
-=======
         public virtual ICollection<Work> Works { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Work> Works1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
->>>>>>> 6d75790f62efd2a85de8c005a44079fdeeea0d0e
         public virtual ICollection<Building> Buildings { get; set; }
     }
 }

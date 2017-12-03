@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")  
-    
+    @Styles.Render("~/Content/dtpic")  
 
 </head>
 <body >
@@ -28,6 +28,8 @@
 
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquerydtpicker")
 
 <script>
     $(function () {
@@ -75,17 +77,11 @@
      $(function () {
 
          $('input[type=datetime]').datetimepicker({
-
              dateFormat: "dd-M-yy",
-
              timeFormat: "hh:mm TT",
-
              hourGrid: 4,
-
              minuteGrid: 10,
-
              stepMinute: 5
-
          });
 
 

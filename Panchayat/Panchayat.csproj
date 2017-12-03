@@ -376,7 +376,7 @@
     <Compile Include="VPRentDetail.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
-    <Compile Include="WEBstatu.cs">
+    <Compile Include="WEBstatu.cs" />
     <Compile Include="Work.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -752,14 +752,12 @@
     <Content Include="Views\VPRents\Details.cshtml" />
     <Content Include="Views\VPRents\EditDet.cshtml" />
     <Content Include="Views\VPRents\IndexDet.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\MovementRegs\Create.cshtml" />
     <Content Include="Views\MovementRegs\Edit.cshtml" />
     <Content Include="Views\MovementRegs\Index.cshtml" />
     <Content Include="Views\CashInHandRegs\Create.cshtml" />
     <Content Include="Views\CashInHandRegs\Edit.cshtml" />
     <Content Include="Views\CashInHandRegs\Index.cshtml" />
-=======
     <Content Include="Views\Works\Create.cshtml" />
     <Content Include="Views\Works\Delete.cshtml" />
     <Content Include="Views\Works\Details.cshtml" />
@@ -767,7 +765,6 @@
     <Content Include="Views\Works\Index.cshtml" />
     <Content Include="Views\Reports\Income Tax.cshtml" />
     <Content Include="Views\Reports\Royalty.cshtml" />
->>>>>>> 6d75790f62efd2a85de8c005a44079fdeeea0d0e
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
