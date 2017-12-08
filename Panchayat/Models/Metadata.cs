@@ -703,7 +703,7 @@ public class MovementMetadata
         [StringLength(250)]
         public string PersonAddress;
 
-        [Required]
+      
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Tdate;
@@ -712,19 +712,17 @@ public class MovementMetadata
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime MeetingDate;
-
-        [Required]
+        
         [StringLength(100)]
         public string PrevPersonName;
 
-        [Required]
+    
         public int Fees;
 
-        [Required]
         [StringLength(100)]
         public string DeveloperName;
 
-        [Required]
+        
         [StringLength(100)]
         public string DeveloperAddress;
 

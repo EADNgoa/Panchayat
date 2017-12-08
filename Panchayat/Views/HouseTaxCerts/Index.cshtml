@@ -4,7 +4,28 @@
     ViewBag.Title = "Index";
 }
 <center>
-    <h2>House Tax Transfer</h2>
+  
+    @if (ViewBag.Rt==27)
+    {
+     <h2>House Tax Transfer</h2>
+    }
+    @if (ViewBag.Rt == 28)
+    {
+     <h2>Trade Certificate</h2>
+    }
+    @if (ViewBag.Rt == 29)
+    {
+        <h2>House Repair License</h2>
+    }
+    @if (ViewBag.Rt == 30)
+    {
+        <h2>Trade Certificate(II)</h2>
+    }
+    @if (ViewBag.Rt == 31)
+    {
+        <h2>Occupation Certificate</h2>
+    }
+
     @using (Html.BeginForm("Index", "HouseTaxCerts", FormMethod.Get))
     {
 
@@ -42,30 +63,75 @@
         <th>
             Name Of Person
         </th>
-        <th>
-           Ward No
-        </th>
+        @if (ViewBag.Rt != 29  && ViewBag.Rt != 30 )
+        {
+            if (ViewBag.Rt == 28)
+            {
+            <th>
+               Ref No
+            </th>
+            }
+            if (ViewBag.Rt == 31)
+            {
+                <th>
+                    License Agreement date
+                </th>
+            }
+            if (ViewBag.Rt == 27 && ViewBag.Rt == 28)
+            {
+                <th>
+                    Ward No
+                </th>
+            }
+        }
         <th>
             Person Address
         </th>
+       @if (ViewBag.Rt != 28 && ViewBag.Rt != 29 && ViewBag.Rt != 30)
+        {
         <th>
           Date
         </th>
+        }
         <th>
          Meeting Date
         </th>
+        @if (ViewBag.Rt != 28 &&  ViewBag.Rt != 29 && ViewBag.Rt != 30 && ViewBag.Rt != 31)
+         {
         <th>
           Current House Tax Holder
         </th>
+          }
         <th>
            Fees
         </th>
-        <th>
-           Developer Name
-        </th>
-        <th>
-            Developer Address
-        </th>
+        @if (ViewBag.Rt != 28 && ViewBag.Rt != 29 && ViewBag.Rt != 30 )
+        {
+            if (ViewBag.Rt != 31)
+            {
+            <th>
+                Developer Name
+            </th>
+            }
+            else
+            {
+            <th>
+                Name Of Bussiness
+            </th>
+            }
+            if (ViewBag.Rt != 31)
+            {
+                <th>
+                    Developer Address
+                </th>
+            }
+            else
+            {
+                <th>
+                   Bussiness
+                </th>
+            }
+        }
         <th>
             Citizen Name
         </th>
@@ -82,30 +148,44 @@
         <td>
             @Html.DisplayFor(modelItem => item.PersonName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WardNo)
-        </td>
+        @if (ViewBag.Rt != 29 && ViewBag.Rt != 30 && ViewBag.Rt != 30)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.WardNo)
+            </td>
+        }
+        
+
         <td>
             @Html.DisplayFor(modelItem => item.PersonAddress)
         </td>
+@if (ViewBag.Rt != 28  && ViewBag.Rt != 29 && ViewBag.Rt != 30)
+{
         <td>
             @Html.DisplayFor(modelItem => item.Tdate)
         </td>
+}
         <td>
             @Html.DisplayFor(modelItem => item.MeetingDate)
         </td>
+@if (ViewBag.Rt != 28 && ViewBag.Rt != 29 && ViewBag.Rt != 30 && ViewBag.Rt != 31)
+{
         <td>
             @Html.DisplayFor(modelItem => item.PrevPersonName)
         </td>
+}
         <td>
             @Html.DisplayFor(modelItem => item.Fees)
         </td>
+@if (ViewBag.Rt != 28 && ViewBag.Rt != 29 && ViewBag.Rt != 30 )
+{
         <td>
             @Html.DisplayFor(modelItem => item.DeveloperName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DeveloperAddress)
         </td>
+}
         <td>
             @Html.DisplayFor(modelItem => item.UserID)
         </td>

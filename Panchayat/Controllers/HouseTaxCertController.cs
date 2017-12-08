@@ -49,7 +49,7 @@ namespace Panchayat.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             HouseTaxCert HouseTaxCert = db.HouseTaxCerts.Find(id);
-            ViewBag.SH = db.Configs.Select(p=>p.PanchSeceretary).FirstOrDefault() ;
+            ViewBag.P = db.Configs.FirstOrDefault() ;
             if (HouseTaxCert == null)
             {
                 return HttpNotFound();
@@ -61,6 +61,10 @@ namespace Panchayat.Controllers
         public ActionResult Create(int? rt)
         {
             ViewBag.RegisterTypeID = rt;
+            if(rt==28)
+            {
+                ViewBag.st = "N/A";
+            }
             return View();
         }
 
@@ -71,13 +75,15 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "HouseTaxCertID,PersonName,WardNo,PersonAddress,Tdate,MeetingDate,PrevPersonName,Fees,DeveloperName,DeveloperAddress,UserID,RegisterTypeID,WebStatusID")] HouseTaxCert house)
         {
+        
             if (ModelState.IsValid)
             {
+                house.Tdate = DateTime.Now;
                 house.UserID = User.Identity.GetUserId();
                 house.WEBstatusID = 1;
                 db.HouseTaxCerts.Add(house);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new {rt=house.RegisterTypeID });
             }
 
             ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", house.RegisterTypeID);
@@ -93,11 +99,11 @@ namespace Panchayat.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             HouseTaxCert house = db.HouseTaxCerts.Find(id);
+            ViewBag.RegisterTypeID = house.RegisterTypeID;
             if (house == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", house.RegisterTypeID);
             ViewBag.WebStatusID = new SelectList(db.WEBstatus, "WebStatusID", "Status", house.WEBstatusID);
             return View(house);
         }
@@ -115,7 +121,7 @@ namespace Panchayat.Controllers
             {
                 db.Entry(house).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new {rt=house.RegisterTypeID });
             }           
             return View(house);
         }
