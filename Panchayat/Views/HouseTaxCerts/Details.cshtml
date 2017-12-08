@@ -1,0 +1,60 @@
+﻿@model Panchayat.HouseTaxCert
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>House Tax Certificate</h2>
+<style>
+     p{
+         text-align:justify;
+         }
+ </style>
+<div class="section-to-print ">
+<center>
+    <div>
+        <div class="row">
+
+    <p class="col-md-12 pull-left ">
+        To<br />
+        @Model.PersonName<br />
+        @Model.WardNo<br />
+    </p>
+        <br />
+        <br />
+
+`  </div>
+        <p class="col-md-12 pull-left">
+           <big><b><u>Sub:Application for transfer of House Tax of @Model.PersonAddress</u></b></big>
+        </p>
+        <br />
+
+        <p class="col-md-12 pull-left">
+            Sir/Madam,<br />
+            <br />
+            With reference to your application dated @Model.Tdate.Value.ToString("dd-mm-yyyy") on above cited subject, 
+            the same was placed in the V. P. meeting dated @Model.MeetingDate. In accordance with the resolution No. 5(11),
+            the Panchayat body conveys its approval for transfer of house tax of @Model.PersonAddress,
+            in the name @Model.PrevPersonName for payment of House Tax to the Panchayat, 
+            on the basis of NOC from the earlier owner and Deed of Sale with immediate effect.
+            <br />
+            <br />
+            <span class="pull-right">
+                (@ViewBag.SH)
+            </span>
+        </p>
+        <p>
+            Copy To:<br />
+            @Model.DeveloperName<br />
+            @Model.DeveloperAddress
+
+        </p>
+    </div>
+
+</center>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.HouseTaxCertID }) |  <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+     |
+    @Html.ActionLink("Back to List", "Index",new {rt=27 })
+</p>

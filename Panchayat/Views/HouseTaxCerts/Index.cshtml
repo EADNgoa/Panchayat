@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Panchayat.HouseTaxCert>
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2>House Tax Transfer</h2>
+    @using (Html.BeginForm("Index", "HouseTaxCerts", FormMethod.Get))
+    {
+
+
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        @Html.Hidden("rt", (int)ViewBag.Rt)
+
+
+                        <td> Name Of Person:</td>
+                        <td> @Html.TextBox("PersonName", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+
+                        <td>&nbsp; Status:</td>
+                        <td> @Html.DropDownList("WebStatusID", null, new { type = "date", @class = "form-control" })</td>
+
+
+                        <td>&nbsp;<input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    }
+</center>
+<p>
+    @Html.ActionLink("Create New", "Create", new { rt = ViewBag.Rt })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name Of Person
+        </th>
+        <th>
+           Ward No
+        </th>
+        <th>
+            Person Address
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+         Meeting Date
+        </th>
+        <th>
+          Current House Tax Holder
+        </th>
+        <th>
+           Fees
+        </th>
+        <th>
+           Developer Name
+        </th>
+        <th>
+            Developer Address
+        </th>
+        <th>
+            Citizen Name
+        </th>
+ 
+      
+        <th>
+            @Html.DisplayNameFor(model => model.WEBstatu.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WardNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeetingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrevPersonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeveloperName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeveloperAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+       
+  
+        <td>
+            @Html.DisplayFor(modelItem => item.WEBstatu.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.HouseTaxCertID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.HouseTaxCertID }) 
+        </td>
+    </tr>
+}
+
+</table>

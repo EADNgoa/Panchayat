@@ -25,6 +25,10 @@ namespace Panchayat
             this.InOutRegsIssues = new HashSet<InOutRegsIssue>();
             this.InvItems = new HashSet<InvItem>();
             this.IllegalConstructions = new HashSet<IllegalConstruction>();
+            this.PovertyCertificates = new HashSet<PovertyCertificate>();
+            this.CertificateRequirements = new HashSet<CertificateRequirement>();
+            this.ResidenceCertificates = new HashSet<ResidenceCertificate>();
+            this.HouseTaxCerts = new HashSet<HouseTaxCert>();
         }
     
         public int RegisterTypeID { get; set; }
@@ -46,5 +50,13 @@ namespace Panchayat
         public virtual ICollection<InvItem> InvItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IllegalConstruction> IllegalConstructions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PovertyCertificate> PovertyCertificates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CertificateRequirement> CertificateRequirements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ResidenceCertificate> ResidenceCertificates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HouseTaxCert> HouseTaxCerts { get; set; }
     }
 }

@@ -211,6 +211,12 @@
     <Compile Include="CBRunning.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
+    <Compile Include="CertificateRequirement.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CertSupportDoc.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="Citizen.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -222,6 +228,7 @@
     <Compile Include="Controllers\BudgetsController.cs" />
     <Compile Include="Controllers\BuildingsController.cs" />
     <Compile Include="Controllers\CashInHandRegsController.cs" />
+    <Compile Include="Controllers\CertificateRequirementsController.cs" />
     <Compile Include="Controllers\CitizensController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\CorrectionsController.cs" />
@@ -237,6 +244,7 @@
     <Compile Include="Controllers\NocsController.cs" />
     <Compile Include="Controllers\OutwardsController.cs" />
     <Compile Include="Controllers\PeriodsController.cs" />
+    <Compile Include="Controllers\PovertyCertificatesController.cs" />
     <Compile Include="Controllers\RentPropertiesController.cs" />
     <Compile Include="Controllers\PropertyBookingsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -245,6 +253,8 @@
     <Compile Include="Controllers\LedgerDetailsController.cs" />
     <Compile Include="Controllers\LedgersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\HouseTaxCertController.cs" />
+    <Compile Include="Controllers\ResidenceCertificatesController.cs" />
     <Compile Include="Controllers\SD9EMD6Controller.cs" />
     <Compile Include="Controllers\SubLedgersController.cs" />
     <Compile Include="Controllers\SubLedgerTypesController.cs" />
@@ -283,6 +293,9 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HouseTaxCert.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="IllegalConstruction.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
@@ -347,6 +360,9 @@
     <Compile Include="PeriodSL.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
+    <Compile Include="PovertyCertificate.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Property.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
@@ -355,6 +371,9 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="RegisterType.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResidenceCertificate.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="RVdetail.cs">
@@ -767,6 +786,22 @@
     <Content Include="Views\Works\Index.cshtml" />
     <Content Include="Views\Reports\Income Tax.cshtml" />
     <Content Include="Views\Reports\Royalty.cshtml" />
+    <Content Include="Views\CertificateRequirements\Create.cshtml" />
+    <Content Include="Views\CertificateRequirements\Delete.cshtml" />
+    <Content Include="Views\CertificateRequirements\Edit.cshtml" />
+    <Content Include="Views\CertificateRequirements\Index.cshtml" />
+    <Content Include="Views\PovertyCertificates\Create.cshtml" />
+    <Content Include="Views\PovertyCertificates\Edit.cshtml" />
+    <Content Include="Views\PovertyCertificates\Index.cshtml" />
+    <Content Include="Views\PovertyCertificates\Details.cshtml" />
+    <Content Include="Views\ResidenceCertificates\Create.cshtml" />
+    <Content Include="Views\ResidenceCertificates\Details.cshtml" />
+    <Content Include="Views\ResidenceCertificates\Edit.cshtml" />
+    <Content Include="Views\ResidenceCertificates\Index.cshtml" />
+    <Content Include="Views\HouseTaxCerts\Create.cshtml" />
+    <Content Include="Views\HouseTaxCerts\Details.cshtml" />
+    <Content Include="Views\HouseTaxCerts\Edit.cshtml" />
+    <Content Include="Views\HouseTaxCerts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

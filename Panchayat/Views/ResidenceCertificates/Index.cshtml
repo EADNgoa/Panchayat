@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Panchayat.ResidenceCertificate>
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2>Residence Certificate</h2>
+    @using (Html.BeginForm("Index", "ResidenceCertificates", FormMethod.Get))
+    {
+
+
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        @Html.Hidden("rt", (int)ViewBag.Rt)
+
+
+                        <td> Name Of Person:</td>
+                        <td> @Html.TextBox("PersonName", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+
+                        <td>&nbsp; Status:</td>
+                        <td> @Html.DropDownList("WebStatusID", null, new { type = "date", @class = "form-control" })</td>
+
+
+                        <td>&nbsp;<input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    }
+</center>
+<p>
+    @Html.ActionLink("Create New", "Create", new { rt = ViewBag.Rt })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name Of Person
+        </th>
+        <th>
+            Birth Date
+        </th>
+        <th>
+            Birth Place
+        </th>
+        <th>
+           Name Of Mother
+        </th>
+        <th>
+         Name Of Father
+        </th>
+        <th>
+           Address
+        </th>
+        <th>
+           Living From
+        </th>
+        <th>
+           Till Date
+        </th>
+        <th>
+            Is Dead?
+        </th>
+        <th>
+           Citizen Name
+        </th>
+        <th>
+            Reveiewed On
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.WEBstatu.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthPlace)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfMother)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfFather)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TillDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDead)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TDate)
+
+
+        </td>
+  
+        <td>
+            @Html.DisplayFor(modelItem => item.WEBstatu.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ResidenceCertificateID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ResidenceCertificateID }) 
+        </td>
+    </tr>
+}
+
+</table>

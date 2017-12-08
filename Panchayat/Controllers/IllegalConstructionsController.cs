@@ -45,7 +45,7 @@ namespace Panchayat.Controllers
             }
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
-            return View(illegalConstructions.ToList().ToPagedList(pageNumber, pageSize));
+            return View(illegalConstructions.OrderByDescending(a=>a.IllegalConID).ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: IllegalConstructions/Details/5

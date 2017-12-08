@@ -625,6 +625,112 @@ public class MovementMetadata
 
     }
 
+    public class PovertyCertificateMetadata
+    {
+        [Required]
+        [StringLength(100)]
+        public string PersonName;
 
+        [Required]
+        [StringLength(100)]
+        public string OtherName;
+
+        [Required]
+        [StringLength(250)]
+        public string PersonAddress;
+
+        [Required]
+        [StringLength(100)]
+        public string RequestedBy;
+
+        [Required]
+        [StringLength(250)]
+        public string AddOfPerReqBy;
+    }
+
+    public class ResidenceCertificateMetadata
+    {
+        [Required]
+        [StringLength(100)]
+        public string PersonName;
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime BirthDate;
+      
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime TDate;
+
+        [Required]
+        [StringLength(250)]
+        public string BirthPlace;
+
+
+        [Required]
+        [StringLength(100)]
+        public string NameOfMother;
+
+
+        [Required]
+        [StringLength(100)]
+        public string NameOfFather;
+
+
+        [Required]
+        [StringLength(250)]
+        public string Address;
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime FromDate;
+
+     
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime TillDate;
+
+    }
+    public class HouseTaxCertMetadata
+    {
+        [Required]
+        [StringLength(100)]
+        public string PersonName;
+
+        [Required]
+        [StringLength(250)]
+        public string PersonAddress;
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Tdate;
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime MeetingDate;
+
+        [Required]
+        [StringLength(100)]
+        public string PrevPersonName;
+
+        [Required]
+        public int Fees;
+
+        [Required]
+        [StringLength(100)]
+        public string DeveloperName;
+
+        [Required]
+        [StringLength(100)]
+        public string DeveloperAddress;
+
+
+
+
+    }
 }
 

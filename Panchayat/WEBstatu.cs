@@ -18,6 +18,9 @@ namespace Panchayat
         public WEBstatu()
         {
             this.IllegalConstructions = new HashSet<IllegalConstruction>();
+            this.PovertyCertificates = new HashSet<PovertyCertificate>();
+            this.ResidenceCertificates = new HashSet<ResidenceCertificate>();
+            this.HouseTaxCerts = new HashSet<HouseTaxCert>();
         }
     
         public int WebStatusID { get; set; }
@@ -25,5 +28,11 @@ namespace Panchayat
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IllegalConstruction> IllegalConstructions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PovertyCertificate> PovertyCertificates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ResidenceCertificate> ResidenceCertificates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HouseTaxCert> HouseTaxCerts { get; set; }
     }
 }
