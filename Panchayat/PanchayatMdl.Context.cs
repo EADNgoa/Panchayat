@@ -37,7 +37,6 @@ namespace Panchayat
         public virtual DbSet<SubLedgerType> SubLedgerTypes { get; set; }
         public virtual DbSet<RVdetail> RVdetails { get; set; }
         public virtual DbSet<Period> Period { get; set; }
-        public virtual DbSet<Config> Configs { get; set; }
         public virtual DbSet<DemandDetail> DemandDetails { get; set; }
         public virtual DbSet<DemandPeriod> DemandPeriods { get; set; }
         public virtual DbSet<DemandYear> DemandYears { get; set; }
@@ -67,5 +66,11 @@ namespace Panchayat
         public virtual DbSet<IllegalConstruction> IllegalConstructions { get; set; }
         public virtual DbSet<CashInHandReg> CashInHandRegs { get; set; }
         public virtual DbSet<MovementReg> MovementRegs { get; set; }
+        public virtual DbSet<CertificateRequirement> CertificateRequirements { get; set; }
+        public virtual DbSet<CertSupportDoc> CertSupportDocs { get; set; }
+        public virtual DbSet<PovertyCertificate> PovertyCertificates { get; set; }
+        public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
+        public virtual DbSet<HouseTaxCert> HouseTaxCerts { get; set; }
+        public virtual DbSet<Config> Configs { get; set; }
     }
 }

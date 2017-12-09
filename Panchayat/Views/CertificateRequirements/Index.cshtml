@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Panchayat.CertificateRequirement>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<center>
+    <h2>Certificate Requirements</h2>
+<br />
+    @using (Html.BeginForm("Index", "CertificateRequirements", FormMethod.Get))
+    {
+
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        <td> Certificate Type:&nbsp;</td>
+                        <td> @Html.DropDownList("RegisterTypeID", null, new { @class = "form-control" })</td>
+                        <td>&nbsp;<input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    }
+</center>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+           Requirement
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CertificateName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisterType.RegisterType1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CertificateRequirementID }) |
+  
+            @Html.ActionLink("Delete", "Delete", new { id=item.CertificateRequirementID })
+        </td>
+    </tr>
+}
+
+</table>

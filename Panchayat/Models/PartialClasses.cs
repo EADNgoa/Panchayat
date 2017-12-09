@@ -124,6 +124,18 @@ namespace Panchayat
     public partial class CashInHandReg
     {
     }
+    [MetadataType(typeof(PovertyCertificateMetadata))]
+    public partial class PovertyCertificate
+    {
+    }
+    [MetadataType(typeof(ResidenceCertificateMetadata))]
+    public partial class ResidenceCertificate
+    {
+    }
+    [MetadataType(typeof(HouseTaxCertMetadata))]
+    public partial class HouseTaxCert
+    {
+    }
     public class Form10rpt
     {
         public string Ledger { get; set; }

@@ -1,0 +1,64 @@
+﻿@model Panchayat.ResidenceCertificate
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<style>
+     p{
+         text-align:justify;
+         }
+ </style>
+<div class="section-to-print ">
+    <center>
+        <h4>Residence Certificate</h4>
+        <hr />
+        @if (Model.IsDead == false)
+        {
+        <p class="col-md-12">
+            After making due investigation, I the undersigned, @ViewBag.ph , 
+            Sarpanch of Village Panchayat Taleigao, Taluka of Tiswadi, District of North-Goa,
+            State of Goa, India, certify that Late<b> @Model.PersonName</b>, born on<b> @Model.BirthDate.Value.ToString("dd-mm-yyy")</b> at <b>@Model.BirthPlace</b>
+            Son of <b>@Model.NameOfFather</b> and of <b>@Model.NameOfMother</b>, was residing at <b>@Model.Address</b>, of the Village of Taleigao,
+            Taluka of Tiswadi, District of North Goa, State of Goa, India. He is residing in this Village of Taleigao since his
+            birth till date, including the period from <b>@Model.FromDate.Value.ToString("dd-mm-yyy")</b> to <b>@Model.TillDate.Value.ToString("dd-mm-yyy")</b> .
+
+        </p>
+        <p class="col-md-12">
+            I confirm that the photograph affixed below is of the applicant<b>@Model.PersonName</b> .
+        </p>
+        <p class="col-md-12">
+            This certificate is issued at the request of <b>@Model.PersonName</b>
+            to produce the same in the Conservatory of Central Registry at Lisbon, Portugal, to obtain Portuguese Nationality.
+        </p>
+        }
+        else
+        {
+            <p class="col-md-12">
+                After making due investigation, I the undersigned, @ViewBag.ph ,
+                Sarpanch of Village Panchayat Taleigao, Taluka of Tiswadi, District of North-Goa,
+                State of Goa, India, certify that Late<b> @Model.PersonName</b>, born on<b> @Model.BirthDate.Value.ToString("dd-mm-yyy")</b> at <b>@Model.BirthPlace</b>
+                Son of <b>@Model.NameOfFather</b> and of <b>@Model.NameOfMother</b>, was residing at <b>@Model.Address</b>, of the Village of Taleigao,
+                Taluka of Tiswadi, District of North Goa, State of Goa, India. He was residing in this Village of Taleigao 
+                since @Model.FromDate.Value.ToString("yyyy") till his death.
+
+            </p>
+         
+            <p class="col-md-12">
+                This certificate is issued at the request of <b>@Model.PersonName</b>
+                to produce the same in the Conservatory of Central Registry at Lisbon, Portugal, to obtain Portuguese Nationality.
+            </p>
+        }
+        <p class="col-md-12">
+            Office of the Village Panchayat of Taleigao, Sub District of North Goa, State of Goa dated @Model.TDate.Value.ToString("dd-mm-yyyy").
+
+        </p>
+
+    </center>  
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ResidenceCertificateID }) |  <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+     |
+    @Html.ActionLink("Back to List", "Index",, new { rt = 26 })
+</p>

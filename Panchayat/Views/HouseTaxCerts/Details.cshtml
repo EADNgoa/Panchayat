@@ -1,0 +1,413 @@
+﻿@model Panchayat.HouseTaxCert
+
+@{
+    ViewBag.Title = "Details";
+}
+<center>
+    @if (Model.RegisterTypeID == 27)
+    {
+        <h2>House Tax Certificate</h2>
+
+    }
+    else if (Model.RegisterTypeID == 28)
+    {
+        <h2>Trade</h2>
+
+    }
+    else if (Model.RegisterTypeID == 29)
+    {
+        <h2>House Repair</h2>
+
+    }
+    else if (Model.RegisterTypeID == 30)
+    {
+        <h2>Trade (II)</h2>
+
+    }
+    else if (Model.RegisterTypeID == 31)
+    {
+        <h2 class="section-to-print">No Objection Certificate</h2>
+
+    }
+</center>
+<style>
+     p{
+         text-align:justify;
+
+         }
+ </style>
+<div class="section-to-print ">
+    <center>
+        @if (Model.RegisterTypeID == 27)
+        {
+            <div>
+                <div class="row">
+
+                    <p class="col-md-12  ">
+                        To<br />
+                        @Model.PersonName<br />
+                        @Model.WardNo<br />
+                    </p>
+                    <br />
+                    <br />
+
+                    
+                </div>
+                <p class="col-md-12 pull-left">
+                    <big><b><u>Sub:Application for transfer of House Tax of @Model.PersonAddress</u></b></big>
+                </p>
+                <br />
+
+                <p class="col-md-12 pull-left">
+                    Sir/Madam,<br />
+                    <br />
+                    With reference to your application dated @Model.Tdate.Value.ToString("dd-mm-yyyy") on above cited subject,
+                    the same was placed in the V. P. meeting dated @Model.MeetingDate. In accordance with the resolution No. 5(11),
+                    the Panchayat body conveys its approval for transfer of house tax of @Model.PersonAddress,
+                    in the name @Model.PrevPersonName for payment of House Tax to the Panchayat,
+                    on the basis of NOC from the earlier owner and Deed of Sale with immediate effect.
+                    <br />
+                    <br />
+                    <span class="pull-right">
+                        (@ViewBag.P.PanchSeceretary)
+                    </span>
+                </p>
+                <p>
+                    Copy To:<br />
+                    @Model.DeveloperName<br />
+                    @Model.DeveloperAddress
+
+                </p>
+            </div>
+        }
+
+        @if (Model.RegisterTypeID == 28)
+        {
+         
+                    <div>
+                        <div class="row">
+
+                            <p class="col-md-12">
+                                To<br />
+                                @Model.PersonName<br />
+                                @Model.PersonAddress<br />
+                            </p>
+                            <br />
+                            <br />
+                        </div>
+                        <p class="col-md-12 pull-left">
+                            <big><b><u>Sub:Renewal of NOC for Fast Food and Restaurant business.</u></b></big><br />
+                            <big><b><u>Ref:@Model.WardNo</u></b></big>
+
+                        </p>
+                        <br />
+                        <br />
+                        <p class="col-md-12 pull-left">
+                            <big>Sir/Madam</big><br />
+                           
+
+                        </p>
+                      
+                        <p class="col-md-12">
+                         
+                            <br />
+                            With reference to the above cited subject, your above application was placed
+                            in the V.P. Meeting dated <b>@Model.MeetingDate.Value.ToString("dd-mm-yyyy")</b>.
+                            In accordance with the resolution No. 3(13)
+                            the Panchayat body Conveys its approval for renewal of NOC for
+                            Fast Food and Restaurant in @Model.PersonAddress
+                            subject to the following conditions.
+                        </p>
+                        <p class="col-md-12 pull-left">
+                          
+
+                            <ul style="text-align:left" >
+                                <li>
+                                    The same should be registered with the Competent Authority and<br />
+                                    the copy of the same should be produced to the Panchayat to avail final N.O.C.
+                                </li>
+                                <li>
+                                    Yearly Professional Tax & Sign Board Tax should be paid to the Panchayat
+                                    on commencement of the business.
+                                </li>
+                                <li>
+                                    This NOC is valid for a period of one year from the date of issue and
+                                    henceforth no renewal will be done of this NOC.
+
+                                </li>
+                                <li>
+                                    The renewal fees of Rs. @Model.Fees/-should be paid to the Panchayat.
+                                </li>
+                                <li>
+                                    Panchayat reserves the right to revoke the NOC if any complaints are received from locals.
+                                </li>
+                            </ul>
+
+                            <br />
+                            <br />
+                            <span class="pull-right">
+                                (@ViewBag.p.PanchHead)
+                            </span>
+                        </p>
+
+                    </div>
+
+
+                    }
+        @if (Model.RegisterTypeID == 29)
+        {
+
+            <div>
+                <div class="row">
+
+                    <p class="col-md-12 ">
+                        To<br />
+                        @Model.PersonName<br />
+                        @Model.PersonAddress<br />
+                    </p>
+                    <br />
+                    <br />
+                </div>
+                <p class="col-md-12 pull-left">
+                    <big><b><u>Sub: NOC for Minor repair of House bearing @Model.PersonAddress.</u></b></big><br />
+                   
+
+                </p>
+                <br />
+                <br />
+                <p class="col-md-12 pull-left">
+                    <big>Sir/Madam</big><br />
+
+
+                </p>
+
+                <p class="col-md-12">
+
+                    <br />
+                    With reference to the above cited subject, your application was placed in 
+                    the V. P. Meeting dated @Model.MeetingDate.Value.ToString("dd-mm-yyy"). In accordance with the resolution No. 3(1) 
+                    the Panchayat body conveys its approval for issue of No objection Certificate 
+                    for minor repair of house bearing No. @Model.PersonAddress 
+                    subject to the following conditions.
+                </p>
+                <p class="col-md-12 pull-left">
+
+
+                    <ul style="text-align:left">
+                        <li>
+                            The applicant is permitted to carry out minor repairs of the house 
+                            such as repairing of existing walls, Plastering of wall, repairing of floor, doors, windows, tile roof etc.
+                        </li>
+                        <li>
+                            This permission does not allow the applicant to construct new RCC Slab.
+                        </li>
+                        <li>
+                            No new construction should be carried out by the applicant.
+
+                        </li>
+                        <li>
+                            This Repair License only permits minor repairs which do not alter the existing plinth area of existing
+                            structure & do not affect the structural stability of existing structure.        
+                        </li>
+                        <li>
+                            The applicant before starting the work should obtain NOC from the owner of the land
+                            or Co-owner of the house if any.
+                        </li>
+                        <li>
+                            The applicant should inform the Panchayat before starting
+                            of the work and also after completion of the work in writing to the Panchayat.
+                        </li>
+                        <li>
+                            No materials should be dumped on the road or public places.
+
+                        </li>
+                        <li>
+                            The repairing debris/unused materials should be disposed by the applicant.
+                        </li>
+                        <li>
+                            Violation of the conditions, the minor repair permission will be deemed 
+                            to be revoked and action shall be taken under section 66 of the Goa Panchayat Raj Act. 1994
+                        </li>
+                        <li>
+                            This NOC is valid for a period of one year from the date of issue.
+
+                        </li>
+                        <li>
+                            Minor Repair fees to the tune of Rs. @Model.Fees/- should be paid to the Panchayat.
+                        </li>
+                    </ul>
+
+                    <br />
+                 
+                </p>
+
+            </div>
+
+
+        }
+        @if (Model.RegisterTypeID == 31)
+        {
+
+            <div>
+                <div class="row">
+
+                    <p class="col-md-12">
+                        To<br />
+                        @Model.PersonName<br />
+                        @Model.PersonAddress<br />
+                    </p>
+                    <br />
+                    <br />
+                </div>
+                <p class="col-md-12 pull-left">
+                    <big><b><u>Ref:Your Letter Dated @Model.Tdate.Value.ToString("dd-mm-yyyy")</u></b></big>
+                    <big><b><u>Sub:No Objection Certificate </u></b></big><br />
+
+
+                  
+
+                </p>
+                <br />
+                <br />
+                <p class="col-md-12 pull-left">
+                    <big>Sir/Madam</big><br />
+                </p>
+
+                <p class="col-md-12">
+                    <br />
+                    <br />
+                    No Objection Certificate is hereby granted to @Model.PersonName to run a business of @Model.DeveloperAddress under the name and style as “@Model.DeveloperName” 
+                    in @Model.PersonAddress
+
+
+                </p>
+                <p class="col-md-12">
+
+                    <br />
+                    This N.O.C. is granted vide Resolution No. 4(20) of the V. P. Meeting dated 12-10-2017 on the following conditions:
+
+
+
+                </p>
+                <p class="col-md-12 pull-left">
+
+
+                    <ul style="text-align:left">
+                        <li>
+                            The same should be registered with the Competent Authority 
+                            and copy of the same should be produced to the Panchayat to avail final N.O.C.
+                        </li>
+                        <li>
+                            Yearly Professional Tax & Sign Board Tax should be paid to the Panchayat every year.                         </li>
+                        <li>
+                            This N.O.C. is issued as per the terms and conditions of Leave and License Agreement dated @Model.WardNo.
+
+                        </li>
+                        <li>
+                            One month’s rent should be paid to the Panchayat as yearly commercial house tax 
+                            as per the Leave and License Agreement.
+                        </li>
+                        <li>
+                            The applicant should not encroach on footpath.
+                        </li>
+                        <li>
+                            This NOC is valid for a period of one year from the date of issue.
+
+                        </li>
+                        <li>
+                            The NOC fees of Rs. @Model.Fees/- (Rupees Two Hundred only) should be paid to the Panchayat.
+                        </li>
+                        <li>
+                            Panchayat reserves the right to revoke the NOC if any complaints are received from locals.
+                        </li>
+                    </ul>
+
+                    <br />
+                    <br />
+                    <span class="pull-right">
+                        (Shri. @ViewBag.p.PanchHead)
+                    </span>
+                </p>
+
+            </div>
+
+
+        }
+        @if (Model.RegisterTypeID == 30)
+        {
+
+            <div>
+                <div class="row">
+
+                    <p class="col-md-12">
+                        To<br />
+                        @Model.PersonName<br />
+                        @Model.PersonAddress<br />
+                    </p>
+                    <br />
+                    <br />
+                </div>
+                <p class="col-md-12 pull-left">
+                    <big><b><u>Sub:No Objection Certificate for Eatery Items and Roving Cart.</u></b></big><br />
+
+
+                </p>
+                <br />
+                <br />
+                <p class="col-md-12 pull-left">
+                    <big>Sir/Madam</big><br />
+
+
+                </p>
+
+                <p class="col-md-12">
+
+                    <br />
+                    With reference to your application dated @Model.Tdate.Value.ToString("dd-mm-yyyy") as per the above cited subject,
+                    the same was placed in the V. P. Meeting dated @Model.MeetingDate.Value.ToString("dd-mm-yyyy"). In accordance with the resolution No. 3(13),
+                    the Panchayat body conveys its approval for issue of NOC to operate roving cart for selling eatery items
+                    such as Sandwiches, Samosas, Wadas etc. within the jurisdiction of V. P. Taleigao, Goa,
+                    (except on the main road from Taleigao Church i.e. Ideal School to Tonca) subject to the following conditions.
+
+                </p>
+                <p class="col-md-12 pull-left">
+
+
+                    <ul style="text-align:left">
+                        <li>
+                            The same should be registered with the Competent
+                            Authority and copy of the same should be produced to the Panchayat.
+                        </li>
+                        <li>
+                            The Gadda (cart/stall) should not be stationed at one place & in front of the existing Shops.
+                        </li>
+                        <li>
+                            The Gada (cart/stall) should not create traffic hazards..
+
+                        </li>
+                        <li>
+                            The renewal fees of Rs. @Model.Fees/-should be paid to the Panchayat.
+                        </li>
+                        <li>
+                            Panchayat reserves the right to revoke the NOC if any complaints are received from locals.
+                        </li>
+                    </ul>
+
+                    <br />
+                    <br />
+                    <span class="pull-right">
+                        (@ViewBag.p.PanchHead)
+                    </span>
+                </p>
+
+            </div>
+
+
+        }
+                </center>
+            </div>
+            <p class="section-to-Not-print">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.HouseTaxCertID }) |  <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+                |
+                @Html.ActionLink("Back to List", "Index", new { rt = 27 })
+            </p>

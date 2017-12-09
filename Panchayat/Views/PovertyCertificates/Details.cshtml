@@ -1,0 +1,100 @@
+﻿@model Panchayat.PovertyCertificate
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    p{
+        font-size:15px;
+
+    }
+</style>
+<br />
+
+<div >
+            <div class="text-justify center-block section-to-print">
+                <div class="row">
+                   
+                    <p class="col-md-8 text-center">
+                         <font size="5"><b>Poverty Certificate</b></font>
+                    </p>
+                </div>
+                <div class="row">
+                    <p class="col-md-8">
+                      
+                        This is to certify that @Model.RequestedBy R/o @Model.AddOfPerReqBy,
+                        as per the local information is
+                        extremely Below the Poverty Line and struggling to meet the daily
+                        needs of the family on account of poor financial background.
+                    </p>
+                </div>
+                <div class="row">
+                    <p class="col-md-8">
+                        This Poverty certificate is issued at the request of @Model.RequestedBy
+                        to produce before the Competent Authority.
+                    </p>
+                        <br />
+                        <br />
+                        <br />
+                    <p class="col-md-8">
+                        <span class="pull-right">
+                            (@ViewBag.ph)
+                        </span>
+                    </p>
+                    <br />
+                    <br />
+                    <div class="row">
+                        <p class="col-md-2 pull-left">
+                            To<br />
+                            @Model.RequestedBy<br />
+                            @Model.AddOfPerReqBy
+                        </p>                        
+                    </div>
+                    <br />
+                    <div class="row">
+                        <center><p class="col-md-8"><b><big><u>TO WHOMSOEVER IT MAY CONCERN</u></big></b></p></center> 
+                    </div>
+                    <br />
+                    <div class="row">                
+                        <p class="col-md-8">                        
+                            This is to certify that<b> @Model.PersonName R/o @Model.PersonAddress</b>
+                            is also known by the name <b>@Model.OtherName</b> in the Village. 
+                            Both the names are of one and the same person.
+                        </p>
+                      
+                    </div>
+
+                    <div class="row">                      
+                        <p class="col-md-8">
+                            This certificate is issued at the request of <b>@Model.PersonName</b> 
+                            on the basis of enclosed documents to produce before the Competent Authority.
+                            <br />
+                            <br />
+                            <br />
+                            <span class="pull-right">
+                                (@ViewBag.ph)
+                            </span>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-2 pull-left">
+                            To<br />
+                            @Model.PersonName<br />
+                            @Model.PersonAddress
+                        </p>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <p class="section-to-Not-print" >
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.PovertyCertificateID }) |
+                    <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+                    |
+                    @Html.ActionLink("Back to List", "Index",new { rt=25})
+                </p>
+            </div>
+  
+   
+
+</div>
+
