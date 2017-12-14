@@ -136,6 +136,14 @@ namespace Panchayat
     public partial class HouseTaxCert
     {
     }
+    [MetadataType(typeof(ConstructionMetadata))]
+    public partial class ConstLicenseCert
+    {
+    }
+    [MetadataType(typeof(OccupationCertificateMetadata))]
+    public partial class OccupationCertificate
+    {
+    }
     public class Form10rpt
     {
         public string Ledger { get; set; }

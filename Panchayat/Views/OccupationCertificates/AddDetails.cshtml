@@ -1,0 +1,124 @@
+﻿@model Panchayat.OccupationCertDetail
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("OccupationCertificateID", (int)ViewBag.oc)
+    <div class="form-horizontal">
+        <h4>Occupancy Certificate</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NameOfTheOwner, "Name Of The Owner", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NameOfTheOwner, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameOfTheOwner, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FlatNo, "Flat No", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FlatNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FlatNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.HouseNo, "Houose No", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HouseNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HouseNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.HouseTax, "House Tax", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HouseTax, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HouseTax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.GarbageTax, "Garbage Tax", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GarbageTax, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GarbageTax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+      
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<table class="table">
+    <thead>
+
+    </thead>
+    <tr>
+        <th>
+            Sr No
+        </th>
+        <th>
+            Name Of Owner
+        </th>
+        <th>
+            Flat No
+        </th>
+        <th>
+            house No
+        </th>
+        <th>
+            House Tax
+        </th>
+        <th>
+            Garbage Tax
+        </th>
+        <th></th>
+    </tr>
+    @{int i = 1; }
+    @foreach(var item in ViewBag.Dets)
+    {
+        <tr>
+            <td>
+                @i
+            </td>
+            <td>
+                @item.NameOfTheOwner
+            </td>
+            <td>
+                @item.FlatNo
+            </td>
+            <td>
+                @item.HouseNo
+            </td>
+            <td>
+                @item.HouseTax
+            </td>
+            <td>
+                @item.GarbageTax
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ManageDetails", new { id = item.OccupationCertDetailsID })
+            </td>
+        </tr>
+        i++;
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

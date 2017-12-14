@@ -1,0 +1,137 @@
+﻿@model Panchayat.OccupationCertificate
+
+@{
+    ViewBag.Title = "Details";
+}
+<center class="section-to-print">
+    <h2>Occupancy Certificate</h2>
+</center>
+<div class="section-to-print">
+    <p class="col-md-12">
+        Occupancy certificate is hereby granted to @Model.PersonName vide Resolution No. 2(4) of V. P.
+        Meeting dated @Model.MeetingDated.Value.ToString("dd-mm-yyyy") for @Model.BuildingDetails
+        only approved vide revised Construction Licence No.@Model.ConstLicNo dated @Model.ConstLicDate.Value.ToString("dd-mm-yyyy"),
+        in Survey No. @Model.SurveyNo  Plot Number @Model.PlotNumber of  Village Taleigao, Taluka Tiswadi, Goa,
+        subject to the following conditions:
+        <ul>
+            <li>
+                All conditions stipulated in the Completion Certificate vide Reference No. @Model.RefNo dated @Model.RefDate.Value.ToString("dd-mm-yyyy") 
+                from North Goa Planning & Development Authority, Panaji, Goa should be strictly adhered to. 
+            </li>
+            <li>
+                Approval from the Office of the Directorate of Health Services, Urban Health Centre Panaji,
+                Goa under ref. No. @Model.HSref dated @Model.HSrefdate.
+            </li>
+            <li>
+                NOC should be obtain from Fire Department before occupying
+                the building and the same should be submitted to the Panchayat, if necessary.
+            </li>
+            <li>
+                <b>
+                    This Certificate shall be treated as NOC for obtaining water and power connection.
+
+                </b>
+            </li>
+            <li>
+                Payment of Garbage Tax and House tax should be paid regularly to the Panchayat during 
+                the financial year and if rented one month’s rent as per lease deed should be paid 
+                to the Panchayat as annual house tax.
+            </li>
+            <li>
+                If there is any Sale of Flat/flats or Shop/shops, the owner of the building/purchaser has 
+                to apply for transfer of  house tax within one month to the Panchayat.
+            </li>
+            <li>
+                No construction should be carried out after issue of Occupancy Certificate.
+            </li>
+            <li>
+                All water drains / roads should be strictly maintained by the occupants of the Building/Bungalow. 
+            </li>
+            <li>
+                Trees should be planted within the plot area by the occupant of the building/bungalow 
+                so as to keep Taleigao Village Clean and Green.
+            </li>
+            <li>
+                House numbers allotted to Block A and B, house tax assessed and garbage tax are as follows:      
+            </li>
+        </ul>
+    </p>
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Sr No
+                </th>
+                <th>
+                    Name Of the Owner
+                </th>
+                <th>
+                    Flat No
+                </th>
+                <th>
+                    House No
+                </th>
+                <th>
+                    House Tax
+                </th>
+                <th>
+                    Garbage Tax
+                </th>
+            </tr>
+            @{ int i = 1;}
+            @foreach (var item in ViewBag.Dets)
+            {
+               <tr>
+                   <td>
+                       @i
+                   </td>
+                    <td>
+                        @item.NameOfTheOwner
+                    </td>
+                   <td>
+                       @item.FlatNo
+                   </td>
+                   <td>
+                       @item.HouseNo
+                   </td>
+                   <td>
+                       @item.HouseTax
+                   </td>
+                   <td>
+                       @item.GarbageTax
+                   </td>
+               </tr>
+
+
+            }
+
+        </table>
+        <span class="col-md-6"><small><b>Seen</b></small></span><span class="col-md-6" style="text-align:right;"><small><b>This carries the embossed seal of this Panchayat.<br /> Office of the Village Panchayat</b></small></span>
+    </div>
+    <br />
+    <br />
+    <p class="col-md-12  ">
+        To<br />
+        @Model.PersonName<br />
+        @Model.PersonAddress<br />
+    </p>
+    <br />
+    <p class="col-md-12">
+        Copy for information to:-  
+        <ul>
+            <li>
+                North Goa Planning & Development Authority, Panaji, Goa.
+            </li>
+            <li>
+                Asst. Engineer, PWD, Panaji, Goa.
+
+            </li>
+            <li>
+                Asst. Engineer, Electricity Department, Taleigao, Goa. 
+            </li>
+        </ul>
+    </p>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index",new { rt=33})|<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+</p>
