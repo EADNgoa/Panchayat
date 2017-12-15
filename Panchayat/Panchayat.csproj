@@ -223,6 +223,9 @@
     <Compile Include="Config.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
+    <Compile Include="ConstLicenseCert.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuditsController.cs" />
     <Compile Include="Controllers\BudgetsController.cs" />
@@ -231,6 +234,7 @@
     <Compile Include="Controllers\CertificateRequirementsController.cs" />
     <Compile Include="Controllers\CitizensController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
+    <Compile Include="Controllers\ConstLicenseCertsController.cs" />
     <Compile Include="Controllers\CorrectionsController.cs" />
     <Compile Include="Controllers\DemandsController.cs" />
     <Compile Include="Controllers\Form4Controller.cs" />
@@ -242,6 +246,7 @@
     <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Controllers\MovementRegsController.cs" />
     <Compile Include="Controllers\NocsController.cs" />
+    <Compile Include="Controllers\OccupationCertificatesController.cs" />
     <Compile Include="Controllers\OutwardsController.cs" />
     <Compile Include="Controllers\PeriodsController.cs" />
     <Compile Include="Controllers\PovertyCertificatesController.cs" />
@@ -334,6 +339,12 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Noc.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OccupationCertDetail.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OccupationCertificate.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Outward.cs">
@@ -802,6 +813,17 @@
     <Content Include="Views\HouseTaxCerts\Details.cshtml" />
     <Content Include="Views\HouseTaxCerts\Edit.cshtml" />
     <Content Include="Views\HouseTaxCerts\Index.cshtml" />
+    <Content Include="Views\ConstLicenseCerts\Create.cshtml" />
+    <Content Include="Views\ConstLicenseCerts\Details.cshtml" />
+    <Content Include="Views\ConstLicenseCerts\Edit.cshtml" />
+    <Content Include="Views\ConstLicenseCerts\Index.cshtml" />
+    <Content Include="Views\OccupationCertificates\Create.cshtml" />
+    <Content Include="Views\OccupationCertificates\Delete.cshtml" />
+    <Content Include="Views\OccupationCertificates\Details.cshtml" />
+    <Content Include="Views\OccupationCertificates\Edit.cshtml" />
+    <Content Include="Views\OccupationCertificates\Index.cshtml" />
+    <Content Include="Views\OccupationCertificates\AddDetails.cshtml" />
+    <Content Include="Views\OccupationCertificates\ManageDetails.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,172 @@
+﻿@model IEnumerable<Panchayat.ConstLicenseCert>
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2>Construction Licenses</h2>
+    @using (Html.BeginForm("Index", "ConstLicenseCerts", FormMethod.Get))
+    {
+
+
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        @Html.Hidden("rt", (int)ViewBag.Rt)
+
+
+                        <td> Name Of Person:</td>
+                        <td> @Html.TextBox("PersonName", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+
+                        <td>&nbsp; Status:</td>
+                        <td> @Html.DropDownList("WebStatusID", null, new { type = "date", @class = "form-control" })</td>
+
+
+                        <td>&nbsp;<input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    }
+</center>
+<p>
+    @Html.ActionLink("Create New", "Create", new { rt = ViewBag.Rt })
+</p>
+<table class="table table-responsive">
+    <tr>
+        <th>
+            Owner Of House
+        </th>
+        <th>
+            Owners Address
+        </th>
+        <th>
+            Meeting Date
+        </th>
+        <th>
+            Building Type
+        </th>
+        <th>
+            Sub-Division
+        </th>
+        <th>
+            Property Zone
+        </th>
+        <th>
+            Survey No
+        </th>
+        <th>
+            Order No
+        </th>
+        <th>
+            Application Date
+        </th>
+        <th>
+            Ref No
+        </th>
+        <th>
+            Ref Date
+        </th>
+        <th>
+            Valid Up To
+        </th>
+        <th>
+            Reciept No
+        </th>
+        <th>
+            Reciept Date
+        </th>
+        <th>
+            Developer Name
+        </th>
+        <th>
+            Developer Address
+        </th>
+        <th>
+            Construction fees
+        </th>
+        <th>
+            Sanitation fees
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.WEBstatu.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnersOfHouse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnwersAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingDated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingType_)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubDivision)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyZone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurveyNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValidUpTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecieptNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecieptDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeveloperName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeveloperAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConstFees)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanitationFees)
+            </td>
+      
+            <td>
+                @Html.DisplayFor(modelItem => item.WEBstatu.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ConstLicenseID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ConstLicenseID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ConstLicenseID })
+            </td>
+        </tr>
+    }
+
+</table>

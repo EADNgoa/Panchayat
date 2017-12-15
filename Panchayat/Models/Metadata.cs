@@ -730,5 +730,137 @@ public class MovementMetadata
 
 
     }
+    public class ConstructionMetadata
+    {
+        [Required]
+        [StringLength(160)]
+        public string OwnersOfHouse;
+
+        [Required]
+        [StringLength(250)]
+        public string OwnwersAddress;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Tdate;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime MeetingDated;
+
+        [Required]
+        [StringLength(100)]
+        public string BuildingType_;
+
+        [Required]
+        [StringLength(100)]
+        public string PropertyZone;
+
+        [Required]
+        [StringLength(100)]
+        public string SurveyNo;
+
+        [Required]
+        [StringLength(100)]
+        public string SubDivision;
+
+        [Required]
+        [StringLength(100)]
+        public string OrderNo;
+
+        [Required]
+        [StringLength(100)]
+        public string RefNo;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime RefDate;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime ValidUpTo;
+
+        [StringLength(100)]
+        public string RecieptNo;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime RecieptDate;
+
+        [Required]
+        [StringLength(100)]
+        public string DeveloperName;
+
+        [Required]
+        [StringLength(250)]
+        public string DeveloperAddress;
+
+        [Range(0.0, Double.MaxValue)]
+        public Decimal ConstFees;
+
+        [Range(0.0, Double.MaxValue)]
+        public Decimal SanitationFees;
+
+
+
+
+    }
+    public class OccupationCertificateMetadata
+    {
+        [Required]
+        [StringLength(100)]
+        public string PersonName;
+
+        [Required]
+        [StringLength(250)]
+        public string PersonAddress;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Tdate;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime MeetingDated;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime ConstLicDate;
+
+
+        [Required]
+        [StringLength(100)]
+        public string ConstLicNo;
+
+        [Required]
+        public string BuildingDetails;
+
+        [Required]
+        [StringLength(100)]
+        public string SurveyNo;
+
+        [Required]
+        [StringLength(100)]
+        public string PlotNumber;
+
+        [Required]
+        [StringLength(100)]
+        public string RefNo;
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime RefDate;
+
+        [Required]
+        [StringLength(250)]
+        public string HSref;
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime HSrefdate;
+
+    }
 }
 

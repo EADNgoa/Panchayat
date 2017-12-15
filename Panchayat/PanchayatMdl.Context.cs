@@ -72,5 +72,8 @@ namespace Panchayat
         public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
         public virtual DbSet<HouseTaxCert> HouseTaxCerts { get; set; }
         public virtual DbSet<Config> Configs { get; set; }
+        public virtual DbSet<ConstLicenseCert> ConstLicenseCerts { get; set; }
+        public virtual DbSet<OccupationCertDetail> OccupationCertDetails { get; set; }
+        public virtual DbSet<OccupationCertificate> OccupationCertificates { get; set; }
     }
 }

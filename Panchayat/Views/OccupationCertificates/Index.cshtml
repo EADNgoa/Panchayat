@@ -1,0 +1,147 @@
+﻿@model IEnumerable<Panchayat.OccupationCertificate>
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2>Occupancy Certificate</h2>
+@using (Html.BeginForm("Index", "OccupationCertificates", FormMethod.Get))
+{
+
+
+    <div class="row">
+        <div>
+            <table>
+                <tr>
+                    @Html.Hidden("rt", (int)ViewBag.RT)
+
+
+                    <td> Name Of Person:</td>
+                    <td> @Html.TextBox("PersonName", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+
+                    <td>&nbsp; Status:</td>
+                    <td> @Html.DropDownList("WebStatusID", null, new { type = "date", @class = "form-control" })</td>
+
+
+                    <td>&nbsp;<input type="submit" value="Search" class="btn btn-default" /></td>
+                </tr>
+            </table>
+
+
+
+
+        </div>
+    </div>
+}
+</center>
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { rt = ViewBag.Rt })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name Of Person
+        </th>
+        <th>
+            Address Of Person
+        </th>
+        <th>
+          Meeting Dated
+        </th>
+        <th>
+         Const Lic No
+        </th>
+        <th>
+            Const Lic Date
+        </th>
+        <th>
+           Building Details
+        </th>
+        <th>
+        Date
+        </th>
+        <th>
+            Survey No
+        </th>
+        <th>
+          Plot Number
+        </th>
+        <th>
+          Ref No
+        </th>
+        <th>
+           Ref Date
+        </th>
+        <th>
+            Health Service Ref
+        </th>
+        <th>
+            Health Service Ref Date
+        </th>
+    
+      
+        <th>
+            @Html.DisplayNameFor(model => model.WEBstatu.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeetingDated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConstLicNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConstLicDate)
+
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildingDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SurveyNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlotNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RefNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RefDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HSref)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HSrefdate)
+        </td>
+   
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.WEBstatu.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OccupationCertificateID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OccupationCertificateID }) |
+        </td>
+    </tr>
+}
+
+</table>

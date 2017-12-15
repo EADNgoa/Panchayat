@@ -118,7 +118,6 @@ namespace Panchayat.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", povertyCertificate.RegisterTypeID);
             ViewBag.WEBstatusID = new SelectList(db.WEBstatus, "WebStatusID", "Status", povertyCertificate.WEBstatusID);
             return View(povertyCertificate);
         }

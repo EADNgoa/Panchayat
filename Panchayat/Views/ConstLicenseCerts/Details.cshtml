@@ -1,0 +1,193 @@
+﻿@model Panchayat.ConstLicenseCert
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    p,ul{
+        text-align:justify;
+    }
+</style>
+
+
+<div class="row section-to-print">
+    <center>
+        <h2><b> <u>Construction License:VP/TLGConst.LIC./<br />/@Model.Tdate.Value.Year - @(Model.Tdate.Value.Year + 1)/</u></b></h2>
+        <p class="col-md-12">
+            Licence is hereby granted to @Model.OwnersOfHouse
+            vide Resolution No. 3(6) of V. P. Meeting dated<b>
+   @(String.Format("{0:dd-mm-yyyy}", Model.MeetingDated)) for proposed revision of
+            building Plans(@Model.BuildingType_)
+        </b> as per the enclosed approval plans,
+            in the property zoned as<b>Settlement “@Model.PropertyZone” </b> zone in the O.D.P. and situated at Taleigao Village bearing
+            Survey No. <b>@Model.SurveyNo</b>, sub-division <b> @Model.SubDivision </b>of approved Development Permission Order No. <b>
+    @Model.OrderNo</b>
+        dated  <b>
+                   @(String.Format("{0:dd-mm-yyyy}", Model.Tdate)) </b> with the following conditions:-
+    <ul>
+        <li>
+            The applicant shall strictly comply all the conditions imposed in the Development Permission/Order No.<b>
+    @Model.OrderNo</b> dated <b>@(String.Format("{0:dd-mm-yyyy}", Model.Tdate)) </b>,
+    issued by the North Goa Planning and Development Authority.
+</li>
+        <li>
+            This license supersedes the earlier license under Ref. No.<b> @Model.RefNo </b> dated <b>@(String.Format("{0:dd-mm-yyyy}", Model.RefDate)) </b>.
+        </li>
+        <li>
+            The applicant shall notify the Panchayat for giving the alignment of the building.
+        </li>
+        <li>
+            The applicant should maintain the minimum prescribed horizontal and vertical clearance from any overhead electrical
+            line passing adjacent to the construction.
+        </li>
+        <li>
+            All RCC/Structural works shall be designed and supervised by the Engineer who has signed the Structural Liability Certificate submitted to the Panchayat.
+        </li>
+        <li>
+            No material for construction or earth from excavation or any other construction material shall be stacked on the Public roads.
+
+        </li>
+        <li>
+            The Building should not be occupied unless the occupancy certificate is obtained from the Panchayat.
+        </li>
+        <li>
+            The construction licence shall be revoked if the construction work is not executed as per the approved plans
+            and the statements therein and whenever there is any false statement or misrepresentation of any material passed,
+            approved or shown in the application on which the permit was based.
+        </li>
+        <li>
+            The applicant should construct a separate soak pit in order to derivate in the sullage water.
+        </li>
+        <li>
+            Any soak pit should be constructed at a minimum distance of 15 meters away from any well.
+        </li>
+        <li>
+            The ventilation pipe of the septic tank should be provided with a mosquito net.
+        </li>
+        <li>
+            The Applicant should connect the pipelines from their latrines/WC’s
+            to the sewerage line at their own cost, when the sewerage line is commissioned.
+        </li>
+        <li>
+            The applicant should fix a board at a prominent place whenever the construction is started, indicating the number,
+            the date and the authority for which the licence for development work has been granted.
+        </li>
+        <li>
+            All the building material and other rubbish should be cleared
+            from the construction site before applying for the Occupancy certificate.
+        </li>
+        <li>
+            Water storage tanks shall be provided with mosquito proof lids and over flow pipes.
+            The tanks should be provided with access ladders wherever necessary.
+        </li>
+        <li>
+            The drains surrounding the plot if any should be constructed
+            with PCC and should be covered with removable RCC slabs of sufficient thickness.
+        </li>
+        <li>
+            The applicant should gift the road widening area to the Village Panchayat before applying for the Occupancy Certificate
+            , if the applicant has utilized the extra FAR in lieu of the road widening affecting the plot.
+        </li>
+        <li>
+            The applicant should plaster and paint the building internally as well as externally before applying for Occupancy certificate.
+            Exposed brick/laterite /concrete/stone/ashlars masonry finish to buildings will also be permitted.
+        </li>
+        <li>
+            The applicant should provide a dustbin at a convenient place accessible for the Panchayat vehicle for collection of garbage.
+
+        </li>
+        <li>
+            Road widening area shall be asphalted to the existing road level before applying for occupancy certificate.
+
+        </li>
+        <li>
+            Garage and Parking areas shown in the approved plan shall be strictly used for parking purposes only and should be easily accessible to vehicles.
+            No commercial activities shall be allowed in these areas.
+        </li>
+        <li>
+            Access up to the entrance of the building is to be paved and is provided with drainage facilities.
+        </li>
+        <li>
+            Space for parking of vehicle is clearly demarcated on the ground.
+
+        </li>
+        <li>
+            No Restaurants/Bars will be permitted in the shops unless a separate soak pit is provided besides confirming to the rules in force.
+        </li>
+        <li>
+            No commercial activities will be permitted in the shops unless a separate permission is obtained from this Panchayat.
+
+        </li>
+        <li>
+            All Temporary sheds/Existing building shown to be demolished in the plan are demolished before applying for Occupancy.
+        </li>
+        <li>
+            Fire Escape staircases, if applicable shall be constructed as indicated in the approved plans.
+        </li>
+        <li>
+            All internal courtyards should be provided with drainage outlet.
+
+        </li>
+        <li>
+            The applicant should maintain all existing natural drains in the plot and should not block them at any stage.
+        </li>
+        <li>
+            No soak pit or other structure should come in the road widening area.
+        </li>
+        <li>
+            The plot boundary should be cordoned off by continuous sheet fencing either of wood or metal during the construction period.
+        </li>
+        <li>
+            The construction of compound wall should not obstruct any pathway or any public access. The applicant shall make necessary
+            arrangements for smooth flow of rain water by keeping adequate openings in the compound wall for the purpose.
+        </li>
+        <li>
+            No gates shall open outwards on to the road. The construction of the compound wall should be as per the approved plan.
+            The applicant shall inform this Panchayat after the completion of the compound wall.
+        </li>
+        <li>
+            Drinking water well should be 15 meters away from any soak pit.
+        </li>
+        <li>
+            The applicant should make a provision of Garbage pit within the plot for disposal of wet garbage
+            and the same should be built before applying for occupancy certificate.
+        </li>
+    </ul>
+</p>
+        <p class="col-md-12">
+            THIS LICENCE IS VALID UP TO @(String.Format("{0:dd-mm-yyyy}", Model.ValidUpTo))  FROM THE DATE OF ISSUE OF THIS LICENCE.
+            HE/SHE HAS PAID  THE RESPECTIVE TAX/FEES VIDE RECEIPT  NO. @Model.RecieptNo  DATED @(String.Format("{0:dd-mm-yyyy}", Model.RecieptDate))  AS FOLLOWS
+        </p>
+        <p class="col-md-12">
+            <b><big>CONSTRUCTION LICENSE FEES--------------------@Model.ConstFees/-</big></b><br />
+            <b><big>SANITATION FEES---------------------------------------@Model.SanitationFees/-</big></b><br />
+            <br />
+            <b><big>TOTAL---------------------------------------------------------@(Model.ConstFees + Model.SanitationFees)/-</big></b><br />
+
+
+        </p>
+    
+        <p class="col-md-12">
+            RENEWAL IF REQUIRED SHALL BE APPLIED WITHIN THE PERIOD OF THE VALIDITY OF THIS LICENCE.
+            <span class="col-md-6"><small><b>Seen</b></small></span><span class="col-md-6" style="text-align:right;"><small><b>This carries the embossed seal of this Panchayat.<br /> Office of the Village Panchayat</b></small></span>
+
+        </p>
+        <p class="col-md-12">
+            To<br />
+            @Model.OwnersOfHouse<br />
+            @Model.OwnwersAddress
+
+        </p>
+        <p class="col-md-12">
+            To<br />
+            @Model.DeveloperName<br />
+            @Model.DeveloperAddress
+
+        </p>
+    </center>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ConstLicenseID }) |<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+|
+    @Html.ActionLink("Back to List", "Index", new { rt = 32 })
+</p>
