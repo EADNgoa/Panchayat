@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Panchayat.NocCertificte>
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    @if (ViewBag.Rt == 34)
+    { <h2>Noc For Electricity</h2>}
+    @if (ViewBag.Rt == 35)
+    { <h2>Noc For Water Supply</h2>}
+    <br />
+    @using (Html.BeginForm("Index", "NocCertifictes", FormMethod.Get))
+    {
+
+
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        @Html.Hidden("rt", (int)ViewBag.Rt)
+
+
+                        <td> Name Of Person:</td>
+                        <td> @Html.TextBox("PersonName", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+
+                        <td>&nbsp; Status:</td>
+                        <td> @Html.DropDownList("WebStatusID", null, new { type = "date", @class = "form-control" })</td>
+
+
+                        <td>&nbsp;<input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    }
+</center>
+<p>
+    @Html.ActionLink("Create New", "Create",new {rt= ViewBag.Rt })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Sr No
+        </th>
+        <th>
+           Person Name
+        </th>
+        <th>
+           Ref No
+        </th>
+        <th>
+           House No
+        </th>
+        <th>
+           Address
+        </th>
+        @if (ViewBag.Rt == 34)
+        {
+            <th>
+                Electric Dept Address
+            </th>
+        }
+        @if (ViewBag.Rt == 35)
+        {
+            <th>
+                Water Dept Address
+            </th>
+        }
+       
+        <th>
+            Approval Date
+        </th>
+        <th>
+            Print Date
+        </th>
+     
+        <th>
+            @Html.DisplayNameFor(model => model.WEBstatu.Status)
+        </th>
+        <th></th>
+    </tr>
+    @{ int i = 1;}
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @i
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.ElectDeptAdd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AprovedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrintDate)
+        </td>
+  
+     
+        <td>
+            @Html.DisplayFor(modelItem => item.WEBstatu.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.NocID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NocID }) |
+        </td>
+    </tr>
+    i++;
+}
+
+</table>

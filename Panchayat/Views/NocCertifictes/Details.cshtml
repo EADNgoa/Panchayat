@@ -1,0 +1,123 @@
+﻿@model Panchayat.NocCertificte
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    p{
+        text-align:justify;
+    }
+</style>
+
+@if (Model.RegisterTypeID == 34)
+{
+    <div class="section-to-print">
+        <p class="col-md-12">
+            Village Panchayat <u>@ViewBag.Vp</u>
+        </p>
+        <p class="col-md-12">
+            <span class="pull-left">
+                Date :<u>@Model.PrintDate</u>
+                </span>
+                <span class="pull-right">
+                    No./Vp/          /NOC/<u>@Model.No</u>
+                </span>
+</p>
+        <br />
+        <center>
+            <h2><b>NO OBJECTION CERTIFICATE </b></h2>
+        </center>
+        <br />
+
+        <p class="col-md-12">
+            This is to certify that house bearing number <u>@Model.Hno</u> Situated at <u>@Model.Address</u>
+            wada is found registered for assesment of the tax in the name of Shri/Smt <u>@Model.PersonName</u>
+            and is a legal construction<br />
+            Shri/Smt.<u>@Model.PersonName</u> is intending to take Electric connection to the same house in his/her name of
+            Commercial/residential/industrial purpose.
+
+        </p>
+        <p class="col-md-12">
+            This Panchayat has no objection towards release Electric Connection to the same house as per the request of the interested party.
+        </p>
+        <p class="col-md-12">
+            This Certificate is issued to produce same at Electricity Department at <u>@Model.ElectDeptAdd</u>
+        </p>
+        <br />
+        <br />
+
+        <p class="col-md-6">
+            Date:@Model.AprovedDate
+        </p>
+        <p class="col-md-6 ">
+            <span class="pull-right">
+                <b>(Sarpanch)</b>
+            </span>
+        </p>
+       <br />
+        <br />
+
+        <p class="col-md-12 ">
+            <span class="pull-right">
+                V.P __________________
+            </span>
+</p>
+    </div>
+}
+@if (Model.RegisterTypeID == 35)
+{
+    <div class="section-to-print">
+        <p class="col-md-12">
+            Village Panchayat <u>@ViewBag.Vp</u>
+        </p>
+        <p class="col-md-12">
+            <span class="pull-left">
+                Date :<u>@Model.PrintDate</u>
+            </span>
+            <span class="pull-right">
+                No./Vp/          /NOC/<u>@Model.No</u>
+            </span>
+        </p>
+        <br />
+        <center>
+            <h2><b>NO OBJECTION CERTIFICATE </b></h2>
+        </center>
+        <br />
+        <p class="col-md-12">
+            This is to certify that house bearing number <u>@Model.Hno</u> Situated at <u>@Model.Address</u>
+            wada is found registered for assesment of the tax in the name of Shri/Smt <u>@Model.PersonName</u>
+            and is a legal construction<br />
+            Shri/Smt.<u>@Model.PersonName</u> is intending to take water connection to the same house in his/her name of
+            Commercial/residential/industrial purpose.
+
+        </p>
+        <p class="col-md-12">
+            This Panchayat has no objection towards release water Connection to the same house as per the request of the interested party.
+        </p>
+        <p class="col-md-12">
+            This Certificate is issued to produce same at Water Supply Department at <u>@Model.ElectDeptAdd</u>
+        </p>
+        <br />
+        <br />
+        <p class="col-md-6">
+            Date:@Model.AprovedDate
+        </p>
+        <p class="col-md-6 ">
+            <span class="pull-right">
+                <b>(Sarpanch)</b>
+            </span>
+        </p>
+        <br />
+        <br />
+
+        <p class="col-md-12 ">
+            <span class="pull-right">
+                V.P __________________
+            </span>
+        </p>
+    </div>
+}
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.NocID }) |<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />|
+    @Html.ActionLink("Back to List", "Index")
+</p>

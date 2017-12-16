@@ -130,6 +130,12 @@
         <AssociationConnector Association="PanchayatModel.FK_OccupancyCertDetails_occupancydetails" />
         <AssociationConnector Association="PanchayatModel.FK_Occuoation_RegisterType" />
         <AssociationConnector Association="PanchayatModel.FK_Occuoation_WEBstatus" />
+        <EntityTypeShape EntityType="PanchayatModel.NocCertificte" Width="1.5" PointX="6.59688154728938" PointY="31.889281749673785" />
+        <AssociationConnector Association="PanchayatModel.FK_NocCert_RegisterType" />
+        <AssociationConnector Association="PanchayatModel.FK_NocCert_WEBstatus" />
+        <EntityTypeShape EntityType="PanchayatModel.CharacterCertificate" Width="1.5" PointX="10.268218505321173" PointY="8.6530604849816584" />
+        <AssociationConnector Association="PanchayatModel.FK_Character_RegisterType" />
+        <AssociationConnector Association="PanchayatModel.FK_Character_WEBstatus" />
         
         
         
