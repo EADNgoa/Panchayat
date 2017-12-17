@@ -22,8 +22,7 @@ namespace Panchayat
         public string NameOfFather { get; set; }
         public string Address { get; set; }
         public Nullable<System.DateTime> TDate { get; set; }
-        public Nullable<System.DateTime> FromDate { get; set; }
-        public Nullable<System.DateTime> TillDate { get; set; }
+        public Nullable<int> Since { get; set; }
         public Nullable<bool> IsDead { get; set; }
         public string UserID { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }

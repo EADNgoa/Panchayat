@@ -69,7 +69,6 @@ namespace Panchayat
         public virtual DbSet<CertificateRequirement> CertificateRequirements { get; set; }
         public virtual DbSet<CertSupportDoc> CertSupportDocs { get; set; }
         public virtual DbSet<PovertyCertificate> PovertyCertificates { get; set; }
-        public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
         public virtual DbSet<HouseTaxCert> HouseTaxCerts { get; set; }
         public virtual DbSet<Config> Configs { get; set; }
         public virtual DbSet<ConstLicenseCert> ConstLicenseCerts { get; set; }
@@ -77,5 +76,6 @@ namespace Panchayat
         public virtual DbSet<OccupationCertificate> OccupationCertificates { get; set; }
         public virtual DbSet<NocCertificte> NocCertifictes { get; set; }
         public virtual DbSet<CharacterCertificate> CharacterCertificates { get; set; }
+        public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
     }
 }

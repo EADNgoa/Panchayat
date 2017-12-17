@@ -70,7 +70,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ResidenceCertificateID,PersonName,BirthDate,BirthPlace,NameOfMother,NameOfFather,Address,FromDate,TillDate,IsDead,UserID,RegisterTypeID,WebStatusID")] ResidenceCertificate residenceCertificate)
+        public ActionResult Create([Bind(Include = "ResidenceCertificateID,PersonName,BirthDate,BirthPlace,NameOfMother,NameOfFather,Address,Since,IsDead,UserID,RegisterTypeID,WebStatusID")] ResidenceCertificate residenceCertificate)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace Panchayat.Controllers
                 residenceCertificate.WebStatusID = 1;
                 db.ResidenceCertificates.Add(residenceCertificate);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { rt = residenceCertificate.RegisterTypeID });
             }
 
             ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", residenceCertificate.RegisterTypeID);
@@ -108,7 +108,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ResidenceCertificateID,PersonName,BirthDate,BirthPlace,NameOfMother,NameOfFather,Address,FromDate,TillDate,TDate,IsDead,UserID,RegisterTypeID,WebStatusID")] ResidenceCertificate residenceCertificate)
+        public ActionResult Edit([Bind(Include = "ResidenceCertificateID,PersonName,BirthDate,BirthPlace,NameOfMother,NameOfFather,Address,Since,TDate,IsDead,UserID,RegisterTypeID,WebStatusID")] ResidenceCertificate residenceCertificate)
         {
             ViewBag.RegisterTypeID = residenceCertificate.RegisterTypeID;
           
@@ -116,7 +116,7 @@ namespace Panchayat.Controllers
             {
                 db.Entry(residenceCertificate).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rt = residenceCertificate.RegisterTypeID });
             }           
             return View(residenceCertificate);
         }

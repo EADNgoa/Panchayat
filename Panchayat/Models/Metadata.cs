@@ -631,8 +631,8 @@ public class MovementMetadata
         [StringLength(100)]
         public string PersonName;
 
-        [Required]
-        [StringLength(100)]
+      
+   
         public string OtherName;
 
         [Required]
@@ -683,14 +683,7 @@ public class MovementMetadata
         public string Address;
 
         [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime FromDate;
-
-     
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime TillDate;
+        public int Since;
 
     }
     public class HouseTaxCertMetadata

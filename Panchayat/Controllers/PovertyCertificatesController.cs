@@ -55,7 +55,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PovertyCertificateID,RegisterTypeID,PersonName,OtherName,PersonAddress,RequestedBy,AddOfPerReqBy,UserID,WEBstatusID")] PovertyCertificate povertyCertificate)
+        public ActionResult Create([Bind(Include = "PovertyCertificateID,RegisterTypeID,PersonName,PersonAddress,RequestedBy,AddOfPerReqBy,UserID,WEBstatusID")] PovertyCertificate povertyCertificate)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +107,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PovertyCertificateID,RegisterTypeID,PersonName,OtherName,AddOfPerReqBy,PersonAddress,RequestedBy,UserID,WEBstatusID")] PovertyCertificate povertyCertificate)
+        public ActionResult Edit([Bind(Include = "PovertyCertificateID,RegisterTypeID,PersonName,AddOfPerReqBy,PersonAddress,RequestedBy,UserID,WEBstatusID")] PovertyCertificate povertyCertificate)
         {
 
             ViewBag.RegisterTypeID = povertyCertificate.RegisterTypeID;

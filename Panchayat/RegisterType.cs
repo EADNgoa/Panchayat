@@ -27,12 +27,12 @@ namespace Panchayat
             this.IllegalConstructions = new HashSet<IllegalConstruction>();
             this.PovertyCertificates = new HashSet<PovertyCertificate>();
             this.CertificateRequirements = new HashSet<CertificateRequirement>();
-            this.ResidenceCertificates = new HashSet<ResidenceCertificate>();
             this.HouseTaxCerts = new HashSet<HouseTaxCert>();
             this.ConstLicenseCerts = new HashSet<ConstLicenseCert>();
             this.OccupationCertificates = new HashSet<OccupationCertificate>();
             this.NocCertifictes = new HashSet<NocCertificte>();
             this.CharacterCertificates = new HashSet<CharacterCertificate>();
+            this.ResidenceCertificates = new HashSet<ResidenceCertificate>();
         }
     
         public int RegisterTypeID { get; set; }
@@ -59,8 +59,6 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CertificateRequirement> CertificateRequirements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ResidenceCertificate> ResidenceCertificates { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HouseTaxCert> HouseTaxCerts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConstLicenseCert> ConstLicenseCerts { get; set; }
@@ -70,5 +68,7 @@ namespace Panchayat
         public virtual ICollection<NocCertificte> NocCertifictes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CharacterCertificate> CharacterCertificates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ResidenceCertificate> ResidenceCertificates { get; set; }
     }
 }
