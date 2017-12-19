@@ -1,0 +1,177 @@
+﻿@model IEnumerable<Panchayat.CharacterCertificate>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<center>
+    @if (ViewBag.Rt == 36)
+    {
+        <h2>Character Certificate</h2>
+
+    }
+    else
+    {
+
+        <h2>Residence Certificate</h2>
+
+    }
+    @using (Html.BeginForm("Index", "CharacterCertificates", FormMethod.Get))
+    {
+
+
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        @Html.Hidden("rt", (int)ViewBag.Rt)
+
+
+                        <td> Name Of Person:</td>
+                        <td> @Html.TextBox("PersonName", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+
+                        <td>&nbsp; Status:</td>
+                        <td> @Html.DropDownList("WebStatusID", null, new { type = "date", @class = "form-control" })</td>
+
+
+                        <td>&nbsp;<input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    }
+</center>
+<p>
+    @Html.ActionLink("Create New", "Create", new { rt = ViewBag.Rt })
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Name Of Person
+        </th>
+        <th>
+           Age
+        </th>
+        @if (ViewBag.Rt == 36)
+       {
+            <th>
+                Father Name
+            </th>
+        }
+        else
+        {
+
+            <th>
+                Son Of
+            </th>
+        }
+        @if (ViewBag.Rt == 36)
+        {
+            <th>
+                Mother Name
+            </th>
+        }
+        else
+        {
+
+            <th>
+                Taluka 
+            </th>
+        }
+      
+            <th>
+                Address
+            </th>
+   
+
+@if (ViewBag.Rt == 37)
+{
+            <th>
+                Village
+            </th>
+        }
+     
+   
+        <th>
+           Ward Of
+        </th>
+        <th>
+            Purpose Of
+        </th>
+        @if (ViewBag.Rt == 36)
+        {
+            <th>
+                Known Years
+            </th>
+        }
+        else
+        {
+
+            <th>
+                Since
+            </th>
+        }
+      
+        <th>
+            Print Date
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WEBstatu.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FatherName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MotherName)
+        </td>
+   
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        @if (ViewBag.Rt == 37)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Village)
+            </td>
+        }
+
+        <td>
+            @Html.DisplayFor(modelItem => item.WardOf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurposeOf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KnownYears)
+        </td>
+    
+        <td>
+            @Html.DisplayFor(modelItem => item.Tdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WEBstatu.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CharacterID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CharacterID }) |
+        </td>
+    </tr>
+}
+
+</table>

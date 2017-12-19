@@ -22,7 +22,7 @@
             State of Goa, India, certify that Late<b> @Model.PersonName</b>, born on<b> @Model.BirthDate.Value.ToString("dd-mm-yyy")</b> at <b>@Model.BirthPlace</b>
             Son of <b>@Model.NameOfFather</b> and of <b>@Model.NameOfMother</b>, was residing at <b>@Model.Address</b>, of the Village of Taleigao,
             Taluka of Tiswadi, District of North Goa, State of Goa, India. He is residing in this Village of Taleigao since his
-            birth till date, including the period from <b>@Model.FromDate.Value.ToString("dd-mm-yyy")</b> to <b>@Model.TillDate.Value.ToString("dd-mm-yyy")</b> .
+            birth till date, including the period from <b>1st January 1974 to 31st December 1975</b>.
 
         </p>
         <p class="col-md-12">
@@ -41,7 +41,7 @@
                 State of Goa, India, certify that Late<b> @Model.PersonName</b>, born on<b> @Model.BirthDate.Value.ToString("dd-mm-yyy")</b> at <b>@Model.BirthPlace</b>
                 Son of <b>@Model.NameOfFather</b> and of <b>@Model.NameOfMother</b>, was residing at <b>@Model.Address</b>, of the Village of Taleigao,
                 Taluka of Tiswadi, District of North Goa, State of Goa, India. He was residing in this Village of Taleigao 
-                since @Model.FromDate.Value.ToString("yyyy") till his death.
+                since @Model.Since till his death.
 
             </p>
          
@@ -60,5 +60,5 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ResidenceCertificateID }) |  <input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
      |
-    @Html.ActionLink("Back to List", "Index",, new { rt = 26 })
+    @Html.ActionLink("Back to List", "Index", new { rt = 26 })
 </p>

@@ -631,8 +631,8 @@ public class MovementMetadata
         [StringLength(100)]
         public string PersonName;
 
-        [Required]
-        [StringLength(100)]
+      
+   
         public string OtherName;
 
         [Required]
@@ -683,14 +683,7 @@ public class MovementMetadata
         public string Address;
 
         [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime FromDate;
-
-     
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime TillDate;
+        public int Since;
 
     }
     public class HouseTaxCertMetadata
@@ -860,6 +853,79 @@ public class MovementMetadata
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime HSrefdate;
+
+    }
+
+    public class NocCertificateMetadata
+    {
+        [Required]
+        [StringLength(50)]
+        public string Hno;
+
+        [Required]
+        [StringLength(100)]
+        public string No;
+
+       
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime AprovedDate;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime PrintDate;
+
+        [Required]
+        [StringLength(200)]
+        public string Address;
+
+        [Required]
+        [StringLength(100)]
+        public string PersonName;
+
+        [Required]
+        [StringLength(200)]
+        public string ElectDeptAdd;
+    }
+
+    public class CharacterCertificateMetadata
+    {
+        [Required]
+        [StringLength(100)]
+        public string PersonName;
+
+        [Required]
+        public int Age;
+
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Tdate;
+
+        [Required]
+        [StringLength(100)]
+        public string FatherName;
+
+        [Required]
+        [StringLength(100)]
+        public string MotherName;
+
+        [Required]
+        [StringLength(200)]
+        public string Address;
+
+        [Required]
+        [StringLength(100)]
+        public string WardOf;
+
+        [Required]
+        [StringLength(200)]
+        public string PurposeOf;
+
+       
+        public int KnownYears;
+
+
 
     }
 }
