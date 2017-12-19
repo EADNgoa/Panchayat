@@ -12,21 +12,19 @@ namespace Panchayat
     using System;
     using System.Collections.Generic;
     
-    public partial class ResidenceCertificate
+    public partial class NocCertificte
     {
-        public int ResidenceCertificateID { get; set; }
-        public string PersonName { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public string BirthPlace { get; set; }
-        public string NameOfMother { get; set; }
-        public string NameOfFather { get; set; }
+        public int NocID { get; set; }
+        public string Hno { get; set; }
+        public string No { get; set; }
+        public Nullable<System.DateTime> AprovedDate { get; set; }
+        public Nullable<System.DateTime> PrintDate { get; set; }
         public string Address { get; set; }
-        public Nullable<System.DateTime> TDate { get; set; }
-        public Nullable<int> Since { get; set; }
-        public Nullable<bool> IsDead { get; set; }
+        public string PersonName { get; set; }
+        public string ElectDeptAdd { get; set; }
         public string UserID { get; set; }
+        public Nullable<int> WEBstatusID { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }
-        public Nullable<int> WebStatusID { get; set; }
     
         public virtual RegisterType RegisterType { get; set; }
         public virtual WEBstatu WEBstatu { get; set; }

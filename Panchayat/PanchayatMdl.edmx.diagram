@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f6045e67b3384e138fe1a60d2b0f7bb4" Name="Diagram1" ZoomLevel="50">
+      <Diagram DiagramId="f6045e67b3384e138fe1a60d2b0f7bb4" Name="Diagram1" ZoomLevel="57">
         <EntityTypeShape EntityType="PanchayatModel.Citizen" Width="1.5" PointX="4.875" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Correction" Width="1.5" PointX="11.875" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Form1" Width="1.5" PointX="3.625" PointY="12.25" IsExpanded="true" />
@@ -115,9 +115,6 @@
         <AssociationConnector Association="PanchayatModel.FK_PovertyCertificate_RegisterType" />
         <AssociationConnector Association="PanchayatModel.FK_PovertyCertificate_WEBstatus" />
         <AssociationConnector Association="PanchayatModel.FK_CertificateRequirements_RegisterType" />
-        <EntityTypeShape EntityType="PanchayatModel.ResidenceCertificate" Width="1.5" PointX="1.8578142662801849" PointY="22.318511913678847" />
-        <AssociationConnector Association="PanchayatModel.FK_ResidenceCertificate_RegisterTypes" />
-        <AssociationConnector Association="PanchayatModel.FK_ResidenceCertificate_WEBstatus" />
         <EntityTypeShape EntityType="PanchayatModel.HouseTaxCert" Width="1.5" PointX="0.875" PointY="3.875" />
         <AssociationConnector Association="PanchayatModel.FK_HouseTax_RegisterType" />
         <AssociationConnector Association="PanchayatModel.FK_HouseTax_WEBstatus" />
@@ -126,10 +123,22 @@
         <AssociationConnector Association="PanchayatModel.FK_ConstLicense_RegisterType" />
         <AssociationConnector Association="PanchayatModel.FK_ConstLicense_WEBstatus" />
         <EntityTypeShape EntityType="PanchayatModel.OccupationCertDetail" Width="1.5" PointX="4.5710857550478945" PointY="19.055704915456335" />
-        <EntityTypeShape EntityType="PanchayatModel.OccupationCertificate" Width="1.5" PointX="6.4317344065903379" PointY="12.506412973863265" />
+        <EntityTypeShape EntityType="PanchayatModel.OccupationCertificate" Width="1.5" PointX="1.125" PointY="16.375" />
         <AssociationConnector Association="PanchayatModel.FK_OccupancyCertDetails_occupancydetails" />
         <AssociationConnector Association="PanchayatModel.FK_Occuoation_RegisterType" />
         <AssociationConnector Association="PanchayatModel.FK_Occuoation_WEBstatus" />
+        <EntityTypeShape EntityType="PanchayatModel.IncomeCertificate" Width="1.5" PointX="1.4602392024641109" PointY="9.7888278410717966" />
+        <EntityTypeShape EntityType="PanchayatModel.NocCertificte" Width="1.5" PointX="11.035301154030162" PointY="19.411366725066383" />
+        <AssociationConnector Association="PanchayatModel.FK_Income_RegisterType" />
+        <AssociationConnector Association="PanchayatModel.FK_Income_WEBstatus" />
+        <AssociationConnector Association="PanchayatModel.FK_NocCert_RegisterType" />
+        <AssociationConnector Association="PanchayatModel.FK_NocCert_WEBstatus" />
+        <EntityTypeShape EntityType="PanchayatModel.ResidenceCertificate" Width="1.5" PointX="0.63870852656602328" PointY="27.841837806553503" />
+        <AssociationConnector Association="PanchayatModel.FK_ResidenceCertificate_RegisterTypes" />
+        <AssociationConnector Association="PanchayatModel.FK_ResidenceCertificate_WEBstatus" />
+        <EntityTypeShape EntityType="PanchayatModel.DeathCorrCertificate" Width="1.5" PointX="6.6151399810868963" PointY="10.701623057341958" />
+        <AssociationConnector Association="PanchayatModel.FK_Death_RegisterType" />
+        <AssociationConnector Association="PanchayatModel.FK_Death_WEBstatus" />
         
         
         

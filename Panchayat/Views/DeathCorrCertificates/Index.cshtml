@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Panchayat.DeathCorrCertificate>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>BND Certificate</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-responsive">
+    <tr>
+        <th>
+           Your Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+           Application Date
+        </th>
+        <th>
+           Birth Of
+        </th>
+        <th>
+           Born On
+        </th>
+        <th>
+            Birth Place
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Correct Name
+        </th>
+        <th>
+            Name Of Father
+        </th>
+        <th>
+           Correct Name Of Father
+        </th>
+        <th>
+            Name Of Mother
+        </th>
+        <th>
+            Correct Name Of Mother
+        </th>
+        <th>
+           Name Of Grand Mother
+        </th>
+        <th>
+            Correct Name Of Grand Mother
+        </th>
+        <th>
+            Name Of Grand Father
+        </th>
+        <th>
+           Correct Name Of Grand Father
+        </th>
+        <th>
+           Birth/Death Name
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.WEBstatu.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthOf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BornOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthPlace)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromWrongName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsteadFWN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfFather)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsteadNF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfMother)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsteadNM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfGrandMother)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsteadNGM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfGrandFather)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsteadNGF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDeathName)
+        </td>
+  
+        <td>
+            @Html.DisplayFor(modelItem => item.WEBstatu.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DeathCorrCertificateID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DeathCorrCertificateID }) 
+        </td>
+    </tr>
+}
+
+</table>

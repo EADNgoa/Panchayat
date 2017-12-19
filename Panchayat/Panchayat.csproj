@@ -236,9 +236,11 @@
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConstLicenseCertsController.cs" />
     <Compile Include="Controllers\CorrectionsController.cs" />
+    <Compile Include="Controllers\DeathCorrCertificatesController.cs" />
     <Compile Include="Controllers\DemandsController.cs" />
     <Compile Include="Controllers\Form4Controller.cs" />
     <Compile Include="Controllers\IllegalConstructionsController.cs" />
+    <Compile Include="Controllers\IncomeCertificatesController.cs" />
     <Compile Include="Controllers\InOutRegsIssuesController.cs" />
     <Compile Include="Controllers\InOutRegsRecptsController.cs" />
     <Compile Include="Controllers\InvItemsController.cs" />
@@ -267,6 +269,9 @@
     <Compile Include="Controllers\VPRentsController.cs" />
     <Compile Include="Controllers\WorksController.cs" />
     <Compile Include="Correction.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeathCorrCertificate.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Demand.cs">
@@ -305,6 +310,9 @@
     <Compile Include="IllegalConstruction.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
+    <Compile Include="IncomeCertificate.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="InOutRegsIssue.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -339,6 +347,9 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Noc.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NocCertificte.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="OccupationCertDetail.cs">
@@ -824,6 +835,14 @@
     <Content Include="Views\OccupationCertificates\Index.cshtml" />
     <Content Include="Views\OccupationCertificates\AddDetails.cshtml" />
     <Content Include="Views\OccupationCertificates\ManageDetails.cshtml" />
+    <Content Include="Views\IncomeCertificates\Create.cshtml" />
+    <Content Include="Views\IncomeCertificates\Details.cshtml" />
+    <Content Include="Views\IncomeCertificates\Edit.cshtml" />
+    <Content Include="Views\IncomeCertificates\Index.cshtml" />
+    <Content Include="Views\DeathCorrCertificates\Create.cshtml" />
+    <Content Include="Views\DeathCorrCertificates\Details.cshtml" />
+    <Content Include="Views\DeathCorrCertificates\Edit.cshtml" />
+    <Content Include="Views\DeathCorrCertificates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

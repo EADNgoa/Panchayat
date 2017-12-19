@@ -144,6 +144,16 @@ namespace Panchayat
     public partial class OccupationCertificate
     {
     }
+    [MetadataType(typeof(IncomeCertificateMetadata))]
+    public partial class IncomeCertificate
+    {
+
+    }
+    [MetadataType(typeof(DeathCorrCertificateMetadata))]
+    public partial class DeathCorrCertificate
+    {
+
+    }
     public class Form10rpt
     {
         public string Ledger { get; set; }

@@ -682,15 +682,7 @@ public class MovementMetadata
         [StringLength(250)]
         public string Address;
 
-        [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime FromDate;
 
-     
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime TillDate;
 
     }
     public class HouseTaxCertMetadata
@@ -860,6 +852,137 @@ public class MovementMetadata
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime HSrefdate;
+
+    }
+
+    public class IncomeCertificateMetadata
+    {
+        [Required]
+        [StringLength(100)]
+        public string PersonName;
+
+        [Required]
+        [StringLength(100)]
+        public string RelationName;
+
+        [Required]
+        [StringLength(100)]
+        public string Address;
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal IncomeAmt;
+        [Required]
+        [StringLength(100)]
+        public string YearOf;
+
+        [Required]
+        [StringLength(100)]
+        public string OfficeName;
+
+        [Required]
+        [StringLength(150)]
+        public string PurposeOf;
+
+        [Required]
+        [StringLength(100)]
+        public string Inquiry;
+
+        [Required]
+        [StringLength(100)]
+        public string ReportNo;
+
+     
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime InquiryDate;
+
+        [Required]
+        [StringLength(50)]
+        public string Place;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime PrintDate;
+
+    }
+    public class DeathCorrCertificateMetadata
+    {
+        [Required]
+        [StringLength(100)]
+        public string FromName;
+        [Required]
+        [StringLength(200)]
+        public string FromAddress;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime TDate;
+
+        [Required]
+        [StringLength(100)]
+        public string BirthOf;
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime BornOn;
+
+        [Required]
+        [StringLength(100)]
+        public string BirthPlace;
+
+        [Required]
+        [StringLength(100)]
+        public string FromWrongName;
+
+        [Required]
+        [StringLength(100)]
+        public string InsteadFWN;
+
+
+        [Required]
+        [StringLength(100)]
+        public string NameOfFather;
+
+
+        [Required]
+        [StringLength(100)]
+        public string InsteadNF;
+
+
+        [Required]
+        [StringLength(100)]
+        public string NameOfMother;
+
+
+        [Required]
+        [StringLength(100)]
+        public string InsteadNM;
+
+
+        [Required]
+        [StringLength(100)]
+        public string NameOfGrandMother;
+
+
+        [Required]
+        [StringLength(100)]
+        public string InsteadNGM;
+
+        [Required]
+        [StringLength(100)]
+        public string NameOfGrandFather;
+
+
+        [Required]
+        [StringLength(100)]
+        public string InsteadNGF;
+
+        [Required]
+        [StringLength(100)]
+        public string BirthDeathName;
+
+
 
     }
 }
