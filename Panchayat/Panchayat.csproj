@@ -837,7 +837,6 @@
     <Content Include="Views\NocCertifictes\Edit.cshtml" />
     <Content Include="Views\NocCertifictes\Index.cshtml" />
     <Content Include="Views\CharacterCertificates\Create.cshtml" />
-    <Content Include="Views\CharacterCertificates\Delete.cshtml" />
     <Content Include="Views\CharacterCertificates\Details.cshtml" />
     <Content Include="Views\CharacterCertificates\Edit.cshtml" />
     <Content Include="Views\CharacterCertificates\Index.cshtml" />

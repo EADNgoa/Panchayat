@@ -81,8 +81,6 @@ namespace Panchayat.Controllers
                 return RedirectToAction("Index",new {rt=character.RegisterTypeID });
             }
 
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", character.RegisterTypeID);
-            ViewBag.WebStatusID = new SelectList(db.WEBstatus, "WebStatusID", "Status", character.WEBstatusID);
             return View(character);
         }
 
@@ -94,11 +92,12 @@ namespace Panchayat.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             CharacterCertificate character = db.CharacterCertificates.Find(id);
+            ViewBag.RegisterTypeID = character.RegisterTypeID;
+
             if (character == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", character.RegisterTypeID);
             ViewBag.WebStatusID = new SelectList(db.WEBstatus, "WebStatusID", "Status", character.WEBstatusID);
             return View(character);
         }

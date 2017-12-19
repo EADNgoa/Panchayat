@@ -6,7 +6,17 @@
 
 
 <center>
-    <h2>Character Certificate</h2>
+    @if (ViewBag.Rt == 36)
+    {
+        <h2>Character Certificate</h2>
+
+    }
+    else
+    {
+
+        <h2>Residence Certificate</h2>
+
+    }
     @using (Html.BeginForm("Index", "CharacterCertificates", FormMethod.Get))
     {
 
@@ -47,25 +57,66 @@
         <th>
            Age
         </th>
-        <th>
-          Father Name
-        </th>
-        <th>
-           Mother Name
-        </th>
+        @if (ViewBag.Rt == 36)
+       {
+            <th>
+                Father Name
+            </th>
+        }
+        else
+        {
+
+            <th>
+                Son Of
+            </th>
+        }
+        @if (ViewBag.Rt == 36)
+        {
+            <th>
+                Mother Name
+            </th>
+        }
+        else
+        {
+
+            <th>
+                Taluka 
+            </th>
+        }
+      
+            <th>
+                Address
+            </th>
+   
+
+@if (ViewBag.Rt == 37)
+{
+            <th>
+                Village
+            </th>
+        }
      
-        <th>
-           Address
-        </th>
+   
         <th>
            Ward Of
         </th>
         <th>
             Purpose Of
         </th>
-        <th>
-            Known Years
-        </th>
+        @if (ViewBag.Rt == 36)
+        {
+            <th>
+                Known Years
+            </th>
+        }
+        else
+        {
+
+            <th>
+                Since
+            </th>
+        }
+      
         <th>
             Print Date
         </th>
@@ -93,6 +144,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
+        @if (ViewBag.Rt == 37)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Village)
+            </td>
+        }
+
         <td>
             @Html.DisplayFor(modelItem => item.WardOf)
         </td>

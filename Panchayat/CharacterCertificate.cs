@@ -17,16 +17,17 @@ namespace Panchayat
         public int CharacterID { get; set; }
         public string PersonName { get; set; }
         public Nullable<int> Age { get; set; }
+        public Nullable<System.DateTime> Tdate { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
-        public Nullable<System.DateTime> Tdate { get; set; }
+        public string Village { get; set; }
         public string Address { get; set; }
         public string WardOf { get; set; }
         public Nullable<int> KnownYears { get; set; }
+        public string PurposeOf { get; set; }
         public string UserID { get; set; }
         public Nullable<int> WEBstatusID { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }
-        public string PurposeOf { get; set; }
     
         public virtual RegisterType RegisterType { get; set; }
         public virtual WEBstatu WEBstatu { get; set; }

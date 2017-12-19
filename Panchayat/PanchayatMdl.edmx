@@ -97,6 +97,7 @@
           <Property Name="Tdate" Type="date" />
           <Property Name="FatherName" Type="varchar" MaxLength="100" />
           <Property Name="MotherName" Type="varchar" MaxLength="100" />
+          <Property Name="Village" Type="varchar" MaxLength="150" />
           <Property Name="Address" Type="varchar" MaxLength="200" />
           <Property Name="WardOf" Type="varchar" MaxLength="100" />
           <Property Name="KnownYears" Type="int" />
@@ -2504,15 +2505,6 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <End Role="WEBstatu" EntitySet="WEBstatus" />
             <End Role="NocCertificte" EntitySet="NocCertifictes" />
           </AssociationSet>
-          <EntitySet Name="CharacterCertificates" EntityType="PanchayatModel.CharacterCertificate" />
-          <AssociationSet Name="FK_Character_RegisterType" Association="PanchayatModel.FK_Character_RegisterType">
-            <End Role="RegisterType" EntitySet="RegisterTypes" />
-            <End Role="CharacterCertificate" EntitySet="CharacterCertificates" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Character_WEBstatus" Association="PanchayatModel.FK_Character_WEBstatus">
-            <End Role="WEBstatu" EntitySet="WEBstatus" />
-            <End Role="CharacterCertificate" EntitySet="CharacterCertificates" />
-          </AssociationSet>
           <EntitySet Name="ResidenceCertificates" EntityType="PanchayatModel.ResidenceCertificate" />
           <AssociationSet Name="FK_ResidenceCertificate_RegisterTypes" Association="PanchayatModel.FK_ResidenceCertificate_RegisterTypes">
             <End Role="RegisterType" EntitySet="RegisterTypes" />
@@ -2521,6 +2513,15 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <AssociationSet Name="FK_ResidenceCertificate_WEBstatus" Association="PanchayatModel.FK_ResidenceCertificate_WEBstatus">
             <End Role="WEBstatu" EntitySet="WEBstatus" />
             <End Role="ResidenceCertificate" EntitySet="ResidenceCertificates" />
+          </AssociationSet>
+          <EntitySet Name="CharacterCertificates" EntityType="PanchayatModel.CharacterCertificate" />
+          <AssociationSet Name="FK_Character_RegisterType" Association="PanchayatModel.FK_Character_RegisterType">
+            <End Role="RegisterType" EntitySet="RegisterTypes" />
+            <End Role="CharacterCertificate" EntitySet="CharacterCertificates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Character_WEBstatus" Association="PanchayatModel.FK_Character_WEBstatus">
+            <End Role="WEBstatu" EntitySet="WEBstatus" />
+            <End Role="CharacterCertificate" EntitySet="CharacterCertificates" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="RVdetail">
@@ -2803,8 +2804,8 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <NavigationProperty Name="ConstLicenseCerts" Relationship="PanchayatModel.FK_ConstLicense_RegisterType" FromRole="RegisterType" ToRole="ConstLicenseCert" />
           <NavigationProperty Name="OccupationCertificates" Relationship="PanchayatModel.FK_Occuoation_RegisterType" FromRole="RegisterType" ToRole="OccupationCertificate" />
           <NavigationProperty Name="NocCertifictes" Relationship="PanchayatModel.FK_NocCert_RegisterType" FromRole="RegisterType" ToRole="NocCertificte" />
-          <NavigationProperty Name="CharacterCertificates" Relationship="PanchayatModel.FK_Character_RegisterType" FromRole="RegisterType" ToRole="CharacterCertificate" />
           <NavigationProperty Name="ResidenceCertificates" Relationship="PanchayatModel.FK_ResidenceCertificate_RegisterTypes" FromRole="RegisterType" ToRole="ResidenceCertificate" />
+          <NavigationProperty Name="CharacterCertificates" Relationship="PanchayatModel.FK_Character_RegisterType" FromRole="RegisterType" ToRole="CharacterCertificate" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -3323,8 +3324,8 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <NavigationProperty Name="ConstLicenseCerts" Relationship="PanchayatModel.FK_ConstLicense_WEBstatus" FromRole="WEBstatu" ToRole="ConstLicenseCert" />
           <NavigationProperty Name="OccupationCertificates" Relationship="PanchayatModel.FK_Occuoation_WEBstatus" FromRole="WEBstatu" ToRole="OccupationCertificate" />
           <NavigationProperty Name="NocCertifictes" Relationship="PanchayatModel.FK_NocCert_WEBstatus" FromRole="WEBstatu" ToRole="NocCertificte" />
-          <NavigationProperty Name="CharacterCertificates" Relationship="PanchayatModel.FK_Character_WEBstatus" FromRole="WEBstatu" ToRole="CharacterCertificate" />
           <NavigationProperty Name="ResidenceCertificates" Relationship="PanchayatModel.FK_ResidenceCertificate_WEBstatus" FromRole="WEBstatu" ToRole="ResidenceCertificate" />
+          <NavigationProperty Name="CharacterCertificates" Relationship="PanchayatModel.FK_Character_WEBstatus" FromRole="WEBstatu" ToRole="CharacterCertificate" />
         </EntityType>
 
         <EntityType Name="Work">
@@ -3801,50 +3802,6 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CharacterCertificate">
-          <Key>
-            <PropertyRef Name="CharacterID" />
-          </Key>
-          <Property Name="CharacterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PersonName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Age" Type="Int32" />
-          <Property Name="FatherName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="MotherName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Tdate" Type="DateTime" Precision="0" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="WardOf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="KnownYears" Type="Int32" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="WEBstatusID" Type="Int32" />
-          <Property Name="RegisterTypeID" Type="Int32" />
-          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_Character_RegisterType" FromRole="CharacterCertificate" ToRole="RegisterType" />
-          <NavigationProperty Name="WEBstatu" Relationship="PanchayatModel.FK_Character_WEBstatus" FromRole="CharacterCertificate" ToRole="WEBstatu" />
-          <Property Name="PurposeOf" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_Character_RegisterType">
-          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="0..1" />
-          <End Type="PanchayatModel.CharacterCertificate" Role="CharacterCertificate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegisterType">
-              <PropertyRef Name="RegisterTypeID" />
-            </Principal>
-            <Dependent Role="CharacterCertificate">
-              <PropertyRef Name="RegisterTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Character_WEBstatus">
-          <End Type="PanchayatModel.WEBstatu" Role="WEBstatu" Multiplicity="0..1" />
-          <End Type="PanchayatModel.CharacterCertificate" Role="CharacterCertificate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WEBstatu">
-              <PropertyRef Name="WebStatusID" />
-            </Principal>
-            <Dependent Role="CharacterCertificate">
-              <PropertyRef Name="WEBstatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ResidenceCertificate">
           <Key>
             <PropertyRef Name="ResidenceCertificateID" />
@@ -3886,6 +3843,51 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             </Principal>
             <Dependent Role="ResidenceCertificate">
               <PropertyRef Name="WebStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CharacterCertificate">
+          <Key>
+            <PropertyRef Name="CharacterID" />
+          </Key>
+          <Property Name="CharacterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Tdate" Type="DateTime" Precision="0" />
+          <Property Name="FatherName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MotherName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Village" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="WardOf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KnownYears" Type="Int32" />
+          <Property Name="PurposeOf" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="WEBstatusID" Type="Int32" />
+          <Property Name="RegisterTypeID" Type="Int32" />
+          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_Character_RegisterType" FromRole="CharacterCertificate" ToRole="RegisterType" />
+          <NavigationProperty Name="WEBstatu" Relationship="PanchayatModel.FK_Character_WEBstatus" FromRole="CharacterCertificate" ToRole="WEBstatu" />
+        </EntityType>
+        <Association Name="FK_Character_RegisterType">
+          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="0..1" />
+          <End Type="PanchayatModel.CharacterCertificate" Role="CharacterCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterType">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="CharacterCertificate">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Character_WEBstatus">
+          <End Type="PanchayatModel.WEBstatu" Role="WEBstatu" Multiplicity="0..1" />
+          <End Type="PanchayatModel.CharacterCertificate" Role="CharacterCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WEBstatu">
+              <PropertyRef Name="WebStatusID" />
+            </Principal>
+            <Dependent Role="CharacterCertificate">
+              <PropertyRef Name="WEBstatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4581,25 +4583,6 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CharacterCertificates">
-            <EntityTypeMapping TypeName="PanchayatModel.CharacterCertificate">
-              <MappingFragment StoreEntitySet="CharacterCertificate">
-                <ScalarProperty Name="PurposeOf" ColumnName="PurposeOf" />
-                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
-                <ScalarProperty Name="WEBstatusID" ColumnName="WEBstatusID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="KnownYears" ColumnName="KnownYears" />
-                <ScalarProperty Name="WardOf" ColumnName="WardOf" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Tdate" ColumnName="Tdate" />
-                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
-                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
-                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ResidenceCertificates">
             <EntityTypeMapping TypeName="PanchayatModel.ResidenceCertificate">
               <MappingFragment StoreEntitySet="ResidenceCertificate">
@@ -4616,6 +4599,26 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
                 <ScalarProperty Name="ResidenceCertificateID" ColumnName="ResidenceCertificateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CharacterCertificates">
+            <EntityTypeMapping TypeName="PanchayatModel.CharacterCertificate">
+              <MappingFragment StoreEntitySet="CharacterCertificate">
+                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
+                <ScalarProperty Name="WEBstatusID" ColumnName="WEBstatusID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PurposeOf" ColumnName="PurposeOf" />
+                <ScalarProperty Name="KnownYears" ColumnName="KnownYears" />
+                <ScalarProperty Name="WardOf" ColumnName="WardOf" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Village" ColumnName="Village" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="Tdate" ColumnName="Tdate" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

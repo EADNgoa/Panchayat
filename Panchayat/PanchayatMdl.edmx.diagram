@@ -130,12 +130,12 @@
         <EntityTypeShape EntityType="PanchayatModel.NocCertificte" Width="1.5" PointX="8" PointY="31.875" />
         <AssociationConnector Association="PanchayatModel.FK_NocCert_RegisterType" />
         <AssociationConnector Association="PanchayatModel.FK_NocCert_WEBstatus" />
-        <EntityTypeShape EntityType="PanchayatModel.CharacterCertificate" Width="1.5" PointX="10.268218505321173" PointY="8.6530604849816584" />
-        <AssociationConnector Association="PanchayatModel.FK_Character_RegisterType" />
-        <AssociationConnector Association="PanchayatModel.FK_Character_WEBstatus" />
         <EntityTypeShape EntityType="PanchayatModel.ResidenceCertificate" Width="1.5" PointX="4.0344814658325543" PointY="5.6796522912008935" />
         <AssociationConnector Association="PanchayatModel.FK_ResidenceCertificate_RegisterTypes" />
         <AssociationConnector Association="PanchayatModel.FK_ResidenceCertificate_WEBstatus" />
+        <EntityTypeShape EntityType="PanchayatModel.CharacterCertificate" Width="1.5" PointX="5.0576983508922613" PointY="28.608180342525326" />
+        <AssociationConnector Association="PanchayatModel.FK_Character_RegisterType" />
+        <AssociationConnector Association="PanchayatModel.FK_Character_WEBstatus" />
         
         
         
