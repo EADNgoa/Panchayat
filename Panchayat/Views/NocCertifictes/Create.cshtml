@@ -1,0 +1,82 @@
+﻿@model Panchayat.NocCertificte
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("RegisterTypeID", (int)ViewBag.RegisterTypeID);
+
+    <div class="form-horizontal">
+        <h4>Noc Certificte</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PersonName, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PersonName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PersonName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Hno,"House No", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Hno, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Hno, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, "Address", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.No,"Ref No", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.No, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.No, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 34)
+            {
+                @Html.LabelFor(model => model.ElectDeptAdd, "Electricity Dept Address", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            }
+            @if (ViewBag.RegisterTypeID == 35)
+            {
+                @Html.LabelFor(model => model.ElectDeptAdd, "Water Dept Address", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            }
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ElectDeptAdd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ElectDeptAdd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+   
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

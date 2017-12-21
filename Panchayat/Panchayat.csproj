@@ -217,6 +217,9 @@
     <Compile Include="CertSupportDoc.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
+    <Compile Include="CharacterCertificate.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="Citizen.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -232,6 +235,7 @@
     <Compile Include="Controllers\BuildingsController.cs" />
     <Compile Include="Controllers\CashInHandRegsController.cs" />
     <Compile Include="Controllers\CertificateRequirementsController.cs" />
+    <Compile Include="Controllers\CharacterCertificatesController.cs" />
     <Compile Include="Controllers\CitizensController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConstLicenseCertsController.cs" />
@@ -239,6 +243,7 @@
     <Compile Include="Controllers\DeathCorrCertificatesController.cs" />
     <Compile Include="Controllers\DemandsController.cs" />
     <Compile Include="Controllers\Form4Controller.cs" />
+    <Compile Include="Controllers\NocCertifictesController.cs" />
     <Compile Include="Controllers\IllegalConstructionsController.cs" />
     <Compile Include="Controllers\IncomeCertificatesController.cs" />
     <Compile Include="Controllers\InOutRegsIssuesController.cs" />
@@ -835,6 +840,7 @@
     <Content Include="Views\OccupationCertificates\Index.cshtml" />
     <Content Include="Views\OccupationCertificates\AddDetails.cshtml" />
     <Content Include="Views\OccupationCertificates\ManageDetails.cshtml" />
+
     <Content Include="Views\IncomeCertificates\Create.cshtml" />
     <Content Include="Views\IncomeCertificates\Details.cshtml" />
     <Content Include="Views\IncomeCertificates\Edit.cshtml" />
@@ -843,6 +849,15 @@
     <Content Include="Views\DeathCorrCertificates\Details.cshtml" />
     <Content Include="Views\DeathCorrCertificates\Edit.cshtml" />
     <Content Include="Views\DeathCorrCertificates\Index.cshtml" />
+
+    <Content Include="Views\NocCertifictes\Create.cshtml" />
+    <Content Include="Views\NocCertifictes\Details.cshtml" />
+    <Content Include="Views\NocCertifictes\Edit.cshtml" />
+    <Content Include="Views\NocCertifictes\Index.cshtml" />
+    <Content Include="Views\CharacterCertificates\Create.cshtml" />
+    <Content Include="Views\CharacterCertificates\Details.cshtml" />
+    <Content Include="Views\CharacterCertificates\Edit.cshtml" />
+    <Content Include="Views\CharacterCertificates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

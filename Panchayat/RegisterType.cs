@@ -34,6 +34,8 @@ namespace Panchayat
             this.NocCertifictes = new HashSet<NocCertificte>();
             this.ResidenceCertificates = new HashSet<ResidenceCertificate>();
             this.DeathCorrCertificates = new HashSet<DeathCorrCertificate>();
+
+            this.CharacterCertificates = new HashSet<CharacterCertificate>();
         }
     
         public int RegisterTypeID { get; set; }
@@ -68,10 +70,12 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IncomeCertificate> IncomeCertificates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         public virtual ICollection<NocCertificte> NocCertifictes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResidenceCertificate> ResidenceCertificates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeathCorrCertificate> DeathCorrCertificates { get; set; }
+        public virtual ICollection<CharacterCertificate> CharacterCertificates { get; set; }
     }
 }

@@ -1,11 +1,15 @@
-﻿@model IEnumerable<Panchayat.ResidenceCertificate>
+﻿@model IEnumerable<Panchayat.NocCertificte>
 
 @{
     ViewBag.Title = "Index";
 }
 <center>
-    <h2>Residence Certificate</h2>
-    @using (Html.BeginForm("Index", "ResidenceCertificates", FormMethod.Get))
+    @if (ViewBag.Rt == 34)
+    { <h2>Noc For Electricity</h2>}
+    @if (ViewBag.Rt == 35)
+    { <h2>Noc For Water Supply</h2>}
+    <br />
+    @using (Html.BeginForm("Index", "NocCertifictes", FormMethod.Get))
     {
 
 
@@ -35,88 +39,89 @@
     }
 </center>
 <p>
-    @Html.ActionLink("Create New", "Create", new { rt = ViewBag.Rt })
+    @Html.ActionLink("Create New", "Create",new {rt= ViewBag.Rt })
 </p>
 <table class="table">
     <tr>
         <th>
-            Name Of Person
+            Sr No
         </th>
         <th>
-            Birth Date
+           Person Name
         </th>
         <th>
-            Birth Place
+           Ref No
         </th>
         <th>
-           Name Of Mother
-        </th>
-        <th>
-         Name Of Father
+           House No
         </th>
         <th>
            Address
         </th>
-        <th>
-           Living Since
-        </th>
+        @if (ViewBag.Rt == 34)
+        {
+            <th>
+                Electric Dept Address
+            </th>
+        }
+        @if (ViewBag.Rt == 35)
+        {
+            <th>
+                Water Dept Address
+            </th>
+        }
        
         <th>
-            Is Dead?
+            Approval Date
         </th>
-  
         <th>
-            Reveiewed On
+            Print Date
         </th>
-      
+     
         <th>
             @Html.DisplayNameFor(model => model.WEBstatu.Status)
         </th>
         <th></th>
     </tr>
-
+    @{ int i = 1;}
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @i
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.PersonName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BirthDate)
+            @Html.DisplayFor(modelItem => item.No)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BirthPlace)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NameOfMother)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NameOfFather)
+            @Html.DisplayFor(modelItem => item.Hno)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Since)
-        </td>
-     
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDead)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.TDate)
 
-
+        <td>
+            @Html.DisplayFor(modelItem => item.ElectDeptAdd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AprovedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrintDate)
         </td>
   
+     
         <td>
             @Html.DisplayFor(modelItem => item.WEBstatu.Status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ResidenceCertificateID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ResidenceCertificateID }) 
+            @Html.ActionLink("Edit", "Edit", new { id=item.NocID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NocID }) |
         </td>
     </tr>
+    i++;
 }
 
 </table>

@@ -12,34 +12,34 @@ using Microsoft.AspNet.Identity;
 
 namespace Panchayat.Controllers
 {
-    public class ResidenceCertificatesController : Controller
+    public class CharacterCertificatesController : Controller
     {
         private PanchayatEntities db = new PanchayatEntities();
 
         // GET: ResidenceCertificates
         public ActionResult Index(int? page, string PersonName, int? rt, int? WEBstatusID)
         {
-           
+            ViewBag.Rt = rt;
             ViewBag.WEBstatusID = new SelectList(db.WEBstatus, "WEBstatusID", "Status");
-            var residenceCertificates = db.ResidenceCertificates.Where(a => a.ResidenceCertificateID > 0);
+            var characterCertificates = db.CharacterCertificates.Where(a => a.CharacterID > 0);
             if (!string.IsNullOrEmpty(PersonName))
             {
-                residenceCertificates = residenceCertificates.Where(a => a.PersonName == PersonName);
+                characterCertificates = characterCertificates.Where(a => a.PersonName == PersonName);
             }
             if (rt != null)
             {
                 ViewBag.Rt = rt;
-                residenceCertificates = residenceCertificates.Where(a => a.RegisterTypeID == rt);
+                characterCertificates = characterCertificates.Where(a => a.RegisterTypeID == rt);
 
             }
             if (WEBstatusID != null)
             {
-                residenceCertificates = residenceCertificates.Where(a => a.WebStatusID == WEBstatusID);
+                characterCertificates = characterCertificates.Where(a => a.WEBstatusID == WEBstatusID);
             }
 
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
-            return View(residenceCertificates.OrderByDescending(a => a.ResidenceCertificateID).ToList().ToPagedList(pageNumber, pageSize));
+            return View(characterCertificates.OrderByDescending(a => a.CharacterID).ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: ResidenceCertificates/Details/5
@@ -49,13 +49,13 @@ namespace Panchayat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ResidenceCertificate residenceCertificate = db.ResidenceCertificates.Find(id);
-            ViewBag.ph = db.Configs.Select(a => a.PanchHead).FirstOrDefault();
-            if (residenceCertificate == null)
+            CharacterCertificate characterCertificates = db.CharacterCertificates.Find(id);
+            ViewBag.Vp = db.Configs.Select(a => a.VP).FirstOrDefault();
+            if (characterCertificates == null)
             {
                 return HttpNotFound();
             }
-            return View(residenceCertificate);
+            return View(characterCertificates);
         }
 
         // GET: ResidenceCertificates/Create
@@ -70,20 +70,18 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ResidenceCertificateID,PersonName,BirthDate,BirthPlace,NameOfMother,NameOfFather,Address,Since,IsDead,UserID,RegisterTypeID,WebStatusID")] ResidenceCertificate residenceCertificate)
+        public ActionResult Create([Bind(Include = "CharacterID,PersonName,Age,FatherName,PurposeOf,MotherName,Tdate,Address,WardOf,KnownYears,UserID,RegisterTypeID,WebStatusID")] CharacterCertificate character)
         {
             if (ModelState.IsValid)
             {
-                residenceCertificate.UserID = User.Identity.GetUserId();
-                residenceCertificate.WebStatusID = 1;
-                db.ResidenceCertificates.Add(residenceCertificate);
+                character.UserID = User.Identity.GetUserId();
+                character.WEBstatusID = 1;
+                db.CharacterCertificates.Add(character);
                 db.SaveChanges();
-                return RedirectToAction("Index",new { rt = residenceCertificate.RegisterTypeID });
+                return RedirectToAction("Index",new {rt=character.RegisterTypeID });
             }
 
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", residenceCertificate.RegisterTypeID);
-            ViewBag.WebStatusID = new SelectList(db.WEBstatus, "WebStatusID", "Status", residenceCertificate.WebStatusID);
-            return View(residenceCertificate);
+            return View(character);
         }
 
         // GET: ResidenceCertificates/Edit/5
@@ -93,14 +91,15 @@ namespace Panchayat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ResidenceCertificate residenceCertificate = db.ResidenceCertificates.Find(id);
-            if (residenceCertificate == null)
+            CharacterCertificate character = db.CharacterCertificates.Find(id);
+            ViewBag.RegisterTypeID = character.RegisterTypeID;
+
+            if (character == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", residenceCertificate.RegisterTypeID);
-            ViewBag.WebStatusID = new SelectList(db.WEBstatus, "WebStatusID", "Status", residenceCertificate.WebStatusID);
-            return View(residenceCertificate);
+            ViewBag.WebStatusID = new SelectList(db.WEBstatus, "WebStatusID", "Status", character.WEBstatusID);
+            return View(character);
         }
 
         // POST: ResidenceCertificates/Edit/5
@@ -108,17 +107,17 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ResidenceCertificateID,PersonName,BirthDate,BirthPlace,NameOfMother,NameOfFather,Address,Since,TDate,IsDead,UserID,RegisterTypeID,WebStatusID")] ResidenceCertificate residenceCertificate)
+        public ActionResult Edit([Bind(Include = "CharacterID,PersonName,Age,PurposeOf,FatherName,MotherName,Tdate,Address,WardOf,KnownYears,UserID,RegisterTypeID,WebStatusID")] CharacterCertificate character)
         {
-            ViewBag.RegisterTypeID = residenceCertificate.RegisterTypeID;
+            ViewBag.RegisterTypeID = character.RegisterTypeID;
           
             if (ModelState.IsValid)
             {
-                db.Entry(residenceCertificate).State = EntityState.Modified;
+                db.Entry(character).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", new { rt = residenceCertificate.RegisterTypeID });
+                return RedirectToAction("Index", new { rt = character.RegisterTypeID });
             }           
-            return View(residenceCertificate);
+            return View(character);
         }
 
        

@@ -631,8 +631,8 @@ public class MovementMetadata
         [StringLength(100)]
         public string PersonName;
 
-        [Required]
-        [StringLength(100)]
+      
+   
         public string OtherName;
 
         [Required]
@@ -683,6 +683,8 @@ public class MovementMetadata
         public string Address;
 
 
+        [Required]
+        public int Since;
 
     }
     public class HouseTaxCertMetadata
@@ -855,6 +857,7 @@ public class MovementMetadata
 
     }
 
+
     public class IncomeCertificateMetadata
     {
         [Required]
@@ -899,6 +902,33 @@ public class MovementMetadata
         [Required]
         [StringLength(50)]
         public string Place;
+    }
+    public class NocCertificateMetadata
+    {
+        [Required]
+        [StringLength(50)]
+        public string Hno;
+
+        [Required]
+        [StringLength(100)]
+        public string No;
+      
+       [Required]
+        [StringLength(200)]
+        public string Address;
+
+        [Required]
+        [StringLength(100)]
+        public string PersonName;
+
+        [Required]
+        [StringLength(200)]
+        public string ElectDeptAdd;
+
+       
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime AprovedDate;
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
@@ -981,6 +1011,46 @@ public class MovementMetadata
         [Required]
         [StringLength(100)]
         public string BirthDeathName;
+
+  
+    }
+
+    public class CharacterCertificateMetadata
+    {
+        [Required]
+        [StringLength(100)]
+        public string PersonName;
+
+        [Required]
+        public int Age;
+
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Tdate;
+
+        [Required]
+        [StringLength(100)]
+        public string FatherName;
+
+        [Required]
+        [StringLength(100)]
+        public string MotherName;
+
+        [Required]
+        [StringLength(200)]
+        public string Address;
+
+        [Required]
+        [StringLength(100)]
+        public string WardOf;
+
+        [Required]
+        [StringLength(200)]
+        public string PurposeOf;
+
+       
+        public int KnownYears;
 
 
 

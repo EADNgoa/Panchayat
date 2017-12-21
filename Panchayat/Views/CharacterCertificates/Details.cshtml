@@ -1,0 +1,110 @@
+﻿@model Panchayat.CharacterCertificate
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    p{
+        text-align:justify;
+
+    }
+
+
+</style>
+
+
+<div>
+    <center>
+        @if (Model.RegisterTypeID == 36)
+        {
+            <div class="section-to-print">
+                <h2>
+                    Village Panchayat <u>@ViewBag.Vp</u>
+                </h2>
+                <h1>TO WHOM IT MAY CONCERN</h1>
+
+
+                <p class="col-md-12">
+                    This is to certify that Shri/Shrimati/Kumari <u>@Model.PersonName</u>
+                    of <u>@Model.Age</u> Years of Age.Son/Daughter/Wife Of <u> @Model.FatherName </u> and of <u>@Model.MotherName</u>
+                    residing at <u>@Model.Address</u> Ward Of <u>@Model.WardOf</u> Village,bears good moral and civil character to thte best of my knowledge and belief there is nothing to any against him/her  behaviour
+                    as far as the village is concerned.
+
+
+                </p>
+                <p class="col-md-12">
+                    Shri/Shrimati/Kumari <u>@Model.PersonName</u> is Known to me for the Last <u>@Model.KnownYears</u> and he/she is nt related to me
+                </p>
+                <p class="col-md-12">
+                    This Certificate has been issued at the request of the interested party for the purpose of <u>@Model.PurposeOf</u>
+                </p>
+                <br />
+                <br />
+
+                <p class="col-md-6">
+                    Date: <u>@(String.Format("{0:dd-mm-yyyy}", Model.Tdate))</u>
+                </p>
+
+                <br />
+                <br />
+
+                <p class="col-md-6 ">
+                    <span class="pull-right">
+                        _______________<br />
+                        <b>&nbsp;&nbsp;&nbsp;&nbsp;Sarpanch</b>
+                    </span>
+                </p>
+            </div>
+
+        }
+
+
+
+        else if (Model.RegisterTypeID == 37)
+        {
+            <div class="section-to-print">
+                <h2>
+                    Village Panchayat <u>@ViewBag.Vp</u>
+                </h2>
+                <h1>RESIDENCE CERTIFICATE</h1>
+
+
+                <p class="col-md-12">
+                    This is to certify that Shri/Shrimati/Kumari <u>@Model.PersonName</u>
+                    Unmaried/Married/aged <u>@Model.Age</u> Years.Son/Daughter/Wife Of <u> @Model.FatherName </u>is residing at  H.No<u>@Model.Address</u>
+                    Situated in Ward  <u>@Model.WardOf</u> of Village <u>@Model.Village</u> Taluka <u>@Model.MotherName</u> Goa,Since <u>@Model.KnownYears</u>
+                    This Certificate is issued at request of Shri/Kum <u>@Model.PersonName</u> for the Purpose of <u>@Model.PurposeOf</u>
+
+
+                </p>
+
+                <br />
+                <br />
+
+                <p class="col-md-6">
+                    Date: <u>@(String.Format("{0:dd-mm-yyyy}", Model.Tdate))</u>
+                </p>
+
+                <br />
+                <br />
+
+                <p class="col-md-6 ">
+                    <span class="pull-right">
+
+                        <b>&nbsp;&nbsp;&nbsp;Sarpanch</b><br />
+                        Village Panchayat_______________<br /><br />
+                    </span>
+                </p>
+            </div>
+        }
+    </center>
+</div>
+<br />
+<br />
+<div class="row">
+    <p class="col-md-12">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CharacterID }) |<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />|
+        @Html.ActionLink("Back to List", "Index", new { rt = 36 })
+    </p>
+
+</div>
