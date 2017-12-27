@@ -1,0 +1,57 @@
+﻿@model Panchayat.IncomeCertificate
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+@{
+    ChangeNumbersToWords cw = new ChangeNumbersToWords();
+    string ntw = cw.changeToWords(Model.IncomeAmt.ToString());
+
+    }
+<div class=" section-to-print">
+    <center><h4>Certificate Of Income(<small>In Panchayat Area</small>)</h4>
+</center>
+    <br />
+ <p class="col-md-12">
+     &nbsp;&nbsp; This is to certify that the annual family Income Shri/Kum/Smt. <u>@Model.PersonName</u>
+     Son/Daughter/Wife Of. <u>@Model.RelationName</u>  resident of <u>@Model.Address</u>
+     Is Rs <u>@Model.IncomeAmt (Rupees <u>@ntw </u>) </u> for the year <u>@Model.YearOf</u>
+ </p>
+    <p class="col-md-12">
+        &nbsp;&nbsp;This cetificate is Issued at the request of Shri/Kum/Smt. <u>@Model.PersonName</u> For Being Produced in(name of the office/Department)
+        for the purpose of <u>@Model.PurposeOf</u>
+    </p>
+    <p class="col-md-12">
+        &nbsp;&nbsp;The Undersignedis personally satisfied about the correctness of the certificate which has been issued after making an inquiry through <u>@Model.Inquiry</u>
+        of this village Panchayat and o basis of the report No. <u>@Model.ReportNo</u><br />
+        dated <u>@Model.InquiryDate</u>
+        <br />
+        <br />
+        <span class="pull-right">
+         <big><b>V.P Secretary</b></big>
+        </span>
+    </p>
+    <p class="col-md-12">
+        Place:- @Model.Place<br />
+        Date:- @Model.PrintDate<br />
+        
+    </p>
+    <center>
+        Attested
+        <br />
+        <br />
+        <br />
+        <b>Sarpanch</b>
+        <br />
+        <p>
+            Village Panchayat <u>@ViewBag.vp</u>
+        </p>
+    </center>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IncomeCertificateID }) |<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+|
+    @Html.ActionLink("Back to List", "Index",new {rt=Model.RegisterTypeID })
+</p>

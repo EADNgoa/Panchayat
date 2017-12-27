@@ -22,8 +22,11 @@ namespace Panchayat
             this.HouseTaxCerts = new HashSet<HouseTaxCert>();
             this.ConstLicenseCerts = new HashSet<ConstLicenseCert>();
             this.OccupationCertificates = new HashSet<OccupationCertificate>();
+            this.IncomeCertificates = new HashSet<IncomeCertificate>();
             this.NocCertifictes = new HashSet<NocCertificte>();
             this.ResidenceCertificates = new HashSet<ResidenceCertificate>();
+            this.DeathCorrCertificates = new HashSet<DeathCorrCertificate>();
+
             this.CharacterCertificates = new HashSet<CharacterCertificate>();
         }
     
@@ -41,10 +44,13 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OccupationCertificate> OccupationCertificates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IncomeCertificate> IncomeCertificates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NocCertificte> NocCertifictes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResidenceCertificate> ResidenceCertificates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeathCorrCertificate> DeathCorrCertificates { get; set; }
         public virtual ICollection<CharacterCertificate> CharacterCertificates { get; set; }
     }
 }
