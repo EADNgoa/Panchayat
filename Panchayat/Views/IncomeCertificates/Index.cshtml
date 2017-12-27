@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Panchayat.IncomeCertificate>
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+
+    <h2>Income Certificate</h2>
+
+    @using (Html.BeginForm("Index", "PovertyCertificates", FormMethod.Get))
+    {
+
+
+        <div class="row">
+            <div>
+                <table>
+                    <tr>
+                        @Html.Hidden("rt", (int)ViewBag.Rt)
+
+
+                        <td> Name Of Person:</td>
+                        <td> @Html.TextBox("PersonName", ViewBag.CurrentFilter as string, new { @class = "form-control" })</td>
+
+                        <td>&nbsp; Status:</td>
+                        <td> @Html.DropDownList("WebStatusID", null, new { type = "date", @class = "form-control" })</td>
+
+
+                        <td>&nbsp;<input type="submit" value="Search" class="btn btn-default" /></td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    }
+</center>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name Of Person
+        </th>
+        <th>
+            Relation Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+           Income Amount
+        </th>
+        <th>
+           Year
+        </th>
+        <th>
+           name Of Office/Dept
+        </th>
+        <th>
+           Purpose Of
+        </th>
+        <th>
+           Inquired through
+        </th>
+        <th>
+           Report No
+        </th>
+        <th>
+           Inquiry Date
+        </th>
+        <th>
+           Place
+        </th>
+        <th>
+           Print Date
+        </th>
+  
+        <th>
+           Status
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RelationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncomeAmt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearOf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfficeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurposeOf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inquiry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReportNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InquiryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Place)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrintDate)
+        </td>
+    
+        <td>
+            @Html.DisplayFor(modelItem => item.WEBstatu.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IncomeCertificateID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IncomeCertificateID }) |
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,96 @@
+﻿@model Panchayat.DeathCorrCertificate
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div class="section-to-print">
+    <center>
+        <h3>Birth and Death Certificate</h3>
+    </center>
+    <br />
+    <br />
+    <p class="col-md-12">
+        <span class="pull-right">
+         From: <u>@Model.FromName</u><br />
+         Address: <u>@Model.FromAddress</u><br />
+         Date:<u>@Model.TDate</u>
+        </span>
+    </p>
+    <br />
+    <br />
+
+    <p class="col-md-12">
+        <span class="pull-left">
+            <b>To</b><br />
+           <b>The Birth And Death Registrars</b><br />
+            <b>Village Panchayat Taluka </b><br />
+            <b>Talegao ,Tiswadi,Goa</b><br />
+        </span>
+    </p>
+    <br />
+  
+    <p class="col-md-12" style="text-align:center">
+        <br />
+            <b>SUB:<u>Correction Of Name On Death Certificate</u></b>
+        <br />
+    </p>
+
+    <br />
+    <p class="col-md-12">
+        Sir,<br />
+        <br />
+        The event of birth of <u>@Model.BirthOf</u> who was born on <u>@Model.BornOn</u> in <u>@Model.BirthPlace</u> 
+        has been registered in the office of Registrar Of Birth And Deaths,Village Panchayat Taleigao, Taleigao,Goa
+    </p>
+    <p class="col-md-12">
+        Sir,<br />
+        <br />
+        However,While Registering the same my name was wrongly recorded as <u>@Model.FromName</u> instead of
+         <u>@Model.FromWrongName</u><br />
+
+        The names of the parents was also wrongly recorded initially due to oversight.<br />
+
+    </p>
+    <p class="col-md-12">
+        This may also be done which is as follows.<br />
+         NAME OF FATHER <u>@Model.NameOfFather</u> Instead of <u>@Model.InsteadNF</u>
+
+
+
+    </p>
+    <p class="col-md-12">
+        NAME OF MOTHER <u>@Model.NameOfMother</u> Instead of <u>@Model.InsteadNM</u>
+    </p>
+    <p class="col-md-12">
+        NAME OF GRAND FATHER <u>@Model.NameOfGrandFather</u> Instead of <u>@Model.InsteadNGF</u>
+    </p>
+    <p class="col-md-12">
+        NAME OF GRAND Mother <u>@Model.NameOfGrandMother</u> Instead of <u>@Model.InsteadNGM</u>
+
+    </p>
+    <p class="col-md-12">
+        In the view of above situation,I am to request kindlyissue suitabale orders to the Registrars of Births And Deaths
+        to do neccessary corrections in its records so that the event of the Births/Deaths of the <u>@Model.BirthDeathName</u>
+        
+    </p>
+    <p class="col-md-12">
+        I am enclosing herewith the Births/Deaths Certificate of <u>@Model.BirthDeathName </u>
+         a  Baptism Certificate,Marraige Certificate of the parents for your ready reference and action at the earliest.
+
+    </p>
+    <p class="col-md-12">
+     <span class="pull-right">
+         <br />
+         <br />
+         Yours faithfully.
+     </span>
+    </p>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DeathCorrCertificateID }) |<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />
+|
+    @Html.ActionLink("Back to List", "Index")
+</p>
