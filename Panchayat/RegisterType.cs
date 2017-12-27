@@ -33,6 +33,7 @@ namespace Panchayat
             this.NocCertifictes = new HashSet<NocCertificte>();
             this.ResidenceCertificates = new HashSet<ResidenceCertificate>();
             this.CharacterCertificates = new HashSet<CharacterCertificate>();
+            this.BNDs = new HashSet<BND>();
         }
     
         public int RegisterTypeID { get; set; }
@@ -70,5 +71,7 @@ namespace Panchayat
         public virtual ICollection<ResidenceCertificate> ResidenceCertificates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CharacterCertificate> CharacterCertificates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BND> BNDs { get; set; }
     }
 }

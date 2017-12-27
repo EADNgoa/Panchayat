@@ -1,0 +1,393 @@
+﻿@model IEnumerable<Panchayat.BND>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<center>
+    @if (ViewBag.RegisterTypeID == 39)
+    {
+        <h2>Birth Certificate</h2>
+
+
+    }
+    else
+    {
+        <h2>Death Certificate</h2>
+    }
+</center>
+<p>
+    @Html.ActionLink("Create New", "Create",new {rt=ViewBag.RegisterTypeID })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Sr No
+        </th>
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Child Name
+            </th>
+        }
+        else
+        {
+            <th>Name Of Deceased</th>
+        }
+
+        <th>
+            Gender
+        </th>
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Date Of Birth
+            </th>
+        }
+        else
+        {
+            <th>
+                Date Of Death
+            </th>
+        }
+
+        <th>
+            Application Date
+        </th>
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Place Of Birth(in House)
+            </th>
+            <th>
+                Place Of Birth(in Hospital)
+            </th>
+        }
+        else
+        {
+            <th>
+                Place Of Daath(in House)
+            </th>
+            <th>
+                Place Of Death(in Hospital)
+            </th>
+        }
+
+        <th>
+            Name Of Mother
+        </th>
+        <th>
+            UID No. Of Mother
+        </th>
+        <th>
+            Name Of Father
+        </th>
+
+        <th>
+            UID No. OF Father
+        </th>
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Grand Father
+            </th>
+        }
+        else
+        {
+            <th>
+                Name Of Husband/Wife(if any)
+            </th>
+        }
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Grand Mother
+            </th>
+        }
+        else
+        {
+            <th>
+                UID No. of husband/wife
+            </th>
+        }
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Address of Parents at Birth of Child
+            </th>
+        }
+        else
+        {
+            <th>
+                Address of Deceased at the time of death
+            </th>
+        }
+
+
+        <th>
+            Permanant Address
+        </th>
+        <th>
+            Informants Name
+        </th>
+        <th>
+            Informant Address
+        </th>
+        <th>
+            Name Of Town
+        </th>
+        <th>
+            Is Town?
+        </th>
+        <th>
+            Name Of District
+        </th>
+        <th>
+            Name Of State
+        </th>
+        <th>
+            Religion Of Family
+        </th>
+        <th>
+            Any Other Religion
+        </th>
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Father's Education Level
+            </th>
+        }
+        else
+        {
+            <th>
+                Occupation of the deceased
+            </th>
+        }
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Mother's Education Level
+            </th>
+        }
+        else
+        {
+            <th>
+                Was the cause of death Medically Certified?
+            </th>
+        }
+
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Father's Occupation
+            </th>
+        }
+        else
+        {
+            <th>
+                Name Of diesease or actual cause of death
+            </th>
+        }
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Mother's Occupation
+            </th>
+        }
+        else
+        {
+            <th>
+                if female,was death occured during pregnancy
+            </th>
+        }
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Age Of Mother at the time of Marraige
+            </th>
+        }
+        else
+        {
+            <th>
+                If used to habitually smoke for how many years?
+            </th>
+        }
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Age Of Mother at the time of Child Birth
+            </th>
+        }
+        else
+        {
+            <th>
+                If used to chew Tobacoo for how many years?
+            </th>
+        }
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                No. Of Child
+            </th>
+        }
+        else
+        {
+            <th>
+                If used to habitually drink Alcohol for how many years?
+            </th>
+        }
+
+
+        <th>
+            Attention Type
+        </th>
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Delivery Method
+            </th>
+        }
+
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Birth Weight
+            </th>
+        }
+        else
+        {
+            <th>
+                If Used to chew drink alcohol for how many years(e.g 1,2,3)
+            </th>
+        }
+
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <th>
+                Duration Of Pregnancy
+            </th>
+        }
+
+        <th>
+            Status
+        </th>
+
+        <th></th>
+
+    </tr>
+    @{ int i = 1;}
+@foreach (var item in Model) {
+    <tr>
+        <td>@i</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChildName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlaceOfBirthHouse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfMother)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UIDmother)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfFather)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UIDfather)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrandFather)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrandMother)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressParentsBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PermAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InformantsName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InformantAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfTown)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TownOrVillage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfDistrict)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameOfState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReligionOfFamily)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnyOtherReligion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FEduc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MEduc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FOccup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MOccup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgeOfMotherMarraige)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgeOfMotherBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfChild)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AttentionType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveryMethod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthWeight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DurationOfPregnancy)
+        </td>
+ 
+        <td>
+            @Html.DisplayFor(modelItem => item.WEBstatu.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BNDID,rt=ViewBag.RegisterTypeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BNDID }) |
+        </td>
+    </tr>
+    i++;
+}
+
+</table>

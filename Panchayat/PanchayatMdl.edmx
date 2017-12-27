@@ -15,6 +15,48 @@
           <Property Name="ActionsTaken" Type="varchar(max)" />
           <Property Name="Year" Type="int" />
         </EntityType>
+        <EntityType Name="BND">
+          <Key>
+            <PropertyRef Name="BNDID" />
+          </Key>
+          <Property Name="BNDID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChildName" Type="varchar" MaxLength="100" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="TDate" Type="date" />
+          <Property Name="PlaceOfBirth" Type="varchar" MaxLength="50" />
+          <Property Name="PlaceOfBirthHouse" Type="varchar" MaxLength="50" />
+          <Property Name="NameOfMother" Type="varchar" MaxLength="100" />
+          <Property Name="UIDmother" Type="int" />
+          <Property Name="NameOfFather" Type="varchar" MaxLength="100" />
+          <Property Name="UIDfather" Type="int" />
+          <Property Name="GrandFather" Type="varchar" MaxLength="100" />
+          <Property Name="GrandMother" Type="varchar" MaxLength="100" />
+          <Property Name="AddressParentsBirth" Type="varchar" MaxLength="250" />
+          <Property Name="PermAddress" Type="varchar" MaxLength="250" />
+          <Property Name="InformantsName" Type="varchar" MaxLength="100" />
+          <Property Name="InformantAddress" Type="varchar" MaxLength="250" />
+          <Property Name="NameOfTown" Type="varchar" MaxLength="100" />
+          <Property Name="TownOrVillage" Type="bit" />
+          <Property Name="NameOfDistrict" Type="varchar" MaxLength="100" />
+          <Property Name="NameOfState" Type="varchar" MaxLength="100" />
+          <Property Name="ReligionOfFamily" Type="varchar" MaxLength="50" />
+          <Property Name="AnyOtherReligion" Type="varchar" MaxLength="50" />
+          <Property Name="FEduc" Type="varchar" MaxLength="50" />
+          <Property Name="MEduc" Type="varchar" MaxLength="50" />
+          <Property Name="FOccup" Type="varchar" MaxLength="50" />
+          <Property Name="MOccup" Type="varchar" MaxLength="50" />
+          <Property Name="AgeOfMotherMarraige" Type="int" />
+          <Property Name="AgeOfMotherBirth" Type="int" />
+          <Property Name="NoOfChild" Type="int" />
+          <Property Name="AttentionType" Type="varchar" MaxLength="100" />
+          <Property Name="DeliveryMethod" Type="varchar" MaxLength="100" />
+          <Property Name="BirthWeight" Type="int" />
+          <Property Name="DurationOfPregnancy" Type="varchar" MaxLength="50" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="WEBstatusID" Type="int" />
+          <Property Name="RegisterTypeID" Type="int" />
+        </EntityType>
         <EntityType Name="Budget">
           <Key>
             <PropertyRef Name="BudgetID" />
@@ -98,6 +140,7 @@
           <Property Name="FatherName" Type="varchar" MaxLength="100" />
           <Property Name="MotherName" Type="varchar" MaxLength="100" />
           <Property Name="Village" Type="varchar" MaxLength="150" />
+          <Property Name="Place" Type="varchar" MaxLength="100" />
           <Property Name="Address" Type="varchar" MaxLength="200" />
           <Property Name="WardOf" Type="varchar" MaxLength="100" />
           <Property Name="KnownYears" Type="int" />
@@ -681,6 +724,30 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <Property Name="PeriodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PeriodSL" Type="varchar" MaxLength="28" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Birth_RegisterType">
+          <End Role="RegisterTypes" Type="Self.RegisterTypes" Multiplicity="0..1" />
+          <End Role="BND" Type="Self.BND" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterTypes">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="BND">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Birth_WEBstatus">
+          <End Role="WEBstatus" Type="Self.WEBstatus" Multiplicity="0..1" />
+          <End Role="BND" Type="Self.BND" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WEBstatus">
+              <PropertyRef Name="WebStatusID" />
+            </Principal>
+            <Dependent Role="BND">
+              <PropertyRef Name="WEBstatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Budget_ToSubledger">
           <End Role="SubLedgers" Type="Self.SubLedgers" Multiplicity="1" />
           <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
@@ -1535,6 +1602,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
         </Association>
         <EntityContainer Name="PanchayatModelStoreContainer">
           <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BND" EntityType="Self.BND" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Budget" EntityType="Self.Budget" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Building" EntityType="Self.Building" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CashInHandReg" EntityType="Self.CashInHandReg" Schema="dbo" store:Type="Tables" />
@@ -1591,6 +1659,14 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
     [PeriodSLs].[PeriodSL] AS [PeriodSL]
     FROM [dbo].[PeriodSLs] AS [PeriodSLs]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Birth_RegisterType" Association="Self.FK_Birth_RegisterType">
+            <End Role="RegisterTypes" EntitySet="RegisterTypes" />
+            <End Role="BND" EntitySet="BND" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Birth_WEBstatus" Association="Self.FK_Birth_WEBstatus">
+            <End Role="WEBstatus" EntitySet="WEBstatus" />
+            <End Role="BND" EntitySet="BND" />
+          </AssociationSet>
           <AssociationSet Name="FK_Budget_ToSubledger" Association="Self.FK_Budget_ToSubledger">
             <End Role="SubLedgers" EntitySet="SubLedgers" />
             <End Role="Budget" EntitySet="Budget" />
@@ -2523,6 +2599,15 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <End Role="WEBstatu" EntitySet="WEBstatus" />
             <End Role="CharacterCertificate" EntitySet="CharacterCertificates" />
           </AssociationSet>
+          <EntitySet Name="BNDs" EntityType="PanchayatModel.BND" />
+          <AssociationSet Name="FK_Birth_RegisterType" Association="PanchayatModel.FK_Birth_RegisterType">
+            <End Role="RegisterType" EntitySet="RegisterTypes" />
+            <End Role="BND" EntitySet="BNDs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Birth_WEBstatus" Association="PanchayatModel.FK_Birth_WEBstatus">
+            <End Role="WEBstatu" EntitySet="WEBstatus" />
+            <End Role="BND" EntitySet="BNDs" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="RVdetail">
           <Key>
@@ -2806,6 +2891,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <NavigationProperty Name="NocCertifictes" Relationship="PanchayatModel.FK_NocCert_RegisterType" FromRole="RegisterType" ToRole="NocCertificte" />
           <NavigationProperty Name="ResidenceCertificates" Relationship="PanchayatModel.FK_ResidenceCertificate_RegisterTypes" FromRole="RegisterType" ToRole="ResidenceCertificate" />
           <NavigationProperty Name="CharacterCertificates" Relationship="PanchayatModel.FK_Character_RegisterType" FromRole="RegisterType" ToRole="CharacterCertificate" />
+          <NavigationProperty Name="BNDs" Relationship="PanchayatModel.FK_Birth_RegisterType" FromRole="RegisterType" ToRole="BND" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -3326,6 +3412,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <NavigationProperty Name="NocCertifictes" Relationship="PanchayatModel.FK_NocCert_WEBstatus" FromRole="WEBstatu" ToRole="NocCertificte" />
           <NavigationProperty Name="ResidenceCertificates" Relationship="PanchayatModel.FK_ResidenceCertificate_WEBstatus" FromRole="WEBstatu" ToRole="ResidenceCertificate" />
           <NavigationProperty Name="CharacterCertificates" Relationship="PanchayatModel.FK_Character_WEBstatus" FromRole="WEBstatu" ToRole="CharacterCertificate" />
+          <NavigationProperty Name="BNDs" Relationship="PanchayatModel.FK_Birth_WEBstatus" FromRole="WEBstatu" ToRole="BND" />
         </EntityType>
 
         <EntityType Name="Work">
@@ -3866,6 +3953,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <Property Name="RegisterTypeID" Type="Int32" />
           <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_Character_RegisterType" FromRole="CharacterCertificate" ToRole="RegisterType" />
           <NavigationProperty Name="WEBstatu" Relationship="PanchayatModel.FK_Character_WEBstatus" FromRole="CharacterCertificate" ToRole="WEBstatu" />
+          <Property Name="Place" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Character_RegisterType">
           <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="0..1" />
@@ -3887,6 +3975,74 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
               <PropertyRef Name="WebStatusID" />
             </Principal>
             <Dependent Role="CharacterCertificate">
+              <PropertyRef Name="WEBstatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BND">
+          <Key>
+            <PropertyRef Name="BNDID" />
+          </Key>
+          <Property Name="BNDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChildName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="TDate" Type="DateTime" Precision="0" />
+          <Property Name="PlaceOfBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlaceOfBirthHouse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NameOfMother" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UIDmother" Type="Int32" />
+          <Property Name="NameOfFather" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UIDfather" Type="Int32" />
+          <Property Name="GrandFather" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GrandMother" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AddressParentsBirth" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PermAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="InformantsName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InformantAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NameOfTown" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TownOrVillage" Type="Boolean" />
+          <Property Name="NameOfDistrict" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NameOfState" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ReligionOfFamily" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AnyOtherReligion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FEduc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MEduc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FOccup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MOccup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AgeOfMotherMarraige" Type="Int32" />
+          <Property Name="AgeOfMotherBirth" Type="Int32" />
+          <Property Name="NoOfChild" Type="Int32" />
+          <Property Name="AttentionType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryMethod" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BirthWeight" Type="Int32" />
+          <Property Name="DurationOfPregnancy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="WEBstatusID" Type="Int32" />
+          <Property Name="RegisterTypeID" Type="Int32" />
+          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_Birth_RegisterType" FromRole="BND" ToRole="RegisterType" />
+          <NavigationProperty Name="WEBstatu" Relationship="PanchayatModel.FK_Birth_WEBstatus" FromRole="BND" ToRole="WEBstatu" />
+        </EntityType>
+        <Association Name="FK_Birth_RegisterType">
+          <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="0..1" />
+          <End Type="PanchayatModel.BND" Role="BND" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterType">
+              <PropertyRef Name="RegisterTypeID" />
+            </Principal>
+            <Dependent Role="BND">
+              <PropertyRef Name="RegisterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Birth_WEBstatus">
+          <End Type="PanchayatModel.WEBstatu" Role="WEBstatu" Multiplicity="0..1" />
+          <End Type="PanchayatModel.BND" Role="BND" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WEBstatu">
+              <PropertyRef Name="WebStatusID" />
+            </Principal>
+            <Dependent Role="BND">
               <PropertyRef Name="WEBstatusID" />
             </Dependent>
           </ReferentialConstraint>
@@ -4605,6 +4761,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <EntitySetMapping Name="CharacterCertificates">
             <EntityTypeMapping TypeName="PanchayatModel.CharacterCertificate">
               <MappingFragment StoreEntitySet="CharacterCertificate">
+                <ScalarProperty Name="Place" ColumnName="Place" />
                 <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
                 <ScalarProperty Name="WEBstatusID" ColumnName="WEBstatusID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -4619,6 +4776,49 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
                 <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BNDs">
+            <EntityTypeMapping TypeName="PanchayatModel.BND">
+              <MappingFragment StoreEntitySet="BND">
+                <ScalarProperty Name="RegisterTypeID" ColumnName="RegisterTypeID" />
+                <ScalarProperty Name="WEBstatusID" ColumnName="WEBstatusID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DurationOfPregnancy" ColumnName="DurationOfPregnancy" />
+                <ScalarProperty Name="BirthWeight" ColumnName="BirthWeight" />
+                <ScalarProperty Name="DeliveryMethod" ColumnName="DeliveryMethod" />
+                <ScalarProperty Name="AttentionType" ColumnName="AttentionType" />
+                <ScalarProperty Name="NoOfChild" ColumnName="NoOfChild" />
+                <ScalarProperty Name="AgeOfMotherBirth" ColumnName="AgeOfMotherBirth" />
+                <ScalarProperty Name="AgeOfMotherMarraige" ColumnName="AgeOfMotherMarraige" />
+                <ScalarProperty Name="MOccup" ColumnName="MOccup" />
+                <ScalarProperty Name="FOccup" ColumnName="FOccup" />
+                <ScalarProperty Name="MEduc" ColumnName="MEduc" />
+                <ScalarProperty Name="FEduc" ColumnName="FEduc" />
+                <ScalarProperty Name="AnyOtherReligion" ColumnName="AnyOtherReligion" />
+                <ScalarProperty Name="ReligionOfFamily" ColumnName="ReligionOfFamily" />
+                <ScalarProperty Name="NameOfState" ColumnName="NameOfState" />
+                <ScalarProperty Name="NameOfDistrict" ColumnName="NameOfDistrict" />
+                <ScalarProperty Name="TownOrVillage" ColumnName="TownOrVillage" />
+                <ScalarProperty Name="NameOfTown" ColumnName="NameOfTown" />
+                <ScalarProperty Name="InformantAddress" ColumnName="InformantAddress" />
+                <ScalarProperty Name="InformantsName" ColumnName="InformantsName" />
+                <ScalarProperty Name="PermAddress" ColumnName="PermAddress" />
+                <ScalarProperty Name="AddressParentsBirth" ColumnName="AddressParentsBirth" />
+                <ScalarProperty Name="GrandMother" ColumnName="GrandMother" />
+                <ScalarProperty Name="GrandFather" ColumnName="GrandFather" />
+                <ScalarProperty Name="UIDfather" ColumnName="UIDfather" />
+                <ScalarProperty Name="NameOfFather" ColumnName="NameOfFather" />
+                <ScalarProperty Name="UIDmother" ColumnName="UIDmother" />
+                <ScalarProperty Name="NameOfMother" ColumnName="NameOfMother" />
+                <ScalarProperty Name="PlaceOfBirthHouse" ColumnName="PlaceOfBirthHouse" />
+                <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ChildName" ColumnName="ChildName" />
+                <ScalarProperty Name="BNDID" ColumnName="BNDID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

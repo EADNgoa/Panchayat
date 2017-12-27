@@ -136,6 +136,9 @@
         <EntityTypeShape EntityType="PanchayatModel.CharacterCertificate" Width="1.5" PointX="5.0576983508922613" PointY="28.608180342525326" />
         <AssociationConnector Association="PanchayatModel.FK_Character_RegisterType" />
         <AssociationConnector Association="PanchayatModel.FK_Character_WEBstatus" />
+        <EntityTypeShape EntityType="PanchayatModel.BND" Width="1.5" PointX="9.7420610514199648" PointY="16.427458577057095" />
+        <AssociationConnector Association="PanchayatModel.FK_Birth_RegisterType" />
+        <AssociationConnector Association="PanchayatModel.FK_Birth_WEBstatus" />
         
         
         

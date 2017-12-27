@@ -98,7 +98,6 @@ namespace Panchayat.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.RegisterTypeID = new SelectList(db.RegisterTypes, "RegisterTypeID", "RegisterType1", residenceCertificate.RegisterTypeID);
             ViewBag.WebStatusID = new SelectList(db.WEBstatus, "WebStatusID", "Status", residenceCertificate.WebStatusID);
             return View(residenceCertificate);
         }

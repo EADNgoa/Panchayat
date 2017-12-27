@@ -682,7 +682,6 @@ public class MovementMetadata
         [StringLength(250)]
         public string Address;
 
-        [Required]
         public int Since;
 
     }

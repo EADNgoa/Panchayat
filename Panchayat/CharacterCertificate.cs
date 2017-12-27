@@ -28,6 +28,7 @@ namespace Panchayat
         public string UserID { get; set; }
         public Nullable<int> WEBstatusID { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }
+        public string Place { get; set; }
     
         public virtual RegisterType RegisterType { get; set; }
         public virtual WEBstatu WEBstatu { get; set; }
