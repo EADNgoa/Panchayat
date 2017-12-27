@@ -4,7 +4,6 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 <style>
      p{
          text-align:justify;
@@ -12,10 +11,13 @@
  </style>
 <div class="section-to-print ">
     <center>
-        <h4>Residence Certificate</h4>
-        <hr />
-        @if (Model.IsDead == false)
+       
+        @if (Model.RegisterTypeID == 26)
         {
+            <h4>Residence Certificate</h4>
+            <hr />
+            if (Model.IsDead == false)
+            {
         <p class="col-md-12">
             After making due investigation, I the undersigned, @ViewBag.ph , 
             Sarpanch of Village Panchayat Taleigao, Taluka of Tiswadi, District of North-Goa,
@@ -44,7 +46,7 @@
                 since @Model.Since till his death.
 
             </p>
-         
+
             <p class="col-md-12">
                 This certificate is issued at the request of <b>@Model.PersonName</b>
                 to produce the same in the Conservatory of Central Registry at Lisbon, Portugal, to obtain Portuguese Nationality.
@@ -54,7 +56,46 @@
             Office of the Village Panchayat of Taleigao, Sub District of North Goa, State of Goa dated @Model.TDate.Value.ToString("dd-mm-yyyy").
 
         </p>
+        }
+        else
+        {
+            <div>
+                <h4>Application For Birth/Death Certificate</h4>
+                <p class="col-md-12 " style="text-align:right">
+                   
+                        Name <u>@Model.PersonName</u><br />
+                        From <u>@Model.Address</u><br />
+                        Date <u>@Model.TDate</u><br />
+                   
+                </p>
+                <p class="col-md-12">
+                   
+                        To <u>Registrar Of Births & Deaths </u><br />
+                        From <u>@Model.Address</u><br />
+                        Date <u>@Model.TDate</u><br />
+                  
+                </p>
+                <p class="col-md-12" style="text-align:center">
+                    Sub : Application for Birth/Death Certificate
+                </p>
+                <p class="col-md-12">
+                    Sir, <br />
+                    &nbsp;&nbsp;&nbsp; I Shri/Smt <u>@Model.PersonName</u> here by apply For Birth/Death Certificate Of <u>@Model.NameOfMother</u>
+                    Who was Born/Died on <u>@Model.BirthPlace</u> at <u>@Model.BirthPlace</u> and registered in your Office Under No <u>@Model.NameOfFather</u>
+                    dated <u>@Model.Since</u>
+                    <br />
+                    <br />
+                    <span class="pull-right">
+                        Your's Faithfully<br />
+                        <br />
+                        <br />
+                        (Signature)
+                    </span>
+                </p>
 
+            </div>
+
+        }
     </center>  
 </div>
 <p>

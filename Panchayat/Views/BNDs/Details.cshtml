@@ -1,0 +1,167 @@
+﻿@model Panchayat.BND
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    th, td {
+        padding: 5px;
+        text-align: left;
+    
+    }
+
+
+}
+
+</style>
+
+    <div style="border:2px">
+        <center>
+            <table class="table-condensed">
+                <thead>
+                    <center>
+                        <h4>Birth Report</h4>
+                        <h5>Legal Information</h5>
+                        <h6>This Part is added to the Register</h6>
+                    </center>
+                </thead>
+                <tr><td></td></tr>
+                <tr>
+                    <td style="text-align:right">1.</td>
+                    <td><b>Date Of Birth</b></td>
+                    <td><u>@Model.DateOfBirth</u></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">2.</td>
+                    <td><b>Sex</b></td>
+                    <td><u>@Model.Gender</u></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">3.</td>
+                    <td><b>Name of Child. If Any</b></td>
+                    <td><u>@Model.ChildName</u></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">4.</td>
+                    <td><b>Name Of Father<br />UID No. Of Father</b></td>
+                    <td><u>@Model.NameOfFather</u><br />@Model.UIDfather</td>
+            </tr>
+            <tr>
+                <td style="text-align:right">5.</td>
+                <td><b>Name Of Mother</b><br />UID No. Of Father</td>
+                <td><u>@Model.NameOfMother</u><br />@Model.UIDmother</td>
+        </tr>
+        <tr>
+            <td></td><td>5.a Permanant Address Of Parents</td><td><u>@Model.PermAddress</u></td>
+            <td></td>
+            </tr>
+                <tr>
+                    <td></td>
+                  
+                    <td>5.b  Address Of Parents at the time of child birth</td>
+                    <td><u>@Model.AddressParentsBirth</u></td>
+                    <td></td>
+                </tr>
+
+    
+        <tr>
+            <td style="text-align:right">6.</td>
+            <td><b>Name Of Grand Father</b></td>
+            <td><u>@Model.GrandFather</u></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">7.</td>
+            <td><b>Name Of Grand Mother</b></td>
+            <td><u>@Model.GrandMother</u></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">8.</td>
+            <td><b>Place Of Birth</b></td>
+            <td><u>@Model.PlaceOfBirth</u></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">9.</td>
+            <td><b>Informants Name</b></td>
+            <td><u>@Model.InformantsName</u></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">10.</td>
+            <td><b> Address</b></td>
+            <td><u>@Model.InformantAddress</u></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+        </tr>
+        <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+        </tr>
+
+
+        <tr>
+            <td>Date:</td>
+            <td></td>
+             
+            <td>(Signature or Left thumb mark of the informant)</td>
+        </tr>
+        <tr style="border-top:solid 2px">
+            <td colspan="1"> To be filled  By Registrar</td>
+        </tr>
+        <tr>
+            <td>Registration No:</td>
+            <td></td>
+            <td>Registration Date:</td>
+        </tr>
+        <tr>
+            <td>Registration Unit:</td>
+            <td></td>
+            <td>District:</td>
+        </tr>
+         <tr>
+            <td>Town/Village:</td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>Remarks(If any):</td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td></td>
+         </tr>
+                <tr>
+                    <td ></td>
+                    <td ></td>
+                    <td >____________________________________</td>
+                </tr>
+         <tr  style="border-bottom:solid 2px;">
+            <td ></td>
+             <td ></td>
+             <td >&nbsp;&nbsp; Name and Signature Of the Registrar</td>
+         </tr>
+    </table>
+    <div class="col-md-6" style="border:solid 2px; height:100%" >
+
+    </div>
+    <div class="col-md-6" style="border:solid 2px; height:100%">
+
+    </div>
+        
+  </center>
+</div>
+   
+  
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BNDID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

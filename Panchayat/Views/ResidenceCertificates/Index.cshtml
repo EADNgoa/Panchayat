@@ -4,7 +4,17 @@
     ViewBag.Title = "Index";
 }
 <center>
-    <h2>Residence Certificate</h2>
+
+    @if (ViewBag.RegisterTypeID == 26)
+    {
+        <h2 class="section-to-print"><b>Residence Certificate</b></h2>
+
+    }
+    else
+    {
+        <h2 class="section-to-print"><b>Birth and Death Certificate</b></h2>
+
+    }
     @using (Html.BeginForm("Index", "ResidenceCertificates", FormMethod.Get))
     {
 
@@ -40,43 +50,92 @@
 <table class="table">
     <tr>
         <th>
-            Name Of Person
+            Sr No
         </th>
         <th>
-            Birth Date
+            Name
         </th>
+        @if (ViewBag.Rt == 26)
+        {
+            <th>
+                Birth Date
+            </th>
+            <th>
+                Birth Place
+            </th>
+            <th>
+                Name Of Mother
+            </th>
+            <th>
+                Name Of Father
+            </th>
+
+        }
+        else
+        {
+            <th>
+                Birth/Death Date
+            </th>
+            <th>
+                Death Place
+            </th>
+            <th>
+                Birth/Death Of
+            </th>
+            <th>
+                Registration No
+            </th>
+        }
+
+
+
+
         <th>
-            Birth Place
+            Address
         </th>
+        @if (ViewBag.Rt == 26)
+        {
+            <th>
+                Living Since
+            </th>
+        }
+        else
+        {
+            <th>
+                Registration Date
+            </th>
+        }
+        @if (ViewBag.Rt == 26)
+        {
+            <th>
+                Reviewed on
+            </th>
+        }
+        else
+        {
+            <th>
+               Application Date
+            </th>
+        }
+
+         
+
+        
         <th>
-           Name Of Mother
-        </th>
-        <th>
-         Name Of Father
-        </th>
-        <th>
-           Address
-        </th>
-        <th>
-           Living Since
+            IsDead?
         </th>
        
         <th>
-            Is Dead?
-        </th>
-  
-        <th>
-            Reveiewed On
-        </th>
-      
-        <th>
-            @Html.DisplayNameFor(model => model.WEBstatu.Status)
+            Status
         </th>
         <th></th>
     </tr>
-
+    @{int i = 0; }
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @i
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.PersonName)
         </td>
@@ -95,19 +154,21 @@
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Since)
-        </td>
      
+     
+            <td>
+                @Html.DisplayFor(modelItem => item.Since)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TDate)
+
+            </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.IsDead)
         </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.TDate)
-
-
-        </td>
+ 
   
         <td>
             @Html.DisplayFor(modelItem => item.WEBstatu.Status)
@@ -117,6 +178,7 @@
             @Html.ActionLink("Details", "Details", new { id=item.ResidenceCertificateID }) 
         </td>
     </tr>
+    i++;
 }
 
 </table>

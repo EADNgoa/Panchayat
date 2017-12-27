@@ -199,6 +199,9 @@
     <Compile Include="Audit.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
+    <Compile Include="BND.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
     <Compile Include="Budget.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -231,6 +234,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuditsController.cs" />
+    <Compile Include="Controllers\BNDsController.cs" />
     <Compile Include="Controllers\BudgetsController.cs" />
     <Compile Include="Controllers\BuildingsController.cs" />
     <Compile Include="Controllers\CashInHandRegsController.cs" />
@@ -858,6 +862,10 @@
     <Content Include="Views\CharacterCertificates\Details.cshtml" />
     <Content Include="Views\CharacterCertificates\Edit.cshtml" />
     <Content Include="Views\CharacterCertificates\Index.cshtml" />
+    <Content Include="Views\BNDs\Create.cshtml" />
+    <Content Include="Views\BNDs\Details.cshtml" />
+    <Content Include="Views\BNDs\Edit.cshtml" />
+    <Content Include="Views\BNDs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

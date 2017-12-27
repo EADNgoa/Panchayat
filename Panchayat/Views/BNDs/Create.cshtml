@@ -1,0 +1,418 @@
+﻿@model Panchayat.BND
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>BND</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Child Name</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Name Of the Deceased</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.ChildName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ChildName, "", new { @class = "text-danger" })
+            </div>
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Gender</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Gender Of the Deceased</label>
+            }
+
+            <div class="col-md-4">
+                @Html.DropDownList("Gender", new List<SelectListItem> { new SelectListItem { Text = "Male", Value = "Male" }, new SelectListItem { Text = "Female", Value = "Female" } }, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Date Of Birth</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Date Of Death</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Duration Of Pregnancy</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.DurationOfPregnancy, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DurationOfPregnancy, "", new { @class = "text-danger" })
+                </div>            }
+
+
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Name Of Mother</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.NameOfMother, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameOfMother, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="control-label col-md-2">UID No. of Mother</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.UIDmother, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UIDmother, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Name Of Father</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.NameOfFather, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameOfFather, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="control-label col-md-2">UID No. of Father</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.UIDfather, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UIDfather, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Grand Father</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Husband/Wife(if any)</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.GrandFather, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GrandFather, "", new { @class = "text-danger" })
+            </div>
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Grand Mother</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">UID No Of husband/Wife</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.GrandMother, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GrandMother, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Address Of the Parents at time Of Child Birth</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Address Of the Deceased at time Of Death</label>
+            }
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.AddressParentsBirth, 3, 43, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AddressParentsBirth, "", new { @class = "text-danger" })
+            </div>
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Permanant Address </label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Permanant Address Of Deceased</label>
+            }
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.PermAddress, 3, 43, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PermAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Informants Name</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.InformantsName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.InformantsName, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="control-label col-md-2">Informants Address</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.InformantAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.InformantAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Name Of Town/Village</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Name Of Town/Village (Where he Live at the time Death )</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.NameOfTown, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameOfTown, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="control-label col-md-2">Is Town ?</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.TownOrVillage, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.InformantsName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Name Of District</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.NameOfDistrict, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameOfDistrict, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="control-label col-md-2"> Name of State</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.NameOfState, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameOfState, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Religion Family</label>
+            <div class="col-md-4">
+                @Html.DropDownList("ReligionOfFamily", new List<SelectListItem>
+                {
+                  new SelectListItem { Text = "Other", Value = "Other" },
+                  new SelectListItem { Text = "Hindu", Value = "Hindu" },
+                  new SelectListItem { Text = "Muslim", Value = "Muslim" },
+                  new SelectListItem { Text = "Christian", Value = "Christian" }
+                },
+              htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ReligionOfFamily, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="control-label col-md-2">Any Other Religion?</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.AnyOtherReligion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AnyOtherReligion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Father's Education</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Occupation of the Deceased</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.FEduc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FEduc, "", new { @class = "text-danger" })
+            </div>
+
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Mother's Education</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Was the Cause of Death medically Certified?(Yes Or No)</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.MEduc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MEduc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Father's Occupation</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Name Of Disease Or Actual Cause Of Death</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.FOccup, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FOccup, "", new { @class = "text-danger" })
+            </div>
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Mothers Occupation</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">if Female,was death occured during pregnancy(Yes Or no)</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.MOccup, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MOccup, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Age Of Mother's Maraige</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">If Used to habitually smokes for how many years(e.g 1,2,3)</label>
+
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.AgeOfMotherMarraige, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.InformantsName, "", new { @class = "text-danger" })
+            </div>
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Age Of Mother At The time Of Child Birth</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">If Used to Chew Tobacco for how many years(e.g 1,2,3)</label>
+
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.AgeOfMotherBirth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AgeOfMotherBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">No Of Child(Including new born baby)</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">If Used habitually drink alcohol for how many years(e.g 1,2,3)</label>
+
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.NoOfChild, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NoOfChild, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="control-label col-md-2">Attention Type</label>
+            <div class="col-md-4">
+                @if (ViewBag.RegisterTypeID == 39)
+                {
+                    @Html.DropDownList("AttentionType",
+                new List<SelectListItem>
+                {
+                   new SelectListItem { Text = "Institutional-Goverment", Value = "Institutional-Goverment" },
+                   new SelectListItem { Text = "Institutional Private Or Non-Goverment", Value = "Institutional Private Or Non-Goverment" },
+                   new SelectListItem { Text = "Doctor,Nurse or trained midwife", Value = "Doctor,Nurse or trained midwife" },
+                   new SelectListItem { Text = "Traditional Birth Attendant", Value = "Traditional Birth Attendant" },
+                   new SelectListItem { Text = "Relatives Or Others", Value = "Relatives Or Others" }
+                },
+                htmlAttributes: new { @class = "form-control" })
+                }
+                else
+                {
+                    @Html.DropDownList("AttentionType",
+                new List<SelectListItem>
+                {
+                   new SelectListItem { Text = "Institutional", Value = "Institutional" },
+                   new SelectListItem { Text = "Medical attention other than institution", Value = "Medical attention other than institution" },
+                   new SelectListItem { Text = "No medical Attention", Value = "No medical Attention" },
+                },
+                htmlAttributes: new { @class = "form-control" })                }
+
+                @Html.ValidationMessageFor(model => model.ReligionOfFamily, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @if (ViewBag.RegisterTypeID == 39)
+        {
+            <div class="form-group">
+                <label class="control-label col-md-2">Delivery Method</label>
+                <div class="col-md-4">
+                    @Html.DropDownList("DeliveryMethod", new List<SelectListItem> { new SelectListItem { Text = "Natural", Value = "Natural" }, new SelectListItem { Text = "Caesaerean", Value = "Caesaerean" }, new SelectListItem { Text = "Forceps/Vaccum", Value = "Forceps/Vaccum" } }, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ReligionOfFamily, "", new { @class = "text-danger" })
+                </div>
+
+                <label class="control-label col-md-2">Birth Weight(In Kgs )if vailaible</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.BirthWeight, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BirthWeight, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @if (ViewBag.RegisterTypeID == 39)
+                {
+                    <label class="control-label col-md-2">Birth Weight(In Kgs )if vailaible</label>
+                }
+                else
+                {
+                    <label class="control-label col-md-2">If Used to chew drink alcohol for how many years(e.g 1,2,3)</label>
+
+                }
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.BirthWeight, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BirthWeight, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        }
+        <div class="form-group">
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">If Place Of Birth in House</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">If Place Of Death in House</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.PlaceOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PlaceOfBirth, "", new { @class = "text-danger" })
+            </div>
+
+            @if (ViewBag.RegisterTypeID == 39)
+            {
+                <label class="control-label col-md-2">Place Of Birth in Hospital</label>
+            }
+            else
+            {
+                <label class="control-label col-md-2">Place Of Death In Hospital</label>
+            }
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.PlaceOfBirthHouse, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PlaceOfBirthHouse, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { rt = ViewBag.RegisterTypeID })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

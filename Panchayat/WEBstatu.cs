@@ -28,6 +28,7 @@ namespace Panchayat
             this.DeathCorrCertificates = new HashSet<DeathCorrCertificate>();
 
             this.CharacterCertificates = new HashSet<CharacterCertificate>();
+            this.BNDs = new HashSet<BND>();
         }
     
         public int WebStatusID { get; set; }
@@ -52,5 +53,7 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeathCorrCertificate> DeathCorrCertificates { get; set; }
         public virtual ICollection<CharacterCertificate> CharacterCertificates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BND> BNDs { get; set; }
     }
 }
