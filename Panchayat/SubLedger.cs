@@ -17,13 +17,13 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SubLedger()
         {
+            this.Budgets = new HashSet<Budget>();
+            this.DemandDetails = new HashSet<DemandDetail>();
             this.Form1 = new HashSet<Form1>();
             this.Form2 = new HashSet<Form2>();
             this.Form3 = new HashSet<Form3>();
             this.Form4 = new HashSet<Form4>();
             this.LedgerDetails = new HashSet<LedgerDetail>();
-            this.DemandDetails = new HashSet<DemandDetail>();
-            this.Budgets = new HashSet<Budget>();
             this.Vouchers = new HashSet<Voucher>();
         }
     
@@ -33,6 +33,10 @@ namespace Panchayat
         public string Ledger { get; set; }
         public bool HasDemand { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Budget> Budgets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DemandDetail> DemandDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Form1> Form1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -45,10 +49,6 @@ namespace Panchayat
         public virtual ICollection<LedgerDetail> LedgerDetails { get; set; }
         public virtual Ledger Ledger1 { get; set; }
         public virtual SubLedgerType SubLedgerType { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DemandDetail> DemandDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Budget> Budgets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Voucher> Vouchers { get; set; }
     }

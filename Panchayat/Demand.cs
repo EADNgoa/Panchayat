@@ -23,9 +23,9 @@ namespace Panchayat
         public int DemandID { get; set; }
         public Nullable<int> CitizenID { get; set; }
         public string HouseNo { get; set; }
+        public System.DateTime CreatedOn { get; set; }
         public System.DateTime StopDate { get; set; }
         public string Remarks { get; set; }
-        public System.DateTime CreatedOn { get; set; }
     
         public virtual Citizen Citizen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

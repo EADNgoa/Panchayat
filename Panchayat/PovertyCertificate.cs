@@ -17,12 +17,12 @@ namespace Panchayat
         public int PovertyCertificateID { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }
         public string PersonName { get; set; }
+        public string OtherName { get; set; }
         public string PersonAddress { get; set; }
         public string RequestedBy { get; set; }
+        public string AddOfPerReqBy { get; set; }
         public string UserID { get; set; }
         public Nullable<int> WEBstatusID { get; set; }
-        public string OtherName { get; set; }
-        public string AddOfPerReqBy { get; set; }
     
         public virtual RegisterType RegisterType { get; set; }
         public virtual WEBstatu WEBstatu { get; set; }

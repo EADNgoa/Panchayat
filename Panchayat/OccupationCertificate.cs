@@ -26,6 +26,7 @@ namespace Panchayat
         public Nullable<System.DateTime> MeetingDated { get; set; }
         public string ConstLicNo { get; set; }
         public string BuildingDetails { get; set; }
+        public Nullable<System.DateTime> ConstLicDate { get; set; }
         public Nullable<System.DateTime> Tdate { get; set; }
         public string SurveyNo { get; set; }
         public string PlotNumber { get; set; }
@@ -36,7 +37,6 @@ namespace Panchayat
         public Nullable<int> RegisterTypeID { get; set; }
         public Nullable<int> WEBstatusID { get; set; }
         public string UserID { get; set; }
-        public Nullable<System.DateTime> ConstLicDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OccupationCertDetail> OccupationCertDetails { get; set; }

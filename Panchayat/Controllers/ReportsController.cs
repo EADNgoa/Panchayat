@@ -171,7 +171,7 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
-                var PeriodStart = db.Period.FirstOrDefault(p => p.PeriodID == PeriodID);
+                var PeriodStart = db.Periods.FirstOrDefault(p => p.PeriodID == PeriodID);
                 DateTime Pstart = DateTime.Parse("1/April/" + PeriodStart.FromYr);
                 DateTime Pend = DateTime.Parse("31/March/" + PeriodStart.ToYr);
                 
@@ -212,7 +212,7 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
-                var PeriodStart = db.Period.FirstOrDefault(p => p.PeriodID == PeriodID);
+                var PeriodStart = db.Periods.FirstOrDefault(p => p.PeriodID == PeriodID);
                 DateTime Pstart = DateTime.Parse("1/April/" + PeriodStart.FromYr);
                 DateTime Pend = DateTime.Parse("31/March/" + PeriodStart.ToYr);
                 ViewBag.SelPeriod = PeriodStart;

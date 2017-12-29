@@ -17,7 +17,5 @@ namespace Panchayat
         public int CertificateRequirementID { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }
         public string CertificateName { get; set; }
-    
-        public virtual RegisterType RegisterType { get; set; }
     }
 }

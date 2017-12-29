@@ -148,11 +148,12 @@ namespace Panchayat
     [MetadataType(typeof(IncomeCertificateMetadata))]
     public partial class IncomeCertificate
     {
-
     }
+
     [MetadataType(typeof(DeathCorrCertificateMetadata))]
     public partial class DeathCorrCertificate
     {
+    }
 
 
     [MetadataType(typeof(NocCertificateMetadata))]

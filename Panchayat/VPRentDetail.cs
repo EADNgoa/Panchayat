@@ -24,7 +24,7 @@ namespace Panchayat
         public decimal BalanceCurrent { get; set; }
         public int ReceiptNo { get; set; }
     
-        public virtual VPRent VPRent { get; set; }
         public virtual Form4 Form4 { get; set; }
+        public virtual VPRent VPRent { get; set; }
     }
 }

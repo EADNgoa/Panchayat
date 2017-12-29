@@ -17,16 +17,16 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Form4()
         {
+            this.Buildings = new HashSet<Building>();
             this.Corrections = new HashSet<Correction>();
-            this.RVdetails = new HashSet<RVdetail>();
             this.DemandYears = new HashSet<DemandYear>();
             this.PropertyBookings = new HashSet<PropertyBooking>();
             this.PropertyBookings1 = new HashSet<PropertyBooking>();
             this.PropertyBookings2 = new HashSet<PropertyBooking>();
+            this.RVdetails = new HashSet<RVdetail>();
             this.VPRentDetails = new HashSet<VPRentDetail>();
             this.Works = new HashSet<Work>();
             this.Works1 = new HashSet<Work>();
-            this.Buildings = new HashSet<Building>();
         }
     
         public int RecieptNo { get; set; }
@@ -38,15 +38,15 @@ namespace Panchayat
         public string RecvdFrom { get; set; }
         public string HouseNo { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Building> Buildings { get; set; }
         public virtual Citizen Citizen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Correction> Corrections { get; set; }
-        public virtual Ledger Ledger { get; set; }
-        public virtual SubLedger SubLedger { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RVdetail> RVdetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DemandYear> DemandYears { get; set; }
+        public virtual Ledger Ledger { get; set; }
+        public virtual SubLedger SubLedger { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PropertyBooking> PropertyBookings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -54,12 +54,12 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PropertyBooking> PropertyBookings2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RVdetail> RVdetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VPRentDetail> VPRentDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Work> Works { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Work> Works1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Building> Buildings { get; set; }
     }
 }

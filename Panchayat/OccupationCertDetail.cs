@@ -16,7 +16,6 @@ namespace Panchayat
     {
         public int OccupationCertDetailsID { get; set; }
         public Nullable<int> OccupationCertificateID { get; set; }
-        public string NameOfTheOwner { get; set; }
         public string FlatNo { get; set; }
         public string HouseNo { get; set; }
         public Nullable<decimal> HouseTax { get; set; }
