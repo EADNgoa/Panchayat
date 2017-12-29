@@ -178,7 +178,7 @@ namespace Panchayat.Controllers
         private int GetCurrentPeriod()
         {
             int y = (System.DateTime.Today.Month > 3) ? System.DateTime.Today.Year : System.DateTime.Today.Year - 1;
-            return db.Period.FirstOrDefault(p => p.FromYr <= y && p.ToYr >= y).PeriodID;            
+            return db.Periods.FirstOrDefault(p => p.FromYr <= y && p.ToYr >= y).PeriodID;            
         }
 
         [HttpPost]

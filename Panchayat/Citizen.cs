@@ -17,8 +17,8 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Citizen()
         {
-            this.Form4 = new HashSet<Form4>();
             this.Demands = new HashSet<Demand>();
+            this.Form4 = new HashSet<Form4>();
         }
     
         public int CitizenID { get; set; }
@@ -28,8 +28,8 @@ namespace Panchayat
         public string ResAddress { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Form4> Form4 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Demand> Demands { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Form4> Form4 { get; set; }
     }
 }

@@ -38,10 +38,10 @@ namespace Panchayat
         public Nullable<byte> PeriodToSpendYrs { get; set; }
         public string TreasureVoucherDetails { get; set; }
     
-        public virtual InvItem InvItem { get; set; }
-        public virtual RegisterType RegisterType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InOutRegsIssue> InOutRegsIssues { get; set; }
+        public virtual InvItem InvItem { get; set; }
+        public virtual RegisterType RegisterType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Work> Works { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

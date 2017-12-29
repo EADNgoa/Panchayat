@@ -17,68 +17,66 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RegisterType()
         {
-            this.Meetings = new HashSet<Meeting>();
-            this.Outwards = new HashSet<Outward>();
-            this.Nocs = new HashSet<Noc>();
-            this.Inwards = new HashSet<Inward>();
-            this.InOutRegsRecpts = new HashSet<InOutRegsRecpt>();
-            this.InOutRegsIssues = new HashSet<InOutRegsIssue>();
-            this.InvItems = new HashSet<InvItem>();
-            this.IllegalConstructions = new HashSet<IllegalConstruction>();
-            this.PovertyCertificates = new HashSet<PovertyCertificate>();
-            this.CertificateRequirements = new HashSet<CertificateRequirement>();
-            this.HouseTaxCerts = new HashSet<HouseTaxCert>();
-            this.ConstLicenseCerts = new HashSet<ConstLicenseCert>();
-            this.OccupationCertificates = new HashSet<OccupationCertificate>();
-            this.IncomeCertificates = new HashSet<IncomeCertificate>();
-            this.NocCertifictes = new HashSet<NocCertificte>();
-            this.ResidenceCertificates = new HashSet<ResidenceCertificate>();
-            this.DeathCorrCertificates = new HashSet<DeathCorrCertificate>();
-
-            this.CharacterCertificates = new HashSet<CharacterCertificate>();
             this.BNDs = new HashSet<BND>();
+            this.CharacterCertificates = new HashSet<CharacterCertificate>();
+            this.ConstLicenseCerts = new HashSet<ConstLicenseCert>();
+            this.DeathCorrCertificates = new HashSet<DeathCorrCertificate>();
+            this.HouseTaxCerts = new HashSet<HouseTaxCert>();
+            this.IllegalConstructions = new HashSet<IllegalConstruction>();
+            this.IncomeCertificates = new HashSet<IncomeCertificate>();
+            this.InOutRegsIssues = new HashSet<InOutRegsIssue>();
+            this.InOutRegsRecpts = new HashSet<InOutRegsRecpt>();
+            this.InvItems = new HashSet<InvItem>();
+            this.Inwards = new HashSet<Inward>();
+            this.Meetings = new HashSet<Meeting>();
+            this.Nocs = new HashSet<Noc>();
+            this.NocCertifictes = new HashSet<NocCertificte>();
+            this.OccupationCertificates = new HashSet<OccupationCertificate>();
+            this.Outwards = new HashSet<Outward>();
+            this.PovertyCertificates = new HashSet<PovertyCertificate>();
+            this.ResidenceCertificates = new HashSet<ResidenceCertificate>();
         }
     
         public int RegisterTypeID { get; set; }
         public string RegisterType1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Meeting> Meetings { get; set; }
+        public virtual ICollection<BND> BNDs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Outward> Outwards { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Noc> Nocs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inward> Inwards { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InOutRegsRecpt> InOutRegsRecpts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InOutRegsIssue> InOutRegsIssues { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InvItem> InvItems { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IllegalConstruction> IllegalConstructions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PovertyCertificate> PovertyCertificates { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CertificateRequirement> CertificateRequirements { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HouseTaxCert> HouseTaxCerts { get; set; }
+        public virtual ICollection<CharacterCertificate> CharacterCertificates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConstLicenseCert> ConstLicenseCerts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OccupationCertificate> OccupationCertificates { get; set; }
+        public virtual ICollection<DeathCorrCertificate> DeathCorrCertificates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HouseTaxCert> HouseTaxCerts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IllegalConstruction> IllegalConstructions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IncomeCertificate> IncomeCertificates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
+        public virtual ICollection<InOutRegsIssue> InOutRegsIssues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InOutRegsRecpt> InOutRegsRecpts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InvItem> InvItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inward> Inwards { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Meeting> Meetings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Noc> Nocs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NocCertificte> NocCertifictes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OccupationCertificate> OccupationCertificates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Outward> Outwards { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PovertyCertificate> PovertyCertificates { get; set; }
+        public virtual RegisterType RegisterTypes1 { get; set; }
+        public virtual RegisterType RegisterType2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResidenceCertificate> ResidenceCertificates { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeathCorrCertificate> DeathCorrCertificates { get; set; }
-        public virtual ICollection<CharacterCertificate> CharacterCertificates { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BND> BNDs { get; set; }
     }
 }

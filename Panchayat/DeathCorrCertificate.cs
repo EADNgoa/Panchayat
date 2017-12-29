@@ -31,7 +31,6 @@ namespace Panchayat
         public string InsteadNGM { get; set; }
         public string NameOfGrandFather { get; set; }
         public string InsteadNGF { get; set; }
-        public string BirthDeathName { get; set; }
         public string UserID { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }
         public Nullable<int> WEBstatusID { get; set; }

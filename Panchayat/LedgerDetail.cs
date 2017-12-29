@@ -17,18 +17,18 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LedgerDetail()
         {
-            this.RVdetails = new HashSet<RVdetail>();
             this.DemandLedgerDetails = new HashSet<DemandLedgerDetail>();
+            this.RVdetails = new HashSet<RVdetail>();
         }
     
         public int LedgerDetailID { get; set; }
         public Nullable<int> SubLedgerID { get; set; }
         public string LedgerDetail1 { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DemandLedgerDetail> DemandLedgerDetails { get; set; }
         public virtual SubLedger SubLedger { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RVdetail> RVdetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DemandLedgerDetail> DemandLedgerDetails { get; set; }
     }
 }

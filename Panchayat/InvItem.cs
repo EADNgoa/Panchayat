@@ -17,8 +17,8 @@ namespace Panchayat
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public InvItem()
         {
-            this.InOutRegsRecpts = new HashSet<InOutRegsRecpt>();
             this.InOutRegsIssues = new HashSet<InOutRegsIssue>();
+            this.InOutRegsRecpts = new HashSet<InOutRegsRecpt>();
         }
     
         public int ItemID { get; set; }
@@ -26,10 +26,10 @@ namespace Panchayat
         public int RegisterTypeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InOutRegsIssue> InOutRegsIssues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InOutRegsRecpt> InOutRegsRecpts { get; set; }
         public virtual Inventory Inventory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InOutRegsIssue> InOutRegsIssues { get; set; }
         public virtual RegisterType RegisterType { get; set; }
     }
 }

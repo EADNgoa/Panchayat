@@ -16,7 +16,7 @@ namespace Panchayat.Controllers
         // GET: Periods
         public ActionResult Index()
         {
-            return View(db.Period.ToList());
+            return View(db.Periods.ToList());
         }
 
         // GET: Periods/Details/5
@@ -26,7 +26,7 @@ namespace Panchayat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Period period = db.Period.Find(id);
+            Period period = db.Periods.Find(id);
             if (period == null)
             {
                 return HttpNotFound();
@@ -49,7 +49,7 @@ namespace Panchayat.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Period.Add(period);
+                db.Periods.Add(period);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -64,7 +64,7 @@ namespace Panchayat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Period period = db.Period.Find(id);
+            Period period = db.Periods.Find(id);
             if (period == null)
             {
                 return HttpNotFound();
@@ -95,7 +95,7 @@ namespace Panchayat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Period period = db.Period.Find(id);
+            Period period = db.Periods.Find(id);
             if (period == null)
             {
                 return HttpNotFound();
@@ -108,8 +108,8 @@ namespace Panchayat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Period period = db.Period.Find(id);
-            db.Period.Remove(period);
+            Period period = db.Periods.Find(id);
+            db.Periods.Remove(period);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
