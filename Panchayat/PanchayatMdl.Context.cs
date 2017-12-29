@@ -78,8 +78,8 @@ namespace Panchayat
         public virtual DbSet<NocCertificte> NocCertifictes { get; set; }
         public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
         public virtual DbSet<DeathCorrCertificate> DeathCorrCertificates { get; set; }
-        public virtual DbSet<NocCertificte> NocCertifictes { get; set; }
-        public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
+        //public virtual DbSet<NocCertificte> NocCertifictes { get; set; }
+        //public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
         public virtual DbSet<CharacterCertificate> CharacterCertificates { get; set; }
         public virtual DbSet<BND> BNDs { get; set; }
     }

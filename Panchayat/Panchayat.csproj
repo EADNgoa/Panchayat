@@ -385,6 +385,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PanchayatMdl.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PanchayatMdl1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PanchayatMdl.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Period.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -508,7 +513,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <EntityDeploy Include="PanchayatMdl.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PanchayatMdl.Designer.cs</LastGenOutput>
+      <LastGenOutput>PanchayatMdl1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="PanchayatMdl.edmx.diagram">
       <DependentUpon>PanchayatMdl.edmx</DependentUpon>
@@ -844,7 +849,6 @@
     <Content Include="Views\OccupationCertificates\Index.cshtml" />
     <Content Include="Views\OccupationCertificates\AddDetails.cshtml" />
     <Content Include="Views\OccupationCertificates\ManageDetails.cshtml" />
-
     <Content Include="Views\IncomeCertificates\Create.cshtml" />
     <Content Include="Views\IncomeCertificates\Details.cshtml" />
     <Content Include="Views\IncomeCertificates\Edit.cshtml" />
@@ -853,7 +857,6 @@
     <Content Include="Views\DeathCorrCertificates\Details.cshtml" />
     <Content Include="Views\DeathCorrCertificates\Edit.cshtml" />
     <Content Include="Views\DeathCorrCertificates\Index.cshtml" />
-
     <Content Include="Views\NocCertifictes\Create.cshtml" />
     <Content Include="Views\NocCertifictes\Details.cshtml" />
     <Content Include="Views\NocCertifictes\Edit.cshtml" />

@@ -168,7 +168,7 @@
           <Property Name="DemandIncPerc" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ArrearsPerc" Type="decimal" Precision="18" Scale="0" />
           <Property Name="RowsPerPage" Type="int" />
-          <Property Name="PanchHead" Type="varchar" MaxLength="100" />
+         <Property Name="PanchHead" Type="varchar" MaxLength="100" />
           <Property Name="PanchSeceretary" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="ConstLicenseCert">
@@ -2695,7 +2695,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <End Role="WEBstatu" EntitySet="WEBstatus" />
             <End Role="IncomeCertificate" EntitySet="IncomeCertificates" />
           </AssociationSet>
-          <EntitySet Name="NocCertifictes" EntityType="PanchayatModel.NocCertificte" />
+          
           <AssociationSet Name="FK_NocCert_RegisterType" Association="PanchayatModel.FK_NocCert_RegisterType">
             <End Role="RegisterType" EntitySet="RegisterTypes" />
             <End Role="NocCertificte" EntitySet="NocCertifictes" />
@@ -2721,6 +2721,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <AssociationSet Name="FK_Death_WEBstatus" Association="PanchayatModel.FK_Death_WEBstatus">
             <End Role="WEBstatu" EntitySet="WEBstatus" />
             <End Role="DeathCorrCertificate" EntitySet="DeathCorrCertificates" />
+          </AssociationSet>
           <EntitySet Name="CharacterCertificates" EntityType="PanchayatModel.CharacterCertificate" />
           <AssociationSet Name="FK_Character_RegisterType" Association="PanchayatModel.FK_Character_RegisterType">
             <End Role="RegisterType" EntitySet="RegisterTypes" />
@@ -3024,8 +3025,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <NavigationProperty Name="ResidenceCertificates" Relationship="PanchayatModel.FK_ResidenceCertificate_RegisterTypes" FromRole="RegisterType" ToRole="ResidenceCertificate" />
           <NavigationProperty Name="DeathCorrCertificates" Relationship="PanchayatModel.FK_Death_RegisterType" FromRole="RegisterType" ToRole="DeathCorrCertificate" />
 
-          <NavigationProperty Name="NocCertifictes" Relationship="PanchayatModel.FK_NocCert_RegisterType" FromRole="RegisterType" ToRole="NocCertificte" />
-          <NavigationProperty Name="ResidenceCertificates" Relationship="PanchayatModel.FK_ResidenceCertificate_RegisterTypes" FromRole="RegisterType" ToRole="ResidenceCertificate" />
+          
           <NavigationProperty Name="CharacterCertificates" Relationship="PanchayatModel.FK_Character_RegisterType" FromRole="RegisterType" ToRole="CharacterCertificate" />
           <NavigationProperty Name="BNDs" Relationship="PanchayatModel.FK_Birth_RegisterType" FromRole="RegisterType" ToRole="BND" />
         </EntityType>
@@ -3549,8 +3549,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <NavigationProperty Name="NocCertifictes" Relationship="PanchayatModel.FK_NocCert_WEBstatus" FromRole="WEBstatu" ToRole="NocCertificte" />
           <NavigationProperty Name="ResidenceCertificates" Relationship="PanchayatModel.FK_ResidenceCertificate_WEBstatus" FromRole="WEBstatu" ToRole="ResidenceCertificate" />
           <NavigationProperty Name="DeathCorrCertificates" Relationship="PanchayatModel.FK_Death_WEBstatus" FromRole="WEBstatu" ToRole="DeathCorrCertificate" />
-          <NavigationProperty Name="NocCertifictes" Relationship="PanchayatModel.FK_NocCert_WEBstatus" FromRole="WEBstatu" ToRole="NocCertificte" />
-          <NavigationProperty Name="ResidenceCertificates" Relationship="PanchayatModel.FK_ResidenceCertificate_WEBstatus" FromRole="WEBstatu" ToRole="ResidenceCertificate" />
+          
           <NavigationProperty Name="CharacterCertificates" Relationship="PanchayatModel.FK_Character_WEBstatus" FromRole="WEBstatu" ToRole="CharacterCertificate" />
           <NavigationProperty Name="BNDs" Relationship="PanchayatModel.FK_Birth_WEBstatus" FromRole="WEBstatu" ToRole="BND" />
         </EntityType>
@@ -4011,24 +4010,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <NavigationProperty Name="WEBstatu" Relationship="PanchayatModel.FK_Income_WEBstatus" FromRole="IncomeCertificate" ToRole="WEBstatu" />
         </EntityType>
 
-        <EntityType Name="NocCertificte">
-          <Key>
-            <PropertyRef Name="NocID" />
-          </Key>
-          <Property Name="NocID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Hno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AprovedDate" Type="DateTime" Precision="0" />
-          <Property Name="PrintDate" Type="DateTime" Precision="0" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PersonName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ElectDeptAdd" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="WEBstatusID" Type="Int32" />
-          <Property Name="RegisterTypeID" Type="Int32" />
-          <NavigationProperty Name="RegisterType" Relationship="PanchayatModel.FK_NocCert_RegisterType" FromRole="NocCertificte" ToRole="RegisterType" />
-          <NavigationProperty Name="WEBstatu" Relationship="PanchayatModel.FK_NocCert_WEBstatus" FromRole="NocCertificte" ToRole="WEBstatu" />
-        </EntityType>
+    
         <Association Name="FK_Income_RegisterType">
           <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="0..1" />
           <End Type="PanchayatModel.IncomeCertificate" Role="IncomeCertificate" Multiplicity="*" />
@@ -4153,6 +4135,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
         <Association Name="FK_Death_RegisterType">
           <End Type="PanchayatModel.RegisterType" Role="RegisterType" Multiplicity="0..1" />
           <End Type="PanchayatModel.DeathCorrCertificate" Role="DeathCorrCertificate" Multiplicity="*" />
+         </Association>  
         <EntityType Name="CharacterCertificate">
           <Key>
             <PropertyRef Name="CharacterID" />
@@ -4182,7 +4165,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <Principal Role="RegisterType">
               <PropertyRef Name="RegisterTypeID" />
             </Principal>
-            <Dependent Role="DeathCorrCertificate">
+            
             <Dependent Role="CharacterCertificate">
               <PropertyRef Name="RegisterTypeID" />
             </Dependent>
@@ -4191,7 +4174,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
         <Association Name="FK_Death_WEBstatus">
           <End Type="PanchayatModel.WEBstatu" Role="WEBstatu" Multiplicity="0..1" />
           <End Type="PanchayatModel.DeathCorrCertificate" Role="DeathCorrCertificate" Multiplicity="*" />
-
+          </Association>
         <Association Name="FK_Character_WEBstatus">
           <End Type="PanchayatModel.WEBstatu" Role="WEBstatu" Multiplicity="0..1" />
           <End Type="PanchayatModel.CharacterCertificate" Role="CharacterCertificate" Multiplicity="*" />
@@ -4199,7 +4182,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <Principal Role="WEBstatu">
               <PropertyRef Name="WebStatusID" />
             </Principal>
-            <Dependent Role="DeathCorrCertificate">
+            
             <Dependent Role="CharacterCertificate">
               <PropertyRef Name="WEBstatusID" />
             </Dependent>
@@ -5031,6 +5014,9 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
                 <ScalarProperty Name="FromAddress" ColumnName="FromAddress" />
                 <ScalarProperty Name="FromName" ColumnName="FromName" />
                 <ScalarProperty Name="DeathCorrCertificateID" ColumnName="DeathCorrCertificateID" />
+              </MappingFragment>
+              </EntityTypeMapping>
+            </EntitySetMapping>
           <EntitySetMapping Name="CharacterCertificates">
             <EntityTypeMapping TypeName="PanchayatModel.CharacterCertificate">
               <MappingFragment StoreEntitySet="CharacterCertificate">

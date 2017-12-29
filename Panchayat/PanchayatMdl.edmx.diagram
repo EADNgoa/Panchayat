@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f6045e67b3384e138fe1a60d2b0f7bb4" Name="Diagram1" ZoomLevel="57">
-      <Diagram DiagramId="f6045e67b3384e138fe1a60d2b0f7bb4" Name="Diagram1" ZoomLevel="66">
+      
         <EntityTypeShape EntityType="PanchayatModel.Citizen" Width="1.5" PointX="4.875" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Correction" Width="1.5" PointX="11.875" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PanchayatModel.Form1" Width="1.5" PointX="3.625" PointY="12.25" IsExpanded="true" />
@@ -156,16 +156,6 @@
         <AssociationConnector Association="PanchayatModel.FK_Birth_RegisterType" />
         <AssociationConnector Association="PanchayatModel.FK_Birth_WEBstatus" />
         
-        
-        
-        
-        
-        
-        
-        
-
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 6d75790f62efd2a85de8c005a44079fdeeea0d0e
-        &gt;&gt;&gt;&gt;&gt;&gt;&gt; 6d75790f62efd2a85de8c005a44079fdeeea0d0e
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

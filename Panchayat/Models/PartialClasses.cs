@@ -154,151 +154,153 @@ namespace Panchayat
     public partial class DeathCorrCertificate
     {
 
-
-    [MetadataType(typeof(NocCertificateMetadata))]
-    public partial class NocCertificte
-    {
     }
 
-    [MetadataType(typeof(CharacterCertificateMetadata))]
-    public partial class CharacterCertificate
-    {
+
+        [MetadataType(typeof(NocCertificateMetadata))]
+        public partial class NocCertificte
+        {
+        }
+
+        [MetadataType(typeof(CharacterCertificateMetadata))]
+        public partial class CharacterCertificate
+        {
+
+        }
+        public class Form10rpt
+        {
+            public string Ledger { get; set; }
+            public string SubLedger { get; set; }
+            public bool isIncome { get; set; }
+            public decimal Amount { get; set; }
+        }
+
+        /// <summary>
+        /// Used when Entering a new demand. Needed because we are entering data into 2 tables
+        /// </summary>
+        public class DemandInitLoad
+        {
+            public int DemandID { get; set; }
+            public Nullable<int> CitizenID { get; set; }
+            public Nullable<int> PeriodID { get; set; }
+            public string HouseNo { get; set; }
+            public Nullable<int> SubLedgerID { get; set; }
+            public Nullable<decimal> Amt { get; set; }
+            public Nullable<DateTime> StopDate { get; set; }
+            public string Remarks { get; set; }
+        }
+
+        public class DemandInitEdit
+        {
+            public int DemandID { get; set; }
+            public int DDID { get; set; }
+            public int DemandPeriodID { get; set; }
+            public string HouseNo { get; set; }
+            public Nullable<decimal> Amt { get; set; }
+            public Nullable<int> StopDate { get; set; }
+            public string Remarks { get; set; }
+        }
+
+        /// <summary>
+        /// The below 2 are used to populate Form7 report
+        /// </summary>
+        public class Form7Rpt
+        {
+            public int form7ID { get; set; }
+
+            public int CitID { get; set; }
+            public string CitName { get; set; }
+            public string House { get; set; }
+            public List<TaxDmd> TaxDmd { get; set; }
+            public string Remarks { get; set; }
+            public Dictionary<int, TaxActuals> TaxActuals { get; set; }
+            public Dictionary<string, string> DetailData { get; set; }
+
+
+        }
+
+        public class TaxDmd
+        {
+            public int SLid { get; set; }
+            public int DDID { get; set; }
+            public string SLname { get; set; }
+            public decimal DmdAmt { get; set; } = 0;
+            public Dictionary<int, TaxActuals> TaxActuals { get; set; }
+        }
+
+        public class TaxActuals
+        {
+            public int f8yr { get; set; }
+            public int DDID { get; set; }
+
+            public decimal Arrears { get; set; } = 0;
+            public int ReceiptNo { get; set; }
+            public Nullable<DateTime> PayDate { get; set; }
+            public decimal PaidAmt { get; set; } = 0;
+        }
+
+        public class GenericReport
+        {
+            public int SLid { get; set; }
+            public int RVid { get; set; } //Receipt of Voucher ID
+            public decimal Amount { get; set; }
+            public DateTime Tdate { get; set; } //Transaction date
+        }
+
+        public class RVReport
+        {
+            public int RVid { get; set; } //Receipt of Voucher ID
+            public decimal Amount { get; set; }
+            public DateTime Tdate { get; set; } //Transaction date
+            public Dictionary<string, string> DetailData { get; set; }
+            public string PayeeName { get; set; }
+        }
+
+        public class rpt1to1io
+        {
+            public int IORecptID { get; set; }
+            public int RegisterTypeID { get; set; }
+            public DateTime TDate { get; set; }
+            public int ItemID { get; set; }
+            public decimal Value { get; set; }
+            public int RVno { get; set; }
+            public string PropertyParticulars { get; set; }
+            public string SituatedWhere { get; set; }
+            public string DepositPurpose { get; set; }
+            public string ValuationDetails { get; set; }
+            public string SanctionDateNo { get; set; }
+            public string SanctionByWhom { get; set; }
+            public byte PeriodToSpendYrs { get; set; }
+            public string TreasureVoucherDetails { get; set; }
+
+            public List<rpt1To1ioIssue> IssuesDets { get; set; }
+        }
+
+        public class rpt1To1ioIssue
+        {
+            public int IOissueID { get; set; }
+            public int IORecptID { get; set; }
+            public DateTime TDate { get; set; }
+            public Decimal Value { get; set; }
+            public string IssuedTo { get; set; }
+            public decimal Balance { get; set; }
+            public string Remarks { get; set; }
+            public int RVno { get; set; }
+            public string RefundReason { get; set; }
+        }
+
+        enum SubLedgerNamer : byte
+        {
+            None = 0,
+            HouseTax = 2
+        }
+
+        enum LedgerDetailNamer : byte
+        {
+            None = 0,
+            HouseNo = 1,
+            SignBoardText = 2,
+            SignBoardSize = 3
+        }
 
     }
-    public class Form10rpt
-    {
-        public string Ledger { get; set; }
-        public string SubLedger { get; set; }
-        public bool isIncome { get; set; }
-        public decimal Amount { get; set; }
-    }
-
-    /// <summary>
-    /// Used when Entering a new demand. Needed because we are entering data into 2 tables
-    /// </summary>
-    public class DemandInitLoad
-    {
-        public int DemandID { get; set; }
-        public Nullable<int> CitizenID { get; set; }
-        public Nullable<int> PeriodID { get; set; }
-        public string HouseNo { get; set; }
-        public Nullable<int> SubLedgerID { get; set; }
-        public Nullable<decimal> Amt { get; set; }
-        public Nullable<DateTime> StopDate { get; set; }
-        public string Remarks { get; set; }
-    }
-
-    public class DemandInitEdit
-    {
-        public int DemandID { get; set; }
-        public int DDID { get; set; }
-        public int DemandPeriodID { get; set; }
-        public string HouseNo { get; set; }
-        public Nullable<decimal> Amt { get; set; }
-        public Nullable<int> StopDate { get; set; }
-        public string Remarks { get; set; }
-    }
-
-    /// <summary>
-    /// The below 2 are used to populate Form7 report
-    /// </summary>
-    public class Form7Rpt
-    {
-        public int form7ID { get; set; }
-
-        public int CitID { get; set; }
-        public string CitName { get; set; }
-        public string House { get; set; }
-        public List<TaxDmd> TaxDmd { get; set; }
-        public string Remarks { get; set; }
-        public Dictionary<int, TaxActuals> TaxActuals { get; set; }
-        public Dictionary<string, string> DetailData { get; set; }
-
-
-    }
-
-    public class TaxDmd
-    {
-        public int SLid { get; set; }
-        public int DDID { get; set; }
-        public string SLname { get; set; }
-        public decimal DmdAmt { get; set; } = 0;
-        public Dictionary<int, TaxActuals> TaxActuals { get; set; }
-    }
-
-    public class TaxActuals
-    {
-        public int f8yr { get; set; }
-        public int DDID { get; set; }
-
-        public decimal Arrears { get; set; } = 0;
-        public int ReceiptNo { get; set; }
-        public Nullable<DateTime> PayDate { get; set; }
-        public decimal PaidAmt { get; set; } = 0;
-    }
-
-    public class GenericReport
-    {
-        public int SLid { get; set; }
-        public int RVid { get; set; } //Receipt of Voucher ID
-        public decimal Amount { get; set; }
-        public DateTime Tdate { get; set; } //Transaction date
-    }
-
-    public class RVReport
-    {
-        public int RVid { get; set; } //Receipt of Voucher ID
-        public decimal Amount { get; set; }
-        public DateTime Tdate { get; set; } //Transaction date
-        public Dictionary<string, string> DetailData { get; set; }
-        public string PayeeName { get; set; }
-    }
-
-    public class rpt1to1io
-    {
-        public int IORecptID { get; set; }
-        public int RegisterTypeID { get; set; }
-        public DateTime TDate { get; set; }
-        public int ItemID { get; set; }        
-        public decimal Value { get; set; }
-        public int RVno { get; set; }
-        public string PropertyParticulars { get; set; }
-        public string SituatedWhere { get; set; }
-        public string DepositPurpose { get; set; }
-        public string ValuationDetails { get; set; }
-        public string SanctionDateNo { get; set; }
-        public string SanctionByWhom { get; set; }
-        public byte PeriodToSpendYrs { get; set; }
-        public string TreasureVoucherDetails { get; set; }
-        
-        public List<rpt1To1ioIssue> IssuesDets { get; set; }
-}
-
-    public class rpt1To1ioIssue
-    {
-        public int IOissueID { get; set; }
-        public int IORecptID { get; set; }
-        public DateTime TDate { get; set; }
-        public Decimal Value { get; set; }
-        public string IssuedTo { get; set; }
-        public decimal Balance { get; set; }
-        public string Remarks { get; set; }
-        public int RVno { get; set; }
-        public string RefundReason { get; set; }
-    }
-
-    enum SubLedgerNamer : byte
-    {
-        None=0,
-        HouseTax=2
-    }
-
-    enum LedgerDetailNamer : byte
-    {
-        None=0,
-        HouseNo=1,
-        SignBoardText=2,
-        SignBoardSize=3
-    }
-
-}
