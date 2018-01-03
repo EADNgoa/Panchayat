@@ -25,6 +25,7 @@ namespace Panchayat
         public Nullable<System.DateTime> DateOfPermision { get; set; }
         public Nullable<decimal> EstimatedCost { get; set; }
         public Nullable<decimal> AmountPaid { get; set; }
+        public Nullable<decimal> SanitationFees { get; set; }
         public Nullable<System.DateTime> DateOfCompletion { get; set; }
         public Nullable<System.DateTime> DateOfOcccp { get; set; }
         public Nullable<System.DateTime> DateOfAsses { get; set; }

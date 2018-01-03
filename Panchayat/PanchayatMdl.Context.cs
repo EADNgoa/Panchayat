@@ -15,10 +15,10 @@ namespace Panchayat
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class PanchayatEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public PanchayatEntities()
-            : base("name=PanchayatEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -30,7 +30,6 @@ namespace Panchayat
         public virtual DbSet<Audit> Audits { get; set; }
         public virtual DbSet<BND> BNDs { get; set; }
         public virtual DbSet<Budget> Budgets { get; set; }
-        public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<CashInHandReg> CashInHandRegs { get; set; }
         public virtual DbSet<CBRunning> CBRunnings { get; set; }
         public virtual DbSet<CertificateRequirement> CertificateRequirements { get; set; }
@@ -72,7 +71,6 @@ namespace Panchayat
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<PropertyBooking> PropertyBookings { get; set; }
         public virtual DbSet<RegisterType> RegisterTypes { get; set; }
-        public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
         public virtual DbSet<RVdetail> RVdetails { get; set; }
         public virtual DbSet<SubLedger> SubLedgers { get; set; }
         public virtual DbSet<SubLedgerType> SubLedgerTypes { get; set; }
@@ -82,6 +80,8 @@ namespace Panchayat
         public virtual DbSet<WEBstatu> WEBstatus { get; set; }
         public virtual DbSet<Work> Works { get; set; }
         public virtual DbSet<PeriodSL> PeriodSLs { get; set; }
+        public virtual DbSet<Building> Buildings { get; set; }
+        public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
     
         public virtual ObjectResult<string> NightlyRun(Nullable<System.DateTime> date)
         {

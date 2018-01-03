@@ -11,9 +11,8 @@ using Panchayat;
 
 namespace Panchayat.Controllers
 {
-    public class WorksController : Controller
+    public class WorksController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
 
         // GET: Works
         public ActionResult Index(int? page, string PropName, int? yr)

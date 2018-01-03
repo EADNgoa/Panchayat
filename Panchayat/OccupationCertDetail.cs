@@ -20,6 +20,7 @@ namespace Panchayat
         public string HouseNo { get; set; }
         public Nullable<decimal> HouseTax { get; set; }
         public Nullable<decimal> GarbageTax { get; set; }
+        public string NameOfTheOwner { get; set; }
     
         public virtual OccupationCertificate OccupationCertificate { get; set; }
     }

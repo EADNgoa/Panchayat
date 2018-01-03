@@ -11,9 +11,8 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class CashInHandRegsController : Controller
+    public class CashInHandRegsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
 
         // GET: CashInHandRegs
         public ActionResult Index(int? page,DateTime? md)

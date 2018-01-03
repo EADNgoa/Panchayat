@@ -12,9 +12,8 @@ using Microsoft.AspNet.Identity;
 
 namespace Panchayat.Controllers
 {
-    public class IncomeCertificatesController : Controller
+    public class IncomeCertificatesController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
 
         // GET: IncomeCertificates
         public ActionResult Index(int? page, string PersonName, int? rt, int? WEBstatusID)
