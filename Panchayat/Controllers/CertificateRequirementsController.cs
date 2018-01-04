@@ -10,9 +10,9 @@ using Panchayat;
 
 namespace Panchayat.Controllers
 {
-    public class CertificateRequirementsController : Controller
+    public class CertificateRequirementsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
+        
 
         // GET: CertificateRequirements
         public ActionResult Index(int? RegisterTypeID)

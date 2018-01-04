@@ -15,9 +15,9 @@ using Panchayat;
 /// </summary>
 namespace Panchayat.Controllers
 {
-    public class SD9EMD6Controller : Controller
+    public class SD9EMD6Controller : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
+        
 
         // GET: SD9EMD6
         public ActionResult Index(int? page, int rt, string PropName, int? yr)

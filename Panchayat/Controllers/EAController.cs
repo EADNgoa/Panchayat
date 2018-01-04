@@ -9,10 +9,10 @@ namespace Panchayat.Controllers
     [HandleError]
     public class EAController : Controller
     {
-        protected PanchayatEntities db;
+        protected Entities db;
         public EAController()
         {
-            this.db = new PanchayatEntities();
+            this.db = new Entities();
         }
 
         // GET: EA
