@@ -23,6 +23,7 @@ namespace Panchayat.Controllers
             {
                 builds = builds.Where(b => b.WardNo.Contains(wn));
             }
+
             if (hn != null)
             {
                 builds = builds.Where(b => b.House_No.Contains(hn));

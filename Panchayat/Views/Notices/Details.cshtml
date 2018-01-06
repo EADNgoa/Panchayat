@@ -1,0 +1,50 @@
+﻿@model Panchayat.Notice
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    p{
+        text-align:justify;
+    }
+</style>
+<center>
+    <div class="section-to-print">
+        <h2>Notice</h2>
+        <br />
+        <br />
+        <p class="col-md-12">
+            <big><b>SUB: <u>@Model.Subject</u></b></big>
+        </p>
+        <br />
+        <br />
+        <p class="col-md-12">
+            &nbsp;&nbsp; @Model.Body
+            <br />
+            <br />
+            <span class="pull-right">
+                (<b>@ViewBag.ph</b>)
+            </span>
+        </p>
+        <br />
+        <p class="col-md-12">
+            To,<br />
+            @Model.To<br />
+            @Model.ToAddress
+        </p>
+        <br />
+
+        <p class="col-md-12">
+            Copy To:<br />
+            @Model.CopyTo<br />
+            @Model.CopyToAddress
+        </p>
+
+
+    </div>
+</center>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.NoticeID }) |<input type="button" onclick="javascript:window.print();" value="Print" class="eabutton section-to-not-print" />|
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -29,5 +29,7 @@ namespace Panchayat.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Panchayat.Notice> Notices { get; set; }
     }
 }

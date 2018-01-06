@@ -171,7 +171,7 @@
           <Property Name="RowsPerPage" Type="int" />
           <Property Name="PanchHead" Type="varchar" MaxLength="100" />
           <Property Name="PanchSeceretary" Type="varchar" MaxLength="100" />
-          <Property Name="MeetingAlert" Type="date" />
+          <Property Name="MeetingAlert" Type="int" />
         </EntityType>
         <EntityType Name="ConstLicenseCert">
           <Key>
@@ -535,6 +535,19 @@
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="WEBstatusID" Type="int" />
           <Property Name="RegisterTypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="Notice">
+          <Key>
+            <PropertyRef Name="NoticeID" />
+          </Key>
+          <Property Name="NoticeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="100" />
+          <Property Name="Body" Type="varchar(max)" />
+          <Property Name="To" Type="varchar" MaxLength="100" />
+          <Property Name="ToAddress" Type="varchar" MaxLength="200" />
+          <Property Name="CopyTo" Type="varchar" MaxLength="100" />
+          <Property Name="CopyToAddress" Type="varchar" MaxLength="100" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="OccupationCertDetails">
           <Key>
@@ -1741,6 +1754,7 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <EntitySet Name="MovementReg" EntityType="Self.MovementReg" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Noc" EntityType="Self.Noc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NocCertifictes" EntityType="Self.NocCertifictes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notice" EntityType="Self.Notice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OccupationCertDetails" EntityType="Self.OccupationCertDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OccupationCertificate" EntityType="Self.OccupationCertificate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Outward" EntityType="Self.Outward" Schema="dbo" store:Type="Tables" />
@@ -2216,19 +2230,6 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <Property Name="ResAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Demands" Relationship="Self.FK_Demand_CitizenID" FromRole="Citizen" ToRole="Demand" />
           <NavigationProperty Name="Form4" Relationship="Self.FK_Form4_Citizen" FromRole="Citizen" ToRole="Form4" />
-        </EntityType>
-        <EntityType Name="Config">
-          <Key>
-            <PropertyRef Name="ConfigID" />
-          </Key>
-          <Property Name="ConfigID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DemandIncPerc" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ArrearsPerc" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="RowsPerPage" Type="Int32" />
-          <Property Name="PanchHead" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PanchSeceretary" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="MeetingAlert" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="ConstLicenseCert">
           <Key>
@@ -3853,7 +3854,6 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
           <EntitySet Name="CertSupportDocs" EntityType="Self.CertSupportDoc" />
           <EntitySet Name="CharacterCertificates" EntityType="Self.CharacterCertificate" />
           <EntitySet Name="Citizens" EntityType="Self.Citizen" />
-          <EntitySet Name="Configs" EntityType="Self.Config" />
           <EntitySet Name="ConstLicenseCerts" EntityType="Self.ConstLicenseCert" />
           <EntitySet Name="Corrections" EntityType="Self.Correction" />
           <EntitySet Name="DeathCorrCertificates" EntityType="Self.DeathCorrCertificate" />
@@ -4217,6 +4217,8 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             <End Role="WEBstatu" EntitySet="WEBstatus" />
             <End Role="ResidenceCertificate" EntitySet="ResidenceCertificates" />
           </AssociationSet>
+          <EntitySet Name="Configs" EntityType="Panchayat.Config" />
+          <EntitySet Name="Notices" EntityType="Panchayat.Notice" />
         </EntityContainer>
         <EntityType Name="Building">
           <Key>
@@ -4310,6 +4312,32 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="ConfigID" />
+          </Key>
+          <Property Name="ConfigID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DemandIncPerc" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ArrearsPerc" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="RowsPerPage" Type="Int32" />
+          <Property Name="PanchHead" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PanchSeceretary" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MeetingAlert" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Notice">
+          <Key>
+            <PropertyRef Name="NoticeID" />
+          </Key>
+          <Property Name="NoticeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="To" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ToAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CopyTo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CopyToAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4454,20 +4482,6 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ResAddress" ColumnName="ResAddress" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Configs">
-            <EntityTypeMapping TypeName="Panchayat.Config">
-              <MappingFragment StoreEntitySet="Config">
-                <ScalarProperty Name="MeetingAlert" ColumnName="MeetingAlert" />
-                <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
-                <ScalarProperty Name="VP" ColumnName="VP" />
-                <ScalarProperty Name="DemandIncPerc" ColumnName="DemandIncPerc" />
-                <ScalarProperty Name="ArrearsPerc" ColumnName="ArrearsPerc" />
-                <ScalarProperty Name="RowsPerPage" ColumnName="RowsPerPage" />
-                <ScalarProperty Name="PanchHead" ColumnName="PanchHead" />
-                <ScalarProperty Name="PanchSeceretary" ColumnName="PanchSeceretary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5131,6 +5145,34 @@ warning 6002: The table/view 'PanchayatNew.dbo.PeriodSLs' does not have a primar
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
                 <ScalarProperty Name="ResidenceCertificateID" ColumnName="ResidenceCertificateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configs">
+            <EntityTypeMapping TypeName="Panchayat.Config">
+              <MappingFragment StoreEntitySet="Config">
+                <ScalarProperty Name="MeetingAlert" ColumnName="MeetingAlert" />
+                <ScalarProperty Name="PanchSeceretary" ColumnName="PanchSeceretary" />
+                <ScalarProperty Name="PanchHead" ColumnName="PanchHead" />
+                <ScalarProperty Name="RowsPerPage" ColumnName="RowsPerPage" />
+                <ScalarProperty Name="ArrearsPerc" ColumnName="ArrearsPerc" />
+                <ScalarProperty Name="DemandIncPerc" ColumnName="DemandIncPerc" />
+                <ScalarProperty Name="VP" ColumnName="VP" />
+                <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notices">
+            <EntityTypeMapping TypeName="Panchayat.Notice">
+              <MappingFragment StoreEntitySet="Notice">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CopyToAddress" ColumnName="CopyToAddress" />
+                <ScalarProperty Name="CopyTo" ColumnName="CopyTo" />
+                <ScalarProperty Name="ToAddress" ColumnName="ToAddress" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="NoticeID" ColumnName="NoticeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

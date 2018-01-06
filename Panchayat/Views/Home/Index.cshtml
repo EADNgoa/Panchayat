@@ -11,4 +11,63 @@
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
-    
+    <table class="table">
+        <thead>
+            Meeting Aletrs
+        </thead>
+        <tr>
+            <th>
+                Subject
+            </th>
+            <th>
+                Proposer Name
+            </th>
+            <th>
+                Is Proposal?
+            </th>
+            <th>
+                For
+            </th>
+            <th>
+                Against
+            </th>
+            <th>
+                Meeting Date
+            </th>
+            <th>
+                Resolution
+            </th>
+            <th>
+                Remark
+            </th>
+        </tr>
+        @foreach(var item in ViewBag.meets)
+        {
+            <tr>
+                <td>
+                    @item.Subject
+                </td>
+                <td>
+                    @item.ProposerName
+                </td>
+                <td>
+                    @item.PropOrAmend
+                </td>
+                  <td>
+                    @item.For
+                </td>
+                <td>
+                    @item.Against
+                </td>
+                <td>
+                    @item.MeetingDate.ToString("dd-mm-yyyy")
+                </td>
+                <td>
+                    @item.Resolution
+                </td>
+                <td>
+                    @item.Remark
+                </td>
+            </tr>
+        }
+    </table>

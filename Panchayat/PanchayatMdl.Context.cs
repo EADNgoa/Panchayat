@@ -36,7 +36,6 @@ namespace Panchayat
         public virtual DbSet<CertSupportDoc> CertSupportDocs { get; set; }
         public virtual DbSet<CharacterCertificate> CharacterCertificates { get; set; }
         public virtual DbSet<Citizen> Citizens { get; set; }
-        public virtual DbSet<Config> Configs { get; set; }
         public virtual DbSet<ConstLicenseCert> ConstLicenseCerts { get; set; }
         public virtual DbSet<Correction> Corrections { get; set; }
         public virtual DbSet<DeathCorrCertificate> DeathCorrCertificates { get; set; }
@@ -82,6 +81,8 @@ namespace Panchayat
         public virtual DbSet<PeriodSL> PeriodSLs { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
+        public virtual DbSet<Config> Configs { get; set; }
+        public virtual DbSet<Notice> Notices { get; set; }
     
         public virtual ObjectResult<string> NightlyRun(Nullable<System.DateTime> date)
         {

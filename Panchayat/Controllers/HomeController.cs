@@ -7,10 +7,15 @@ using System.Web.Mvc;
 namespace Panchayat.Controllers
 {
     [Authorize(Roles = "Boss,Type1,Type2")]
-    public class HomeController : Controller
+    public class HomeController : EAController
     {
         public ActionResult Index()
         {
+            int days = (int)db.Configs.First().MeetingAlert;
+            var currdate = DateTime.Now;
+            var md = currdate.AddDays(days);
+            ViewBag.meets = db.Meetings.Where(a => a.MeetingDate > currdate && a.MeetingDate <= md);
+
             return View();
         }
 

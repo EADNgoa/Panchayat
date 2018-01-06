@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="Panchayat.CertSupportDoc" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.CharacterCertificate" Width="1.5" PointX="6" PointY="47.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.Citizen" Width="1.5" PointX="6" PointY="74.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Config" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.ConstLicenseCert" Width="1.5" PointX="9" PointY="46.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.Correction" Width="1.5" PointX="15.5" PointY="78.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.DeathCorrCertificate" Width="1.5" PointX="6" PointY="40.875" IsExpanded="true" />
@@ -138,6 +137,8 @@
         <EntityTypeShape EntityType="Panchayat.ResidenceCertificate" Width="1.5" PointX="9" PointY="36.625" />
         <AssociationConnector Association="Panchayat.FK_ResidenceCertificate_RegisterTypes" />
         <AssociationConnector Association="Panchayat.FK_ResidenceCertificate_WEBstatus" />
+        <EntityTypeShape EntityType="Panchayat.Config" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Panchayat.Notice" Width="1.5" PointX="0.75" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

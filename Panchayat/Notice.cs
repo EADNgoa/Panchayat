@@ -12,15 +12,15 @@ namespace Panchayat
     using System;
     using System.Collections.Generic;
     
-    public partial class Config
+    public partial class Notice
     {
-        public int ConfigID { get; set; }
-        public string VP { get; set; }
-        public Nullable<decimal> DemandIncPerc { get; set; }
-        public Nullable<decimal> ArrearsPerc { get; set; }
-        public Nullable<int> RowsPerPage { get; set; }
-        public string PanchHead { get; set; }
-        public string PanchSeceretary { get; set; }
-        public Nullable<int> MeetingAlert { get; set; }
+        public int NoticeID { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+        public string To { get; set; }
+        public string ToAddress { get; set; }
+        public string CopyTo { get; set; }
+        public string CopyToAddress { get; set; }
+        public string UserID { get; set; }
     }
 }
