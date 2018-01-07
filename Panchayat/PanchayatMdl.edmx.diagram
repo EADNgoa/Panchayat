@@ -4,72 +4,65 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="48f33b9bb1de4aa482467a0e168efcd6" Name="Diagram1" ZoomLevel="57">
+      <Diagram DiagramId="48f33b9bb1de4aa482467a0e168efcd6" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="Panchayat.Audit" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.BND" Width="1.5" PointX="3" PointY="45.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Budget" Width="1.5" PointX="8.25" PointY="83" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.BND" Width="1.5" PointX="3.75" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Budget" Width="1.5" PointX="23.75" PointY="43.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.CashInHandReg" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.CBRunning" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.CertificateRequirement" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.CertSupportDoc" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.CharacterCertificate" Width="1.5" PointX="6" PointY="47.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Citizen" Width="1.5" PointX="6" PointY="74.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.ConstLicenseCert" Width="1.5" PointX="9" PointY="46.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Correction" Width="1.5" PointX="15.5" PointY="78.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.DeathCorrCertificate" Width="1.5" PointX="6" PointY="40.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Demand" Width="1.5" PointX="11" PointY="94.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.DemandDetail" Width="1.5" PointX="13.25" PointY="87.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.DemandLedgerDetail" Width="1.5" PointX="18.5" PointY="87.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.DemandPeriod" Width="1.5" PointX="18.5" PointY="90.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.DemandYear" Width="1.5" PointX="13.5" PointY="82.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Form1" Width="1.5" PointX="11.25" PointY="82.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Form2" Width="1.5" PointX="13.25" PointY="78.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Form3" Width="1.5" PointX="13.25" PointY="74.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Form4" Width="1.5" PointX="8.25" PointY="76.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.HouseTaxCert" Width="1.5" PointX="6" PointY="52.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.IllegalConstruction" Width="1.5" PointX="9" PointY="41.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.IncomeCertificate" Width="1.5" PointX="9" PointY="53.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.InOutRegsIssue" Width="1.5" PointX="5.25" PointY="68.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.InOutRegsRecpt" Width="1.5" PointX="8.25" PointY="67.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Inventory" Width="1.5" PointX="5.25" PointY="91.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.InvItem" Width="1.5" PointX="3" PointY="91.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Inward" Width="1.5" PointX="3" PointY="94.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.LedgerDetail" Width="1.5" PointX="8.25" PointY="86.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Ledger" Width="1.5" PointX="6" PointY="77.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Meeting" Width="1.5" PointX="3" PointY="98.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Citizen" Width="1.5" PointX="21.5" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.ConstLicenseCert" Width="1.5" PointX="9.75" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Correction" Width="1.5" PointX="31" PointY="38.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Demand" Width="1.5" PointX="26.5" PointY="54.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.DemandDetail" Width="1.5" PointX="28.75" PointY="47.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.DemandLedgerDetail" Width="1.5" PointX="34" PointY="47.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.DemandPeriod" Width="1.5" PointX="34" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.DemandYear" Width="1.5" PointX="29" PointY="43" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Form1" Width="1.5" PointX="26.75" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Form2" Width="1.5" PointX="28.75" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Form3" Width="1.5" PointX="28.75" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Form4" Width="1.5" PointX="23.75" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.HouseTaxCert" Width="1.5" PointX="6.75" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.IllegalConstruction" Width="1.5" PointX="9.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.IncomeCertificate" Width="1.5" PointX="9.75" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.InOutRegsIssue" Width="1.5" PointX="20.75" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.InOutRegsRecpt" Width="1.5" PointX="23.75" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Inventory" Width="1.5" PointX="20.75" PointY="51.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.InvItem" Width="1.5" PointX="18.5" PointY="51.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Inward" Width="1.5" PointX="18.5" PointY="54.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.LedgerDetail" Width="1.5" PointX="23.75" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Ledger" Width="1.5" PointX="21.5" PointY="37.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Meeting" Width="1.5" PointX="18.5" PointY="58.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.MovementReg" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Noc" Width="1.5" PointX="3" PointY="102.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.NocCertificte" Width="1.5" PointX="3" PointY="40.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.OccupationCertDetail" Width="1.5" PointX="5.25" PointY="57.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.OccupationCertificate" Width="1.5" PointX="3" PointY="55.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Outward" Width="1.5" PointX="3" PointY="116.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Period" Width="1.5" PointX="11.25" PointY="90.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.PovertyCertificate" Width="1.5" PointX="12" PointY="48" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Property" Width="1.5" PointX="13.25" PointY="71.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.PropertyBooking" Width="1.5" PointX="15.5" PointY="71.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.RegisterType" Width="1.5" PointX="0.75" PointY="46.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.RVdetail" Width="1.5" PointX="10.5" PointY="86.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.SubLedger" Width="1.5" PointX="6" PointY="80.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.SubLedgerType" Width="1.5" PointX="3.75" PointY="81.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Voucher" Width="1.5" PointX="16.25" PointY="85.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.VPRent" Width="1.5" PointX="14.25" PointY="91.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.VPRentDetail" Width="1.5" PointX="16.5" PointY="81.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.WEBstatu" Width="1.5" PointX="0.75" PointY="40.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Panchayat.Work" Width="1.5" PointX="10.5" PointY="67.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Noc" Width="1.5" PointX="30.375" PointY="56.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.NocCertificte" Width="1.5" PointX="3.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.OccupationCertificate" Width="1.5" PointX="3.75" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Outward" Width="1.5" PointX="24" PointY="56.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Period" Width="1.5" PointX="26.75" PointY="50.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.PovertyCertificate" Width="1.5" PointX="12.75" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Property" Width="1.5" PointX="28.75" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.PropertyBooking" Width="1.5" PointX="31" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.RegisterType" Width="1.5" PointX="1.5" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.RVdetail" Width="1.5" PointX="26" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.SubLedger" Width="1.5" PointX="21.5" PointY="40.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.SubLedgerType" Width="1.5" PointX="19.25" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Voucher" Width="1.5" PointX="31.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.VPRent" Width="1.5" PointX="29.75" PointY="51.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.VPRentDetail" Width="1.5" PointX="32" PointY="41.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.WEBstatu" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Work" Width="1.5" PointX="26" PointY="27.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.PeriodSL" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="Panchayat.FK_Birth_RegisterType" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_Birth_WEBstatus" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_Budget_ToSubledger" ManuallyRouted="false" />
-        <AssociationConnector Association="Panchayat.FK_Character_RegisterType" ManuallyRouted="false" />
-        <AssociationConnector Association="Panchayat.FK_Character_WEBstatus" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_Demand_CitizenID" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_Form4_Citizen" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_ConstLicense_RegisterType" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_ConstLicense_WEBstatus" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_Corrections_Reciept" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_Corrections_Voucher" ManuallyRouted="false" />
-        <AssociationConnector Association="Panchayat.FK_Death_RegisterType" ManuallyRouted="false" />
-        <AssociationConnector Association="Panchayat.FK_Death_WEBstatus" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_DemandDetails_Demand" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_DemandDetails_SubLedgerID" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_DemandLedgerDetails_Demand" ManuallyRouted="false" />
@@ -118,7 +111,6 @@
         <AssociationConnector Association="Panchayat.FK_Noc_RegisterType" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_NocCert_RegisterType" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_NocCert_WEBstatus" ManuallyRouted="false" />
-        <AssociationConnector Association="Panchayat.FK_OccupancyCertDetails_occupancydetails" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_Occuoation_RegisterType" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_Occuoation_WEBstatus" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_Outward_ToTable" ManuallyRouted="false" />
@@ -131,14 +123,22 @@
         <AssociationConnector Association="Panchayat.FK_SubLedgers_SubLedgerType" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_Voucher_SubLedger" ManuallyRouted="false" />
         <AssociationConnector Association="Panchayat.FK_VPRentDetails_ToVPRent" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Panchayat.Building" Width="1.5" PointX="10.5" PointY="77.125" />
+        <EntityTypeShape EntityType="Panchayat.Building" Width="1.5" PointX="26" PointY="37.25" />
         <AssociationConnector Association="Panchayat.FK_Building_ToForm4" />
         <AssociationConnector Association="Panchayat.FK_CertificateRequirements_RegisterType1" />
-        <EntityTypeShape EntityType="Panchayat.ResidenceCertificate" Width="1.5" PointX="9" PointY="36.625" />
+        <EntityTypeShape EntityType="Panchayat.ResidenceCertificate" Width="1.5" PointX="9.75" PointY="12.5" />
         <AssociationConnector Association="Panchayat.FK_ResidenceCertificate_RegisterTypes" />
         <AssociationConnector Association="Panchayat.FK_ResidenceCertificate_WEBstatus" />
         <EntityTypeShape EntityType="Panchayat.Config" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Panchayat.CharacterCertificate" Width="1.5" PointX="7.125" PointY="14.25" />
+        <EntityTypeShape EntityType="Panchayat.DeathCorrCertificate" Width="1.5" PointX="7.125" PointY="19.75" />
         <EntityTypeShape EntityType="Panchayat.Notice" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Panchayat.OccupationCertDetail" Width="1.5" PointX="6.375" PointY="33.125" />
+        <AssociationConnector Association="Panchayat.FK_Character_RegisterType" />
+        <AssociationConnector Association="Panchayat.FK_Character_WEBstatus" />
+        <AssociationConnector Association="Panchayat.FK_Death_RegisterType" />
+        <AssociationConnector Association="Panchayat.FK_Death_WEBstatus" />
+        <AssociationConnector Association="Panchayat.FK_OccupancyCertDetails_occupancydetails" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

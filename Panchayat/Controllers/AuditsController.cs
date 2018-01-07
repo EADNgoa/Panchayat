@@ -12,7 +12,7 @@ using PagedList;
 namespace Panchayat.Controllers
 {
     [Authorize(Roles = "Boss,Type1")]
-    public class AuditsController : EAController
+    public class AuditsController : EAAController
     {       
 
         // GET: Audits

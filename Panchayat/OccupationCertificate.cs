@@ -38,9 +38,9 @@ namespace Panchayat
         public Nullable<int> WEBstatusID { get; set; }
         public string UserID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OccupationCertDetail> OccupationCertDetails { get; set; }
         public virtual RegisterType RegisterType { get; set; }
         public virtual WEBstatu WEBstatu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OccupationCertDetail> OccupationCertDetails { get; set; }
     }
 }
