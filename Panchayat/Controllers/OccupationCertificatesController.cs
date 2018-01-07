@@ -12,9 +12,9 @@ using Microsoft.AspNet.Identity;
 
 namespace Panchayat.Controllers
 {
-    public class OccupationCertificatesController : Controller
+    public class OccupationCertificatesController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
+        
 
         // GET: OccupationCertificates
         public ActionResult Index(int? page, string PersonName, int? rt, int? WEBstatusID)

@@ -257,6 +257,7 @@
     <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Controllers\MovementRegsController.cs" />
     <Compile Include="Controllers\NocsController.cs" />
+    <Compile Include="Controllers\NoticesController.cs" />
     <Compile Include="Controllers\OccupationCertificatesController.cs" />
     <Compile Include="Controllers\OutwardsController.cs" />
     <Compile Include="Controllers\PeriodsController.cs" />
@@ -359,6 +360,9 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="NocCertificte.cs">
+      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Notice.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="OccupationCertDetail.cs">
@@ -864,6 +868,10 @@
     <Content Include="Views\BNDs\Details.cshtml" />
     <Content Include="Views\BNDs\Edit.cshtml" />
     <Content Include="Views\BNDs\Index.cshtml" />
+    <Content Include="Views\Notices\Create.cshtml" />
+    <Content Include="Views\Notices\Details.cshtml" />
+    <Content Include="Views\Notices\Edit.cshtml" />
+    <Content Include="Views\Notices\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

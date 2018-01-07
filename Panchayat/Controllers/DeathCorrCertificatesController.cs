@@ -12,9 +12,8 @@ using Microsoft.AspNet.Identity;
 
 namespace Panchayat.Controllers
 {
-    public class DeathCorrCertificatesController : Controller
+    public class DeathCorrCertificatesController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
 
         // GET: DeathCorrCertificates
         public ActionResult Index(int? page, string PersonName, int? rt, int? WEBstatusID)

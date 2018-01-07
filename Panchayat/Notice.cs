@@ -12,12 +12,15 @@ namespace Panchayat
     using System;
     using System.Collections.Generic;
     
-    public partial class CertificateRequirement
+    public partial class Notice
     {
-        public int CertificateRequirementID { get; set; }
-        public Nullable<int> RegisterTypeID { get; set; }
-        public string CertificateName { get; set; }
-    
-        public virtual RegisterType RegisterType { get; set; }
+        public int NoticeID { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+        public string To { get; set; }
+        public string ToAddress { get; set; }
+        public string CopyTo { get; set; }
+        public string CopyToAddress { get; set; }
+        public string UserID { get; set; }
     }
 }

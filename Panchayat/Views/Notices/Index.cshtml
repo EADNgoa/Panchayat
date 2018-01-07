@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Panchayat.Notice>
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2>Notices</h2>
+
+</center>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.To)
+        </th>
+        <th>
+            To Address
+        </th>
+        <th>
+           Copy To
+        </th>
+        <th>
+            Copy To Address
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.To)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CopyTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CopyToAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.NoticeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NoticeID }) |
+        </td>
+    </tr>
+}
+
+</table>

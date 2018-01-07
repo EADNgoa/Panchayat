@@ -12,9 +12,8 @@ using Microsoft.AspNet.Identity;
 
 namespace Panchayat.Controllers
 {
-    public class ConstLicenseCertsController : Controller
+    public class ConstLicenseCertsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
 
         // GET: ConstLicenseCerts
         public ActionResult Index(int? page, string PersonName, int? rt, int? WEBstatusID)

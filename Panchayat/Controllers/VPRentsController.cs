@@ -11,9 +11,9 @@ using Panchayat;
 
 namespace Panchayat.Controllers
 {
-    public class VPRentsController : Controller
+    public class VPRentsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
+        
 
         // GET: VPRents
         public ActionResult Index(int? page,  string PropName, int? yr)

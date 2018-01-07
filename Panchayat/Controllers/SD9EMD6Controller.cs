@@ -15,9 +15,9 @@ using Panchayat;
 /// </summary>
 namespace Panchayat.Controllers
 {
-    public class SD9EMD6Controller : Controller
+    public class SD9EMD6Controller : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
+        
 
         // GET: SD9EMD6
         public ActionResult Index(int? page, int rt, string PropName, int? yr)
@@ -28,7 +28,7 @@ namespace Panchayat.Controllers
             var Recpts = db.InOutRegsRecpts.Where(r =>r.RegisterTypeID==rt && ((DateTime)r.TDate).Year == yr).OrderByDescending(r => r.TDate).Include(i => i.RegisterType).ToList();
             var Issues = db.InOutRegsIssues.Where(i => i.RegisterTypeID == rt && ((DateTime)i.TDate).Year == yr).OrderByDescending(r => r.TDate).Include(i => i.RegisterType).ToList();
 
-            if (PropName?.Length>0 && rt==22)
+            if (PropName?.Length>0 && rt==22 || rt==1040)
             {//for Form 6
                 Recpts = Recpts.Where(r => r.PropertyParticulars.Contains(PropName)).ToList();
                 page = 1;
@@ -85,7 +85,7 @@ namespace Panchayat.Controllers
             int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
             int pageNumber = (page ?? 1);
             if (rt == 21) return View("Index9", RptData.OrderByDescending(a => a.TDate).ToList().ToPagedList(pageNumber, pageSize));
-            if (rt == 22) return View("Index6",RptData.OrderByDescending(a => a.TDate).ToList().ToPagedList(pageNumber, pageSize));
+            if (rt == 22 || rt == 1040) return View("Index6",RptData.OrderByDescending(a => a.TDate).ToList().ToPagedList(pageNumber, pageSize));
             if (rt == 23) return View("IndexSD", RptData.OrderByDescending(a => a.TDate).ToList().ToPagedList(pageNumber, pageSize));
             if (rt == 24) return View("IndexEMD", RptData.OrderByDescending(a => a.TDate).ToList().ToPagedList(pageNumber, pageSize));
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

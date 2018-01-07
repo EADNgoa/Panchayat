@@ -43,7 +43,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ConfigID,VP,DemandIncPerc,ArrearsPerc,RowsPerPage")] Config config)
+        public ActionResult Edit([Bind(Include = "ConfigID,VP,DemandIncPerc,ArrearsPerc,RowsPerPage,MeetingAlert")] Config config)
         {
             if (ModelState.IsValid)
             {

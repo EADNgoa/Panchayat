@@ -7,87 +7,97 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Panchayat;
-using PagedList;
+using Panchayat.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Panchayat.Controllers
 {
-    public class CashInHandRegsController : EAController
+    public class NoticesController : EAController
     {
 
-        // GET: CashInHandRegs
-        public ActionResult Index(int? page,DateTime? md)
+        // GET: Notices
+        public ActionResult Index()
         {
-            var cih = db.CashInHandRegs.Where(a=>a.CashInHandRegID >0);
-            if (md!=null)
-            {
-                cih = cih.Where(a => a.Tdate == md);
-            }
-            cih = cih.OrderByDescending(a => a.CashInHandRegID);
-            int pageSize = db.Configs.FirstOrDefault().RowsPerPage ?? 5;
-            int pageNumber = (page ?? 1);
-            return View(cih.ToPagedList(pageNumber, pageSize));
+            return View(db.Notices.ToList());
         }
 
+        // GET: Notices/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Notice notice = db.Notices.Find(id);
+            ViewBag.ph = db.Configs.FirstOrDefault().PanchHead;
+            if (notice == null)
+            {
+                return HttpNotFound();
+            }
+            return View(notice);
+        }
 
-        // GET: CashInHandRegs/Create
+        // GET: Notices/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CashInHandRegs/Create
+        // POST: Notices/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CashInHandRegID,Tdate,NameAndDesg,CashToDeclareStart,DetailsOfCashExp,CashToDeclareEnd,Remarks")] CashInHandReg cashInHandReg)
+        public ActionResult Create([Bind(Include = "NoticeID,Subject,Body,To,ToAddress,CopyTo,CopyToAddress,UserID")] Notice notice)
         {
-          
-
             if (ModelState.IsValid)
             {
-                cashInHandReg.Tdate = DateTime.Now;
-                db.CashInHandRegs.Add(cashInHandReg);
+                db.Notices.Add(notice);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cashInHandReg);
+            return View(notice);
         }
 
-        // GET: CashInHandRegs/Edit/5
+        // GET: Notices/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CashInHandReg cashInHandReg = db.CashInHandRegs.Find(id);
-            if (cashInHandReg == null)
+            Notice notice = db.Notices.Find(id);
+            if (notice == null)
             {
                 return HttpNotFound();
             }
-            return View(cashInHandReg);
+            return View(notice);
         }
 
-        // POST: CashInHandRegs/Edit/5
+        // POST: Notices/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CashInHandRegID,Tdate,NameAndDesg,CashToDeclareStart,DetailsOfCashExp,CashToDeclareEnd,Remarks")] CashInHandReg cashInHandReg)
+        public ActionResult Edit([Bind(Include = "NoticeID,Subject,Body,To,ToAddress,CopyTo,CopyToAddress,UserID")] Notice notice)
         {
             if (ModelState.IsValid)
             {
-                cashInHandReg.Tdate = DateTime.Now;
-                db.Entry(cashInHandReg).State = EntityState.Modified;
+                notice.UserID = User.Identity.GetUserId();
+
+                db.Entry(notice).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cashInHandReg);
+            return View(notice);
         }
 
- 
+        // GET: Notices/Delete/5
+     
+
+    
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

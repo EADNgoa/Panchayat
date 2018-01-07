@@ -21,5 +21,6 @@ namespace Panchayat
         public Nullable<int> RowsPerPage { get; set; }
         public string PanchHead { get; set; }
         public string PanchSeceretary { get; set; }
+        public Nullable<int> MeetingAlert { get; set; }
     }
 }

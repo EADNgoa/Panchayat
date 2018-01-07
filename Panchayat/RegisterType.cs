@@ -34,6 +34,7 @@ namespace Panchayat
             this.OccupationCertificates = new HashSet<OccupationCertificate>();
             this.Outwards = new HashSet<Outward>();
             this.PovertyCertificates = new HashSet<PovertyCertificate>();
+            this.CertificateRequirements = new HashSet<CertificateRequirement>();
             this.ResidenceCertificates = new HashSet<ResidenceCertificate>();
         }
     
@@ -76,6 +77,8 @@ namespace Panchayat
         public virtual ICollection<PovertyCertificate> PovertyCertificates { get; set; }
         public virtual RegisterType RegisterTypes1 { get; set; }
         public virtual RegisterType RegisterType2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CertificateRequirement> CertificateRequirements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResidenceCertificate> ResidenceCertificates { get; set; }
     }

@@ -166,6 +166,11 @@ namespace Panchayat
     {
 
     }
+    [MetadataType(typeof(NoticeMetadata))]
+    public partial class Notice
+    {
+
+    }
     public class Form10rpt
     {
         public string Ledger { get; set; }

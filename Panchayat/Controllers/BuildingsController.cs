@@ -11,9 +11,9 @@ using PagedList;
 
 namespace Panchayat.Controllers
 {
-    public class BuildingsController : Controller
+    public class BuildingsController : EAController
     {
-        private PanchayatEntities db = new PanchayatEntities();
+        
 
         // GET: Buildings
         public ActionResult Index(int? page,string wn,string hn,DateTime? doa)
@@ -23,6 +23,7 @@ namespace Panchayat.Controllers
             {
                 builds = builds.Where(b => b.WardNo.Contains(wn));
             }
+
             if (hn != null)
             {
                 builds = builds.Where(b => b.House_No.Contains(hn));
@@ -63,7 +64,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BuildingID,WardNo,House_No,OwnerName,NameOfConstructioin,DateOfAppl,NoOfRes,DateOfRes,DateOfPermision,EstimatedCost,AmountPaid,DateOfCompletion,DateOfOcccp,DateOfAsses,HouseTax,Remarks")] Building building)
+        public ActionResult Create([Bind(Include = "BuildingID,WardNo,House_No,OwnerName,SanitationFees,NameOfConstructioin,DateOfAppl,NoOfRes,DateOfRes,DateOfPermision,EstimatedCost,AmountPaid,DateOfCompletion,DateOfOcccp,DateOfAsses,HouseTax,Remarks")] Building building)
         {
             if (ModelState.IsValid)
             {
@@ -112,7 +113,7 @@ namespace Panchayat.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BuildingID,WardNo,House_No,OwnerName,NameOfConstructioin,DateOfAppl,NoOfRes,DateOfRes,DateOfPermision,EstimatedCost,AmountPaid,DateOfCompletion,DateOfOcccp,DateOfAsses,HouseTax,Remarks,ReceiptNo")] Building building)
+        public ActionResult Edit([Bind(Include = "BuildingID,WardNo,House_No,OwnerName,SanitationFees,NameOfConstructioin,DateOfAppl,NoOfRes,DateOfRes,DateOfPermision,EstimatedCost,AmountPaid,DateOfCompletion,DateOfOcccp,DateOfAsses,HouseTax,Remarks,ReceiptNo")] Building building)
         {
             if (ModelState.IsValid)
             {

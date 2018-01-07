@@ -30,7 +30,16 @@
     }
 </style>
 <center>
-    <h2 class="section-to-print"><b>Form No. 6</b></h2>
+    @if (ViewBag.RegisterTypeID == 22)
+    {
+        <h2 class="section-to-print"><b>Form No. 6:Non Consumable</b></h2>
+
+    }
+    else
+    {
+        <h2 class="section-to-print"><b>Form No. 6:Consumable</b></h2>
+
+    }
     <h4>Registers Of Properties and Assets</h4>
 @using (Html.BeginForm("Index", "SD9EMD6", FormMethod.Get))
 {

@@ -544,7 +544,9 @@ namespace Panchayat
         [Required]
         [Range(0.0, Double.MaxValue)]
         public decimal EstimatedCost;
-
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public decimal SanitaitonFees;
         [Required]
         [Range(0.0, Double.MaxValue)]
 
@@ -1053,6 +1055,32 @@ public class MovementMetadata
 
 
 
+    }
+
+    public class NoticeMetadata
+    {
+        [Required]
+        [StringLength(200)]
+        public string Subject;
+
+        [Required]
+        public string Body;
+
+        [Required]
+        [StringLength(100)]
+        public string To;
+
+        [Required]
+        [StringLength(200)]
+        public string ToAddress;
+
+        [Required]
+        [StringLength(100)]
+        public string CopyTo;
+
+        [Required]
+        [StringLength(200)]
+        public string CopyToAddress;
     }
 }
 
