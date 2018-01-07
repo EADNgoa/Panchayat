@@ -34,11 +34,9 @@ namespace Panchayat
         public virtual DbSet<CBRunning> CBRunnings { get; set; }
         public virtual DbSet<CertificateRequirement> CertificateRequirements { get; set; }
         public virtual DbSet<CertSupportDoc> CertSupportDocs { get; set; }
-        public virtual DbSet<CharacterCertificate> CharacterCertificates { get; set; }
         public virtual DbSet<Citizen> Citizens { get; set; }
         public virtual DbSet<ConstLicenseCert> ConstLicenseCerts { get; set; }
         public virtual DbSet<Correction> Corrections { get; set; }
-        public virtual DbSet<DeathCorrCertificate> DeathCorrCertificates { get; set; }
         public virtual DbSet<Demand> Demands { get; set; }
         public virtual DbSet<DemandDetail> DemandDetails { get; set; }
         public virtual DbSet<DemandLedgerDetail> DemandLedgerDetails { get; set; }
@@ -62,7 +60,6 @@ namespace Panchayat
         public virtual DbSet<MovementReg> MovementRegs { get; set; }
         public virtual DbSet<Noc> Nocs { get; set; }
         public virtual DbSet<NocCertificte> NocCertifictes { get; set; }
-        public virtual DbSet<OccupationCertDetail> OccupationCertDetails { get; set; }
         public virtual DbSet<OccupationCertificate> OccupationCertificates { get; set; }
         public virtual DbSet<Outward> Outwards { get; set; }
         public virtual DbSet<Period> Periods { get; set; }
@@ -82,7 +79,10 @@ namespace Panchayat
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<ResidenceCertificate> ResidenceCertificates { get; set; }
         public virtual DbSet<Config> Configs { get; set; }
+        public virtual DbSet<CharacterCertificate> CharacterCertificates { get; set; }
+        public virtual DbSet<DeathCorrCertificate> DeathCorrCertificates { get; set; }
         public virtual DbSet<Notice> Notices { get; set; }
+        public virtual DbSet<OccupationCertDetail> OccupationCertDetails { get; set; }
     
         public virtual ObjectResult<string> NightlyRun(Nullable<System.DateTime> date)
         {

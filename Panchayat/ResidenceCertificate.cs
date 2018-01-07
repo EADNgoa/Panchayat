@@ -27,6 +27,8 @@ namespace Panchayat
         public string UserID { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }
         public Nullable<int> WebStatusID { get; set; }
+        public Nullable<System.DateTime> FromDate { get; set; }
+        public Nullable<System.DateTime> TillDate { get; set; }
     
         public virtual RegisterType RegisterType { get; set; }
         public virtual WEBstatu WEBstatu { get; set; }

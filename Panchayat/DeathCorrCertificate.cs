@@ -15,6 +15,7 @@ namespace Panchayat
     public partial class DeathCorrCertificate
     {
         public int DeathCorrCertificateID { get; set; }
+        public string BirthDeathName { get; set; }
         public string FromName { get; set; }
         public string FromAddress { get; set; }
         public Nullable<System.DateTime> TDate { get; set; }
@@ -34,7 +35,6 @@ namespace Panchayat
         public string UserID { get; set; }
         public Nullable<int> RegisterTypeID { get; set; }
         public Nullable<int> WEBstatusID { get; set; }
-        public string BirthDeathName { get; set; }
     
         public virtual RegisterType RegisterType { get; set; }
         public virtual WEBstatu WEBstatu { get; set; }

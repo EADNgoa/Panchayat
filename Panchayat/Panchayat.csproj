@@ -196,6 +196,21 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AttEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttEntities.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Audit.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -246,6 +261,7 @@
     <Compile Include="Controllers\CorrectionsController.cs" />
     <Compile Include="Controllers\DeathCorrCertificatesController.cs" />
     <Compile Include="Controllers\DemandsController.cs" />
+    <Compile Include="Controllers\EAAController.cs" />
     <Compile Include="Controllers\Form4Controller.cs" />
     <Compile Include="Controllers\NocCertifictesController.cs" />
     <Compile Include="Controllers\IllegalConstructionsController.cs" />
@@ -442,6 +458,16 @@
     <Content Include="App_Data\Panchayat_log.ldf">
       <DependentUpon>Panchayat.mdf</DependentUpon>
     </Content>
+    <Content Include="AttEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AttEntities.edmx</DependentUpon>
+      <LastGenOutput>AttEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AttEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AttEntities.edmx</DependentUpon>
+      <LastGenOutput>AttEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -516,6 +542,13 @@
     </EntityDeploy>
     <Content Include="PanchayatMdl.edmx.diagram">
       <DependentUpon>PanchayatMdl.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="AttEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AttEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="AttEntities.edmx.diagram">
+      <DependentUpon>AttEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="PanchayatMdl.Context.tt">
