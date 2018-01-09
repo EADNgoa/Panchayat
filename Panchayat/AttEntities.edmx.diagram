@@ -7,6 +7,14 @@
       <Diagram DiagramId="5b94c44bf7a84a63a5c2ac0955ea3a2f" Name="Diagram1">
         <EntityTypeShape EntityType="Panchayat.Audit" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.Config" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Panchayat.Holiday" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Panchayat.LeaveApplication" Width="1.5" PointX="3" PointY="7.875" />
+        <EntityTypeShape EntityType="Panchayat.LeaveBalance" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Panchayat.LeaveEntitlement" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="Panchayat.LeaveType" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="Panchayat.User" Width="1.5" PointX="5.75" PointY="6.75" />
+        <AssociationConnector Association="Panchayat.FK_LeaveApplication_LeaveType" />
+        <AssociationConnector Association="Panchayat.FK_LeaveEntitlement_LeaveType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

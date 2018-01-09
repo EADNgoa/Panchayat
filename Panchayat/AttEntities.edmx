@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Panchayat.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Panchayat.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Audit">
           <Key>
             <PropertyRef Name="AuditID" />
@@ -26,13 +26,108 @@
           <Property Name="RowsPerPage" Type="int" />
           <Property Name="PanchHead" Type="varchar" MaxLength="100" />
           <Property Name="PanchSeceretary" Type="varchar" MaxLength="100" />
+          <Property Name="MeetingAlert" Type="int" />
         </EntityType>
+        <EntityType Name="Holidays">
+          <Key>
+            <PropertyRef Name="HolidayID" />
+          </Key>
+          <Property Name="HolidayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HDate" Type="date" />
+          <Property Name="HolidayName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="LeaveApplication">
+          <Key>
+            <PropertyRef Name="LeaveApplicationID" />
+          </Key>
+          <Property Name="LeaveApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationDate" Type="date" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="LeaveTypeID" Type="int" />
+          <Property Name="LeaveStartDate" Type="date" />
+          <Property Name="NoOfDays" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="StatusBy" Type="int" />
+          <Property Name="StatusDate" Type="date" />
+        </EntityType>
+        <EntityType Name="LeaveBalance">
+          <Key>
+            <PropertyRef Name="LeaveBalanceID" />
+          </Key>
+          <Property Name="LeaveBalanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="LeaveTypeID" Type="int" />
+          <Property Name="LeaveYear" Type="int" />
+          <Property Name="LeaveDays" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Attendance" Type="int" />
+        </EntityType>
+        <EntityType Name="LeaveEntitlement">
+          <Key>
+            <PropertyRef Name="LeaveEntitlementID" />
+          </Key>
+          <Property Name="LeaveEntitlementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveYear" Type="int" />
+          <Property Name="LeaveTypeID" Type="int" />
+          <Property Name="LeaveDays" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="LeaveType">
+          <Key>
+            <PropertyRef Name="LeaveTypeID" />
+          </Key>
+          <Property Name="LeaveTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveTypeName" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="GtekID" Type="int" />
+        </EntityType>
+        <Association Name="FK_LeaveApplication_LeaveType">
+          <End Role="LeaveType" Type="Self.LeaveType" Multiplicity="0..1" />
+          <End Role="LeaveApplication" Type="Self.LeaveApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="LeaveApplication">
+              <PropertyRef Name="LeaveTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveEntitlement_LeaveType">
+          <End Role="LeaveType" Type="Self.LeaveType" Multiplicity="0..1" />
+          <End Role="LeaveEntitlement" Type="Self.LeaveEntitlement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="LeaveEntitlement">
+              <PropertyRef Name="LeaveTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PanchayatStoreContainer">
           <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Holidays" EntityType="Self.Holidays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveApplication" EntityType="Self.LeaveApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveBalance" EntityType="Self.LeaveBalance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveEntitlement" EntityType="Self.LeaveEntitlement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveType" EntityType="Self.LeaveType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_LeaveApplication_LeaveType" Association="Self.FK_LeaveApplication_LeaveType">
+            <End Role="LeaveType" EntitySet="LeaveType" />
+            <End Role="LeaveApplication" EntitySet="LeaveApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveEntitlement_LeaveType" Association="Self.FK_LeaveEntitlement_LeaveType">
+            <End Role="LeaveType" EntitySet="LeaveType" />
+            <End Role="LeaveEntitlement" EntitySet="LeaveEntitlement" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Panchayat" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -57,11 +152,111 @@
           <Property Name="RowsPerPage" Type="Int32" />
           <Property Name="PanchHead" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PanchSeceretary" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MeetingAlert" Type="Int32" />
         </EntityType>
         <EntityContainer Name="AttEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Audits" EntityType="Self.Audit" />
           <EntitySet Name="Configs" EntityType="Self.Config" />
+          <EntitySet Name="Holidays" EntityType="Panchayat.Holiday" />
+          <EntitySet Name="LeaveApplications" EntityType="Panchayat.LeaveApplication" />
+          <EntitySet Name="LeaveBalances" EntityType="Panchayat.LeaveBalance" />
+          <EntitySet Name="LeaveEntitlements" EntityType="Panchayat.LeaveEntitlement" />
+          <EntitySet Name="LeaveTypes" EntityType="Panchayat.LeaveType" />
+          <EntitySet Name="Users" EntityType="Panchayat.User" />
+          <AssociationSet Name="FK_LeaveApplication_LeaveType" Association="Panchayat.FK_LeaveApplication_LeaveType">
+            <End Role="LeaveType" EntitySet="LeaveTypes" />
+            <End Role="LeaveApplication" EntitySet="LeaveApplications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveEntitlement_LeaveType" Association="Panchayat.FK_LeaveEntitlement_LeaveType">
+            <End Role="LeaveType" EntitySet="LeaveTypes" />
+            <End Role="LeaveEntitlement" EntitySet="LeaveEntitlements" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Holiday">
+          <Key>
+            <PropertyRef Name="HolidayID" />
+          </Key>
+          <Property Name="HolidayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HDate" Type="DateTime" Precision="0" />
+          <Property Name="HolidayName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LeaveApplication">
+          <Key>
+            <PropertyRef Name="LeaveApplicationID" />
+          </Key>
+          <Property Name="LeaveApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationDate" Type="DateTime" Precision="0" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LeaveTypeID" Type="Int32" />
+          <Property Name="LeaveStartDate" Type="DateTime" Precision="0" />
+          <Property Name="NoOfDays" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="StatusBy" Type="Int32" />
+          <Property Name="StatusDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="LeaveType" Relationship="Panchayat.FK_LeaveApplication_LeaveType" FromRole="LeaveApplication" ToRole="LeaveType" />
+        </EntityType>
+        <EntityType Name="LeaveBalance">
+          <Key>
+            <PropertyRef Name="LeaveBalanceID" />
+          </Key>
+          <Property Name="LeaveBalanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="LeaveTypeID" Type="Int32" />
+          <Property Name="LeaveYear" Type="Int32" />
+          <Property Name="LeaveDays" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Attendance" Type="Int32" />
+        </EntityType>
+        <EntityType Name="LeaveEntitlement">
+          <Key>
+            <PropertyRef Name="LeaveEntitlementID" />
+          </Key>
+          <Property Name="LeaveEntitlementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveYear" Type="Int32" />
+          <Property Name="LeaveTypeID" Type="Int32" />
+          <Property Name="LeaveDays" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="LeaveType" Relationship="Panchayat.FK_LeaveEntitlement_LeaveType" FromRole="LeaveEntitlement" ToRole="LeaveType" />
+        </EntityType>
+        <EntityType Name="LeaveType">
+          <Key>
+            <PropertyRef Name="LeaveTypeID" />
+          </Key>
+          <Property Name="LeaveTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveTypeName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="LeaveApplications" Relationship="Panchayat.FK_LeaveApplication_LeaveType" FromRole="LeaveType" ToRole="LeaveApplication" />
+          <NavigationProperty Name="LeaveEntitlements" Relationship="Panchayat.FK_LeaveEntitlement_LeaveType" FromRole="LeaveType" ToRole="LeaveEntitlement" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GtekID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_LeaveApplication_LeaveType">
+          <End Type="Panchayat.LeaveType" Role="LeaveType" Multiplicity="0..1" />
+          <End Type="Panchayat.LeaveApplication" Role="LeaveApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="LeaveApplication">
+              <PropertyRef Name="LeaveTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveEntitlement_LeaveType">
+          <End Type="Panchayat.LeaveType" Role="LeaveType" Multiplicity="0..1" />
+          <End Type="Panchayat.LeaveEntitlement" Role="LeaveEntitlement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="LeaveEntitlement">
+              <PropertyRef Name="LeaveTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -82,6 +277,7 @@
           <EntitySetMapping Name="Configs">
             <EntityTypeMapping TypeName="Panchayat.Config">
               <MappingFragment StoreEntitySet="Config">
+                <ScalarProperty Name="MeetingAlert" ColumnName="MeetingAlert" />
                 <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
                 <ScalarProperty Name="VP" ColumnName="VP" />
                 <ScalarProperty Name="DemandIncPerc" ColumnName="DemandIncPerc" />
@@ -89,6 +285,69 @@
                 <ScalarProperty Name="RowsPerPage" ColumnName="RowsPerPage" />
                 <ScalarProperty Name="PanchHead" ColumnName="PanchHead" />
                 <ScalarProperty Name="PanchSeceretary" ColumnName="PanchSeceretary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Holidays">
+            <EntityTypeMapping TypeName="Panchayat.Holiday">
+              <MappingFragment StoreEntitySet="Holidays">
+                <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
+                <ScalarProperty Name="HDate" ColumnName="HDate" />
+                <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveApplications">
+            <EntityTypeMapping TypeName="Panchayat.LeaveApplication">
+              <MappingFragment StoreEntitySet="LeaveApplication">
+                <ScalarProperty Name="StatusDate" ColumnName="StatusDate" />
+                <ScalarProperty Name="StatusBy" ColumnName="StatusBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NoOfDays" ColumnName="NoOfDays" />
+                <ScalarProperty Name="LeaveStartDate" ColumnName="LeaveStartDate" />
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ApplicationDate" ColumnName="ApplicationDate" />
+                <ScalarProperty Name="LeaveApplicationID" ColumnName="LeaveApplicationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveBalances">
+            <EntityTypeMapping TypeName="Panchayat.LeaveBalance">
+              <MappingFragment StoreEntitySet="LeaveBalance">
+                <ScalarProperty Name="Attendance" ColumnName="Attendance" />
+                <ScalarProperty Name="LeaveDays" ColumnName="LeaveDays" />
+                <ScalarProperty Name="LeaveYear" ColumnName="LeaveYear" />
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LeaveBalanceID" ColumnName="LeaveBalanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveEntitlements">
+            <EntityTypeMapping TypeName="Panchayat.LeaveEntitlement">
+              <MappingFragment StoreEntitySet="LeaveEntitlement">
+                <ScalarProperty Name="LeaveDays" ColumnName="LeaveDays" />
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+                <ScalarProperty Name="LeaveYear" ColumnName="LeaveYear" />
+                <ScalarProperty Name="LeaveEntitlementID" ColumnName="LeaveEntitlementID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveTypes">
+            <EntityTypeMapping TypeName="Panchayat.LeaveType">
+              <MappingFragment StoreEntitySet="LeaveType">
+                <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Panchayat.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="GtekID" ColumnName="GtekID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
