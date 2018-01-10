@@ -27,5 +27,12 @@ namespace Panchayat
     
         public virtual DbSet<Audit> Audits { get; set; }
         public virtual DbSet<Config> Configs { get; set; }
+        public virtual DbSet<Holiday> Holidays { get; set; }
+        public virtual DbSet<LeaveType> LeaveTypes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<LeaveApplication> LeaveApplications { get; set; }
+        public virtual DbSet<LeaveBalance> LeaveBalances { get; set; }
+        public virtual DbSet<LeaveEntitlement> LeaveEntitlements { get; set; }
     }
 }

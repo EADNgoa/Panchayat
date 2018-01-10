@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Panchayat.LeaveType>
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2>Leave Typess</h2>
+
+</center>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Leave Type Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveTypeName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LeaveTypeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LeaveTypeID })
+        </td>
+    </tr>
+}
+
+</table>

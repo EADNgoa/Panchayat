@@ -4,10 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5b94c44bf7a84a63a5c2ac0955ea3a2f" Name="Diagram1">
+      <Diagram DiagramId="5b94c44bf7a84a63a5c2ac0955ea3a2f" Name="Diagram1" ZoomLevel="69">
         <EntityTypeShape EntityType="Panchayat.Audit" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Panchayat.Config" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-      </Diagram>
+        <EntityTypeShape EntityType="Panchayat.Holiday" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Panchayat.LeaveType" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="Panchayat.User" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Panchayat.Status" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Panchayat.LeaveApplication" Width="1.5" PointX="10.625" PointY="3.25" />
+        <AssociationConnector Association="Panchayat.FK_LeaveApplication_LeaveType" />
+        <AssociationConnector Association="Panchayat.FK_LeaveApplication_Status" />
+        <EntityTypeShape EntityType="Panchayat.LeaveBalance" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="Panchayat.LeaveEntitlement" Width="1.5" PointX="3" PointY="5.375" />
+        <AssociationConnector Association="Panchayat.FK_LeaveBalance_LeaveType" />
+        <AssociationConnector Association="Panchayat.FK_LeaveEntitlement_LeaveType" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

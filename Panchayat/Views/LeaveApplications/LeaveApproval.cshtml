@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Panchayat.LeaveApplication>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>List Of Leave Applications</h2>
+
+<div>
+   <table class="table">
+       <tr>
+           <th>
+               Sr No
+           </th>
+           <th>
+               Application Date
+           </th>
+           <th>
+               User
+           </th>
+           <th>
+               Leave Type
+           </th>
+           <th>
+               Leave Start Date
+           </th>
+           <th>
+               No Of Days
+           </th>
+           <th>
+
+           </th>
+       </tr>
+       @{ int i = 1;}
+       @foreach (var item in Model)
+       {
+           <tr>
+               <td>
+                   @i
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.ApplicationDate)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.UserID)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.LeaveType.LeaveTypeName)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.LeaveStartDate)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => item.NoOfDays)
+               </td>
+              @if (item.StatusID == 3)
+              {
+               <td>
+                   @Html.ActionLink("Approve", "LeaveApproval", new { ap = item.LeaveApplicationID }) |
+                   @Html.ActionLink("Reject", "LeaveApproval", new { rp = item.LeaveApplicationID })
+               </td>
+              }
+              else
+              {
+                  if (item.StatusID == 1)
+                  {
+                    <td>Approved</td>
+                  }
+                  else if( item.StatusID == 2)
+                  {
+                    <td>Rejected</td>
+                  }
+              }
+           </tr>
+           i++;
+       }
+   </table>
+    
+</div>
+

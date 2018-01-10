@@ -1082,5 +1082,25 @@ public class MovementMetadata
         [StringLength(200)]
         public string CopyToAddress;
     }
+
+    public class HolidayMetadata
+    {
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime HDate;
+
+
+        [Required]
+        [StringLength(100)]
+        public string HolidayName;
+    }
+
+    public class LeaveTypeMetadata
+    {
+        [Required]
+        [StringLength(100)]
+        public string LeaveTypeName;
+    }
 }
 

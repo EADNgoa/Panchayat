@@ -171,6 +171,16 @@ namespace Panchayat
     {
 
     }
+    [MetadataType(typeof(HolidayMetadata))]
+    public partial class Holiday
+    {
+
+    }
+    [MetadataType(typeof(LeaveTypeMetadata))]
+    public partial class LeaveType
+    {
+
+    }
     public class Form10rpt
     {
         public string Ledger { get; set; }

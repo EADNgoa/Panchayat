@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Panchayat.LeaveApplication>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Leave Type Name
+        </th>
+      
+        <th>
+            Application Date
+        </th>
+     
+        <th>
+           Leave  Start Date
+        </th>
+        <th>
+          No Of Days
+        </th>
+        <th>
+            Status
+        </th>
+      
+        <th>
+            Status Date
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveType.LeaveTypeName)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationDate)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.Status1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LeaveApplicationID }) |
+        </td>
+    </tr>
+}
+
+</table>

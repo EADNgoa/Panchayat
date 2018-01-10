@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Panchayat.LeaveEntitlement>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<center>
+    <h2>Leave Entitlement</h2>
+
+</center>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Leave Type Name
+        </th>
+        <th>
+            Leae Year
+        </th>
+        <th>
+            Leave Days
+        </th>
+        <th>
+            Attendance
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveType.LeaveTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attendance)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LeaveEntitlementID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LeaveEntitlementID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -212,7 +212,7 @@
       <DependentUpon>AttEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Audit.cs">
-      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+      <DependentUpon>AttEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="BND.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
@@ -242,7 +242,7 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Config.cs">
-      <DependentUpon>PanchayatMdl.tt</DependentUpon>
+      <DependentUpon>AttEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ConstLicenseCert.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
@@ -263,6 +263,10 @@
     <Compile Include="Controllers\DemandsController.cs" />
     <Compile Include="Controllers\EAAController.cs" />
     <Compile Include="Controllers\Form4Controller.cs" />
+    <Compile Include="Controllers\HolidaysController.cs" />
+    <Compile Include="Controllers\LeaveApplicationsController.cs" />
+    <Compile Include="Controllers\LeaveEntitlementsController.cs" />
+    <Compile Include="Controllers\LeaveTypesController.cs" />
     <Compile Include="Controllers\NocCertifictesController.cs" />
     <Compile Include="Controllers\IllegalConstructionsController.cs" />
     <Compile Include="Controllers\IncomeCertificatesController.cs" />
@@ -330,6 +334,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Holiday.cs">
+      <DependentUpon>AttEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="HouseTaxCert.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
@@ -353,6 +360,18 @@
     </Compile>
     <Compile Include="Inward.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveApplication.cs">
+      <DependentUpon>AttEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveBalance.cs">
+      <DependentUpon>AttEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveEntitlement.cs">
+      <DependentUpon>AttEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveType.cs">
+      <DependentUpon>AttEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Ledger.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
@@ -431,11 +450,17 @@
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Status.cs">
+      <DependentUpon>AttEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="SubLedger.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
     </Compile>
     <Compile Include="SubLedgerType.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>AttEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Voucher.cs">
       <DependentUpon>PanchayatMdl.tt</DependentUpon>
@@ -905,6 +930,22 @@
     <Content Include="Views\Notices\Details.cshtml" />
     <Content Include="Views\Notices\Edit.cshtml" />
     <Content Include="Views\Notices\Index.cshtml" />
+    <Content Include="Views\Holidays\Create.cshtml" />
+    <Content Include="Views\Holidays\Delete.cshtml" />
+    <Content Include="Views\Holidays\Edit.cshtml" />
+    <Content Include="Views\Holidays\Index.cshtml" />
+    <Content Include="Views\LeaveTypes\Create.cshtml" />
+    <Content Include="Views\LeaveTypes\Delete.cshtml" />
+    <Content Include="Views\LeaveTypes\Edit.cshtml" />
+    <Content Include="Views\LeaveTypes\Index.cshtml" />
+    <Content Include="Views\LeaveApplications\Create.cshtml" />
+    <Content Include="Views\LeaveApplications\Edit.cshtml" />
+    <Content Include="Views\LeaveApplications\Index.cshtml" />
+    <Content Include="Views\LeaveEntitlements\Create.cshtml" />
+    <Content Include="Views\LeaveEntitlements\Delete.cshtml" />
+    <Content Include="Views\LeaveEntitlements\Edit.cshtml" />
+    <Content Include="Views\LeaveEntitlements\Index.cshtml" />
+    <Content Include="Views\LeaveApplications\LeaveApproval.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
