@@ -15,10 +15,12 @@ namespace Panchayat
     public partial class LeaveBalance
     {
         public int LeaveBalanceID { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public Nullable<int> LeaveTypeID { get; set; }
-        public Nullable<int> LeaveYear { get; set; }
+        public string UserID { get; set; }
+        public int LeaveTypeID { get; set; }
+        public int LeaveYear { get; set; }
         public Nullable<decimal> LeaveDays { get; set; }
         public Nullable<int> Attendance { get; set; }
+    
+        public virtual LeaveType LeaveType { get; set; }
     }
 }

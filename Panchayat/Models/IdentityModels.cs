@@ -35,5 +35,11 @@ namespace Panchayat.Models
         public System.Data.Entity.DbSet<Panchayat.Holiday> Holidays { get; set; }
 
         public System.Data.Entity.DbSet<Panchayat.LeaveType> LeaveTypes { get; set; }
+
+        public System.Data.Entity.DbSet<Panchayat.LeaveEntitlement> LeaveEntitlements { get; set; }
+
+        public System.Data.Entity.DbSet<Panchayat.LeaveApplication> LeaveApplications { get; set; }
+
+        public System.Data.Entity.DbSet<Panchayat.Status> Status { get; set; }
     }
 }

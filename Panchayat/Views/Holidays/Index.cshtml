@@ -3,8 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
+<center>
+    <h2>Holidays</h2>
 
-<h2>Index</h2>
+</center>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,10 +14,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.HDate)
+           Holiday Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HolidayName)
+            Holiday Name
         </th>
         <th></th>
     </tr>
@@ -30,7 +32,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.HolidayID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.HolidayID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.HolidayID })
         </td>
     </tr>

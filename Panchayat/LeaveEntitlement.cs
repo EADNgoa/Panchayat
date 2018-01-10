@@ -15,9 +15,10 @@ namespace Panchayat
     public partial class LeaveEntitlement
     {
         public int LeaveEntitlementID { get; set; }
-        public Nullable<int> LeaveYear { get; set; }
-        public Nullable<int> LeaveTypeID { get; set; }
+        public int LeaveYear { get; set; }
+        public int LeaveTypeID { get; set; }
         public Nullable<decimal> LeaveDays { get; set; }
+        public Nullable<int> Attendance { get; set; }
     
         public virtual LeaveType LeaveType { get; set; }
     }

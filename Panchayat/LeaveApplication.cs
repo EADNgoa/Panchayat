@@ -20,10 +20,11 @@ namespace Panchayat
         public Nullable<int> LeaveTypeID { get; set; }
         public Nullable<System.DateTime> LeaveStartDate { get; set; }
         public Nullable<int> NoOfDays { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<int> StatusBy { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public string StatusBy { get; set; }
         public Nullable<System.DateTime> StatusDate { get; set; }
     
         public virtual LeaveType LeaveType { get; set; }
+        public virtual Status Status { get; set; }
     }
 }

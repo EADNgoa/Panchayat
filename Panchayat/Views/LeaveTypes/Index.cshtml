@@ -3,8 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
+<center>
+    <h2>Leave Typess</h2>
 
-<h2>Index</h2>
+</center>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,7 +14,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LeaveTypeName)
+            Leave Type Name
         </th>
         <th></th>
     </tr>
@@ -24,7 +26,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.LeaveTypeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LeaveTypeID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.LeaveTypeID })
         </td>
     </tr>

@@ -46,18 +46,20 @@
           <Property Name="LeaveTypeID" Type="int" />
           <Property Name="LeaveStartDate" Type="date" />
           <Property Name="NoOfDays" Type="int" />
-          <Property Name="Status" Type="int" />
-          <Property Name="StatusBy" Type="int" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="StatusBy" Type="nvarchar" MaxLength="128" />
           <Property Name="StatusDate" Type="date" />
         </EntityType>
         <EntityType Name="LeaveBalance">
           <Key>
             <PropertyRef Name="LeaveBalanceID" />
+            <PropertyRef Name="LeaveTypeID" />
+            <PropertyRef Name="LeaveYear" />
           </Key>
           <Property Name="LeaveBalanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" />
-          <Property Name="LeaveTypeID" Type="int" />
-          <Property Name="LeaveYear" Type="int" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="LeaveTypeID" Type="int" Nullable="false" />
+          <Property Name="LeaveYear" Type="int" Nullable="false" />
           <Property Name="LeaveDays" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Attendance" Type="int" />
         </EntityType>
@@ -66,16 +68,24 @@
             <PropertyRef Name="LeaveEntitlementID" />
           </Key>
           <Property Name="LeaveEntitlementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LeaveYear" Type="int" />
-          <Property Name="LeaveTypeID" Type="int" />
+          <Property Name="LeaveYear" Type="int" Nullable="false" />
+          <Property Name="LeaveTypeID" Type="int" Nullable="false" />
           <Property Name="LeaveDays" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Attendance" Type="int" />
         </EntityType>
         <EntityType Name="LeaveType">
           <Key>
             <PropertyRef Name="LeaveTypeID" />
           </Key>
           <Property Name="LeaveTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LeaveTypeName" Type="nchar" MaxLength="10" />
+          <Property Name="LeaveTypeName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -97,8 +107,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LeaveApplication_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="LeaveApplication" Type="Self.LeaveApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="LeaveApplication">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveBalance_LeaveType">
+          <End Role="LeaveType" Type="Self.LeaveType" Multiplicity="1" />
+          <End Role="LeaveBalance" Type="Self.LeaveBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="LeaveBalance">
+              <PropertyRef Name="LeaveTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LeaveEntitlement_LeaveType">
-          <End Role="LeaveType" Type="Self.LeaveType" Multiplicity="0..1" />
+          <End Role="LeaveType" Type="Self.LeaveType" Multiplicity="1" />
           <End Role="LeaveEntitlement" Type="Self.LeaveEntitlement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LeaveType">
@@ -117,10 +151,19 @@
           <EntitySet Name="LeaveBalance" EntityType="Self.LeaveBalance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeaveEntitlement" EntityType="Self.LeaveEntitlement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeaveType" EntityType="Self.LeaveType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_LeaveApplication_LeaveType" Association="Self.FK_LeaveApplication_LeaveType">
             <End Role="LeaveType" EntitySet="LeaveType" />
             <End Role="LeaveApplication" EntitySet="LeaveApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveApplication_Status" Association="Self.FK_LeaveApplication_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="LeaveApplication" EntitySet="LeaveApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveBalance_LeaveType" Association="Self.FK_LeaveBalance_LeaveType">
+            <End Role="LeaveType" EntitySet="LeaveType" />
+            <End Role="LeaveBalance" EntitySet="LeaveBalance" />
           </AssociationSet>
           <AssociationSet Name="FK_LeaveEntitlement_LeaveType" Association="Self.FK_LeaveEntitlement_LeaveType">
             <End Role="LeaveType" EntitySet="LeaveType" />
@@ -158,20 +201,29 @@
           <EntitySet Name="Audits" EntityType="Self.Audit" />
           <EntitySet Name="Configs" EntityType="Self.Config" />
           <EntitySet Name="Holidays" EntityType="Panchayat.Holiday" />
-          <EntitySet Name="LeaveApplications" EntityType="Panchayat.LeaveApplication" />
-          <EntitySet Name="LeaveBalances" EntityType="Panchayat.LeaveBalance" />
-          <EntitySet Name="LeaveEntitlements" EntityType="Panchayat.LeaveEntitlement" />
           <EntitySet Name="LeaveTypes" EntityType="Panchayat.LeaveType" />
           <EntitySet Name="Users" EntityType="Panchayat.User" />
+          <EntitySet Name="Status" EntityType="Panchayat.Status" />
+          <EntitySet Name="LeaveApplications" EntityType="Panchayat.LeaveApplication" />
           <AssociationSet Name="FK_LeaveApplication_LeaveType" Association="Panchayat.FK_LeaveApplication_LeaveType">
             <End Role="LeaveType" EntitySet="LeaveTypes" />
             <End Role="LeaveApplication" EntitySet="LeaveApplications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveApplication_Status" Association="Panchayat.FK_LeaveApplication_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="LeaveApplication" EntitySet="LeaveApplications" />
+          </AssociationSet>
+          <EntitySet Name="LeaveBalances" EntityType="Panchayat.LeaveBalance" />
+          <EntitySet Name="LeaveEntitlements" EntityType="Panchayat.LeaveEntitlement" />
+          <AssociationSet Name="FK_LeaveBalance_LeaveType" Association="Panchayat.FK_LeaveBalance_LeaveType">
+            <End Role="LeaveType" EntitySet="LeaveTypes" />
+            <End Role="LeaveBalance" EntitySet="LeaveBalances" />
           </AssociationSet>
           <AssociationSet Name="FK_LeaveEntitlement_LeaveType" Association="Panchayat.FK_LeaveEntitlement_LeaveType">
             <End Role="LeaveType" EntitySet="LeaveTypes" />
             <End Role="LeaveEntitlement" EntitySet="LeaveEntitlements" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Holiday">
           <Key>
             <PropertyRef Name="HolidayID" />
@@ -179,6 +231,32 @@
           <Property Name="HolidayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HDate" Type="DateTime" Precision="0" />
           <Property Name="HolidayName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LeaveType">
+          <Key>
+            <PropertyRef Name="LeaveTypeID" />
+          </Key>
+          <Property Name="LeaveTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LeaveApplications" Relationship="Panchayat.FK_LeaveApplication_LeaveType" FromRole="LeaveType" ToRole="LeaveApplication" />
+          <NavigationProperty Name="LeaveBalances" Relationship="Panchayat.FK_LeaveBalance_LeaveType" FromRole="LeaveType" ToRole="LeaveBalance" />
+          <NavigationProperty Name="LeaveEntitlements" Relationship="Panchayat.FK_LeaveEntitlement_LeaveType" FromRole="LeaveType" ToRole="LeaveEntitlement" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GtekID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="Status1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LeaveApplications" Relationship="Panchayat.FK_LeaveApplication_Status" FromRole="Status" ToRole="LeaveApplication" />
         </EntityType>
         <EntityType Name="LeaveApplication">
           <Key>
@@ -190,48 +268,11 @@
           <Property Name="LeaveTypeID" Type="Int32" />
           <Property Name="LeaveStartDate" Type="DateTime" Precision="0" />
           <Property Name="NoOfDays" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="StatusBy" Type="Int32" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="StatusBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="StatusDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="LeaveType" Relationship="Panchayat.FK_LeaveApplication_LeaveType" FromRole="LeaveApplication" ToRole="LeaveType" />
-        </EntityType>
-        <EntityType Name="LeaveBalance">
-          <Key>
-            <PropertyRef Name="LeaveBalanceID" />
-          </Key>
-          <Property Name="LeaveBalanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" />
-          <Property Name="LeaveTypeID" Type="Int32" />
-          <Property Name="LeaveYear" Type="Int32" />
-          <Property Name="LeaveDays" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Attendance" Type="Int32" />
-        </EntityType>
-        <EntityType Name="LeaveEntitlement">
-          <Key>
-            <PropertyRef Name="LeaveEntitlementID" />
-          </Key>
-          <Property Name="LeaveEntitlementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LeaveYear" Type="Int32" />
-          <Property Name="LeaveTypeID" Type="Int32" />
-          <Property Name="LeaveDays" Type="Decimal" Precision="10" Scale="2" />
-          <NavigationProperty Name="LeaveType" Relationship="Panchayat.FK_LeaveEntitlement_LeaveType" FromRole="LeaveEntitlement" ToRole="LeaveType" />
-        </EntityType>
-        <EntityType Name="LeaveType">
-          <Key>
-            <PropertyRef Name="LeaveTypeID" />
-          </Key>
-          <Property Name="LeaveTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LeaveTypeName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="LeaveApplications" Relationship="Panchayat.FK_LeaveApplication_LeaveType" FromRole="LeaveType" ToRole="LeaveApplication" />
-          <NavigationProperty Name="LeaveEntitlements" Relationship="Panchayat.FK_LeaveEntitlement_LeaveType" FromRole="LeaveType" ToRole="LeaveEntitlement" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="GtekID" Type="Int32" />
+          <NavigationProperty Name="Status" Relationship="Panchayat.FK_LeaveApplication_Status" FromRole="LeaveApplication" ToRole="Status" />
         </EntityType>
         <Association Name="FK_LeaveApplication_LeaveType">
           <End Type="Panchayat.LeaveType" Role="LeaveType" Multiplicity="0..1" />
@@ -245,8 +286,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LeaveApplication_Status">
+          <End Type="Panchayat.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="Panchayat.LeaveApplication" Role="LeaveApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="LeaveApplication">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LeaveBalance">
+          <Key>
+            <PropertyRef Name="LeaveBalanceID" />
+            <PropertyRef Name="LeaveTypeID" />
+            <PropertyRef Name="LeaveYear" />
+          </Key>
+          <Property Name="LeaveBalanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LeaveTypeID" Type="Int32" Nullable="false" />
+          <Property Name="LeaveYear" Type="Int32" Nullable="false" />
+          <Property Name="LeaveDays" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Attendance" Type="Int32" />
+          <NavigationProperty Name="LeaveType" Relationship="Panchayat.FK_LeaveBalance_LeaveType" FromRole="LeaveBalance" ToRole="LeaveType" />
+        </EntityType>
+        <EntityType Name="LeaveEntitlement">
+          <Key>
+            <PropertyRef Name="LeaveEntitlementID" />
+          </Key>
+          <Property Name="LeaveEntitlementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveYear" Type="Int32" Nullable="false" />
+          <Property Name="LeaveTypeID" Type="Int32" Nullable="false" />
+          <Property Name="LeaveDays" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Attendance" Type="Int32" />
+          <NavigationProperty Name="LeaveType" Relationship="Panchayat.FK_LeaveEntitlement_LeaveType" FromRole="LeaveEntitlement" ToRole="LeaveType" />
+        </EntityType>
+        <Association Name="FK_LeaveBalance_LeaveType">
+          <End Type="Panchayat.LeaveType" Role="LeaveType" Multiplicity="1" />
+          <End Type="Panchayat.LeaveBalance" Role="LeaveBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="LeaveBalance">
+              <PropertyRef Name="LeaveTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LeaveEntitlement_LeaveType">
-          <End Type="Panchayat.LeaveType" Role="LeaveType" Multiplicity="0..1" />
+          <End Type="Panchayat.LeaveType" Role="LeaveType" Multiplicity="1" />
           <End Type="Panchayat.LeaveEntitlement" Role="LeaveEntitlement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LeaveType">
@@ -257,7 +347,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -297,12 +387,37 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="LeaveTypes">
+            <EntityTypeMapping TypeName="Panchayat.LeaveType">
+              <MappingFragment StoreEntitySet="LeaveType">
+                <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Panchayat.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="GtekID" ColumnName="GtekID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="Panchayat.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Status1" ColumnName="Status" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LeaveApplications">
             <EntityTypeMapping TypeName="Panchayat.LeaveApplication">
               <MappingFragment StoreEntitySet="LeaveApplication">
                 <ScalarProperty Name="StatusDate" ColumnName="StatusDate" />
                 <ScalarProperty Name="StatusBy" ColumnName="StatusBy" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="NoOfDays" ColumnName="NoOfDays" />
                 <ScalarProperty Name="LeaveStartDate" ColumnName="LeaveStartDate" />
                 <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
@@ -327,27 +442,11 @@
           <EntitySetMapping Name="LeaveEntitlements">
             <EntityTypeMapping TypeName="Panchayat.LeaveEntitlement">
               <MappingFragment StoreEntitySet="LeaveEntitlement">
+                <ScalarProperty Name="Attendance" ColumnName="Attendance" />
                 <ScalarProperty Name="LeaveDays" ColumnName="LeaveDays" />
                 <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
                 <ScalarProperty Name="LeaveYear" ColumnName="LeaveYear" />
                 <ScalarProperty Name="LeaveEntitlementID" ColumnName="LeaveEntitlementID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LeaveTypes">
-            <EntityTypeMapping TypeName="Panchayat.LeaveType">
-              <MappingFragment StoreEntitySet="LeaveType">
-                <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
-                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="Panchayat.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="GtekID" ColumnName="GtekID" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

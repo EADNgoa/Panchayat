@@ -11,106 +11,111 @@ using Panchayat.Models;
 
 namespace Panchayat.Controllers
 {
-    public class LeaveTypesController : EAAController
+    public class LeaveEntitlementsController : EAAController
     {
 
-        // GET: LeaveTypes
+        // GET: LeaveEntitlements
         public ActionResult Index()
         {
-            return View(db.LeaveTypes.ToList());
+            var leaveEntitlements = db.LeaveEntitlements.Include(l => l.LeaveType);
+            return View(leaveEntitlements.ToList());
         }
 
-        // GET: LeaveTypes/Details/5
+        // GET: LeaveEntitlements/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LeaveType leaveType = db.LeaveTypes.Find(id);
-            if (leaveType == null)
+            LeaveEntitlement leaveEntitlement = db.LeaveEntitlements.Find(id);
+            if (leaveEntitlement == null)
             {
                 return HttpNotFound();
             }
-            return View(leaveType);
+            return View(leaveEntitlement);
         }
 
-        // GET: LeaveTypes/Create
+        // GET: LeaveEntitlements/Create
         public ActionResult Create()
         {
+            ViewBag.LeaveTypeID = new SelectList(db.LeaveTypes, "LeaveTypeID", "LeaveTypeName");
             return View();
         }
 
-        // POST: LeaveTypes/Create
+        // POST: LeaveEntitlements/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LeaveTypeID,LeaveTypeName")] LeaveType leaveType)
+        public ActionResult Create([Bind(Include = "LeaveEntitlementID,LeaveYear,LeaveTypeID,LeaveDays,Attendance")] LeaveEntitlement leaveEntitlement)
         {
             if (ModelState.IsValid)
             {
-                db.LeaveTypes.Add(leaveType);
+                db.LeaveEntitlements.Add(leaveEntitlement);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(leaveType);
+            ViewBag.LeaveTypeID = new SelectList(db.LeaveTypes, "LeaveTypeID", "LeaveTypeName", leaveEntitlement.LeaveTypeID);
+            return View(leaveEntitlement);
         }
 
-        // GET: LeaveTypes/Edit/5
+        // GET: LeaveEntitlements/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LeaveType leaveType = db.LeaveTypes.Find(id);
-            if (leaveType == null)
+            LeaveEntitlement leaveEntitlement = db.LeaveEntitlements.Find(id);
+            if (leaveEntitlement == null)
             {
                 return HttpNotFound();
             }
-            return View(leaveType);
+            ViewBag.LeaveTypeID = new SelectList(db.LeaveTypes, "LeaveTypeID", "LeaveTypeName", leaveEntitlement.LeaveTypeID);
+            return View(leaveEntitlement);
         }
 
-        // POST: LeaveTypes/Edit/5
+        // POST: LeaveEntitlements/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "LeaveTypeID,LeaveTypeName")] LeaveType leaveType)
+        public ActionResult Edit([Bind(Include = "LeaveEntitlementID,LeaveYear,LeaveTypeID,LeaveDays,Attendance")] LeaveEntitlement leaveEntitlement)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(leaveType).State = EntityState.Modified;
+                db.Entry(leaveEntitlement).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(leaveType);
+            ViewBag.LeaveTypeID = new SelectList(db.LeaveTypes, "LeaveTypeID", "LeaveTypeName", leaveEntitlement.LeaveTypeID);
+            return View(leaveEntitlement);
         }
 
-        // GET: LeaveTypes/Delete/5
+        // GET: LeaveEntitlements/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LeaveType leaveType = db.LeaveTypes.Find(id);
-            if (leaveType == null)
+            LeaveEntitlement leaveEntitlement = db.LeaveEntitlements.Find(id);
+            if (leaveEntitlement == null)
             {
                 return HttpNotFound();
             }
-            return View(leaveType);
+            return View(leaveEntitlement);
         }
 
-        // POST: LeaveTypes/Delete/5
+        // POST: LeaveEntitlements/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            LeaveType leaveType = db.LeaveTypes.Find(id);
-            db.LeaveTypes.Remove(leaveType);
+            LeaveEntitlement leaveEntitlement = db.LeaveEntitlements.Find(id);
+            db.LeaveEntitlements.Remove(leaveEntitlement);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

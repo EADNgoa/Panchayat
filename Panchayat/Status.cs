@@ -12,24 +12,18 @@ namespace Panchayat
     using System;
     using System.Collections.Generic;
     
-    public partial class LeaveType
+    public partial class Status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LeaveType()
+        public Status()
         {
             this.LeaveApplications = new HashSet<LeaveApplication>();
-            this.LeaveBalances = new HashSet<LeaveBalance>();
-            this.LeaveEntitlements = new HashSet<LeaveEntitlement>();
         }
     
-        public int LeaveTypeID { get; set; }
-        public string LeaveTypeName { get; set; }
+        public int StatusID { get; set; }
+        public string Status1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LeaveApplication> LeaveApplications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LeaveBalance> LeaveBalances { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LeaveEntitlement> LeaveEntitlements { get; set; }
     }
 }
