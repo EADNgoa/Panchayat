@@ -181,6 +181,16 @@ namespace Panchayat
     {
 
     }
+    [MetadataType(typeof(LeaveApplicationMetadata))]
+    public partial class LeaveApplication
+    {
+
+    }
+    [MetadataType(typeof(LeaveEntitlementMetadata))]
+    public partial class LeaveEntitlement
+    {
+
+    }
     public class Form10rpt
     {
         public string Ledger { get; set; }

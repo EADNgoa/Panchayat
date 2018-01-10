@@ -1102,5 +1102,39 @@ public class MovementMetadata
         [StringLength(100)]
         public string LeaveTypeName;
     }
+
+    public class LeaveApplicationMetadata
+    {
+        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime ApplicationDate;
+
+        [Required]
+        public int LeaveTypeID;
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime LeaveStartDate;
+
+        [Required]
+        public int NoOfDays;
+
+
+    }
+
+    public class LeaveEntitlementMetadata
+    {
+        [Required]
+        public int LeaveYear;
+
+        [Required]
+        public int LeaveTypeID;
+
+        [Required]
+        public int LeaveDays;
+
+    }
 }
 
