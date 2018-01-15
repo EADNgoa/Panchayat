@@ -53,10 +53,7 @@ namespace Panchayat.Controllers
                 bal = (decimal)LeavBal.LeaveDays;
                 bal = (decimal)leaveApplication.NoOfDays + bal;
             }
-            if (bal == 0)
-            {
-                bal = 0;
-            }
+        
             if (ModelState.IsValid && bal <= leaveEnt)
             {
                 leaveApplication.ApplicationDate = DateTime.Now;
@@ -110,7 +107,10 @@ namespace Panchayat.Controllers
         public ActionResult LeaveApproval(int? ap, int? rp)
         {
             var ApprovalList = db.LeaveApplications.Where(a => a.StatusID == 3).ToList();
-          
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
                     if (ap != null)
                     {
                         var AppRec = db.LeaveApplications.Find(ap);
@@ -119,17 +119,17 @@ namespace Panchayat.Controllers
                         AppRec.StatusBy = User.Identity.GetUserId();
                         db.Entry(AppRec).State = EntityState.Modified;
 
-                        var LeavBal = db.LeaveBalances.Where(a=>a.UserID == AppRec.UserID && a.LeaveTypeID ==AppRec.LeaveTypeID && a.LeaveYear == AppRec.LeaveStartDate.Value.Year ).FirstOrDefault();
+                        var LeavBal = db.LeaveBalances.Where(a => a.UserID == AppRec.UserID && a.LeaveTypeID == AppRec.LeaveTypeID && a.LeaveYear == AppRec.LeaveStartDate.Value.Year).FirstOrDefault();
                         if (LeavBal == null)
                         {
                             var item = new LeaveBalance
                             {
                                 LeaveDays = AppRec.NoOfDays,
-                                LeaveTypeID= (int)AppRec.LeaveTypeID,
-                                LeaveYear= AppRec.ApplicationDate.Value.Year,
-                                UserID=AppRec.UserID,                                
+                                LeaveTypeID = (int)AppRec.LeaveTypeID,
+                                LeaveYear = AppRec.ApplicationDate.Value.Year,
+                                UserID = AppRec.UserID,
                             };
-                    db.LeaveBalances.Add(item);
+                            db.LeaveBalances.Add(item);
                         }
                         else
                         {
@@ -147,11 +147,17 @@ namespace Panchayat.Controllers
                         db.Entry(AppRec).State = EntityState.Modified;
 
                     }
-           
+
                     db.SaveChanges();
-
-           return View(ApprovalList);
-
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+                return View(ApprovalList);
+            }
         }
 
         protected override void Dispose(bool disposing)

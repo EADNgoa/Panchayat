@@ -23,9 +23,7 @@
         <th>
             Leave Days
         </th>
-        <th>
-            Attendance
-        </th>
+ 
         <th></th>
     </tr>
 
@@ -40,9 +38,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.LeaveDays)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Attendance)
-        </td>
+    
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.LeaveEntitlementID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.LeaveEntitlementID })
